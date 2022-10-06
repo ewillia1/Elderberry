@@ -1,5 +1,7 @@
 # Elderberry
-CS 5520 Mobile Application Development Final Project
+CS 5520 Mobile Application Development 
+
+Final Project
 
 Fall 2022
 
