@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/medName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/name_"
+        android:textColor="@color/main"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/selectFrom"
+        app:layout_constraintEnd_toStartOf="@+id/nameText"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/nameText"
+        android:layout_width="235dp"
+        android:layout_height="47dp"
+        android:autofillHints=""
+        android:hint="@string/type_name"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/from_date_picker_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/medName"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/selectFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/from"
+        android:textColor="@color/main"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/selectTo"
+        app:layout_constraintEnd_toStartOf="@+id/from_date_picker_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medName" />
+
+    <Button
+        android:id="@+id/from_date_picker_button"
+        style="?android:spinnerStyle"
+        android:layout_width="228dp"
+        android:layout_height="46dp"
+        android:hint="@string/select_date"
+        android:onClick="openFromDatePicker"
+        android:textColor="@color/main"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/to_date_picker_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/selectFrom"
+        app:layout_constraintTop_toBottomOf="@+id/nameText"
+        tools:ignore="DuplicateSpeakableTextCheck" />
+
+    <TextView
+        android:id="@+id/selectTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/to"
+        android:textColor="@color/main"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/sleectTime"
+        app:layout_constraintEnd_toStartOf="@+id/to_date_picker_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selectFrom" />
+
+    <Button
+        android:id="@+id/to_date_picker_button"
+        style="?android:spinnerStyle"
+        android:layout_width="205dp"
+        android:layout_height="51dp"
+        android:hint="@string/select_date_"
+        android:onClick="openToDatePicker"
+        android:textColor="@color/main"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/time_time_picker_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/selectTo"
+        app:layout_constraintTop_toBottomOf="@+id/from_date_picker_button" />
+
+    <TextView
+        android:id="@+id/sleectTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/time"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/doseText"
+        app:layout_constraintEnd_toStartOf="@+id/time_time_picker_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selectTo" />
+
+    <Button
+        android:id="@+id/time_time_picker_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_elderberryplant"
+        android:text="@string/pick_a_time"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/unitText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/sleectTime"
+        app:layout_constraintTop_toBottomOf="@+id/to_date_picker_button" />
+
+    <TextView
+        android:id="@+id/dose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dose"
+        android:textColor="@color/main"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/doseText"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.651" />
+
+    <EditText
+        android:id="@+id/doseText"
+        android:layout_width="103dp"
+        android:layout_height="51dp"
+        android:hint="@string/type_dose"
+        android:textColor="@color/main"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/unit"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/dose"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.662"
+        android:importantForAutofill="no"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/unit"
+        android:textColor="@color/main"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/unitText"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/doseText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.651" />
+
+    <EditText
+        android:id="@+id/unitText"
+        android:layout_width="107dp"
+        android:layout_height="54dp"
+        android:hint="@string/type_unit"
+        android:textColor="@color/main"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/unit"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.666"
+        android:inputType="text"
+        android:autofillHints="" />
+
+    <TextView
+        android:id="@+id/information"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/information"
+        android:textColor="@color/main"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.114"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/doseText"
+        app:layout_constraintVertical_bias="0.146" />
+
+    <EditText
+        android:layout_width="361dp"
+        android:layout_height="137dp"
+        android:hint="@string/type_text_here"
+        android:textColor="@color/main"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/information"
+        app:layout_constraintVertical_bias="0.0"
+        android:autofillHints=""
+        android:inputType="text" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
