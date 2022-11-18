@@ -9,18 +9,24 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MedicationTrackerActivity extends AppCompatActivity {
     private static final String TAG = "MedicationTrackerActivity";
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "_____onCreate");
         setContentView(R.layout.activity_medication_tracker);
+        // get user name from main activity
+        // Todo figure a way not to pass it btw activity
+        this.username = getIntent().getStringExtra("current_username");
+        Toast.makeText(MedicationTrackerActivity.this, username, Toast.LENGTH_SHORT).show();
 
         // Calling this activity's function to use ActionBar utility methods.
         ActionBar actionBar = getSupportActionBar();
