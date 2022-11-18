@@ -161,7 +161,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void createNewUser() {
         Log.d(TAG, "_____createNewUser");
-//        EditText newUserName = findViewById(R.id.enterUsername);
         boolean duplicateUsername = false;
 
         if (this.enterUsername.getText().toString().equals("") || this.enterUsername.getText().toString().isBlank()) {
