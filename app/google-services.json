@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "143977742536",
+    "project_id": "elderberry-7ce5b",
+    "storage_bucket": "elderberry-7ce5b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143977742536:android:e2a250211f29dfc48fe5fd",
+        "android_client_info": {
+          "package_name": "edu.northeastern.elderberry"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "143977742536-lgtfqbe7qp4eb5e829rnqfovuq20okv2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO8IffxZ4MxmzzpynJwOVxpQCjPwh_h4k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "143977742536-lgtfqbe7qp4eb5e829rnqfovuq20okv2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

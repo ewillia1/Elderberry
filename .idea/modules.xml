@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Elderberry.iml" filepath="$PROJECT_DIR$/.idea/modules/Elderberry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Elderberry.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Elderberry.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Elderberry.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Elderberry.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Elderberry.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Elderberry.app.unitTest.iml" />
     </modules>
   </component>
 </project>
