@@ -12,16 +12,32 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private String username;
     private String password;
+    private final ArrayList<DisplayUsername> listOfUsers = new ArrayList<>();
+    private DatabaseReference userDatabase;
+    private EditText enterUsername;
+    private EditText enterPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +68,25 @@ public class LoginActivity extends AppCompatActivity {
             Log.d(TAG, "_____onClick");
             startMedicationTrackerActivity();
         });
+
+        this.userDatabase = FirebaseDatabase.getInstance().getReference("users");
+
+        this.userDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d(TAG, "_____onDataChange");
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    listOfUsers.add(new DisplayUsername((String) dataSnapshot.child("username").getValue()));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d(TAG, "_____onCancelled");
+                Toast.makeText(LoginActivity.this, "Error: Unable to get access to Database", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     private void startMedicationTrackerActivity() {
@@ -64,8 +99,8 @@ public class LoginActivity extends AppCompatActivity {
         Log.d(TAG, "_____openCreateAccount");
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.add_user);
-        EditText enterUsername = dialog.findViewById(R.id.enterUsername);
-        EditText enterPassword = dialog.findViewById(R.id.enterPassword);
+        this.enterUsername = dialog.findViewById(R.id.enterUsername);
+        this.enterPassword = dialog.findViewById(R.id.enterPassword);
         Button createButton = dialog.findViewById(R.id.createAccount);
 
         createButton.setOnClickListener(view -> {
@@ -77,6 +112,7 @@ public class LoginActivity extends AppCompatActivity {
             } else {
                 Snackbar.make(view, "Successful account creation!", Snackbar.LENGTH_SHORT).show();
             }
+            createNewUser();
             dialog.dismiss();
         });
 
@@ -120,6 +156,38 @@ public class LoginActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void createNewUser() {
+        Log.d(TAG, "_____createNewUser");
+//        EditText newUserName = findViewById(R.id.enterUsername);
+        boolean duplicateUsername = false;
+
+        if (this.enterUsername.getText().toString().equals("") || this.enterUsername.getText().toString().isBlank()) {
+            Toast.makeText(LoginActivity.this, "Your username must include at least 1 non-white space character!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        for (DisplayUsername username : listOfUsers) {
+            if (username.getUsername().equals(this.enterUsername.getText().toString())) {
+                duplicateUsername = true;
+                break;
+            }
+        }
+
+        if (!duplicateUsername) {
+            Map<String, String> newUser = new HashMap<>();
+            newUser.put("username", this.enterUsername.getText().toString());
+            Task<Void> task = this.userDatabase.push().setValue(newUser);
+
+            try {
+                task.addOnSuccessListener(o -> finish());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            Toast.makeText(LoginActivity.this, "Sorry! This username already exists. Please create a new one!", Toast.LENGTH_LONG).show();
         }
     }
 }
