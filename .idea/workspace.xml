@@ -9,8 +9,8 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13556392-2823-4189-9d7f-bb770af20f28" name="Changes" comment="Updated activity_login.xml">
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_about.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_about.xml" afterDir="false" />
+    <list default="true" id="13556392-2823-4189-9d7f-bb770af20f28" name="Changes" comment="Updated LoginActivity.java">
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/LoginActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +26,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="resourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -71,6 +71,9 @@
     <option name="LAST_EDITED_SIGNING_CONFIG" value="release" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="edu.northeastern.elderberry" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app" />
     </key>
@@ -194,7 +197,35 @@
       <option name="project" value="LOCAL" />
       <updated>1668786504272</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Updated activity_about.xml, strings.xml">
+      <created>1668786857391</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1668786857391</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Updated activity_add_medication.xml">
+      <created>1668787415763</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1668787415763</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Updated fontFamily">
+      <created>1668789367205</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1668789367205</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Updated LoginActivity.java">
+      <created>1668791238166</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1668791238166</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -215,6 +246,10 @@
     <MESSAGE value="Added Firebase Realtime Database" />
     <MESSAGE value="Updated strings.xml" />
     <MESSAGE value="Updated activity_login.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated activity_login.xml" />
+    <MESSAGE value="Updated activity_about.xml, strings.xml" />
+    <MESSAGE value="Updated activity_add_medication.xml" />
+    <MESSAGE value="Updated fontFamily" />
+    <MESSAGE value="Updated LoginActivity.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated LoginActivity.java" />
   </component>
 </project>
