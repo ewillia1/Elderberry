@@ -23,7 +23,7 @@
     <EditText
         android:id="@+id/nameText"
         android:layout_width="233dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:autofillHints=""
         android:hint="@string/type_name"
         android:inputType="text"
@@ -52,6 +52,7 @@
         android:layout_width="57dp"
         android:layout_height="61dp"
         android:layout_marginTop="60dp"
+        android:contentDescription="@string/calendar_icon"
         android:onClick="openFromDatePicker"
         app:layout_constraintBottom_toTopOf="@+id/to_image"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +60,7 @@
         app:layout_constraintStart_toEndOf="@+id/selectFrom"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/calendar"
-        android:contentDescription="@string/calendar_icon" />
+        tools:ignore="DuplicateSpeakableTextCheck" />
 
     <TextView
         android:id="@+id/selectTo"
