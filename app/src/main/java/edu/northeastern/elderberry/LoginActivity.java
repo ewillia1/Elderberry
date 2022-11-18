@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -35,9 +34,10 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private String username;
     private String password;
-    private DatabaseReference userDatabase;
     private final ArrayList<DisplayUsername> listOfUsers = new ArrayList<>();
-
+    private DatabaseReference userDatabase;
+    private EditText enterUsername;
+    private EditText enterPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +69,6 @@ public class LoginActivity extends AppCompatActivity {
             startMedicationTrackerActivity();
         });
 
-        // Init the database
         this.userDatabase = FirebaseDatabase.getInstance().getReference("users");
 
         this.userDatabase.addValueEventListener(new ValueEventListener() {
@@ -100,21 +99,20 @@ public class LoginActivity extends AppCompatActivity {
         Log.d(TAG, "_____openCreateAccount");
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.add_user);
-        EditText enterUsername = dialog.findViewById(R.id.enterUsername);
-        EditText enterPassword = dialog.findViewById(R.id.enterPassword);
+        this.enterUsername = dialog.findViewById(R.id.enterUsername);
+        this.enterPassword = dialog.findViewById(R.id.enterPassword);
         Button createButton = dialog.findViewById(R.id.createAccount);
 
         createButton.setOnClickListener(view -> {
             this.username = enterUsername.getText().toString();
             this.password = enterPassword.getText().toString();
 
-
             if (isInvalid(this.username) || isInvalid(this.password)) {
                 Snackbar.make(view, "Unsuccessful account creation!", Snackbar.LENGTH_SHORT).show();
             } else {
                 Snackbar.make(view, "Successful account creation!", Snackbar.LENGTH_SHORT).show();
             }
-            // createNewUser(view);
+            createNewUser();
             dialog.dismiss();
         });
 
@@ -161,23 +159,17 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-
-    public void createNewUser(View view) {
+    public void createNewUser() {
         Log.d(TAG, "_____createNewUser");
-        // Todo add password to the database
-        // Todo check for duplication username adds
-        EditText newUserName = findViewById(R.id.enterUsername);
         boolean duplicateUsername = false;
-        Toast.makeText(LoginActivity.this,"CreateNewUser clicked", Toast.LENGTH_SHORT).show();
 
-        if (newUserName.getText().toString().equals("") || newUserName.getText().toString().isBlank()) {
+        if (this.enterUsername.getText().toString().equals("") || this.enterUsername.getText().toString().isBlank()) {
             Toast.makeText(LoginActivity.this, "Your username must include at least 1 non-white space character!", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // check for duplicates in the database
         for (DisplayUsername username : listOfUsers) {
-            if (username.getUsername().equals(newUserName.getText().toString())) {
+            if (username.getUsername().equals(this.enterUsername.getText().toString())) {
                 duplicateUsername = true;
                 break;
             }
@@ -185,7 +177,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (!duplicateUsername) {
             Map<String, String> newUser = new HashMap<>();
-            newUser.put("username", newUserName.getText().toString());
+            newUser.put("username", this.enterUsername.getText().toString());
             Task<Void> task = this.userDatabase.push().setValue(newUser);
 
             try {

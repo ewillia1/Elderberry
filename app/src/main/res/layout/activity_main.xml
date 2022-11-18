@@ -34,6 +34,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/button_elderberryplant"
         android:text="@string/continueText"
+        android:fontFamily="@font/elsie"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
