@@ -68,7 +68,8 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         return getMonthFormat(month) + " " + day + ", " + year;
     }
 
-    private String getMonthFormat(int month) {
+    private String getMonthFormat(int month_index) {
+        int month = month_index + 1;
         if (month == 1)
             return "JAN";
         if (month == 2)
