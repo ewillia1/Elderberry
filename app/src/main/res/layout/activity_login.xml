@@ -28,8 +28,8 @@
 
     <TextView
         android:id="@+id/username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="351dp"
+        android:layout_height="25dp"
         android:layout_marginHorizontal="10dp"
         android:text="@string/user_name"
         android:textColor="@color/main"
@@ -55,8 +55,8 @@
 
     <TextView
         android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="28dp"
         android:layout_marginHorizontal="30dp"
         android:text="@string/password"
         android:textColor="@color/main"
