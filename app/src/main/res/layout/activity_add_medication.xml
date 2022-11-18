@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteX="-5dp"
+    tools:layout_editor_absoluteY="-5dp">
 
     <TextView
         android:id="@+id/medName"
@@ -20,12 +22,12 @@
 
     <EditText
         android:id="@+id/nameText"
-        android:layout_width="235dp"
-        android:layout_height="47dp"
+        android:layout_width="233dp"
+        android:layout_height="40dp"
         android:autofillHints=""
         android:hint="@string/type_name"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/from_date_picker_button"
+        app:layout_constraintBottom_toTopOf="@+id/from_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/medName"
@@ -33,143 +35,178 @@
 
     <TextView
         android:id="@+id/selectFrom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="258dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="80dp"
         android:text="@string/from"
         android:textColor="@color/main"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/selectTo"
-        app:layout_constraintEnd_toStartOf="@+id/from_date_picker_button"
+        app:layout_constraintEnd_toStartOf="@+id/from_image"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medName" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/from_date_picker_button"
-        style="?android:spinnerStyle"
-        android:layout_width="228dp"
-        android:layout_height="46dp"
-        android:hint="@string/select_date"
+    <ImageView
+        android:id="@+id/from_image"
+        android:layout_width="57dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="60dp"
         android:onClick="openFromDatePicker"
-        android:textColor="@color/main"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/to_date_picker_button"
+        app:layout_constraintBottom_toTopOf="@+id/to_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/selectFrom"
-        app:layout_constraintTop_toBottomOf="@+id/nameText"
-        tools:ignore="DuplicateSpeakableTextCheck" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/calendar"
+        android:contentDescription="@string/calendar_icon" />
 
     <TextView
         android:id="@+id/selectTo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="270dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="48dp"
         android:text="@string/to"
         android:textColor="@color/main"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/sleectTime"
-        app:layout_constraintEnd_toStartOf="@+id/to_date_picker_button"
+        app:layout_constraintBottom_toTopOf="@+id/selectTime"
+        app:layout_constraintEnd_toStartOf="@+id/to_image"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectFrom" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/to_date_picker_button"
-        style="?android:spinnerStyle"
-        android:layout_width="205dp"
-        android:layout_height="51dp"
-        android:hint="@string/select_date_"
+    <ImageView
+        android:id="@+id/to_image"
+        android:layout_width="57dp"
+        android:layout_height="61dp"
+        android:layout_marginBottom="36dp"
         android:onClick="openToDatePicker"
-        android:textColor="@color/main"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/time_time_picker_button"
+        app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/selectTo"
-        app:layout_constraintTop_toBottomOf="@+id/from_date_picker_button" />
+        app:srcCompat="@drawable/calendar"
+        android:contentDescription="@string/calendar_icon" />
 
     <TextView
-        android:id="@+id/sleectTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/selectTime"
+        android:layout_width="232dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="72dp"
         android:text="@string/time"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/doseText"
-        app:layout_constraintEnd_toStartOf="@+id/time_time_picker_button"
+        app:layout_constraintBottom_toTopOf="@+id/dose"
+        app:layout_constraintEnd_toStartOf="@+id/time_picker"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectTo" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/time_time_picker_button"
+    <ImageView
+        android:id="@+id/time_picker"
+        android:layout_width="65dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="68dp"
+        app:layout_constraintBottom_toTopOf="@+id/unit"
+        app:layout_constraintEnd_toStartOf="@+id/floatingActionButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/selectTime"
+        app:srcCompat="@drawable/clock"
+        android:contentDescription="@string/clock_icon" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_elderberryplant"
-        android:text="@string/pick_a_time"
-        android:textColor="@color/white"
+        android:layout_marginBottom="56dp"
+        android:clickable="true"
+        android:contentDescription="@string/add_medication_item"
+        android:src="@drawable/add_med_button"
+        app:backgroundTint="@color/background"
         app:layout_constraintBottom_toTopOf="@+id/unitText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/sleectTime"
-        app:layout_constraintTop_toBottomOf="@+id/to_date_picker_button" />
+        app:layout_constraintStart_toEndOf="@+id/time_picker"
+        tools:ignore="ImageContrastCheck" />
 
     <TextView
         android:id="@+id/dose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="68dp"
         android:text="@string/dose"
         android:textColor="@color/main"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/information"
         app:layout_constraintEnd_toStartOf="@+id/doseText"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.651" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/doseText"
-        android:layout_width="103dp"
-        android:layout_height="51dp"
+        android:layout_width="107dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="60dp"
         android:hint="@string/type_dose"
+        android:importantForAutofill="no"
+        android:inputType="text"
         android:textColor="@color/main"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/information"
         app:layout_constraintEnd_toStartOf="@+id/unit"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/dose"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.662"
-        android:importantForAutofill="no"
-        android:inputType="text" />
+        app:layout_constraintStart_toEndOf="@+id/dose" />
 
     <TextView
         android:id="@+id/unit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="68dp"
         android:text="@string/unit"
         android:textColor="@color/main"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/information"
         app:layout_constraintEnd_toStartOf="@+id/unitText"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/doseText"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.651" />
+        app:layout_constraintStart_toEndOf="@+id/doseText" />
 
     <EditText
         android:id="@+id/unitText"
-        android:layout_width="107dp"
-        android:layout_height="54dp"
+        android:layout_width="97dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="56dp"
+        android:autofillHints=""
         android:hint="@string/type_unit"
+        android:inputType="text"
         android:textColor="@color/main"
+        app:layout_constraintBottom_toTopOf="@+id/information"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/unit" />
+
+    <Button
+        android:id="@+id/cancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_elderberryplant"
+        android:text="@string/cancel"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/add_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+    <Button
+        android:id="@+id/add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_elderberryplant"
+        android:text="@string/add"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/unit"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.666"
-        android:inputType="text"
-        android:autofillHints="" />
+        app:layout_constraintStart_toEndOf="@+id/cancel_button"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
 
     <TextView
         android:id="@+id/information"
@@ -180,23 +217,57 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.114"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/doseText"
-        app:layout_constraintVertical_bias="0.146" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.656" />
 
     <EditText
-        android:layout_width="361dp"
-        android:layout_height="137dp"
+        android:id="@+id/editText"
+        android:layout_width="382dp"
+        android:layout_height="159dp"
+        android:layout_marginBottom="88dp"
+        android:autofillHints=""
         android:hint="@string/type_text_here"
+        android:inputType="text"
         android:textColor="@color/main"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/information"
-        app:layout_constraintVertical_bias="0.0"
-        android:autofillHints=""
-        android:inputType="text" />
+        app:layout_constraintTop_toBottomOf="@+id/information" />
 
+    <androidx.constraintlayout.widget.Group
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="nameText,medName" />
+
+    <androidx.constraintlayout.widget.Group
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="from_image" />
+
+    <androidx.constraintlayout.widget.Group
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="to_image,selectTo" />
+
+    <androidx.constraintlayout.widget.Group
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <androidx.constraintlayout.widget.Group
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="unit,doseText,unitText,dose" />
+
+    <androidx.constraintlayout.widget.Group
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="editText,information" />
+
+    <androidx.constraintlayout.widget.Group
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="add_button,cancel_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

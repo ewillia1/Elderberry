@@ -1,10 +1,10 @@
 package edu.northeastern.elderberry;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class YourMedicationsActivity extends AppCompatActivity {
     private static final String TAG = "AddMedicationActivity";

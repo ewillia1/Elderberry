@@ -1,22 +1,29 @@
 package edu.northeastern.elderberry;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.TimePicker;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import java.util.Calendar;
 
-public class AddMedicationActivity extends AppCompatActivity {
+@SuppressWarnings("unused")
+public class AddMedicationActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
     private static final String TAG = "AddMedicationActivity";
+    private static final String TIME_PICKER_TAG = "time picker";
     private DatePickerDialog from_datePickerDialog;
     private DatePickerDialog to_datePickerDialog;
-    private Button from_date_picker_button;
-    private Button to_date_picker_button;
+    private TextView select_from;
+    private TextView select_to;
+    private TextView selectTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,17 +46,28 @@ public class AddMedicationActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
 
         initDatePicker();
-        this.from_date_picker_button = findViewById(R.id.from_date_picker_button);
-        this.to_date_picker_button = findViewById(R.id.to_date_picker_button);
+
+        this.select_from = findViewById(R.id.selectFrom);
+        this.select_to = findViewById(R.id.selectTo);
+
+        ImageView time_picker = findViewById(R.id.time_picker);
+        time_picker.setOnClickListener(v -> {
+            DialogFragment timePicker = new TimePickerFragment();
+            timePicker.show(getSupportFragmentManager(), TIME_PICKER_TAG);
+        });
+
+        this.selectTime = findViewById(R.id.selectTime);
     }
 
     private void initDatePicker() {
+        Log.d(TAG, "_____initDatePicker");
         // From date.
         DatePickerDialog.OnDateSetListener from_dateSetListener = (view, year, month, day) -> {
             Log.d(TAG, "_____initDatePicker");
             month = month + 1;
             String date = makeDateString(day, month, year);
-            this.from_date_picker_button.setText(date);
+            this.select_from.setText(getString(R.string.from_date, date));
+            this.select_from.setTextSize(25);
         };
 
         Calendar calendar = Calendar.getInstance();
@@ -64,7 +82,8 @@ public class AddMedicationActivity extends AppCompatActivity {
             Log.d(TAG, "_____initDatePicker");
             month = month + 1;
             String date = makeDateString(day, month, year);
-            this.to_date_picker_button.setText(date);
+            this.select_to.setText(getString(R.string.to_date, date));
+            this.select_to.setTextSize(25);
         };
 
         this.to_datePickerDialog = new DatePickerDialog(this, style, to_dateSetListener, year1, month1, day1);
@@ -77,29 +96,29 @@ public class AddMedicationActivity extends AppCompatActivity {
 
     private String getMonthFormat(int month) {
         Log.d(TAG, "_____getMonthFormat");
-        if(month == 1)
+        if (month == 1)
             return "JAN";
-        if(month == 2)
+        if (month == 2)
             return "FEB";
-        if(month == 3)
+        if (month == 3)
             return "MAR";
-        if(month == 4)
+        if (month == 4)
             return "APR";
-        if(month == 5)
+        if (month == 5)
             return "MAY";
-        if(month == 6)
+        if (month == 6)
             return "JUN";
-        if(month == 7)
+        if (month == 7)
             return "JUL";
-        if(month == 8)
+        if (month == 8)
             return "AUG";
-        if(month == 9)
+        if (month == 9)
             return "SEP";
-        if(month == 10)
+        if (month == 10)
             return "OCT";
-        if(month == 11)
+        if (month == 11)
             return "NOV";
-        if(month == 12)
+        if (month == 12)
             return "DEC";
 
         //default should never happen
@@ -114,5 +133,22 @@ public class AddMedicationActivity extends AppCompatActivity {
     public void openToDatePicker(View view) {
         Log.d(TAG, "_____openDatePicker");
         this.to_datePickerDialog.show();
+    }
+
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        Log.d(TAG, "_____onTimeSet");
+        String am_pm = (hourOfDay < 12) ? " AM" : " PM";
+        String st_min = Integer.toString(minute);
+
+        if (hourOfDay > 12) {
+            hourOfDay %= 12;
+        }
+
+        if (minute < 10) {
+            st_min = "0" + st_min;
+        }
+
+        this.selectTime.setText(getString(R.string.set_time, hourOfDay, st_min, am_pm));
     }
 }

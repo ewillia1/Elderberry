@@ -21,12 +21,9 @@
     <string name="view_medications">View Medications</string>
     <string name="medication_history">Medication History</string>
     <string name="name_">Name:</string>
-    <string name="pick_a_time">Pick a time</string>
     <string name="information">Information:</string>
     <string name="type_text_here">Type text here</string>
-    <string name="select_date">Select date</string>
     <string name="type_name">Type name</string>
-    <string name="select_date_">Select date</string>
     <string name="type_unit">Type unit</string>
     <string name="unit">Unit:</string>
     <string name="type_dose">Type dose</string>
@@ -35,4 +32,12 @@
     <string name="to">To:</string>
     <string name="from">From:</string>
     <string name="set_the_date">Set the Date</string>
+    <string name="cancel">Cancel</string>
+    <string name="add">Add</string>
+    <string name="add_medication_item">Add medication item</string>
+    <string name="calendar_icon">calendar icon</string>
+    <string name="clock_icon">clock icon</string>
+    <string name="from_date">From: %1$s</string>
+    <string name="to_date">To: %1$s</string>
+    <string name="set_time">Time: %1$d:%2$s %3$s</string>
 </resources>
