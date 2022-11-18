@@ -9,8 +9,8 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13556392-2823-4189-9d7f-bb770af20f28" name="Changes" comment="Updated strings.xml">
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+    <list default="true" id="13556392-2823-4189-9d7f-bb770af20f28" name="Changes" comment="Updated activity_login.xml">
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_about.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_about.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,7 +180,21 @@
       <option name="project" value="LOCAL" />
       <updated>1668786305431</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Updated strings.xml">
+      <created>1668786360336</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1668786360337</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Updated activity_login.xml">
+      <created>1668786504272</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1668786504272</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -200,6 +214,7 @@
     <MESSAGE value="Updated activity_add_medication.xml (still in the works)" />
     <MESSAGE value="Added Firebase Realtime Database" />
     <MESSAGE value="Updated strings.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated strings.xml" />
+    <MESSAGE value="Updated activity_login.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated activity_login.xml" />
   </component>
 </project>
