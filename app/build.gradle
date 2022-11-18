@@ -1,5 +1,7 @@
 plugins {
     id 'com.android.application'
+    // Add the Google services Gradle plugin
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -27,13 +29,13 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        signingConfig signingConfigs.release
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
@@ -48,7 +50,20 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.firebase:firebase-database:20.1.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+
+    //Import Firebase BOM
+    implementation platform('com.google.firebase:firebase-bom:31.0.2')
+
+    //Firebase Analytics
+    implementation 'com.google.firebase:firebase-analytics'
+
+    //Firebase Cloud Storage
+    implementation 'com.google.firebase:firebase-storage'
+
+    //Firebase Realtime Database
+    implementation 'com.google.firebase:firebase-database'
 }
