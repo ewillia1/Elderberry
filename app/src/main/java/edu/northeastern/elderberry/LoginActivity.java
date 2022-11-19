@@ -25,15 +25,7 @@ import java.util.Objects;
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     protected static final String PREFS_NAME = "MyPrefsFile";
-    private static final String PREF_EMAIL = "email";
-    private static final String PREF_PASSWORD = "password";
     private FirebaseAuth mAuth;
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
-    private CheckBox rememberMeCheckBox;
-    private boolean rememberMe;
-    private TextInputEditText loginEmail;
-    private TextInputEditText loginPassword;
 
 
     @Override
@@ -41,10 +33,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "_____onCreate");
         setContentView(R.layout.activity_login);
-
-        // Shared preferences.
-        this.sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, MODE_PRIVATE);
-        this.editor = sharedPreferences.edit();
 
         // Initialize Firebase Auth.
         // Get the shared instance of the FirebaseAuth object.
@@ -78,31 +66,6 @@ public class LoginActivity extends AppCompatActivity {
             Log.d(TAG, "_____onClick (forgotPassword)");
             resetPassword();
         });
-
-        this.rememberMeCheckBox = findViewById(R.id.remember_me_checkbox);
-        this.rememberMeCheckBox.setOnClickListener(v -> clickedCheckbox());
-
-        this.loginEmail = findViewById(R.id.loginEmail);
-        this.loginPassword = findViewById(R.id.loginPassword);
-
-        this.rememberMe = sharedPreferences.getBoolean("rememberMe", false);
-        if (this.rememberMe) {
-            this.loginEmail.setText(this.sharedPreferences.getString(PREF_EMAIL, ""));
-            this.loginPassword.setText(this.sharedPreferences.getString(PREF_PASSWORD, ""));
-            rememberMeCheckBox.setChecked(true);
-        }
-    }
-
-    private void clickedCheckbox() {
-        if (this.rememberMeCheckBox.isChecked()) {
-            this.editor.putBoolean("rememberMe", true);
-            this.editor.putString(PREF_EMAIL, this.loginEmail.getText().toString());
-            this.editor.putString(PREF_PASSWORD, this.loginPassword.getText().toString());
-            this.editor.apply();
-        } else {
-            this.editor.clear();
-            this.editor.apply();
-        }
     }
 
     private void resetPassword() {
@@ -134,19 +97,16 @@ public class LoginActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 Log.d(TAG, "_____authenticateUser (signInWithEmail:success)");
 
-//                // Letting the program know that this user has officially logged in.
-//                this.editor.putBoolean("hasLoggedIn", true);
-//                this.editor.apply();
+                // Letting the program know that this user has officially logged in.
+                SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("hasLoggedIn", true);
+                editor.apply();
 
                 showMedicationTrackerActivity();
             } else {
                 // If sign in fails, display a message to the user.
                 Log.d(TAG, "_____authenticateUser (signInWithEmail:failure): " + Objects.requireNonNull(task.getException()).getMessage(), task.getException());
-
-                // Reset editor if login fails.
-                this.editor.clear();
-                this.editor.apply();
-
                 Toast.makeText(LoginActivity.this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

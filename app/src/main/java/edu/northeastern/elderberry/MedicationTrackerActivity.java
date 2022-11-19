@@ -136,7 +136,7 @@ public class MedicationTrackerActivity extends AppCompatActivity {
             case R.id.log_out:
                 Log.d(TAG, "_____onOptionsItemSelected (logout)");
 
-                // Set hasLoggedIn has false, since the user has no logged out.
+                // Set hasLoggedIn has false, since the user has now logged out.
                 SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean("hasLoggedIn", false);
