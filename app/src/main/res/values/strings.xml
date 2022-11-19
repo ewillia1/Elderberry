@@ -8,13 +8,10 @@
     <string name="medication_tracker">Medication Tracker</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
-    <string name="user_name">Username</string>
     <string name="insert_password">Insert password</string>
-    <string name="insert_user_name">Insert username</string>
     <string name="no_account_yet_create_an_account">No Account Yet? Create an Account.</string>
     <string name="app_logo1">App Logo</string>
     <string name="continueText">Continue</string>
-    <string name="enter_user_name">Enter Username</string>
     <string name="enter_password">Enter Password</string>
     <string name="create_account">Create Account</string>
     <string name="add_medication">Add Medication</string>
@@ -41,4 +38,10 @@
     <string name="to_date">To: %1$s</string>
     <string name="set_time">Time: %1$d:%2$s %3$s</string>
     <string name="by_christopher_mccune_nelizabeth_williams_nshriya_hukkeri_nzhengyu_yang_n_npictures_by_virginia_gassman">By: Christopher McCune\nElizabeth Williams\nShriya Hukkeri\nZhengyu Yang\n\nPictures by: Virginia Gassman</string>
+    <string name="enter_first_name">Enter First Name</string>
+    <string name="enter_last_name">Enter Last Name</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="log_out">Log Out</string>
+    <string name="insert_email">Insert Email</string>
+    <string name="email">Email</string>
 </resources>
