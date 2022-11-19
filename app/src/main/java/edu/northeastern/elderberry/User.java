@@ -1,5 +1,6 @@
 package edu.northeastern.elderberry;
 
+@SuppressWarnings("unused")
 public class User {
     public String firstName;
     public String lastName;

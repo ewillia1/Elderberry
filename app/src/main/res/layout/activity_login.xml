@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         app:counterEnabled="true"
         app:counterMaxLength="40"
-        app:endIconMode="clear_text"
+        app:endIconMode="password_toggle"
         app:helperText="Required*"
         app:helperTextTextColor="@color/textHintColor"
         app:layout_constraintBottom_toTopOf="@+id/loginButton"

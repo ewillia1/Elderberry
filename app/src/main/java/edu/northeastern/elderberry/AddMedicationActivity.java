@@ -15,6 +15,7 @@ import androidx.fragment.app.DialogFragment;
 
 import java.util.Calendar;
 
+@SuppressWarnings("unused")
 public class AddMedicationActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
     private static final String TAG = "AddMedicationActivity";
     private static final String TIME_PICKER_TAG = "time picker";
