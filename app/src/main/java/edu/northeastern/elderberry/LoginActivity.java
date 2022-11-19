@@ -32,12 +32,12 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
+    private String username;
+    private String password;
     private final ArrayList<DisplayUsername> listOfUsers = new ArrayList<>();
     private DatabaseReference userDatabase;
-    private EditText enterUsername; // for creating new users
-    private EditText enterPassword; // for creating password
-    private EditText username; //
-    private EditText password; //
+    private EditText enterUsername;
+    private EditText enterPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,15 +60,12 @@ public class LoginActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
 
         TextView createAccount = findViewById(R.id.createAccount);
-        this.username = findViewById(R.id.username_edit);
-        this.password = findViewById(R.id.password_edit);
         createAccount.setOnClickListener(view -> openCreateAccount());
 
         // Temporary
         Button loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(v -> {
             Log.d(TAG, "_____onClick");
-
             startMedicationTrackerActivity();
         });
 
@@ -95,7 +92,6 @@ public class LoginActivity extends AppCompatActivity {
     private void startMedicationTrackerActivity() {
         Log.d(TAG, "_____startMedicationTrackerActivity");
         Intent intent = new Intent(this, MedicationTrackerActivity.class);
-        intent.putExtra("current_username", this.username.getText().toString());
         startActivity(intent);
     }
 
@@ -108,10 +104,10 @@ public class LoginActivity extends AppCompatActivity {
         Button createButton = dialog.findViewById(R.id.createAccount);
 
         createButton.setOnClickListener(view -> {
-            String username = enterUsername.getText().toString();
-            String password = enterPassword.getText().toString();
+            this.username = enterUsername.getText().toString();
+            this.password = enterPassword.getText().toString();
 
-            if (isInvalid(username) || isInvalid(password)) {
+            if (isInvalid(this.username) || isInvalid(this.password)) {
                 Snackbar.make(view, "Unsuccessful account creation!", Snackbar.LENGTH_SHORT).show();
             } else {
                 Snackbar.make(view, "Successful account creation!", Snackbar.LENGTH_SHORT).show();
