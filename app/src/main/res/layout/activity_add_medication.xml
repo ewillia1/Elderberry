@@ -201,7 +201,7 @@
             android:hint="@string/dose"
             android:maxLength="50"
             android:textColor="@color/main"
-            android:textColorHint="@color/main"
+            android:textColorHint="#78909C"
             android:textSize="30sp"
             android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -229,7 +229,7 @@
             android:hint="@string/unit"
             android:maxLength="50"
             android:textColor="@color/main"
-            android:textColorHint="@color/main"
+            android:textColorHint="#78909C"
             android:textSize="30sp"
             android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -257,7 +257,7 @@
             android:hint="@string/information"
             android:maxLength="5000"
             android:textColor="@color/main"
-            android:textColorHint="@color/main"
+            android:textColorHint="#78909C"
             android:textSize="20sp"
             android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
