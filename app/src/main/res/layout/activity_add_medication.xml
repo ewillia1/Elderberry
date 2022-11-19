@@ -102,7 +102,7 @@
         tools:layout_editor_absoluteY="281dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/addTimeBt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -112,6 +112,18 @@
         tools:ignore="ImageContrastCheck"
         tools:layout_editor_absoluteX="330dp"
         tools:layout_editor_absoluteY="282dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/deleteTimeBt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:contentDescription="@string/add_medication_item"
+        android:src="@drawable/delete_med_button"
+        app:backgroundTint="@color/background"
+        tools:ignore="ImageContrastCheck"
+        tools:layout_editor_absoluteX="151dp"
+        tools:layout_editor_absoluteY="293dp" />
 
     <ImageView
         android:id="@+id/to_image"
