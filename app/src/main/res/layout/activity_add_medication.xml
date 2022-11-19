@@ -27,8 +27,8 @@
         android:layout_height="94dp"
         app:counterEnabled="true"
         app:counterMaxLength="40"
-        app:helperText="Required*"
         app:endIconMode="clear_text"
+        app:helperText="Required*"
         app:helperTextTextColor="@color/textHintColor"
         tools:layout_editor_absoluteX="4dp"
         tools:layout_editor_absoluteY="50dp">
@@ -57,15 +57,6 @@
         tools:layout_editor_absoluteX="300dp"
         tools:layout_editor_absoluteY="145dp" />
 
-    <ImageView
-        android:id="@+id/time_picker"
-        android:layout_width="67dp"
-        android:layout_height="45dp"
-        android:contentDescription="@string/clock_icon"
-        app:srcCompat="@drawable/clock"
-        tools:layout_editor_absoluteX="150dp"
-        tools:layout_editor_absoluteY="293dp" />
-
     <TextView
         android:id="@+id/selectFrom"
         android:layout_width="wrap_content"
@@ -75,8 +66,17 @@
         android:textColor="@color/main"
         android:textSize="30sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="90dp"
-        tools:layout_editor_absoluteY="145dp" />
+        tools:layout_editor_absoluteX="80dp"
+        tools:layout_editor_absoluteY="165dp" />
+
+    <ImageView
+        android:id="@+id/time_picker"
+        android:layout_width="67dp"
+        android:layout_height="45dp"
+        android:contentDescription="@string/clock_icon"
+        app:srcCompat="@drawable/clock"
+        tools:layout_editor_absoluteX="150dp"
+        tools:layout_editor_absoluteY="281dp" />
 
     <TextView
         android:id="@+id/selectTo"
@@ -88,7 +88,7 @@
         android:textSize="30sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="178dp" />
+        tools:layout_editor_absoluteY="225dp" />
 
     <TextView
         android:id="@+id/set_time"
@@ -167,8 +167,8 @@
         android:layout_height="99dp"
         app:counterEnabled="true"
         app:counterMaxLength="40"
-        app:helperText="Required*"
         app:endIconMode="clear_text"
+        app:helperText="Required*"
         app:helperTextTextColor="@color/textHintColor"
         tools:layout_editor_absoluteX="236dp"
         tools:layout_editor_absoluteY="387dp">
@@ -194,8 +194,8 @@
         android:layout_height="94dp"
         app:counterEnabled="true"
         app:counterMaxLength="40"
-        app:helperText="Required*"
         app:endIconMode="clear_text"
+        app:helperText="Required*"
         app:helperTextTextColor="@color/textHintColor"
         tools:layout_editor_absoluteX="60dp"
         tools:layout_editor_absoluteY="392dp">
@@ -237,26 +237,5 @@
             android:textStyle="bold"
             tools:ignore="TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.02872777" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="419dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

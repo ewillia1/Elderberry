@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13556392-2823-4189-9d7f-bb770af20f28" name="Changes" comment="Updated delete_med_button.xml">
+    <list default="true" id="13556392-2823-4189-9d7f-bb770af20f28" name="Changes" comment="Updated activity_add_medication.xml, renames the add_button and delete_button drawables">
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_medication.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_medication.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -430,7 +430,21 @@
       <option name="project" value="LOCAL" />
       <updated>1668889305957</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Updated activity_add_medication.xml">
+      <created>1668889495511</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1668889495511</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Updated activity_add_medication.xml, renames the add_button and delete_button drawables">
+      <created>1668889681989</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1668889681989</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -445,8 +459,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Updated activity_add_medication.xml" />
-    <MESSAGE value="Updated fontFamily" />
     <MESSAGE value="Updated build.gradle" />
     <MESSAGE value="Updated layouts and added menus" />
     <MESSAGE value="Updated CreateAccountActivity.java, LoginActivity.java" />
@@ -470,6 +482,8 @@
     <MESSAGE value="Override onBackPressed() in CreateAccountActivity.java, still working on add medication functionality" />
     <MESSAGE value="Added delete_med_button.xml" />
     <MESSAGE value="Updated delete_med_button.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated delete_med_button.xml" />
+    <MESSAGE value="Updated activity_add_medication.xml" />
+    <MESSAGE value="Updated activity_add_medication.xml, renames the add_button and delete_button drawables" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated activity_add_medication.xml, renames the add_button and delete_button drawables" />
   </component>
 </project>
