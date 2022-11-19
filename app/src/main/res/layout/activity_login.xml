@@ -21,7 +21,6 @@
         android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/email_"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -85,29 +84,54 @@
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="357dp"
-        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/button_elderberryplant"
         android:fontFamily="@font/elsie"
         android:text="@string/login"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/createAccount"
+        app:layout_constraintBottom_toTopOf="@+id/forgotPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_edit"
         tools:ignore="DuplicateSpeakableTextCheck" />
 
     <TextView
-        android:id="@+id/createAccount"
-        android:layout_width="match_parent"
+        android:id="@+id/forgotPassword"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/elsie"
-        android:text="@string/no_account_yet_create_an_account"
+        android:text="@string/forgot_password"
         android:textAlignment="center"
-        android:textColor="@color/textHintColor"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/main"
+        app:layout_constraintBottom_toTopOf="@+id/forgotEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 
+    <TextView
+        android:id="@+id/forgotEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/elsie"
+        android:text="@string/forgot_email"
+        android:textAlignment="center"
+        android:textColor="@color/textHintColor"
+        app:layout_constraintBottom_toTopOf="@+id/createAccount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forgotPassword" />
+
+    <TextView
+        android:id="@+id/createAccount"
+        android:layout_width="373dp"
+        android:layout_height="24dp"
+        android:fontFamily="@font/elsie"
+        android:text="@string/no_account_yet_create_an_account"
+        android:textAlignment="center"
+        android:textColor="@color/main"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forgotEmail" />
 </androidx.constraintlayout.widget.ConstraintLayout>

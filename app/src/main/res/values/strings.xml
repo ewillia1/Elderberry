@@ -44,4 +44,6 @@
     <string name="log_out">Log Out</string>
     <string name="insert_email">Insert Email</string>
     <string name="email">Email</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="forgot_email">Forgot email?</string>
 </resources>
