@@ -64,7 +64,6 @@ public class LoginActivity extends AppCompatActivity {
         TextView createAccount = findViewById(R.id.createAccount);
         createAccount.setOnClickListener(view -> openCreateAccount());
 
-        // Temporary
         Button loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(v -> {
             Log.d(TAG, "_____onClick");

@@ -9,7 +9,13 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13556392-2823-4189-9d7f-bb770af20f28" name="Changes" comment="Update activity_create_account.xml, activity_login.xml, strings.xml, workspace.xml">
+    <list default="true" id="13556392-2823-4189-9d7f-bb770af20f28" name="Changes" comment="Updated LoginActivity.java">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/ForgotEmailActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/ForgotPasswordActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_forgot_email.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_forgot_password.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/LoginActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -80,6 +86,9 @@
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app" />
+    </key>
+    <key name="android.template.424079550">
+      <recent name="edu.northeastern.elderberry" />
     </key>
   </component>
   <component name="RunManager">
@@ -299,7 +308,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668821574805</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Updated LoginActivity.java">
+      <created>1668821879213</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1668821879213</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -321,7 +337,6 @@
     <MESSAGE value="Updated activity_about.xml, strings.xml" />
     <MESSAGE value="Updated activity_add_medication.xml" />
     <MESSAGE value="Updated fontFamily" />
-    <MESSAGE value="Updated LoginActivity.java" />
     <MESSAGE value="Updated build.gradle" />
     <MESSAGE value="Updated strings.xml" />
     <MESSAGE value="Updated layouts and added menus" />
@@ -330,6 +345,7 @@
     <MESSAGE value="Update" />
     <MESSAGE value="Update workspace.xml" />
     <MESSAGE value="Update activity_create_account.xml, activity_login.xml, strings.xml, workspace.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update activity_create_account.xml, activity_login.xml, strings.xml, workspace.xml" />
+    <MESSAGE value="Updated LoginActivity.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated LoginActivity.java" />
   </component>
 </project>
