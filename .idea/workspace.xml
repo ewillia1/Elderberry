@@ -9,15 +9,19 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13556392-2823-4189-9d7f-bb770af20f28" name="Changes" comment="Updated LoginActivity.java">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="13556392-2823-4189-9d7f-bb770af20f28" name="Changes" comment="Reverted back to now Remember Me checkbox -- user stays logged in until they log out">
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_medication.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_medication.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_create_account.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_create_account.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_forgot_password.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_forgot_password.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/Gavin/.android/avd/Pixel_5_API_27.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[8B2X12EH8]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -40,6 +44,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -47,9 +59,6 @@
     <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2GKNiBEHPYaUulIo5hdoDXVODgy" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -63,7 +72,7 @@
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="cidr.known.project.marker" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/layout" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -77,8 +86,15 @@
     <key name="CreateClassDialog.RecentsKey">
       <recent name="edu.northeastern.elderberry" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/menu" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app" />
+    </key>
+    <key name="android.template.424079550">
+      <recent name="edu.northeastern.elderberry" />
     </key>
   </component>
   <component name="RunManager">
@@ -228,7 +244,161 @@
       <option name="project" value="LOCAL" />
       <updated>1668791238166</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Updated LoginActivity.java">
+      <created>1668791296013</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1668791296013</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Updated build.gradle">
+      <created>1668817915932</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1668817915932</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Updated build.gradle">
+      <created>1668817924452</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1668817924452</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Updated strings.xml">
+      <created>1668817956108</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1668817956108</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Updated layouts and added menus">
+      <created>1668818218976</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1668818218977</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Updated workspace.xml">
+      <created>1668818256560</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1668818256560</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Updated CreateAccountActivity.java, LoginActivity.java">
+      <created>1668820918630</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1668820918630</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Update">
+      <created>1668820935535</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1668820935535</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Update workspace.xml">
+      <created>1668821187786</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1668821187786</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Update activity_create_account.xml, activity_login.xml, strings.xml, workspace.xml">
+      <created>1668821574805</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1668821574805</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Updated LoginActivity.java">
+      <created>1668821879213</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1668821879213</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Updated LoginActivity.java, added ForgotEmailActivity and ForgotPasswordActivity">
+      <created>1668822472634</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1668822472634</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Updated login/create user functionality">
+      <created>1668828021880</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1668828021880</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Updated login/create user functionality again, cleaned code">
+      <created>1668828824718</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1668828824718</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Updated deploymentTargetDropDown.xml">
+      <created>1668868087752</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1668868087752</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Skip LoginActivity, if already successfully logged in, got logo screen to show up and then go away">
+      <created>1668872842971</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1668872842971</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Updated workspace.xml">
+      <created>1668872874064</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1668872874064</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Made textStyle bold and added Remember Me Checkbox to activity_login.xml">
+      <created>1668873506812</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1668873506812</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Updated strings.xml">
+      <created>1668873520951</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1668873520951</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Made mode MODE_PRIVATE for shared preferences">
+      <created>1668873804312</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1668873804312</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Just a save to have the remember me checkbox code (but I am going to remove it)">
+      <created>1668875812102</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1668875812102</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Reverted back to now Remember Me checkbox -- user stays logged in until they log out">
+      <created>1668876124475</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1668876124475</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -244,15 +414,30 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added a lot of files -- started the first draft of the app" />
-    <MESSAGE value="Update" />
     <MESSAGE value="Updated activity_add_medication.xml (still in the works)" />
     <MESSAGE value="Added Firebase Realtime Database" />
-    <MESSAGE value="Updated strings.xml" />
     <MESSAGE value="Updated activity_login.xml" />
     <MESSAGE value="Updated activity_about.xml, strings.xml" />
     <MESSAGE value="Updated activity_add_medication.xml" />
     <MESSAGE value="Updated fontFamily" />
+    <MESSAGE value="Updated build.gradle" />
+    <MESSAGE value="Updated layouts and added menus" />
+    <MESSAGE value="Updated CreateAccountActivity.java, LoginActivity.java" />
+    <MESSAGE value="Update" />
+    <MESSAGE value="Update workspace.xml" />
+    <MESSAGE value="Update activity_create_account.xml, activity_login.xml, strings.xml, workspace.xml" />
     <MESSAGE value="Updated LoginActivity.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated LoginActivity.java" />
+    <MESSAGE value="Updated LoginActivity.java, added ForgotEmailActivity and ForgotPasswordActivity" />
+    <MESSAGE value="Updated login/create user functionality" />
+    <MESSAGE value="Updated login/create user functionality again, cleaned code" />
+    <MESSAGE value="Updated deploymentTargetDropDown.xml" />
+    <MESSAGE value="Skip LoginActivity, if already successfully logged in, got logo screen to show up and then go away" />
+    <MESSAGE value="Updated workspace.xml" />
+    <MESSAGE value="Made textStyle bold and added Remember Me Checkbox to activity_login.xml" />
+    <MESSAGE value="Updated strings.xml" />
+    <MESSAGE value="Made mode MODE_PRIVATE for shared preferences" />
+    <MESSAGE value="Just a save to have the remember me checkbox code (but I am going to remove it)" />
+    <MESSAGE value="Reverted back to now Remember Me checkbox -- user stays logged in until they log out" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reverted back to now Remember Me checkbox -- user stays logged in until they log out" />
   </component>
 </project>
