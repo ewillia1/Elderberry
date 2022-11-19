@@ -21,9 +21,9 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
     private static final String TIME_PICKER_TAG = "time picker";
     private DatePickerDialog from_datePickerDialog;
     private DatePickerDialog to_datePickerDialog;
-    private TextView select_from;
-    private TextView select_to;
-    private TextView selectTime;
+    private TextView set_from;
+    private TextView set_to;
+    private TextView set_time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +47,8 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
 
         initDatePicker();
 
-        this.select_from = findViewById(R.id.selectFrom);
-        this.select_to = findViewById(R.id.selectTo);
+        this.set_from = findViewById(R.id.selectFrom);
+        this.set_to = findViewById(R.id.selectTo);
 
         ImageView time_picker = findViewById(R.id.time_picker);
         time_picker.setOnClickListener(v -> {
@@ -56,7 +56,9 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
             timePicker.show(getSupportFragmentManager(), TIME_PICKER_TAG);
         });
 
-        this.selectTime = findViewById(R.id.selectTime);
+//        this.addAnotherTime = false;
+
+        this.set_time = findViewById(R.id.set_time);
     }
 
     private void initDatePicker() {
@@ -66,8 +68,8 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
             Log.d(TAG, "_____initDatePicker");
             month = month + 1;
             String date = makeDateString(day, month, year);
-            this.select_from.setText(getString(R.string.from_date, date));
-            this.select_from.setTextSize(25);
+            this.set_from.setText(getString(R.string.from_date, date));
+            this.set_from.setTextSize(25);
         };
 
         Calendar calendar = Calendar.getInstance();
@@ -82,8 +84,8 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
             Log.d(TAG, "_____initDatePicker");
             month = month + 1;
             String date = makeDateString(day, month, year);
-            this.select_to.setText(getString(R.string.to_date, date));
-            this.select_to.setTextSize(25);
+            this.set_to.setText(getString(R.string.to_date, date));
+            this.set_to.setTextSize(25);
         };
 
         this.to_datePickerDialog = new DatePickerDialog(this, style, to_dateSetListener, year1, month1, day1);
@@ -149,6 +151,6 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
             st_min = "0" + st_min;
         }
 
-        this.selectTime.setText(getString(R.string.set_time, hourOfDay, st_min, am_pm));
+        this.set_time.setText(getString(R.string.set_time, hourOfDay, st_min, am_pm));
     }
 }

@@ -12,12 +12,12 @@
         android:id="@+id/addMedTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/elsie"
         android:text="@string/add_medication_title"
         android:textColor="@color/main"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,16 +25,20 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout5"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="391dp"
-        android:layout_height="103dp"
+        android:layout_width="0dp"
+        android:layout_height="94dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="34dp"
         app:counterEnabled="true"
         app:counterMaxLength="40"
         app:helperText="Required*"
         app:helperTextTextColor="@color/textHintColor"
-        app:layout_constraintBottom_toTopOf="@+id/selectFrom"
+        app:layout_constraintBottom_toBottomOf="@+id/selectFrom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@+id/addMedTitle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/medName"
@@ -51,115 +55,115 @@
 
     <ImageView
         android:id="@+id/from_image"
-        android:layout_width="63dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="71dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="94dp"
+        android:layout_marginEnd="86dp"
+        android:layout_marginBottom="91dp"
         android:contentDescription="@string/calendar_icon"
         android:onClick="openFromDatePicker"
-        app:layout_constraintBottom_toTopOf="@+id/to_image"
+        app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/selectFrom"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toTopOf="@+id/textInputLayout5"
         app:srcCompat="@drawable/calendar"
         tools:ignore="DuplicateSpeakableTextCheck" />
 
     <ImageView
         android:id="@+id/time_picker"
-        android:layout_width="67dp"
+        android:layout_width="0dp"
         android:layout_height="46dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="258dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="259dp"
         android:contentDescription="@string/clock_icon"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout7"
+        app:layout_constraintBottom_toBottomOf="@+id/add_button"
         app:layout_constraintEnd_toStartOf="@+id/floatingActionButton"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/selectTime"
-        app:layout_constraintTop_toBottomOf="@+id/to_image"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textInputLayout6"
+        app:layout_constraintTop_toTopOf="@+id/guideline3"
         app:srcCompat="@drawable/clock" />
 
     <TextView
         android:id="@+id/selectFrom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="34dp"
         android:fontFamily="@font/elsie"
         android:text="@string/from"
         android:textColor="@color/main"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/selectTo"
-        app:layout_constraintEnd_toStartOf="@+id/from_image"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.982" />
+        app:layout_constraintBottom_toTopOf="@+id/set_time"
+        app:layout_constraintStart_toStartOf="@+id/set_time" />
 
     <TextView
         android:id="@+id/selectTo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:fontFamily="@font/elsie"
         android:text="@string/to"
         android:textColor="@color/main"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/selectTime"
-        app:layout_constraintEnd_toStartOf="@+id/to_image"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.945" />
+        app:layout_constraintStart_toStartOf="@+id/selectFrom"
+        app:layout_constraintTop_toBottomOf="@+id/selectFrom" />
+
+    <TextView
+        android:id="@+id/set_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="212dp"
+        android:layout_marginEnd="54dp"
+        android:fontFamily="@font/elsie"
+        android:text="@string/time"
+        android:textColor="@color/main"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/cancel_button"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout6"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="239dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="238dp"
         android:clickable="true"
         android:contentDescription="@string/add_medication_item"
         android:src="@drawable/add_med_button"
         app:backgroundTint="@color/background"
+        app:layout_constraintBottom_toBottomOf="@+id/cancel_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/time_picker"
-        app:layout_constraintTop_toBottomOf="@+id/selectTo"
+        app:layout_constraintTop_toTopOf="@+id/textInputLayout5"
         tools:ignore="ImageContrastCheck" />
-
-    <TextView
-        android:id="@+id/selectTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="272dp"
-        android:fontFamily="@font/elsie"
-        android:text="@string/time"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/time_picker"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/to_image"
-        android:layout_width="59dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="102dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="57dp"
         android:contentDescription="@string/calendar_icon"
         android:onClick="openToDatePicker"
-        app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
+        app:layout_constraintBottom_toTopOf="@+id/time_picker"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/selectTo"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textInputLayout6"
+        app:layout_constraintTop_toBottomOf="@+id/from_image"
         app:srcCompat="@drawable/calendar" />
 
     <Button
         android:id="@+id/cancel_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="69dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="64dp"
         android:background="@drawable/button_elderberryplant"
         android:fontFamily="@font/elsie"
         android:text="@string/cancel"
@@ -167,45 +171,37 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/add_button"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout10" />
 
     <Button
         android:id="@+id/add_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="68dp"
         android:background="@drawable/button_elderberryplant"
         android:fontFamily="@font/elsie"
         android:text="@string/add"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cancel_button"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout10"
-        app:layout_constraintVertical_bias="0.157" />
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout10"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout10" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout7"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="197dp"
+        android:layout_width="0dp"
         android:layout_height="96dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="34dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
         app:counterEnabled="true"
         app:counterMaxLength="40"
         app:helperText="Required*"
         app:helperTextTextColor="@color/textHintColor"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout10"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textInputLayout6"
-        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton"
-        app:layout_constraintVertical_bias="0.052">
+        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/unit"
@@ -223,19 +219,20 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout6"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="199dp"
-        android:layout_height="95dp"
-        android:layout_marginTop="52dp"
+        android:layout_width="0dp"
+        android:layout_height="94dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="102dp"
+        android:layout_marginEnd="89dp"
+        android:layout_marginBottom="101dp"
         app:counterEnabled="true"
         app:counterMaxLength="40"
         app:helperText="Required*"
         app:helperTextTextColor="@color/textHintColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textInputLayout7"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout7"
+        app:layout_constraintEnd_toStartOf="@+id/to_image"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectTime"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="@+id/selectFrom">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dose"
@@ -253,16 +250,14 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout10"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="408dp"
-        android:layout_height="167dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:counterEnabled="true"
         app:counterMaxLength="5000"
         app:layout_constraintBottom_toTopOf="@+id/cancel_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout6"
-        app:layout_constraintVertical_bias="0.275">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout7">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/medInformation"
@@ -276,5 +271,19 @@
             android:textSize="20sp"
             android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
