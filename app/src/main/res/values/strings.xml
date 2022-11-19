@@ -10,19 +10,13 @@
     <string name="password">Password</string>
     <string name="no_account_yet_create_an_account">No Account Yet? Create an Account.</string>
     <string name="app_logo1">App Logo</string>
-    <string name="continueText">Continue</string>
     <string name="create_account">Create Account</string>
     <string name="add_medication">Add Medication</string>
     <string name="view_medications">View Medications</string>
     <string name="medication_history">Medication History</string>
-    <string name="name_">Name:</string>
-    <string name="information">Information:</string>
-    <string name="type_text_here">Type information</string>
-    <string name="type_name">Type name</string>
-    <string name="type_unit">Type unit</string>
-    <string name="unit">Unit:</string>
-    <string name="type_dose">Type dose</string>
-    <string name="dose">Dose:</string>
+    <string name="information">Information</string>
+    <string name="unit">Unit</string>
+    <string name="dose">Dose</string>
     <string name="time">Time:</string>
     <string name="to">To:</string>
     <string name="from">From:</string>
@@ -43,5 +37,5 @@
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="send_email">Send Email</string>
-    <string name="remember_me">Remember Me</string>
+    <string name="medication_name">Medication Name</string>
 </resources>

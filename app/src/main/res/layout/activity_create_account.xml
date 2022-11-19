@@ -30,7 +30,8 @@
             android:textSize="30sp"
             android:fontFamily="@font/elsie"
             android:maxLength="40"
-            android:hint="@string/first_name" />
+            android:hint="@string/first_name"
+            android:textColorHint="@color/main"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -57,7 +58,8 @@
             android:textSize="30sp"
             android:fontFamily="@font/elsie"
             android:maxLength="40"
-            android:hint="@string/last_name" />
+            android:hint="@string/last_name"
+            android:textColorHint="@color/main"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -84,7 +86,8 @@
             android:textSize="30sp"
             android:fontFamily="@font/elsie"
             android:maxLength="40"
-            android:hint="@string/email" />
+            android:hint="@string/email"
+            android:textColorHint="@color/main"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -112,7 +115,8 @@
             android:textSize="30sp"
             android:fontFamily="@font/elsie"
             android:maxLength="40"
-            android:hint="@string/password" />
+            android:hint="@string/password"
+            android:textColorHint="@color/main"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

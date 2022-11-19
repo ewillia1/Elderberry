@@ -9,17 +9,19 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13556392-2823-4189-9d7f-bb770af20f28" name="Changes" comment="Just a save to have the remember me checkbox code (but I am going to remove it)">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/LoginActivity.java" afterDir="false" />
+    <list default="true" id="13556392-2823-4189-9d7f-bb770af20f28" name="Changes" comment="Reverted back to now Remember Me checkbox -- user stays logged in until they log out">
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_medication.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_medication.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_create_account.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_create_account.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_forgot_password.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_forgot_password.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/elizabethwilliams/.android/avd/Pixel_3_API_30.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[8B2X12EH8]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -389,7 +391,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668875812102</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Reverted back to now Remember Me checkbox -- user stays logged in until they log out">
+      <created>1668876124475</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1668876124475</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -428,6 +437,7 @@
     <MESSAGE value="Updated strings.xml" />
     <MESSAGE value="Made mode MODE_PRIVATE for shared preferences" />
     <MESSAGE value="Just a save to have the remember me checkbox code (but I am going to remove it)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Just a save to have the remember me checkbox code (but I am going to remove it)" />
+    <MESSAGE value="Reverted back to now Remember Me checkbox -- user stays logged in until they log out" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reverted back to now Remember Me checkbox -- user stays logged in until they log out" />
   </component>
 </project>
