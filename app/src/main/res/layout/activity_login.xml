@@ -49,7 +49,8 @@
             android:hint="@string/email"
             android:maxLength="40"
             android:textColor="@color/main"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -75,7 +76,8 @@
             android:hint="@string/password"
             android:maxLength="40"
             android:textColor="@color/main"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -100,6 +102,7 @@
         android:text="@string/forgot_password"
         android:textAlignment="center"
         android:textColor="@color/main"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/createAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -113,8 +116,25 @@
         android:text="@string/no_account_yet_create_an_account"
         android:textAlignment="center"
         android:textColor="@color/main"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/forgotPassword" />
+
+    <CheckBox
+        android:id="@+id/remember_me_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/textHintColor"
+        android:text="@string/remember_me"
+        android:textColor="@color/textHintColor"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/loginButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout9"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
