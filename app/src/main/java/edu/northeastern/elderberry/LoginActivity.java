@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -18,8 +19,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -66,9 +72,20 @@ public class LoginActivity extends AppCompatActivity {
 
         Button loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(v -> {
-            Log.d(TAG, "_____onClick");
+            Log.d(TAG, "_____onClick (loginButton)");
             authenticateUser();
         });
+
+        TextView forgotPassword = findViewById(R.id.forgotPassword);
+        forgotPassword.setOnClickListener(v -> {
+            Log.d(TAG, "_____onClick (forgotPassword)");
+            resetPassword();
+        });
+    }
+
+    private void resetPassword() {
+        Intent intent = new Intent(this, ForgotPasswordActivity.class);
+        startActivity(intent);
     }
 
     private void openCreateAccount() {
@@ -80,11 +97,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private void authenticateUser() {
         Log.d(TAG, "_____authenticateUser");
-        EditText loginEmail = findViewById(R.id.email_edit);
-        EditText loginPassword = findViewById(R.id.password_edit);
+        TextInputEditText loginEmail = findViewById(R.id.loginEmail);
+        TextInputEditText loginPassword = findViewById(R.id.loginPassword);
 
-        String email = loginEmail.getText().toString();
-        String password = loginPassword.getText().toString();
+        String email = Objects.requireNonNull(loginEmail.getText()).toString();
+        String password = Objects.requireNonNull(loginPassword.getText()).toString();
 
         if (email.isEmpty() || email.isBlank() || password.isEmpty() || password.isBlank()) {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_LONG).show();

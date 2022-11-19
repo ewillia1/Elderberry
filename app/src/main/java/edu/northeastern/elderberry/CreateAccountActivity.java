@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -72,14 +73,14 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     private void registerUser() {
         Log.d(TAG, "_____registerUser");
-        EditText etFirstName = findViewById(R.id.et_firstName);
-        EditText etLastName = findViewById(R.id.et_lastName);
-        EditText etRegisteredEmail = findViewById(R.id.et_email);
-        EditText etRegisteredPassword = findViewById(R.id.et_password);
-        this.firstName = etFirstName.getText().toString();
-        this.lastName = etLastName.getText().toString();
-        this.registeredEmail = etRegisteredEmail.getText().toString();
-        String registeredPassword = etRegisteredPassword.getText().toString();
+        TextInputEditText ti_firstName = findViewById(R.id.ti_firstName);
+        TextInputEditText ti_lastName = findViewById(R.id.ti_lastName);
+        TextInputEditText tiRegisteredEmail = findViewById(R.id.ti_email);
+        TextInputEditText tiRegisteredPassword = findViewById(R.id.ti_password);
+        this.firstName = Objects.requireNonNull(ti_firstName.getText()).toString();
+        this.lastName = Objects.requireNonNull(ti_lastName.getText()).toString();
+        this.registeredEmail = Objects.requireNonNull(tiRegisteredEmail.getText()).toString();
+        String registeredPassword = Objects.requireNonNull(tiRegisteredPassword.getText()).toString();
 
         if (isInvalid(this.firstName) || isInvalid(this.lastName) || isInvalid(this.registeredEmail) || isInvalid(registeredPassword)) {
             Toast.makeText(this, "Unsuccessful account creation! Please fill all fields.", Toast.LENGTH_SHORT).show();
