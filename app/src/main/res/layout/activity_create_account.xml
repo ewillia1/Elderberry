@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateAccountActivity">
+
+    <EditText
+        android:id="@+id/et_firstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:fontFamily="@font/elsie"
+        android:hint="@string/enter_first_name"
+        android:inputType="text"
+        android:textColorHint="@color/textHintColor"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/et_lastName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:fontFamily="@font/elsie"
+        android:hint="@string/enter_email"
+        android:inputType="textEmailAddress"
+        android:textColorHint="@color/textHintColor"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/et_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_lastName" />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:fontFamily="@font/elsie"
+        android:hint="@string/enter_password"
+        android:inputType="textPassword"
+        android:textColorHint="@color/textHintColor"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/createAccount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_email" />
+
+    <EditText
+        android:id="@+id/et_lastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:fontFamily="@font/elsie"
+        android:hint="@string/enter_last_name"
+        android:inputType="text"
+        android:textColorHint="@color/textHintColor"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/et_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_firstName" />
+
+    <Button
+        android:id="@+id/createAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_elderberryplant"
+        android:fontFamily="@font/elsie"
+        android:text="@string/create_account"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_password" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
