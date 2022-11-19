@@ -9,9 +9,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13556392-2823-4189-9d7f-bb770af20f28" name="Changes" comment="Updated build.gradle">
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-    </list>
+    <list default="true" id="13556392-2823-4189-9d7f-bb770af20f28" name="Changes" comment="Updated layouts and added menus" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -60,7 +58,7 @@
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="cidr.known.project.marker" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/layout" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -73,6 +71,10 @@
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="edu.northeastern.elderberry" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/menu" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app" />
@@ -246,7 +248,21 @@
       <option name="project" value="LOCAL" />
       <updated>1668817924452</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Updated strings.xml">
+      <created>1668817956108</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1668817956108</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Updated layouts and added menus">
+      <created>1668818218976</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1668818218977</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -265,13 +281,14 @@
     <MESSAGE value="Update" />
     <MESSAGE value="Updated activity_add_medication.xml (still in the works)" />
     <MESSAGE value="Added Firebase Realtime Database" />
-    <MESSAGE value="Updated strings.xml" />
     <MESSAGE value="Updated activity_login.xml" />
     <MESSAGE value="Updated activity_about.xml, strings.xml" />
     <MESSAGE value="Updated activity_add_medication.xml" />
     <MESSAGE value="Updated fontFamily" />
     <MESSAGE value="Updated LoginActivity.java" />
     <MESSAGE value="Updated build.gradle" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated build.gradle" />
+    <MESSAGE value="Updated strings.xml" />
+    <MESSAGE value="Updated layouts and added menus" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated layouts and added menus" />
   </component>
 </project>
