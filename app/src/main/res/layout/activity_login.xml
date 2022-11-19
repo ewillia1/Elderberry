@@ -20,61 +20,60 @@
         android:textColor="@color/main"
         android:textSize="50sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/username"
+        app:layout_constraintBottom_toTopOf="@+id/email_"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/email_"
         android:layout_width="351dp"
         android:layout_height="25dp"
         android:layout_marginHorizontal="10dp"
-        android:text="@string/user_name"
         android:fontFamily="@font/elsie"
+        android:text="@string/email"
         android:textColor="@color/main"
-        app:layout_constraintBottom_toTopOf="@+id/username_edit"
+        app:layout_constraintBottom_toTopOf="@+id/email_edit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginImage" />
 
     <EditText
-        android:id="@+id/username_edit"
+        android:id="@+id/email_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:autofillHints=""
         android:fontFamily="@font/elsie"
-        android:hint="@string/insert_user_name"
-        android:inputType="text"
+        android:hint="@string/insert_email"
+        android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:textColorHint="@color/textHintColor"
         app:layout_constraintBottom_toTopOf="@+id/password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/email_" />
 
     <TextView
         android:id="@+id/password"
         android:layout_width="350dp"
         android:layout_height="28dp"
         android:layout_marginHorizontal="30dp"
-        android:text="@string/password"
         android:fontFamily="@font/elsie"
+        android:text="@string/password"
         android:textColor="@color/main"
         app:layout_constraintBottom_toTopOf="@+id/password_edit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username_edit" />
+        app:layout_constraintTop_toBottomOf="@+id/email_edit" />
 
     <EditText
         android:id="@+id/password_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/elsie"
         android:layout_marginHorizontal="30dp"
         android:autofillHints=""
+        android:fontFamily="@font/elsie"
         android:hint="@string/insert_password"
         android:inputType="textPassword"
         android:minHeight="48dp"
@@ -86,11 +85,11 @@
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="357dp"
+        android:layout_height="48dp"
         android:background="@drawable/button_elderberryplant"
-        android:text="@string/login"
         android:fontFamily="@font/elsie"
+        android:text="@string/login"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/createAccount"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,9 +101,9 @@
         android:id="@+id/createAccount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/elsie"
         android:text="@string/no_account_yet_create_an_account"
         android:textAlignment="center"
-        android:fontFamily="@font/elsie"
         android:textColor="@color/textHintColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
