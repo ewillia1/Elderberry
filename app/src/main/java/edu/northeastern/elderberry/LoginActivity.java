@@ -72,12 +72,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void startMedicationTrackerActivity() {
-        Log.d(TAG, "_____startMedicationTrackerActivity");
-        Intent intent = new Intent(this, MedicationTrackerActivity.class);
-        startActivity(intent);
-    }
-
     private void openCreateAccount() {
         Log.d(TAG, "_____openCreateAccount");
         Intent intent = new Intent(this, CreateAccountActivity.class);
