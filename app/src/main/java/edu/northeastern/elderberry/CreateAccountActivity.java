@@ -7,9 +7,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
@@ -32,11 +36,6 @@ public class CreateAccountActivity extends AppCompatActivity {
         // Initialize Firebase Auth.
         // Get the shared instance of the FirebaseAuth object.
         this.mAuth = FirebaseAuth.getInstance();
-        // Allows us to check if the user is already authenticated or not. If the user is already authenticated we will close the activity.
-        if (this.mAuth.getCurrentUser() != null) {
-            finish();
-            return;
-        }
 
         // Calling this activity's function to use ActionBar utility methods.
         ActionBar actionBar = getSupportActionBar();
@@ -89,16 +88,17 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         this.mAuth.createUserWithEmailAndPassword(this.registeredEmail, registeredPassword)
                 .addOnCompleteListener(this, task -> {
-                    Log.d(TAG, "_____onComplete");
+                    Log.d(TAG, "_____registerUser");
                     if (task.isSuccessful()) {
-                        Log.d(TAG, "_____onComplete (signInWithEmail:success)");
+                        Log.d(TAG, "_____registerUser(success)");
                         User user = new User(firstName, lastName, registeredEmail);
                         FirebaseDatabase.getInstance().getReference("users")
                                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
                                 .setValue(user).addOnCompleteListener(task1 -> showMedicationTrackerActivity());
                     } else {
-                        Log.w(TAG, "_____onComplete (signInWithEmail:failure)", task.getException());
-                        Toast.makeText(CreateAccountActivity.this, "Authentication failed.", Toast.LENGTH_LONG).show();
+                        Log.d(TAG, "_____registerUser(failure): " + Objects.requireNonNull(task.getException()).getMessage(), task.getException());
+                        Toast.makeText(CreateAccountActivity.this, "Authentication failed: " + task.getException().getMessage(),
+                                Toast.LENGTH_LONG).show();
                     }
                 });
     }
@@ -107,6 +107,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         Log.d(TAG, "_____startMedicationTrackerActivity");
         Intent intent = new Intent(this, MedicationTrackerActivity.class);
         startActivity(intent);
+        finish();
     }
 
     private static boolean isInvalid(String s) {

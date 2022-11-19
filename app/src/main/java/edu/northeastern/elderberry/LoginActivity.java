@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,21 +31,21 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
-    private String username;
-    private String password;
-    private final ArrayList<DisplayUsername> listOfUsers = new ArrayList<>();
-    private DatabaseReference userDatabase;
-    private EditText enterUsername;
-    private EditText enterPassword;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "_____onCreate");
         setContentView(R.layout.activity_login);
+
+        // Initialize Firebase Auth.
+        // Get the shared instance of the FirebaseAuth object.
+        this.mAuth = FirebaseAuth.getInstance();
 
         // Calling this activity's function to use ActionBar utility methods.
         ActionBar actionBar = getSupportActionBar();
@@ -66,26 +68,7 @@ public class LoginActivity extends AppCompatActivity {
         Button loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(v -> {
             Log.d(TAG, "_____onClick");
-            startMedicationTrackerActivity();
-        });
-
-        this.userDatabase = FirebaseDatabase.getInstance().getReference("users");
-
-        this.userDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d(TAG, "_____onDataChange");
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    listOfUsers.add(new DisplayUsername((String) dataSnapshot.child("username").getValue()));
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d(TAG, "_____onCancelled");
-                Toast.makeText(LoginActivity.this, "Error: Unable to get access to Database", Toast.LENGTH_SHORT).show();
-
-            }
+            authenticateUser();
         });
     }
 
@@ -97,42 +80,59 @@ public class LoginActivity extends AppCompatActivity {
 
     private void openCreateAccount() {
         Log.d(TAG, "_____openCreateAccount");
-        Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.add_user);
-        this.enterUsername = dialog.findViewById(R.id.enterUsername);
-        this.enterPassword = dialog.findViewById(R.id.enterPassword);
-        Button createButton = dialog.findViewById(R.id.createAccount);
-
-        createButton.setOnClickListener(view -> {
-            this.username = enterUsername.getText().toString();
-            this.password = enterPassword.getText().toString();
-
-            if (isInvalid(this.username) || isInvalid(this.password)) {
-                Snackbar.make(view, "Unsuccessful account creation!", Snackbar.LENGTH_SHORT).show();
-            } else {
-                Snackbar.make(view, "Successful account creation!", Snackbar.LENGTH_SHORT).show();
-            }
-            createNewUser();
-            dialog.dismiss();
-        });
-
-        dialog.show();
-
-        // Adjust the size of the dialog.
-        Window window = dialog.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        Intent intent = new Intent(this, CreateAccountActivity.class);
+        startActivity(intent);
+        finish();
     }
 
-    private static boolean isInvalid(String s) {
-        Log.d(TAG, "_____isValid");
-        return s == null || s.isBlank();
+    private void authenticateUser() {
+        Log.d(TAG, "_____authenticateUser");
+        EditText loginEmail = findViewById(R.id.email_edit);
+        EditText loginPassword = findViewById(R.id.password_edit);
+
+        String email = loginEmail.getText().toString();
+        String password = loginPassword.getText().toString();
+
+        if (email.isEmpty() || email.isBlank() || password.isEmpty() || password.isBlank()) {
+            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        this.mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
+            if (task.isSuccessful()) {
+                Log.d(TAG, "_____authenticateUser (signInWithEmail:success)");
+                showMedicationTrackerActivity();
+            } else {
+                // If sign in fails, display a message to the user.
+                Log.d(TAG, "_____authenticateUser (signInWithEmail:failure): " + Objects.requireNonNull(task.getException()).getMessage(), task.getException());
+                Toast.makeText(LoginActivity.this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    // When initializing the activity, check to see if the user is currently signed in.
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "_____onStart");
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            currentUser.reload();
+        }
+    }
+
+    private void showMedicationTrackerActivity() {
+        Log.d(TAG, "_____startMedicationTrackerActivity");
+        Intent intent = new Intent(this, MedicationTrackerActivity.class);
+        startActivity(intent);
     }
 
     // Method to inflate the options menu when the user opens the menu for the first time.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d(TAG, "_____onCreateOptionsMenu");
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.about, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -143,50 +143,12 @@ public class LoginActivity extends AppCompatActivity {
         Log.d(TAG, "_____onOptionsItemSelected");
         int id = item.getItemId();
         Intent intent;
-        switch (id) {
-            case R.id.about:
-                Log.d(TAG, "_____onOptionsItemSelected (about)");
-                intent = new Intent(this, AboutActivity.class);
-                startActivity(intent);
-                return true;
-            case R.id.settings:
-                Log.d(TAG, "_____onOptionsItemSelected (settings)");
-                intent = new Intent(this, SettingsActivity.class);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (id == R.id.about) {
+            Log.d(TAG, "_____onOptionsItemSelected (about)");
+            intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
+            return true;
         }
-    }
-
-    public void createNewUser() {
-        Log.d(TAG, "_____createNewUser");
-        boolean duplicateUsername = false;
-
-        if (this.enterUsername.getText().toString().equals("") || this.enterUsername.getText().toString().isBlank()) {
-            Toast.makeText(LoginActivity.this, "Your username must include at least 1 non-white space character!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        for (DisplayUsername username : listOfUsers) {
-            if (username.getUsername().equals(this.enterUsername.getText().toString())) {
-                duplicateUsername = true;
-                break;
-            }
-        }
-
-        if (!duplicateUsername) {
-            Map<String, String> newUser = new HashMap<>();
-            newUser.put("username", this.enterUsername.getText().toString());
-            Task<Void> task = this.userDatabase.push().setValue(newUser);
-
-            try {
-                task.addOnSuccessListener(o -> finish());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            Toast.makeText(LoginActivity.this, "Sorry! This username already exists. Please create a new one!", Toast.LENGTH_LONG).show();
-        }
+        return super.onOptionsItemSelected(item);
     }
 }

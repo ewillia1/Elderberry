@@ -9,9 +9,12 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MedicationTrackerActivity extends AppCompatActivity {
     private static final String TAG = "MedicationTrackerActivity";
@@ -103,7 +106,7 @@ public class MedicationTrackerActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d(TAG, "_____onCreateOptionsMenu");
-        getMenuInflater().inflate(R.menu.tracker, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -114,12 +117,31 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         Log.d(TAG, "_____onOptionsItemSelected");
         int id = item.getItemId();
         Intent intent;
-        if (id == R.id.medicationHistory) {
-            Log.d(TAG, "_____onOptionsItemSelected (about)");
-            intent = new Intent(this, MedicationHistory.class);
-            startActivity(intent);
-            return true;
+        switch (id) {
+            case R.id.medicationHistory:
+                Log.d(TAG, "_____onOptionsItemSelected (medicationHistory)");
+                intent = new Intent(this, MedicationHistory.class);
+                startActivity(intent);
+                return true;
+            case R.id.settings:
+                Log.d(TAG, "_____onOptionsItemSelected (settings)");
+                intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.about:
+                Log.d(TAG, "_____onOptionsItemSelected (about)");
+                intent = new Intent(this, AboutActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.log_out:
+                Log.d(TAG, "_____onOptionsItemSelected (logout)");
+                FirebaseAuth.getInstance().signOut();
+                intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 }
