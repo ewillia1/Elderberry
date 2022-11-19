@@ -12,6 +12,3 @@ Team 5
 * Elizabeth Williams
 * Shriya Hukkeri
 * Zhengyu (Gavin) Yang
-
-## Git Repo Pushes that we forgot to add other users to:
-* @ewillia1 committed (11/18/2022): Updated LoginActivity.java -- Christopher and Gavin also helped with this

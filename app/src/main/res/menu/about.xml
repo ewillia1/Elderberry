@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/medicationHistory"
+        android:id="@+id/about"
         android:orderInCategory="100"
-        android:title="@string/medication_history"
+        android:title="@string/about"
         app:showAsAction="never" />
 </menu>
