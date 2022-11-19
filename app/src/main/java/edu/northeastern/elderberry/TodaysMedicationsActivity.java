@@ -56,7 +56,7 @@ public class TodaysMedicationsActivity extends AppCompatActivity {
             Log.d(TAG, "_____onOptionsItemSelected (logout)");
 
             // Set hasLoggedIn has false, since the user has no logged out.
-            SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
+            SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("hasLoggedIn", false);
             editor.apply();

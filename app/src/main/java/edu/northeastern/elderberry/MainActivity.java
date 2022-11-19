@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
 
         new Handler().postDelayed(() -> {
-            SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
+            SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, MODE_PRIVATE);
             boolean hasLoggedIn = sharedPreferences.getBoolean("hasLoggedIn", false);
 
             if (hasLoggedIn) {

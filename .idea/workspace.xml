@@ -9,14 +9,8 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13556392-2823-4189-9d7f-bb770af20f28" name="Changes" comment="Updated workspace.xml">
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_about.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_about.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_medication.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_medication.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_create_account.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_create_account.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_forgot_password.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_forgot_password.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" afterDir="false" />
+    <list default="true" id="13556392-2823-4189-9d7f-bb770af20f28" name="Changes" comment="Updated strings.xml">
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/LoginActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -365,7 +359,21 @@
       <option name="project" value="LOCAL" />
       <updated>1668872874064</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Made textStyle bold and added Remember Me Checkbox to activity_login.xml">
+      <created>1668873506812</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1668873506812</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Updated strings.xml">
+      <created>1668873520951</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1668873520951</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -388,7 +396,6 @@
     <MESSAGE value="Updated activity_add_medication.xml" />
     <MESSAGE value="Updated fontFamily" />
     <MESSAGE value="Updated build.gradle" />
-    <MESSAGE value="Updated strings.xml" />
     <MESSAGE value="Updated layouts and added menus" />
     <MESSAGE value="Updated CreateAccountActivity.java, LoginActivity.java" />
     <MESSAGE value="Update" />
@@ -401,6 +408,8 @@
     <MESSAGE value="Updated deploymentTargetDropDown.xml" />
     <MESSAGE value="Skip LoginActivity, if already successfully logged in, got logo screen to show up and then go away" />
     <MESSAGE value="Updated workspace.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated workspace.xml" />
+    <MESSAGE value="Made textStyle bold and added Remember Me Checkbox to activity_login.xml" />
+    <MESSAGE value="Updated strings.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated strings.xml" />
   </component>
 </project>

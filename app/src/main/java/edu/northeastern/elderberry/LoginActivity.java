@@ -23,6 +23,7 @@ import java.util.Objects;
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     protected static final String PREFS_NAME = "MyPrefsFile";
+    protected static final String SHARED_PREFS = "sharedPrefs";
     private FirebaseAuth mAuth;
 
     @Override
@@ -95,10 +96,13 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d(TAG, "_____authenticateUser (signInWithEmail:success)");
 
                 // Letting the program know that this user has officially logged in.
-                SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
+                SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean("hasLoggedIn", true);
                 editor.apply();
+
+                // Auto login -- keep user logged in and remember me.
+                SharedPreferences anotherSharedPreference = getSharedPreferences(LoginActivity.SHARED_PREFS, MODE_PRIVATE);
 
                 showMedicationTrackerActivity();
             } else {
