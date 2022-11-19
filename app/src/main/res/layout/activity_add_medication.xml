@@ -28,6 +28,7 @@
         app:counterEnabled="true"
         app:counterMaxLength="40"
         app:helperText="Required*"
+        app:endIconMode="clear_text"
         app:helperTextTextColor="@color/textHintColor"
         tools:layout_editor_absoluteX="4dp"
         tools:layout_editor_absoluteY="50dp">
@@ -62,7 +63,7 @@
         android:layout_height="45dp"
         android:contentDescription="@string/clock_icon"
         app:srcCompat="@drawable/clock"
-        tools:layout_editor_absoluteX="236dp"
+        tools:layout_editor_absoluteX="150dp"
         tools:layout_editor_absoluteY="293dp" />
 
     <TextView
@@ -122,8 +123,8 @@
         android:src="@drawable/delete_med_button"
         app:backgroundTint="@color/background"
         tools:ignore="ImageContrastCheck"
-        tools:layout_editor_absoluteX="151dp"
-        tools:layout_editor_absoluteY="293dp" />
+        tools:layout_editor_absoluteX="255dp"
+        tools:layout_editor_absoluteY="282dp" />
 
     <ImageView
         android:id="@+id/to_image"
@@ -167,6 +168,7 @@
         app:counterEnabled="true"
         app:counterMaxLength="40"
         app:helperText="Required*"
+        app:endIconMode="clear_text"
         app:helperTextTextColor="@color/textHintColor"
         tools:layout_editor_absoluteX="236dp"
         tools:layout_editor_absoluteY="387dp">
@@ -192,6 +194,7 @@
         app:counterEnabled="true"
         app:counterMaxLength="40"
         app:helperText="Required*"
+        app:endIconMode="clear_text"
         app:helperTextTextColor="@color/textHintColor"
         tools:layout_editor_absoluteX="60dp"
         tools:layout_editor_absoluteY="392dp">
@@ -216,9 +219,21 @@
         android:layout_height="87dp"
         app:counterEnabled="true"
         app:counterMaxLength="5000"
+        app:endIconMode="clear_text"
         tools:layout_editor_absoluteX="14dp"
         tools:layout_editor_absoluteY="515dp">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/medInformation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/elsie"
+            android:hint="@string/information"
+            android:maxLength="5000"
+            android:textColor="@color/main"
+            android:textColorHint="#78909C"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.constraintlayout.widget.Guideline
@@ -241,19 +256,5 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="419dp" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/medInformation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/elsie"
-        android:hint="@string/information"
-        android:maxLength="5000"
-        android:textColor="@color/main"
-        android:textColorHint="#78909C"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="586dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,10 +9,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13556392-2823-4189-9d7f-bb770af20f28" name="Changes" comment="Added delete_med_button.xml">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/delete_med_button-playstore.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/delete_med_button-playstore.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/delete_med_button.xml" beforeDir="false" />
+    <list default="true" id="13556392-2823-4189-9d7f-bb770af20f28" name="Changes" comment="Updated delete_med_button.xml">
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_medication.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_medication.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -419,7 +416,21 @@
       <option name="project" value="LOCAL" />
       <updated>1668888452847</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Updated delete_med_button.xml">
+      <created>1668889245438</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1668889245438</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Updated delete_med_button.xml">
+      <created>1668889305957</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1668889305957</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -434,7 +445,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Updated activity_about.xml, strings.xml" />
     <MESSAGE value="Updated activity_add_medication.xml" />
     <MESSAGE value="Updated fontFamily" />
     <MESSAGE value="Updated build.gradle" />
@@ -459,6 +469,7 @@
     <MESSAGE value="Override onBackPressed() in CreateAccountActivity.java" />
     <MESSAGE value="Override onBackPressed() in CreateAccountActivity.java, still working on add medication functionality" />
     <MESSAGE value="Added delete_med_button.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added delete_med_button.xml" />
+    <MESSAGE value="Updated delete_med_button.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated delete_med_button.xml" />
   </component>
 </project>
