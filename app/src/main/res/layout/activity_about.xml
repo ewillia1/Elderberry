@@ -8,13 +8,14 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="302dp"
-        android:layout_height="504dp"
+        android:layout_width="315dp"
+        android:layout_height="441dp"
         android:fontFamily="@font/elsie"
         android:text="@string/about_string"
         android:textAlignment="center"
         android:textColor="@color/main"
         android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/authors"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,8 +29,10 @@
         android:text="@string/by_christopher_mccune_nelizabeth_williams_nshriya_hukkeri_nzhengyu_yang_n_npictures_by_virginia_gassman"
         android:textAlignment="center"
         android:textColor="@color/main"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

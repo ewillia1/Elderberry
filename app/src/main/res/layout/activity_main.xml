@@ -8,12 +8,12 @@
         android:id="@+id/imageView"
         android:layout_width="257dp"
         android:layout_height="199dp"
+        android:contentDescription="@string/app_logo1"
         app:layout_constraintBottom_toTopOf="@+id/app_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/app_logo"
-        android:contentDescription="@string/app_logo1" />
+        app:srcCompat="@mipmap/app_logo" />
 
     <TextView
         android:id="@+id/app_name"
@@ -23,21 +23,9 @@
         android:text="@string/elderberry"
         android:textColor="@color/main"
         android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/continueBt"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <Button
-        android:id="@+id/continueBt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_elderberryplant"
-        android:text="@string/continueText"
-        android:fontFamily="@font/elsie"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,11 +2,14 @@ package edu.northeastern.elderberry;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +24,9 @@ import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
+    protected static final String PREFS_NAME = "MyPrefsFile";
     private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +96,13 @@ public class LoginActivity extends AppCompatActivity {
         this.mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
             if (task.isSuccessful()) {
                 Log.d(TAG, "_____authenticateUser (signInWithEmail:success)");
+
+                // Letting the program know that this user has officially logged in.
+                SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("hasLoggedIn", true);
+                editor.apply();
+
                 showMedicationTrackerActivity();
             } else {
                 // If sign in fails, display a message to the user.
@@ -116,6 +128,7 @@ public class LoginActivity extends AppCompatActivity {
         Log.d(TAG, "_____startMedicationTrackerActivity");
         Intent intent = new Intent(this, MedicationTrackerActivity.class);
         startActivity(intent);
+        finish();
     }
 
     // Method to inflate the options menu when the user opens the menu for the first time.

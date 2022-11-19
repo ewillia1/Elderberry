@@ -14,6 +14,7 @@
         android:text="@string/spoken_notification"
         android:textColor="@color/main"
         android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/notificationSwitch"
         app:layout_constraintHorizontal_bias="0.5"
