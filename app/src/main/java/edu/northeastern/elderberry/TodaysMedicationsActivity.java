@@ -2,6 +2,7 @@ package edu.northeastern.elderberry;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -53,6 +54,13 @@ public class TodaysMedicationsActivity extends AppCompatActivity {
         Intent intent;
         if (id == R.id.log_out) {
             Log.d(TAG, "_____onOptionsItemSelected (logout)");
+
+            // Set hasLoggedIn has false, since the user has no logged out.
+            SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("hasLoggedIn", false);
+            editor.apply();
+
             FirebaseAuth.getInstance().signOut();
             intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
