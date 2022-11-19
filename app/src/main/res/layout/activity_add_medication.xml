@@ -107,8 +107,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:contentDescription="@string/add_medication_item"
-        android:src="@drawable/add_med_button"
+        android:contentDescription="@string/add_time"
+        android:src="@drawable/add_button"
         app:backgroundTint="@color/background"
         tools:ignore="ImageContrastCheck"
         tools:layout_editor_absoluteX="330dp"
@@ -119,8 +119,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:contentDescription="@string/add_medication_item"
-        android:src="@drawable/delete_med_button"
+        android:contentDescription="@string/delete_time"
+        android:src="@drawable/delete_button"
         app:backgroundTint="@color/background"
         tools:ignore="ImageContrastCheck"
         tools:layout_editor_absoluteX="255dp"
@@ -183,7 +183,8 @@
             android:textColor="@color/main"
             android:textColorHint="#78909C"
             android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -233,7 +234,8 @@
             android:textColor="@color/main"
             android:textColorHint="#78909C"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.constraintlayout.widget.Guideline
