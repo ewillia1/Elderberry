@@ -7,13 +7,13 @@ plugins {
 android {
     signingConfigs {
         debug {
-            storeFile file('/Users/elizabethwilliams/KeyStore/Team5_KeyStore')
+            storeFile file('/Users/Gavin/AndroidStudioProjects/Team5_Keystore')
             keyAlias 'team5signkey'
             storePassword 'team5password'
             keyPassword 'team5password'
         }
         release {
-            storeFile file('/Users/elizabethwilliams/KeyStore/Team5_KeyStore')
+            storeFile file('/Users/Gavin/AndroidStudioProjects/Team5_Keystore')
             keyAlias 'team5signkey'
             storePassword 'team5password'
             keyPassword 'team5password'
@@ -43,6 +43,9 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
     namespace 'edu.northeastern.elderberry'
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -51,6 +54,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.firebase:firebase-database:20.1.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
