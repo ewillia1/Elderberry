@@ -41,20 +41,27 @@ public class MedicationTrackerActivity extends AppCompatActivity {
 
         CalendarView calendarView = findViewById(R.id.calendar);
 
+        // BottomNavigationView functionality.
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-
         bottomNavigationView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.add_med:
-                    startAddMedicationActivity();
-                    return true;
-                case R.id.view_med:
-                    startYourMedicationsActivity();
-                    return true;
-                default:
-                    return  false;
+            int itemId = item.getItemId();
+            if (itemId == R.id.home) {
+                startMedicationTrackerActivity();
+                return true;
+            } else if (itemId == R.id.add_med) {
+                startAddMedicationActivity();
+                return true;
+            } else if (itemId == R.id.view_med) {
+                startYourMedicationsActivity();
+                return true;
             }
+            return false;
         });
+    }
+
+    private void startMedicationTrackerActivity() {
+        Log.d(TAG, "_____startMedicationTrackerActivity");
+        onResume();
     }
 
     private void startAddMedicationActivity() {

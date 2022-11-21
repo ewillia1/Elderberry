@@ -33,6 +33,7 @@
     <string name="add_medication_title">Add Medication</string>
     <string name="set_time_frequency">Set Time Frequency</string>
     <string name="set_time_and_dose">Set Time and Dose</string>
+    <string name="home">Home</string>
 
     <string-array name="time_frequencies">
         <item>1 time</item>

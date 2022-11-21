@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class TodaysMedicationsActivity extends AppCompatActivity {
@@ -35,6 +36,41 @@ public class TodaysMedicationsActivity extends AppCompatActivity {
         // Methods to display the icon in the ActionBar.
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
+
+        // BottomNavigationView functionality.
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.home) {
+                startMedicationTrackerActivity();
+                return true;
+            } else if (itemId == R.id.add_med) {
+                startAddMedicationActivity();
+                return true;
+            } else if (itemId == R.id.view_med) {
+                startYourMedicationsActivity();
+                return true;
+            }
+            return false;
+        });
+    }
+
+    private void startMedicationTrackerActivity() {
+        Log.d(TAG, "_____startMedicationTrackerActivity");
+        Intent intent = new Intent(this, MedicationTrackerActivity.class);
+        startActivity(intent);
+    }
+
+    private void startAddMedicationActivity() {
+        Log.d(TAG, "_____startAddMedicationActivity");
+        Intent intent = new Intent(this, AddMedicationActivity.class);
+        startActivity(intent);
+    }
+
+    private void startYourMedicationsActivity() {
+        Log.d(TAG, "_____startYourMedicationsActivity");
+        Intent intent = new Intent(this, YourMedicationsActivity.class);
+        startActivity(intent);
     }
 
     // Method to inflate the options menu when the user opens the menu for the first time.
