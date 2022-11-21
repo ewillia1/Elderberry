@@ -26,6 +26,8 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
     private TextView set_to;
     private TextView set_time;
 
+    private boolean fromDateSet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +51,7 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
         // Set from and to date functionality.
         initDatePicker();
 
+        this.fromDateSet = false;
         this.set_from = findViewById(R.id.fromTextView);
         this.set_to = findViewById(R.id.to_textView);
 
@@ -65,7 +68,6 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
         autoCompleteTimeFreq.setAdapter(arrayAdapter);
 
         // Set time and dose functionality.
-
 
 
 //        ImageView time_picker = findViewById(R.id.time_picker);
@@ -98,10 +100,17 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
         // To date.
         DatePickerDialog.OnDateSetListener to_dateSetListener = (view, year, month, day) -> {
             Log.d(TAG, "_____initDatePicker");
-            month = month + 1;
-            String date = makeDateString(day, month, year);
-            this.set_to.setText(date);
-            this.set_to.setTextSize(25);
+
+            if (this.fromDateSet) {
+                month = month + 1;
+                String date = makeDateString(day, month, year);
+                this.set_to.setText(date);
+                this.set_to.setTextSize(25);
+            }
+//            month = month + 1;
+//            String date = makeDateString(day, month, year);
+//            this.set_to.setText(date);
+//            this.set_to.setTextSize(25);
         };
 
         this.to_datePickerDialog = new DatePickerDialog(this, style, to_dateSetListener, year1, month1, day1);

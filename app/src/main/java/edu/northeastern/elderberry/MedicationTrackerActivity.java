@@ -7,18 +7,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MedicationTrackerActivity extends AppCompatActivity {
     private static final String TAG = "MedicationTrackerActivity";
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,19 +40,21 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
 
         CalendarView calendarView = findViewById(R.id.calendar);
-        TextView date_view = findViewById(R.id.date_view);
 
-        // Add Listener in calendar
-        calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
-            String date = makeDateString(dayOfMonth, month, year);
-            date_view.setText(date);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.add_med:
+                    startAddMedicationActivity();
+                    return true;
+                case R.id.view_med:
+                    startYourMedicationsActivity();
+                    return true;
+                default:
+                    return  false;
+            }
         });
-
-        Button addMedication = findViewById(R.id.addMedication);
-        addMedication.setOnClickListener(view -> startAddMedicationActivity());
-
-        Button viewMedications = findViewById(R.id.viewMedications);
-        viewMedications.setOnClickListener(view -> startYourMedicationsActivity());
     }
 
     private void startAddMedicationActivity() {
