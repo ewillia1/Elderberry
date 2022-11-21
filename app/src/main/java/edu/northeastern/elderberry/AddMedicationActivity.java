@@ -13,6 +13,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.Calendar;
 
 @SuppressWarnings("unused")
@@ -45,20 +47,18 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
-        initDatePicker();
-
-        this.set_from = findViewById(R.id.selectFrom);
-        this.set_to = findViewById(R.id.selectTo);
-
-        ImageView time_picker = findViewById(R.id.time_picker);
-        time_picker.setOnClickListener(v -> {
-            DialogFragment timePicker = new TimePickerFragment();
-            timePicker.show(getSupportFragmentManager(), TIME_PICKER_TAG);
-        });
-
-//        this.addAnotherTime = false;
-
-        this.set_time = findViewById(R.id.set_time);
+//        initDatePicker();
+//
+//        this.set_from = findViewById(R.id.selectFrom);
+//        this.set_to = findViewById(R.id.selectTo);
+//
+//        ImageView time_picker = findViewById(R.id.time_picker);
+//        time_picker.setOnClickListener(v -> {
+//            DialogFragment timePicker = new TimePickerFragment();
+//            timePicker.show(getSupportFragmentManager(), TIME_PICKER_TAG);
+//        });
+//
+//        this.set_time = findViewById(R.id.set_time);
     }
 
     private void initDatePicker() {

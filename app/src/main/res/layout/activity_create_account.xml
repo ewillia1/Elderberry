@@ -11,11 +11,11 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
-        app:helperText="Required*"
-        app:helperTextTextColor="@color/textHintColor"
         app:counterEnabled="true"
         app:counterMaxLength="40"
         app:endIconMode="clear_text"
+        app:helperText="Required*"
+        app:helperTextTextColor="@color/textHintColor"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,13 +25,13 @@
             android:id="@+id/ti_firstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/main"
-            android:textStyle="bold"
-            android:textSize="30sp"
             android:fontFamily="@font/elsie"
-            android:maxLength="40"
             android:hint="@string/first_name"
-            android:textColorHint="@color/main"/>
+            android:maxLength="40"
+            android:textColor="@color/main"
+            android:textColorHint="@color/main"
+            android:textSize="30sp"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -39,11 +39,11 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
-        app:helperText="Required*"
-        app:helperTextTextColor="@color/textHintColor"
         app:counterEnabled="true"
         app:counterMaxLength="40"
         app:endIconMode="clear_text"
+        app:helperText="Required*"
+        app:helperTextTextColor="@color/textHintColor"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,13 +53,13 @@
             android:id="@+id/ti_lastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/main"
-            android:textStyle="bold"
-            android:textSize="30sp"
             android:fontFamily="@font/elsie"
-            android:maxLength="40"
             android:hint="@string/last_name"
-            android:textColorHint="@color/main"/>
+            android:maxLength="40"
+            android:textColor="@color/main"
+            android:textColorHint="@color/main"
+            android:textSize="30sp"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -67,11 +67,11 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
-        app:helperText="Required*"
-        app:helperTextTextColor="@color/textHintColor"
         app:counterEnabled="true"
         app:counterMaxLength="40"
         app:endIconMode="clear_text"
+        app:helperText="Required*"
+        app:helperTextTextColor="@color/textHintColor"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,13 +81,13 @@
             android:id="@+id/ti_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/main"
-            android:textStyle="bold"
-            android:textSize="30sp"
             android:fontFamily="@font/elsie"
-            android:maxLength="40"
             android:hint="@string/email"
-            android:textColorHint="@color/main"/>
+            android:maxLength="40"
+            android:textColor="@color/main"
+            android:textColorHint="@color/main"
+            android:textSize="30sp"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -95,12 +95,12 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
-        app:helperText="Required*"
-        app:helperTextTextColor="@color/textHintColor"
+        android:orientation="vertical"
         app:counterEnabled="true"
         app:counterMaxLength="40"
         app:endIconMode="password_toggle"
-        android:orientation="vertical"
+        app:helperText="Required*"
+        app:helperTextTextColor="@color/textHintColor"
         app:layout_constraintBottom_toTopOf="@+id/createAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -110,13 +110,13 @@
             android:id="@+id/ti_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/main"
-            android:textStyle="bold"
-            android:textSize="30sp"
             android:fontFamily="@font/elsie"
-            android:maxLength="40"
             android:hint="@string/password"
-            android:textColorHint="@color/main"/>
+            android:maxLength="40"
+            android:textColor="@color/main"
+            android:textColorHint="@color/main"
+            android:textSize="30sp"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
