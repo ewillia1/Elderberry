@@ -1,5 +1,7 @@
 package edu.northeastern.elderberry;
 
+import static edu.northeastern.elderberry.util.DatetimeFormat.makeDateString;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -74,41 +76,6 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         Log.d(TAG, "_____startYourMedicationsActivity");
         Intent intent = new Intent(this, YourMedicationsActivity.class);
         startActivity(intent);
-    }
-
-    private String makeDateString(int day, int month, int year) {
-        return getMonthFormat(month) + " " + day + ", " + year;
-    }
-
-    private String getMonthFormat(int month_index) {
-        int month = month_index + 1;
-        if (month == 1)
-            return "JAN";
-        if (month == 2)
-            return "FEB";
-        if (month == 3)
-            return "MAR";
-        if (month == 4)
-            return "APR";
-        if (month == 5)
-            return "MAY";
-        if (month == 6)
-            return "JUN";
-        if (month == 7)
-            return "JUL";
-        if (month == 8)
-            return "AUG";
-        if (month == 9)
-            return "SEP";
-        if (month == 10)
-            return "OCT";
-        if (month == 11)
-            return "NOV";
-        if (month == 12)
-            return "DEC";
-
-        //default should never happen
-        return "JAN";
     }
 
     // Method to inflate the options menu when the user opens the menu for the first time.
