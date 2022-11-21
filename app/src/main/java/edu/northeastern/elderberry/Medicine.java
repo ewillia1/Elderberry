@@ -5,28 +5,26 @@ import java.util.Date;
 import edu.northeastern.elderberry.enums.Unit;
 
 public class Medicine {
-    private String medName;
-    private String dose;
+    private String name;
+    //private String dose;
     private String fromDate;
     private String toDate;
-    private Unit unit;
-    private int interDayFreq;
+    //private Unit unit;
+    //private int interDayFreq;
 
-    public Medicine(String medName, String dose, String fromDate, String toDate, Unit unit, int interDayFreq) {
-        this.medName = medName;
-        this.dose = dose;
+
+    public Medicine() {
+
+    }
+
+    public Medicine(String name, String fromDate, String toDate) {
+        this.name = name;
         this.fromDate = fromDate;
         this.toDate = toDate;
-        this.unit = unit;
-        this.interDayFreq = interDayFreq;
     }
 
-    public String getMedName() {
-        return medName;
-    }
-
-    public String getDose() {
-        return dose;
+    public String getName() {
+        return name;
     }
 
     public String getFromDate() {
@@ -37,11 +35,12 @@ public class Medicine {
         return toDate;
     }
 
-    public Unit getUnit() {
-        return unit;
-    }
-
-    public int getInterDayFreq() {
-        return interDayFreq;
+    @Override
+    public String toString() {
+        return "Medicine{" +
+                "name='" + name + '\'' +
+                ", fromDate='" + fromDate + '\'' +
+                ", toDate='" + toDate + '\'' +
+                '}';
     }
 }
