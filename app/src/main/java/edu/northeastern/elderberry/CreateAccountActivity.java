@@ -110,4 +110,12 @@ public class CreateAccountActivity extends AppCompatActivity {
         Log.d(TAG, "_____isValid");
         return s == null || s.isBlank() || s.isEmpty();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

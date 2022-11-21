@@ -15,19 +15,11 @@
     <string name="view_medications">View Medications</string>
     <string name="medication_history">Medication History</string>
     <string name="information">Information</string>
-    <string name="unit">Unit</string>
-    <string name="dose">Dose</string>
-    <string name="time">Time:</string>
     <string name="to">To:</string>
     <string name="from">From:</string>
-    <string name="set_the_date">Set the Date</string>
     <string name="cancel">Cancel</string>
     <string name="add">Add</string>
-    <string name="add_medication_item">Add medication item</string>
     <string name="calendar_icon">calendar icon</string>
-    <string name="clock_icon">clock icon</string>
-    <string name="from_date">From: %1$s</string>
-    <string name="to_date">To: %1$s</string>
     <string name="set_time">Time: %1$d:%2$s %3$s</string>
     <string name="by_christopher_mccune_nelizabeth_williams_nshriya_hukkeri_nzhengyu_yang_n_npictures_by_virginia_gassman">By: Christopher McCune\nElizabeth Williams\nShriya Hukkeri\nZhengyu Yang\n\nPictures by: Virginia Gassman</string>
     <string name="log_out">Log Out</string>
@@ -38,4 +30,23 @@
     <string name="last_name">Last Name</string>
     <string name="send_email">Send Email</string>
     <string name="medication_name">Medication Name</string>
+    <string name="add_medication_title">Add Medication</string>
+    <string name="set_time_frequency">Set Time Frequency</string>
+    <string name="set_time_and_dose">Set Time and Dose</string>
+    <string name="home">Home</string>
+
+    <string-array name="time_frequencies">
+        <item>1 time</item>
+        <item>2 times</item>
+        <item>3 times</item>
+        <item>4 times</item>
+        <item>5 times</item>
+        <item>6 times</item>
+        <item>7 times</item>
+        <item>8 times</item>
+        <item>9 times</item>
+        <item>10 times</item>
+        <item>11 times</item>
+        <item>12 times</item>
+    </string-array>
 </resources>
