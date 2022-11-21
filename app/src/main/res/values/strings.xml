@@ -40,4 +40,21 @@
     <string name="send_email">Send Email</string>
     <string name="medication_name">Medication Name</string>
     <string name="add_medication_title">Add Medication</string>
+    <string name="set_time_frequency">Set Time Frequency</string>
+    <string name="set_time_and_dose">Set Time and Dose</string>
+
+    <string-array name="time_frequencies">
+        <item>1 time</item>
+        <item>2 times</item>
+        <item>3 times</item>
+        <item>4 times</item>
+        <item>5 times</item>
+        <item>6 times</item>
+        <item>7 times</item>
+        <item>8 times</item>
+        <item>9 times</item>
+        <item>10 times</item>
+        <item>11 times</item>
+        <item>12 times</item>
+    </string-array>
 </resources>

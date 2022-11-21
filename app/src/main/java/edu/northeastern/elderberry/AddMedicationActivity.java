@@ -2,9 +2,12 @@ package edu.northeastern.elderberry;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -15,6 +18,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 @SuppressWarnings("unused")
@@ -47,11 +51,28 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
-//        initDatePicker();
-//
-//        this.set_from = findViewById(R.id.selectFrom);
-//        this.set_to = findViewById(R.id.selectTo);
-//
+        // Set from and to date functionality.
+        initDatePicker();
+
+        this.set_from = findViewById(R.id.fromTextView);
+        this.set_to = findViewById(R.id.to_textView);
+
+        // Set time frequency functionality.
+        // Get reference to the string array.
+        Resources res = getResources();
+        String[] time_frequencies = res.getStringArray(R.array.time_frequencies);
+        // Create an array adapter and pass the context, drop down layout, and array.
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, time_frequencies);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Get reference to the autocomplete text view
+        AutoCompleteTextView autoCompleteTimeFreq = findViewById(R.id.setTimeFrequency);
+        // set adapter to the autocomplete tv to the arrayAdapter
+        autoCompleteTimeFreq.setAdapter(arrayAdapter);
+
+        // Set time and dose functionality.
+
+
+
 //        ImageView time_picker = findViewById(R.id.time_picker);
 //        time_picker.setOnClickListener(v -> {
 //            DialogFragment timePicker = new TimePickerFragment();
@@ -68,7 +89,7 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
             Log.d(TAG, "_____initDatePicker");
             month = month + 1;
             String date = makeDateString(day, month, year);
-            this.set_from.setText(getString(R.string.from_date, date));
+            this.set_from.setText(date);
             this.set_from.setTextSize(25);
         };
 
@@ -84,7 +105,7 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
             Log.d(TAG, "_____initDatePicker");
             month = month + 1;
             String date = makeDateString(day, month, year);
-            this.set_to.setText(getString(R.string.to_date, date));
+            this.set_to.setText(date);
             this.set_to.setTextSize(25);
         };
 
