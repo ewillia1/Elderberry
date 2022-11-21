@@ -8,17 +8,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.ArrayList;
 import java.util.Calendar;
 
 @SuppressWarnings("unused")

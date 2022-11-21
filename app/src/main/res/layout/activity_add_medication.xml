@@ -12,23 +12,24 @@
         android:id="@+id/addMedTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/elsie"
         android:text="@string/add_medication_title"
         android:textColor="@color/main"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/textInputLayout5"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout5"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+        android:layout_width="187dp"
         android:layout_height="94dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginTop="49dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="51dp"
         app:counterEnabled="true"
         app:counterMaxLength="40"
         app:endIconMode="clear_text"
@@ -36,12 +37,9 @@
         app:helperTextTextColor="@color/textHintColor"
         app:layout_constraintBottom_toBottomOf="@+id/fromTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/from_image"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/medName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/elsie"
@@ -58,14 +56,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="26dp"
+        android:layout_marginTop="165dp"
         android:fontFamily="@font/elsie"
         android:text="@string/from"
         android:textColor="@color/main"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/toTitle"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/fromTextView"
@@ -79,19 +77,19 @@
 
     <ImageView
         android:id="@+id/from_image"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="4dp"
+        android:layout_width="92dp"
+        android:layout_height="84dp"
+        android:layout_marginTop="125dp"
+        android:layout_marginBottom="127dp"
         android:contentDescription="@string/calendar_icon"
         android:onClick="openFromDatePicker"
-        app:layout_constraintEnd_toStartOf="@+id/textInputLayout5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout11"
+        app:layout_constraintEnd_toEndOf="@+id/to_image"
+        app:layout_constraintTop_toTopOf="@+id/addMedTitle"
         app:srcCompat="@drawable/calendar"
         tools:ignore="DuplicateSpeakableTextCheck" />
 
     <TextView
-        android:id="@+id/toTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="26dp"
@@ -117,13 +115,15 @@
     <ImageView
         android:id="@+id/to_image"
         android:layout_width="75dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="36dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginBottom="79dp"
         android:contentDescription="@string/calendar_icon"
         android:onClick="openToDatePicker"
-        app:layout_constraintBottom_toBottomOf="@+id/toTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fromTitle"
+        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout11"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout11"
+        app:layout_constraintStart_toEndOf="@+id/textInputLayout11"
+        app:layout_constraintTop_toTopOf="@+id/from_image"
         app:srcCompat="@drawable/calendar" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -132,9 +132,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="279dp"
+        android:layout_marginTop="43dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/to_textView">
 
         <AutoCompleteTextView
             android:id="@+id/setTimeFrequency"
@@ -144,7 +144,7 @@
             android:inputType="none"
             android:text="@string/set_time_frequency"
             android:textColor="#78909C"
-            tools:ignore="TextContrastCheck" />
+            tools:ignore="LabelFor,TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -158,19 +158,17 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout11">
 
         <AutoCompleteTextView
-            android:id="@+id/set"
             android:layout_width="271dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:inputType="none"
             android:text="@string/set_time_and_dose"
             android:textColor="#78909C"
-            tools:ignore="TextContrastCheck" />
+            tools:ignore="LabelFor,TextContrastCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout10"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="87dp"
@@ -187,7 +185,6 @@
         app:layout_constraintTop_toTopOf="@+id/textInputLayout12">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/medInformation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/elsie"
@@ -215,7 +212,6 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/add_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="50dp"
