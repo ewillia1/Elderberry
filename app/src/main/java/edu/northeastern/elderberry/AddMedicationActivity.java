@@ -16,7 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
 
-@SuppressWarnings("unused")
+// TODO: Make it so the user have to input a from date before the to date
+// TODO: Make it so the user to date has to be after the from date
+// TODO: Make it so once the user picks a time frequency the correct number of times and corresponding doses show up
+
 public class AddMedicationActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
     private static final String TAG = "AddMedicationActivity";
     private static final String TIME_PICKER_TAG = "time picker";
@@ -27,6 +30,8 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
     private TextView set_time;
 
     private boolean fromDateSet;
+    private Calendar fromDate;
+    private Calendar toDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,16 +106,10 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
         DatePickerDialog.OnDateSetListener to_dateSetListener = (view, year, month, day) -> {
             Log.d(TAG, "_____initDatePicker");
 
-            if (this.fromDateSet) {
-                month = month + 1;
-                String date = makeDateString(day, month, year);
-                this.set_to.setText(date);
-                this.set_to.setTextSize(25);
-            }
-//            month = month + 1;
-//            String date = makeDateString(day, month, year);
-//            this.set_to.setText(date);
-//            this.set_to.setTextSize(25);
+            month = month + 1;
+            String date = makeDateString(day, month, year);
+            this.set_to.setText(date);
+            this.set_to.setTextSize(25);
         };
 
         this.to_datePickerDialog = new DatePickerDialog(this, style, to_dateSetListener, year1, month1, day1);
