@@ -2,18 +2,31 @@
 <project version="4">
   <component name="AndroidLayouts">
     <shared>
-      <config />
+      <config>
+        <option name="nonWearDeviceLastStateName" value="Landscape" />
+      </config>
     </shared>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13556392-2823-4189-9d7f-bb770af20f28" name="Changes" comment="Reverted back to now Remember Me checkbox -- user stays logged in until they log out">
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_medication.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_medication.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_create_account.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_create_account.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_forgot_password.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_forgot_password.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+    <list default="true" id="13556392-2823-4189-9d7f-bb770af20f28" name="Changes" comment="Still working on add medication functionality">
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/home_icon.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/MedicationTrackerActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/MedicationTrackerActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/TodaysMedicationsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/TodaysMedicationsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/YourMedicationsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/YourMedicationsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_todays_medications.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_todays_medications.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_your_medications.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_your_medications.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/bottom_nav_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/bottom_nav_menu.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -30,8 +43,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="resourceFile" />
         <option value="Class" />
+        <option value="layoutResourceFile" />
+        <option value="resourceFile" />
       </list>
     </option>
   </component>
@@ -72,11 +86,13 @@
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="cidr.known.project.marker" value="true" />
+    <property name="com.android.tools.idea.emulator.zoom.toolbar.visible" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/layout" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.externalResources" />
   </component>
   <component name="PsdUISettings">
     <option name="MODULE_TAB" value="Default Config" />
@@ -91,6 +107,8 @@
       <recent name="$PROJECT_DIR$/app/src/main/res/menu" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
       <recent name="$PROJECT_DIR$/app" />
     </key>
     <key name="android.template.424079550">
@@ -398,7 +416,98 @@
       <option name="project" value="LOCAL" />
       <updated>1668876124475</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Working on activity_add_medication.xml">
+      <created>1668880113586</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1668880113586</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Override onBackPressed() in CreateAccountActivity.java, still working on add medication functionality">
+      <created>1668887691053</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1668887691053</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Added delete_med_button.xml">
+      <created>1668888452847</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1668888452847</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Updated delete_med_button.xml">
+      <created>1668889245438</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1668889245438</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Updated delete_med_button.xml">
+      <created>1668889305957</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1668889305957</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Updated activity_add_medication.xml">
+      <created>1668889495511</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1668889495511</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Updated activity_add_medication.xml, renames the add_button and delete_button drawables">
+      <created>1668889681989</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1668889681989</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Updated activity_add_medication.xml">
+      <created>1668890070721</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1668890070721</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Update workspace.xml">
+      <created>1668897602500</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1668897602500</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Working on add medication xml file">
+      <created>1668990694746</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1668990694746</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Updated MedicationTrackerActivity.java, still working on add medication functionality">
+      <created>1669004212948</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1669004212948</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Still working on add medication functionality">
+      <created>1669004709740</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1669004709740</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Still working on add medication functionality">
+      <created>1669047792773</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1669047792773</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -413,18 +522,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added a lot of files -- started the first draft of the app" />
-    <MESSAGE value="Updated activity_add_medication.xml (still in the works)" />
-    <MESSAGE value="Added Firebase Realtime Database" />
-    <MESSAGE value="Updated activity_login.xml" />
-    <MESSAGE value="Updated activity_about.xml, strings.xml" />
-    <MESSAGE value="Updated activity_add_medication.xml" />
-    <MESSAGE value="Updated fontFamily" />
-    <MESSAGE value="Updated build.gradle" />
-    <MESSAGE value="Updated layouts and added menus" />
-    <MESSAGE value="Updated CreateAccountActivity.java, LoginActivity.java" />
-    <MESSAGE value="Update" />
-    <MESSAGE value="Update workspace.xml" />
     <MESSAGE value="Update activity_create_account.xml, activity_login.xml, strings.xml, workspace.xml" />
     <MESSAGE value="Updated LoginActivity.java" />
     <MESSAGE value="Updated LoginActivity.java, added ForgotEmailActivity and ForgotPasswordActivity" />
@@ -438,6 +535,18 @@
     <MESSAGE value="Made mode MODE_PRIVATE for shared preferences" />
     <MESSAGE value="Just a save to have the remember me checkbox code (but I am going to remove it)" />
     <MESSAGE value="Reverted back to now Remember Me checkbox -- user stays logged in until they log out" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reverted back to now Remember Me checkbox -- user stays logged in until they log out" />
+    <MESSAGE value="Working on activity_add_medication.xml" />
+    <MESSAGE value="Override onBackPressed() in CreateAccountActivity.java" />
+    <MESSAGE value="Override onBackPressed() in CreateAccountActivity.java, still working on add medication functionality" />
+    <MESSAGE value="Added delete_med_button.xml" />
+    <MESSAGE value="Updated delete_med_button.xml" />
+    <MESSAGE value="Updated activity_add_medication.xml, renames the add_button and delete_button drawables" />
+    <MESSAGE value="Updated activity_add_medication.xml" />
+    <MESSAGE value="Update workspace.xml" />
+    <MESSAGE value="Working on add medication xml file" />
+    <MESSAGE value="Working on add medication functionality" />
+    <MESSAGE value="Updated MedicationTrackerActivity.java, still working on add medication functionality" />
+    <MESSAGE value="Still working on add medication functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="Still working on add medication functionality" />
   </component>
 </project>

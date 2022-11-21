@@ -47,9 +47,9 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/elsie"
             android:hint="@string/email"
-            android:textColorHint="@color/main"
             android:maxLength="40"
             android:textColor="@color/main"
+            android:textColorHint="@color/main"
             android:textSize="30sp"
             android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -75,9 +75,9 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/elsie"
             android:hint="@string/password"
-            android:textColorHint="@color/main"
             android:maxLength="40"
             android:textColor="@color/main"
+            android:textColorHint="@color/main"
             android:textSize="30sp"
             android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
