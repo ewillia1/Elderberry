@@ -1,5 +1,7 @@
 package edu.northeastern.elderberry;
 
+import static edu.northeastern.elderberry.util.DatetimeFormat.makeDateString;
+
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.res.Resources;
@@ -101,55 +103,18 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
         int month1 = calendar.get(Calendar.MONTH);
         int day1 = calendar.get(Calendar.DAY_OF_MONTH);
         int style = 0;              // 0 is the default style/theme.
+        // Take input from user on date selected from calendar
         this.from_datePickerDialog = new DatePickerDialog(this, style, from_dateSetListener, year1, month1, day1);
 
         // To date.
         DatePickerDialog.OnDateSetListener to_dateSetListener = (view, year, month, day) -> {
             Log.d(TAG, "_____initDatePicker");
-
-            month = month + 1;
             String date = makeDateString(day, month, year);
             this.set_to.setText(date);
             this.set_to.setTextSize(25);
         };
 
         this.to_datePickerDialog = new DatePickerDialog(this, style, to_dateSetListener, year1, month1, day1);
-    }
-
-    private String makeDateString(int day, int month, int year) {
-        Log.d(TAG, "_____makeDateString");
-        return getMonthFormat(month) + " " + day + ", " + year;
-    }
-
-    private String getMonthFormat(int month) {
-        Log.d(TAG, "_____getMonthFormat");
-        if (month == 1)
-            return "JAN";
-        if (month == 2)
-            return "FEB";
-        if (month == 3)
-            return "MAR";
-        if (month == 4)
-            return "APR";
-        if (month == 5)
-            return "MAY";
-        if (month == 6)
-            return "JUN";
-        if (month == 7)
-            return "JUL";
-        if (month == 8)
-            return "AUG";
-        if (month == 9)
-            return "SEP";
-        if (month == 10)
-            return "OCT";
-        if (month == 11)
-            return "NOV";
-        if (month == 12)
-            return "DEC";
-
-        //default should never happen
-        return "JAN";
     }
 
     public void openFromDatePicker(View view) {
