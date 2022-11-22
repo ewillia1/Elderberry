@@ -2,11 +2,13 @@ package edu.northeastern.elderberry;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 public class AddMedicationActivity extends AppCompatActivity {
@@ -33,11 +35,27 @@ public class AddMedicationActivity extends AppCompatActivity {
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
+        // BottomNavigationView functionality.
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.cancel_add) {
+                finish();
+                return true;
+            } else if (itemId == R.id.add_med) {
+                Toast.makeText(AddMedicationActivity.this, R.string.successful_add, Toast.LENGTH_SHORT).show();
+                // TODO: Add database functionality and check to see all required fields are filled in.
+                finish();
+                return true;
+            }
+            return false;
+        });
+
         // TabLayout functionality.
         TabLayout tabLayout = findViewById(R.id.add_med_tabLayout);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         ViewPager2 viewPager2 = findViewById(R.id.viewPager);
-        final MyAdapter adapter = new MyAdapter(this, getSupportFragmentManager(), getLifecycle(), tabLayout.getTabCount());
+        final MedAdapter adapter = new MedAdapter(this, getSupportFragmentManager(), getLifecycle(), tabLayout.getTabCount());
         viewPager2.setAdapter(adapter);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

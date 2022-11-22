@@ -55,6 +55,7 @@ public class SetDatesFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "_____onCreate");
+        this.fromDateSet = false;
     }
 
     @Override
@@ -87,6 +88,7 @@ public class SetDatesFragment extends Fragment {
         DatePickerDialog.OnDateSetListener from_dateSetListener = (view, year, month, day) -> {
             Log.d(TAG, "_____initDatePicker");
             String date = makeDateString(day, month, year);
+            this.fromDateSet = true;
             this.set_from.setText(date);
             this.set_from.setTextSize(25);
         };

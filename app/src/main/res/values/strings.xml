@@ -46,6 +46,7 @@
     <string name="time_1">Time 1</string>
     <string name="required">Required*</string>
     <string name="elderberry_image">Elderberry image</string>
+    <string name="successful_add">Successful add!</string>
     <string-array name="time_frequencies">
         <item>1 time</item>
         <item>2 times</item>
