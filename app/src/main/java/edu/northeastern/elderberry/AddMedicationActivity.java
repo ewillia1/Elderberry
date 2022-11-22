@@ -45,6 +45,10 @@ public class AddMedicationActivity extends AppCompatActivity {
             } else if (itemId == R.id.add_med) {
                 Toast.makeText(AddMedicationActivity.this, R.string.successful_add, Toast.LENGTH_SHORT).show();
                 // TODO: Add database functionality and check to see all required fields are filled in.
+                if (completeFieldsFilled()) {
+                    // Add fields to database.
+
+                }
                 finish();
                 return true;
             }
@@ -75,5 +79,10 @@ public class AddMedicationActivity extends AppCompatActivity {
                 Log.d(TAG, "_____onTabReselected");
             }
         });
+    }
+
+    private boolean completeFieldsFilled() {
+
+        return true;
     }
 }
