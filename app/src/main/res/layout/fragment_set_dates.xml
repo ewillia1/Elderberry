@@ -46,7 +46,6 @@
         tools:ignore="DuplicateSpeakableTextCheck" />
 
     <TextView
-        android:id="@+id/required1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="serif"
@@ -100,7 +99,6 @@
         app:layout_constraintTop_toBottomOf="@+id/from_image" />
 
     <TextView
-        android:id="@+id/required2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="serif"

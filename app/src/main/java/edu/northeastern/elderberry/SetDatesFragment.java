@@ -3,7 +3,6 @@ package edu.northeastern.elderberry;
 import static edu.northeastern.elderberry.util.DatetimeFormat.makeDateString;
 
 import android.app.DatePickerDialog;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
