@@ -36,6 +36,16 @@
     <string name="title_activity_medication_dayview">MedicationDayview</string>
     <string name="cardview_expand">expand down</string>
     <string name="home">Home</string>
+    <string name="med_info">Med Info</string>
+    <string name="set_dates">Set Dates</string>
+    <string name="set_times">Set Times</string>
+    <string name="_1_med_name">1. Med Name</string>
+    <string name="scheduled_time_s">Scheduled Time(s)</string>
+    <string name="time_3">Time 3</string>
+    <string name="time_2">Time 2</string>
+    <string name="time_1">Time 1</string>
+    <string name="required">Required*</string>
+    <string name="elderberry_image">Elderberry image</string>
     <string-array name="time_frequencies">
         <item>1 time</item>
         <item>2 times</item>

@@ -1,7 +1,5 @@
 package edu.northeastern.elderberry;
 
-import static edu.northeastern.elderberry.util.DatetimeFormat.makeDateString;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;

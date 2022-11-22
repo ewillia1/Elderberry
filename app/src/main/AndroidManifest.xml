@@ -14,6 +14,7 @@
         tools:targetApi="31">
         <activity
             android:name=".MedicationDayview"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false"
             android:label="@string/title_activity_medication_dayview"
             android:theme="@style/Theme.TestApp.NoActionBar">
@@ -23,6 +24,7 @@
         </activity>
         <activity
             android:name=".ForgotPasswordActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -30,6 +32,7 @@
         </activity>
         <activity
             android:name=".CreateAccountActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -37,6 +40,7 @@
         </activity>
         <activity
             android:name=".AddMedicationActivity"
+            android:windowSoftInputMode="adjustPan"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="false">
             <meta-data
@@ -45,6 +49,7 @@
         </activity>
         <activity
             android:name=".TodaysMedicationsActivity"
+            android:windowSoftInputMode="adjustPan"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="false">
             <meta-data
@@ -53,6 +58,7 @@
         </activity>
         <activity
             android:name=".YourMedicationsActivity"
+            android:windowSoftInputMode="adjustPan"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="false">
             <meta-data
@@ -61,6 +67,7 @@
         </activity>
         <activity
             android:name=".MedicationHistory"
+            android:windowSoftInputMode="adjustPan"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="false">
             <meta-data
@@ -69,6 +76,7 @@
         </activity>
         <activity
             android:name=".MedicationTrackerActivity"
+            android:windowSoftInputMode="adjustPan"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="false">
             <meta-data
@@ -77,6 +85,7 @@
         </activity>
         <activity
             android:name=".LoginActivity"
+            android:windowSoftInputMode="adjustPan"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="false">
             <meta-data
@@ -85,6 +94,7 @@
         </activity>
         <activity
             android:name=".SettingsActivity"
+            android:windowSoftInputMode="adjustPan"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="false">
             <meta-data
@@ -93,6 +103,7 @@
         </activity>
         <activity
             android:name=".AboutActivity"
+            android:windowSoftInputMode="adjustPan"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="false">
             <meta-data
@@ -101,6 +112,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="true">
             <intent-filter>
