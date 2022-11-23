@@ -17,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import edu.northeastern.elderberry.dayview.MedicationDayview;
+
 public class MedicationTrackerActivity extends AppCompatActivity {
     private static final String TAG = "MedicationTrackerActivity";
 
@@ -42,6 +44,16 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
 
         CalendarView calendarView = findViewById(R.id.calendar);
+
+        // Add Listener in calendar
+        calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
+            String date = makeDateString(dayOfMonth, month, year);
+            //date_view.setText(date);
+            // Todo ask user if to navigate to the activity
+            // https://developer.android.com/guide/topics/location/transitions reference this
+            Intent intent = new Intent(this, MedicationDayview.class);
+            startActivity(intent);
+        });
 
         // BottomNavigationView functionality.
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
