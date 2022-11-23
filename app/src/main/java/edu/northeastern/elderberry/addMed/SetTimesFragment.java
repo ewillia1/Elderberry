@@ -27,7 +27,7 @@ import edu.northeastern.elderberry.R;
 
 // TODO: Make it so once the user picks a time frequency the correct number of times and corresponding doses show up
 // TODO: Make fields required
-// TODO: Fix the layout design in landscape mode
+// TODO: Get landscape layout to look good/work as expected.
 public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener {
     private static final String TAG = "SetTimesFragment";
     private static final String LIST_STATE = "list_state";

@@ -19,7 +19,7 @@ import edu.northeastern.elderberry.R;
 
 // TODO: Fix the layout design in landscape mode
 // TODO: Make fields required
-// TODO: Fix the layout design in landscape mode
+// TODO: Get landscape layout to look good/work as expected.
 public class MedInfoFragment extends Fragment {
     private static final String TAG = "MedInfoFragment";
 

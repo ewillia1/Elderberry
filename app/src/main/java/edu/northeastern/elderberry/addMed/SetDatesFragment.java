@@ -26,6 +26,7 @@ import edu.northeastern.elderberry.R;
 // TODO: Make it so the user have to input a from date before the to date
 // TODO: Make it so the user to date has to be after the from date
 // TODO: Make fields required
+// TODO: Get landscape layout to look good/work as expected.
 public class SetDatesFragment extends Fragment {
     private static final String TAG = "SetDatesFragment";
     private DatePickerDialog from_datePickerDialog;

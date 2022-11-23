@@ -11,7 +11,7 @@ import androidx.fragment.app.DialogFragment;
 
 import java.util.Calendar;
 
-
+// TODO: Get landscape layout to look good/work as expected.
 public class TimePickerFragment extends DialogFragment {
     private static final String TAG = "TimePickerFragment";
 
