@@ -20,6 +20,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
+import edu.northeastern.elderberry.helpAndConfigs.AboutActivity;
+
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     protected static final String PREFS_NAME = "MyPrefsFile";

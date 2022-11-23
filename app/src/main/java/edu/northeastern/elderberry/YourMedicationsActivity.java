@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import edu.northeastern.elderberry.addMed.AddMedicationActivity;
+
 public class YourMedicationsActivity extends AppCompatActivity {
     private static final String TAG = "AddMedicationActivity";
 
