@@ -70,13 +70,16 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
         AutoCompleteTextView autoCompleteTimeFreq = view.findViewById(R.id.setTimeFrequency);
         // set adapter to the autocomplete tv to the arrayAdapter
         autoCompleteTimeFreq.setAdapter(arrayAdapter);
+
+        // TODO: Shriya -- Get this to work. Functionality: Click on a frequency have corresponding number of TimeDoseItems to show up in the RecyclerView.
         // What happens when an time frequency is clicked on.
         autoCompleteTimeFreq.setOnItemClickListener((parent, view1, position, id) -> Log.d(TAG, "_____onItemClick: clicked on item " + position + 1));
 
         // Instantiate the ArrayList.
         ArrayList<TimeDoseItem> timeDoseItemArrayList = new ArrayList<>();
 
-        // Temporary.
+        // TODO: Remove. Once the frequency click functionality works.
+        // Temporary. Will be removed once the frequency click functionality works. This is just here to get other functionality to work.
         timeDoseItemArrayList.add(new TimeDoseItem(1, "10:00", "2", "tabs"));
 
         // Instantiate the recyclerView.

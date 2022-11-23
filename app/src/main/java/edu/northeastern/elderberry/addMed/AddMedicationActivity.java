@@ -84,6 +84,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         });
     }
 
+    // TODO: finish.
     private boolean completeFieldsFilled() {
 
         return true;
