@@ -1,6 +1,8 @@
 package edu.northeastern.elderberry.addMed;
 
+import android.app.Activity;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -18,15 +20,14 @@ import edu.northeastern.elderberry.R;
 // TODO: Finish
 public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, TimePickerDialog.OnTimeSetListener {
     private final String TAG = "TimeDoseViewHolder";
-    private static final String TIME_PICKER_TAG = "time picker";
+    private static final String TIME_PICKER_TAG = "time_picker";
     public final TextView itemNumber;
     public final TextView timeTextView;
     public final EditText doseTextView;
     public final TextView unitTextView;
     public final OnTimeDoseItemListener onTimeDoseItemListener;
-    private DialogFragment timePicker;
 
-    public TimeDoseViewHolder(@NonNull View itemView, OnTimeDoseItemListener onTimeDoseItemListener) {
+    public TimeDoseViewHolder(@NonNull View itemView, OnTimeDoseItemListener onTimeDoseItemListener, Context context) {
         super(itemView);
         Log.d(TAG, "_____constructor");
         this.itemNumber = itemView.findViewById(R.id.itemNumber);
@@ -45,9 +46,8 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
 
         this.timeTextView.setOnClickListener(v -> {
             Log.d(TAG, "_____onClick (this.time)");
-
-            timePicker = new TimePickerFragment();
-//            timePicker.show();
+            DialogFragment timePicker = new TimePickerFragment();
+//            timePicker.show(((Activity) this.context).getFragmentManager(), TIME_PICKER_TAG);
         });
 
         this.doseTextView.setOnClickListener(v -> Log.d(TAG, "_____onClick (this.dose)"));
@@ -102,7 +102,6 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
 
     public void bindThisData(TimeDoseItem theLinkToBind) {
         Log.d(TAG, "_____bindThisData");
-
         this.timeTextView.setText(theLinkToBind.getTime());
         this.doseTextView.setText(theLinkToBind.getDose());
     }

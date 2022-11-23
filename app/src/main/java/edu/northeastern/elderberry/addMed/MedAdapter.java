@@ -1,4 +1,4 @@
-package edu.northeastern.elderberry;
+package edu.northeastern.elderberry.addMed;
 
 import android.content.Context;
 
@@ -30,6 +30,7 @@ public class MedAdapter extends FragmentStateAdapter {
         super(fragmentManager, lifecycle);
     }
 
+    // TODO: Fix null issue!!!!
     @Override
     public Fragment createFragment(int position) {
         switch (position) {

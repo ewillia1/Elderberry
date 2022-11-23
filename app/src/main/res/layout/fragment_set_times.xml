@@ -11,6 +11,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:hint="@string/set_time_frequency"
         app:helperText="Required*"
         app:helperTextTextColor="@color/textHintColor"
         app:layout_constraintBottom_toTopOf="@+id/textInputTimeAndDose"

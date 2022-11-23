@@ -32,7 +32,7 @@ public class TimeDoseAdapter extends RecyclerView.Adapter<TimeDoseViewHolder> {
     public TimeDoseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d(TAG, "_____onCreateViewHolder");
         // Create an instance of the view holder by passing it the layout inflated as view and no root.
-        return new TimeDoseViewHolder(LayoutInflater.from(this.context).inflate(R.layout.card_view, parent, false), this.onTimeDoseItemListener);
+        return new TimeDoseViewHolder(LayoutInflater.from(this.context).inflate(R.layout.card_view, parent, false), this.onTimeDoseItemListener, this.context);
     }
 
     @Override
