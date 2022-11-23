@@ -30,30 +30,28 @@
             android:id="@+id/time_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/elsie"
             android:hint="@string/click_to_set_time"
             android:textAlignment="center"
             android:textColor="@color/textHintColor"
-            android:fontFamily="@font/elsie"
-            android:textStyle="bold"
             android:textColorHint="@color/textHintColor"
-            android:layout_marginTop="4dp"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/dose_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:fontFamily="@font/elsie"
             android:hint="@string/click_to_set_dose"
             android:importantForAutofill="no"
             android:inputType="number"
-            android:minHeight="48dp"
             android:textAlignment="center"
-            android:fontFamily="@font/elsie"
-            android:textStyle="bold"
             android:textColor="@color/textHintColor"
             android:textColorHint="@color/textHintColor"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/unit_recyclerView"
@@ -65,7 +63,6 @@
             android:fontFamily="@font/elsie"
             android:textStyle="bold"
             android:textColorHint="@color/textHintColor"
-            android:layout_marginTop="20dp"
             android:textSize="20sp" />
     </LinearLayout>
 
