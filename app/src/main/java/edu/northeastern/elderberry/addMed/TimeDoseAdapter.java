@@ -43,7 +43,6 @@ public class TimeDoseAdapter extends RecyclerView.Adapter<TimeDoseViewHolder> {
         holder.itemNumber.setText(String.format(Locale.getDefault(),"%d", this.timeDoseItemArrayList.get(position).getItemNumber()));
         holder.timeTextView.setText(this.timeDoseItemArrayList.get(position).getTime());
         holder.doseTextView.setText(this.timeDoseItemArrayList.get(position).getDose());
-        holder.unitTextView.setText(this.timeDoseItemArrayList.get(position).getUnit());
     }
 
     @Override

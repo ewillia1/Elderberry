@@ -30,8 +30,7 @@
     <string name="last_name">Last Name</string>
     <string name="send_email">Send Email</string>
     <string name="medication_name">Medication Name</string>
-    <string name="set_time_frequency">Set Time Frequency</string>
-    <string name="set_time_and_dose">Set Time and Dose</string>
+    <string name="set_time_frequency">Set Time Frequency Per Day</string>
     <string name="title_activity_medication_dayview">MedicationDayview</string>
     <string name="cardview_expand">expand down</string>
     <string name="home">Home</string>
@@ -46,17 +45,10 @@
     <string name="required">Required*</string>
     <string name="elderberry_image">Elderberry image</string>
     <string name="successful_add">Successful add!</string>
-    <string name="tabs">tabs</string>
-    <string name="pills">pills</string>
-    <string name="grams">grams</string>
-    <string name="puffs">puffs</string>
-    <string name="teaspoons">teaspoons</string>
-    <string name="tablespoons">tablespoons</string>
-    <string name="ml">mL</string>
-    <string name="cc">cc</string>
-    <string name="click_to_set_unit">Click to set unit</string>
     <string name="click_to_set_dose">Click to set dose</string>
     <string name="click_to_set_time">Click to set time</string>
+    <string name="unit">Unit</string>
+    <string name="set_times_dose">Set Times and Dose</string>
     <string-array name="time_frequencies">
         <item>1 time</item>
         <item>2 times</item>
@@ -70,5 +62,15 @@
         <item>10 times</item>
         <item>11 times</item>
         <item>12 times</item>
+    </string-array>
+    <string-array name="units_array">
+        <item>tabs</item>
+        <item>pills</item>
+        <item>grams</item>
+        <item>puffs</item>
+        <item>teaspoons</item>
+        <item>tablespoons</item>
+        <item>mL</item>
+        <item>cc</item>
     </string-array>
 </resources>

@@ -59,21 +59,32 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
         Log.d(TAG, "_____onCreateView");
         View view = inflater.inflate(R.layout.fragment_set_times, container, false);
 
-        // Set time frequency functionality.
+        // Set dose functionality.
         // Get reference to the string array.
         Resources res = getResources();
+        String[] units_array = res.getStringArray(R.array.units_array);
+        // Create an array adapter and pass the context, drop down layout, and array.
+        ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, units_array);
+        arrayAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Get reference to the autocomplete text view
+        AutoCompleteTextView autoCompleteTimeFreq2 = view.findViewById(R.id.setUnit);
+        // set adapter to the autocomplete tv to the arrayAdapter
+        autoCompleteTimeFreq2.setAdapter(arrayAdapter2);
+
+        // Set time frequency functionality.
+        // Get reference to the string array.
         String[] time_frequencies = res.getStringArray(R.array.time_frequencies);
         // Create an array adapter and pass the context, drop down layout, and array.
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, time_frequencies);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, time_frequencies);
+        arrayAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Get reference to the autocomplete text view
-        AutoCompleteTextView autoCompleteTimeFreq = view.findViewById(R.id.setTimeFrequency);
+        AutoCompleteTextView autoCompleteTimeFreq1 = view.findViewById(R.id.setTimeFrequency);
         // set adapter to the autocomplete tv to the arrayAdapter
-        autoCompleteTimeFreq.setAdapter(arrayAdapter);
+        autoCompleteTimeFreq1.setAdapter(arrayAdapter1);
 
         // TODO: Shriya -- Get this to work. Functionality: Click on a frequency have corresponding number of TimeDoseItems to show up in the RecyclerView.
         // What happens when an time frequency is clicked on.
-        autoCompleteTimeFreq.setOnItemClickListener((parent, view1, position, id) -> Log.d(TAG, "_____onItemClick: clicked on item " + position + 1));
+        autoCompleteTimeFreq1.setOnItemClickListener((parent, view1, position, id) -> Log.d(TAG, "_____onItemClick: clicked on item " + position + 1));
 
         // Instantiate the ArrayList.
         ArrayList<TimeDoseItem> timeDoseItemArrayList = new ArrayList<>();

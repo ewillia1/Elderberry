@@ -14,9 +14,8 @@
         android:hint="@string/set_time_frequency"
         app:helperText="Required*"
         app:helperTextTextColor="@color/textHintColor"
-        app:layout_constraintBottom_toTopOf="@+id/textInputTimeAndDose"
+        app:layout_constraintBottom_toTopOf="@+id/unit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -33,6 +32,31 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/unit"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/unit"
+        app:helperText="Required*"
+        app:helperTextTextColor="@color/textHintColor"
+        app:layout_constraintBottom_toTopOf="@+id/textInputTimeAndDose"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputTimeFreq">
+
+        <AutoCompleteTextView
+            android:id="@+id/setUnit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="none"
+            android:text="@string/unit"
+            android:textColor="@color/main"
+            android:textSize="30sp"
+            tools:ignore="LabelFor" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputTimeAndDose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,16 +64,15 @@
         app:helperTextTextColor="@color/textHintColor"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputTimeFreq">
+        app:layout_constraintTop_toBottomOf="@+id/unit">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:inputType="none"
-            android:text="@string/set_time_and_dose"
+            android:text="@string/set_times_dose"
             android:textColor="@color/main"
             android:textSize="30sp"
             tools:ignore="LabelFor" />
@@ -58,8 +81,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="409dp"
-        android:layout_height="278dp"
+        android:layout_width="402dp"
+        android:layout_height="156dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

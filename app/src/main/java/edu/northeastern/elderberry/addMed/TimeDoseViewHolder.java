@@ -1,13 +1,10 @@
 package edu.northeastern.elderberry.addMed;
 
-import android.app.Activity;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -24,7 +21,6 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
     public final TextView itemNumber;
     public final TextView timeTextView;
     public final EditText doseTextView;
-    public final TextView unitTextView;
     public final OnTimeDoseItemListener onTimeDoseItemListener;
 
     public TimeDoseViewHolder(@NonNull View itemView, OnTimeDoseItemListener onTimeDoseItemListener, Context context) {
@@ -33,7 +29,6 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
         this.itemNumber = itemView.findViewById(R.id.itemNumber);
         this.timeTextView = itemView.findViewById(R.id.time_recyclerView);
         this.doseTextView = itemView.findViewById(R.id.dose_recyclerView);
-        this.unitTextView = itemView.findViewById(R.id.unit_recyclerView);
         this.onTimeDoseItemListener = onTimeDoseItemListener;
 
         itemView.setOnClickListener(this);
@@ -54,53 +49,6 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
 
         // TODO: Make it so the decimal works!
         this.doseTextView.setOnClickListener(v -> Log.d(TAG, "_____onClick (this.dose)"));
-
-        this.unitTextView.setOnClickListener(v -> {
-            Log.d(TAG, "_____onClick (this.unit)");
-            PopupMenu popupMenu = new PopupMenu(unitTextView.getContext(), itemView);
-            popupMenu.setOnMenuItemClickListener(item -> {
-                int itemId = item.getItemId();
-                if (itemId == R.id.tabs) {
-                    Log.d(TAG, "_____onMenuItemClick (R.id.tabs)");
-                    this.unitTextView.setText(R.string.tabs);
-                    return true;
-                } else if (itemId == R.id.pills) {
-                    Log.d(TAG, "_____onMenuItemClick (R.id.pills)");
-                    this.unitTextView.setText(R.string.pills);
-                    return true;
-                } else if (itemId == R.id.grams) {
-                    Log.d(TAG, "_____onMenuItemClick (R.id.grams)");
-                    this.unitTextView.setText(R.string.grams);
-                    return true;
-                } else if (itemId == R.id.puffs) {
-                    Log.d(TAG, "_____onMenuItemClick (R.id.puffs)");
-                    this.unitTextView.setText(R.string.puffs);
-                    return true;
-                } else if (itemId == R.id.teaspoons) {
-                    Log.d(TAG, "_____onMenuItemClick (R.id.teaspoons)");
-                    this.unitTextView.setText(R.string.teaspoons);
-                    return true;
-                } else if (itemId == R.id.tablespoons) {
-                    Log.d(TAG, "_____onMenuItemClick (R.id.tablespoons)");
-                    this.unitTextView.setText(R.string.tablespoons);
-                    return true;
-                } else if (itemId == R.id.mL) {
-                    Log.d(TAG, "_____onMenuItemClick (R.id.mL)");
-                    this.unitTextView.setText(R.string.ml);
-                    return true;
-                } else if (itemId == R.id.cc) {
-                    Log.d(TAG, "_____onMenuItemClick (R.id.cc)");
-                    this.unitTextView.setText(R.string.cc);
-                    return true;
-                }
-                Log.d(TAG, "_____onMenuItemClick (default)");
-                this.unitTextView.setText(R.string.click_to_set_unit);
-                return false;
-            });
-            popupMenu.inflate(R.menu.unit);
-            popupMenu.setGravity(Gravity.END);
-            popupMenu.show();
-        });
     }
 
     public void bindThisData(TimeDoseItem theLinkToBind) {
