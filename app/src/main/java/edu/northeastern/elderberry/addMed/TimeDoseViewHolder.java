@@ -50,6 +50,7 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
 //            timePicker.show(((Activity) this.context).getFragmentManager(), TIME_PICKER_TAG);
         });
 
+        // TODO: Make it so the decimal works!
         this.doseTextView.setOnClickListener(v -> Log.d(TAG, "_____onClick (this.dose)"));
 
         this.unitTextView.setOnClickListener(v -> {
