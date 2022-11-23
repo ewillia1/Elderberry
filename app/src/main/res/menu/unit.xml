@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/tabs"
+        android:orderInCategory="100"
+        android:title="@string/tabs"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/pills"
+        android:orderInCategory="100"
+        android:title="@string/pills"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/grams"
+        android:orderInCategory="100"
+        android:title="@string/grams"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/puffs"
+        android:orderInCategory="100"
+        android:title="@string/puffs"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/teaspoons"
+        android:orderInCategory="100"
+        android:title="@string/teaspoons"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/tablespoons"
+        android:orderInCategory="100"
+        android:title="@string/tablespoons"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/mL"
+        android:orderInCategory="100"
+        android:title="@string/ml"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/cc"
+        android:orderInCategory="100"
+        android:title="@string/cc"
+        app:showAsAction="never" />
+</menu>

@@ -46,6 +46,17 @@
     <string name="required">Required*</string>
     <string name="elderberry_image">Elderberry image</string>
     <string name="successful_add">Successful add!</string>
+    <string name="tabs">tabs</string>
+    <string name="pills">pills</string>
+    <string name="grams">grams</string>
+    <string name="puffs">puffs</string>
+    <string name="teaspoons">teaspoons</string>
+    <string name="tablespoons">tablespoons</string>
+    <string name="ml">mL</string>
+    <string name="cc">cc</string>
+    <string name="click_to_set_unit">Click to set unit</string>
+    <string name="click_to_set_dose">Click to set dose</string>
+    <string name="click_to_set_time">Click to set time</string>
     <string-array name="time_frequencies">
         <item>1 time</item>
         <item>2 times</item>

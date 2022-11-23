@@ -2,7 +2,6 @@ package edu.northeastern.elderberry;
 
 import android.os.Bundle;
 
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -47,11 +46,6 @@ public class MedInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Log.d(TAG, "_____onCreateView");
-        View view = inflater.inflate(R.layout.fragment_med_info, container, false);
-        NestedScrollView scrollView = view.findViewById(R.id.nestedScrollView1);
-
-        scrollView.setOnScrollChangeListener((View.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> v.getParent().requestDisallowInterceptTouchEvent(true));
-
-        return view;
+        return inflater.inflate(R.layout.fragment_med_info, container, false);
     }
 }

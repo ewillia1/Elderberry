@@ -1,10 +1,12 @@
 package edu.northeastern.elderberry;
 
-import android.app.TimePickerDialog;
 import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,9 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,11 +26,9 @@ import android.widget.Toast;
 // TODO: Make it so once the user picks a time frequency the correct number of times and corresponding doses show up
 // TODO: Make fields required
 // TODO: Fix the layout design in landscape mode
-public class SetTimesFragment extends Fragment implements TimePickerDialog.OnTimeSetListener {
+public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener  {
     private static final String TAG = "SetTimesFragment";
-    private static final String TIME_PICKER_TAG = "time picker";
-
-    private TextView set_time;
+    private static final String LIST_STATE = "list_state";
 
     public SetTimesFragment() {
         Log.d(TAG, "_____SetTimesFragment");
@@ -69,40 +68,36 @@ public class SetTimesFragment extends Fragment implements TimePickerDialog.OnTim
         AutoCompleteTextView autoCompleteTimeFreq = view.findViewById(R.id.setTimeFrequency);
         // set adapter to the autocomplete tv to the arrayAdapter
         autoCompleteTimeFreq.setAdapter(arrayAdapter);
+        // What happens when an time frequency is clicked on.
+        autoCompleteTimeFreq.setOnItemClickListener((parent, view1, position, id) -> Log.d(TAG, "_____onItemClick: clicked on item " + position + 1));
 
-        autoCompleteTimeFreq.setOnItemClickListener((parent, view1, position, id) -> {
-            Log.d(TAG, "_____onItemClick");
-            Toast.makeText(getContext(), "Clicked on item " + position + 1, Toast.LENGTH_SHORT).show();
-        });
+        // Instantiate the ArrayList.
+        ArrayList<TimeDoseItem> timeDoseItemArrayList = new ArrayList<>();
 
-        //        // Set time and dose functionality.
+        // Temporary.
+        timeDoseItemArrayList.add(new TimeDoseItem(1, "10:00", "2", "tabs"));
 
+        // Instantiate the recyclerView.
+        RecyclerView timeDoseRecyclerView = view.findViewById(R.id.recyclerView);
 
-//        ImageView time_picker = findViewById(R.id.time_picker);
-//        time_picker.setOnClickListener(v -> {
-//            DialogFragment timePicker = new TimePickerFragment();
-//            timePicker.show(getSupportFragmentManager(), TIME_PICKER_TAG);
-//        });
-//
-//        this.set_time = findViewById(R.id.set_time);
+        // Restore ArrayList of linked items, if the screen is rotated.
+        if (savedInstanceState != null && savedInstanceState.getParcelableArrayList(LIST_STATE) != null) {
+            timeDoseItemArrayList = savedInstanceState.getParcelableArrayList(LIST_STATE);
+        }
+
+        timeDoseRecyclerView.setHasFixedSize(true);
+        timeDoseRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        timeDoseRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        // Instantiate recyclerView adapter. Associate the adapter with the recyclerView.
+        TimeDoseAdapter timeDoseAdapter = new TimeDoseAdapter(timeDoseItemArrayList, getContext(), this);
+        timeDoseRecyclerView.setAdapter(timeDoseAdapter);
 
         return view;
     }
 
     @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        Log.d(TAG, "_____onTimeSet");
-        String am_pm = (hourOfDay < 12) ? " AM" : " PM";
-        String st_min = Integer.toString(minute);
-
-        if (hourOfDay > 12) {
-            hourOfDay %= 12;
-        }
-
-        if (minute < 10) {
-            st_min = "0" + st_min;
-        }
-
-        this.set_time.setText(getString(R.string.set_time, hourOfDay, st_min, am_pm));
+    public void onTimeDoseItemClick(int position) {
+        Log.d(TAG, "_____onTimeDoseItemClick: clicked item " + position + 1);
     }
 }
