@@ -42,8 +42,9 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
         this.timeTextView.setOnClickListener(v -> {
             Log.d(TAG, "_____onClick (this.time)");
             DialogFragment timePicker = new TimePickerFragment();
-
+//            FragmentManager fragmentManager = ((Activity) this.context).getFragmentManager();
             // TODO: Get this to work.
+//            timePicker.show(fragmentManager, TIME_PICKER_TAG);
 //            timePicker.show(((Activity) this.context).getFragmentManager(), TIME_PICKER_TAG);
         });
 

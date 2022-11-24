@@ -46,7 +46,7 @@
             android:fontFamily="@font/elsie"
             android:hint="@string/click_to_set_dose"
             android:importantForAutofill="no"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:textAlignment="center"
             android:textColor="@color/textHintColor"
             android:textColorHint="@color/textHintColor"

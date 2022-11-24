@@ -9,7 +9,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputTimeFreq"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/set_time_frequency"
         app:helperText="Required*"
@@ -53,7 +53,7 @@
             android:text="@string/unit"
             android:textColor="@color/main"
             android:textSize="30sp"
-            tools:ignore="LabelFor" />
+            tools:ignore="LabelFor,TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
