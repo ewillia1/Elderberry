@@ -3,20 +3,26 @@ package edu.northeastern.elderberry.dayview;
 import android.os.Bundle;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.northeastern.elderberry.Medicine;
 import edu.northeastern.elderberry.R;
 
 public class MedicationDayview extends AppCompatActivity {
@@ -68,6 +74,27 @@ public class MedicationDayview extends AppCompatActivity {
                 .setAdapter(parentItemAdapter);
         ParentRecyclerViewItem
                 .setLayoutManager(layoutManager);
+
+        // Todo to provide the correct username based on log-in info
+        this.userDB.child("Gavin").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //medicines.add(snapshot.getValue(Medicine.class).getName());
+                //Medicine md = snapshot.getValue(Medicine.class);
+                //Log.d(TAG, "_____onDataChange: medicine is " + md.getName());
+                 for (DataSnapshot d: snapshot.getChildren()) {
+                     //Medicine md = d.getValue(Medicine.class);
+
+                     //Log.d(TAG, "onDataChange: " + "med is " + md.getName());
+                    //medicines.add();
+                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private List<ParentItem> ParentItemList()
@@ -138,21 +165,6 @@ public class MedicationDayview extends AppCompatActivity {
         //    }
         //});
 
-        //String user = "Gavin";
-        //this.userDB.child(user).addValueEventListener(new ValueEventListener() {
-        //    @Override
-        //    public void onDataChange(@NonNull DataSnapshot snapshot) {
-        //        medicines.add(snapshot.getValue(Medicine.class).getName());
-        //        Log.d(TAG, "onDataChange: " + "med is " + medicines.get(0));
-        //        // for (DataSnapshot d: snapshot.getChildren()) {
-        //        //    //medicines.add();
-        //        //}
-        //    }
 
-        //    @Override
-        //    public void onCancelled(@NonNull DatabaseError error) {
-
-        //    }
-        //});
     }
 }

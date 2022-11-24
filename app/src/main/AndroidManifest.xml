@@ -52,7 +52,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".YourMedicationsActivity"
+            android:name=".your_medication.YourMedicationsActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="false">
             <meta-data
