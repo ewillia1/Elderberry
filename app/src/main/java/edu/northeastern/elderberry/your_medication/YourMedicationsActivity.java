@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -16,19 +18,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import edu.northeastern.elderberry.AddMedicationActivity;
 import edu.northeastern.elderberry.LoginActivity;
 import edu.northeastern.elderberry.MedicationTrackerActivity;
-import edu.northeastern.elderberry.Medicine;
 import edu.northeastern.elderberry.R;
 
 public class YourMedicationsActivity extends AppCompatActivity {
-    private static final String TAG = "AddMedicationActivity";
+    private static final String TAG = "YourMedicationsActivity";
     private MedicineAdapter medAdapter;
     private ArrayList<MedicineRow> medicines = new ArrayList<>();
     private DatabaseReference medicineDB;
@@ -70,6 +74,34 @@ public class YourMedicationsActivity extends AppCompatActivity {
             return false;
         });
 
+        // init db data
+        // Todo to make db query more generic
+        this.medicineDB = FirebaseDatabase.getInstance().getReference();
+        this.medicineDB.child("Gavin").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d(TAG, "_____onDataChange: ");
+                medicines.clear();
+
+                for (DataSnapshot d : snapshot.getChildren()) {
+                    //System.out.println(d.child("name"));
+                    //System.out.println(d.child("fromDate"));
+                    //System.out.println(d.child("toDate"));
+                    //System.out.println(d.child("name").getValue());
+                    //MedicineRow medRow = new MedicineRow((String) d.child("name").getValue(), (String) d.child("fromDate").getValue(), (String) d.child("toDate").getValue());
+                    MedicineRow medRow = new MedicineRow(String.valueOf(d.child("name").getValue()), String.valueOf(d.child("fromDate").getValue()), String.valueOf(d.child("toDate").getValue()));
+                    medicines.add(medRow);
+                }
+                medAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d(TAG, "_____onCancelled: ");
+                //Toast.makeText(YourMedicationsActivity.this, "Error: Unable to get access to Database", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         // Set RecyclerView
         RecyclerView recyclerView = findViewById(R.id.yourMedRecyclerView);
         recyclerView.setHasFixedSize(true);
@@ -82,7 +114,6 @@ public class YourMedicationsActivity extends AppCompatActivity {
         this.medAdapter = new MedicineAdapter(this.medicines);
         recyclerView.setAdapter(this.medAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        // Todo connect to DB and feed database data to recycler view
         // Todo enable edits within recycler view
         // Todo edit the UI of the recycler view to display the "right" info, include the field name
     }
