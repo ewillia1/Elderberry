@@ -10,18 +10,28 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.northeastern.elderberry.AddMedicationActivity;
 import edu.northeastern.elderberry.LoginActivity;
 import edu.northeastern.elderberry.MedicationTrackerActivity;
+import edu.northeastern.elderberry.Medicine;
 import edu.northeastern.elderberry.R;
 
 public class YourMedicationsActivity extends AppCompatActivity {
     private static final String TAG = "AddMedicationActivity";
+    private MedicineAdapter medAdapter;
+    private ArrayList<MedicineRow> medicines = new ArrayList<>();
+    private DatabaseReference medicineDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +72,19 @@ public class YourMedicationsActivity extends AppCompatActivity {
 
         // Set RecyclerView
         RecyclerView recyclerView = findViewById(R.id.yourMedRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        // passing an array into the recyclerview adapter
+        // Test data
+        //this.medicines.add(new MedicineRow("Vitamin A", "20221001", "20221101"));
+        //this.medicines.add(new MedicineRow("Vitamin B", "20221101", "20221201"));
+        //this.medicines.add(new MedicineRow("Vitamin C", "20221201", "20230101"));
+        this.medAdapter = new MedicineAdapter(this.medicines);
+        recyclerView.setAdapter(this.medAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // Todo connect to DB and feed database data to recycler view
+        // Todo enable edits within recycler view
+        // Todo edit the UI of the recycler view to display the "right" info, include the field name
     }
 
     private void startMedicationTrackerActivity() {

@@ -11,11 +11,11 @@ import java.util.ArrayList;
 
 import edu.northeastern.elderberry.R;
 
-public class StickerAdapter extends RecyclerView.Adapter<MedicineHolder> {
-    private static final String TAG = "StickerAdapter";
+public class MedicineAdapter extends RecyclerView.Adapter<MedicineHolder> {
+    private static final String TAG = "MedicineAdapter";
     private final ArrayList<MedicineRow> medicines;
 
-    public StickerAdapter(ArrayList<MedicineRow> medicines) {
+    public MedicineAdapter(ArrayList<MedicineRow> medicines) {
         Log.d(TAG, "_____StickerAdapter: ");
         this.medicines = medicines;
     }

@@ -32,7 +32,7 @@ public class MedicationDayview extends AppCompatActivity {
     LinearLayout hiddenView;
     CardView cardView;
     private DatabaseReference userDB;
-    private List<String> medicines = new ArrayList<>();
+    private ArrayList<String> medicines = new ArrayList<>();
 
     // Todo show the data of the medication
     // Todo add database reference
