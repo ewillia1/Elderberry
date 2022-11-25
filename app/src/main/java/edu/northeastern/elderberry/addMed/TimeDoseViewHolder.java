@@ -1,5 +1,6 @@
 package edu.northeastern.elderberry.addMed;
 
+import android.app.Activity;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.util.Log;
@@ -42,6 +43,7 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
         this.timeTextView.setOnClickListener(v -> {
             Log.d(TAG, "_____onClick (this.time)");
             DialogFragment timePicker = new TimePickerFragment();
+//            timePicker.show(getFragmentManager(), TIME_PICKER_TAG);
 //            FragmentManager fragmentManager = ((Activity) this.context).getFragmentManager();
             // TODO: Get this to work.
 //            timePicker.show(fragmentManager, TIME_PICKER_TAG);

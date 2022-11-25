@@ -11,7 +11,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Working on add functionality (specifically the time frequency, time, dose, unit page)">
+    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Working on add functionality -- timePicker in TimeDoseViewHolder still does not work, got it so from date has to be set before to date (before check still not working)">
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
@@ -22,8 +22,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/SetDatesFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/SetDatesFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/TimeDoseViewHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/TimeDoseViewHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/card_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/card_view.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_set_times.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_set_times.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,13 +187,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666133441374</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Updated LoginActivity.java">
-      <created>1668791296013</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1668791296013</updated>
     </task>
     <task id="LOCAL-00013" summary="Updated build.gradle">
       <created>1668817915932</created>
@@ -533,7 +524,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669237605872</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Working on add functionality -- timePicker in TimeDoseViewHolder still does not work, got it so from date has to be set before to date (before check still not working)">
+      <created>1669266088488</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1669266088489</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -548,7 +546,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Updated workspace.xml" />
     <MESSAGE value="Made textStyle bold and added Remember Me Checkbox to activity_login.xml" />
     <MESSAGE value="Updated strings.xml" />
     <MESSAGE value="Made mode MODE_PRIVATE for shared preferences" />
@@ -573,6 +570,7 @@
     <MESSAGE value="Working on time frequency, time, dose, and unit functionality" />
     <MESSAGE value="Added TODOs" />
     <MESSAGE value="Working on add functionality (specifically the time frequency, time, dose, unit page)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Working on add functionality (specifically the time frequency, time, dose, unit page)" />
+    <MESSAGE value="Working on add functionality -- timePicker in TimeDoseViewHolder still does not work, got it so from date has to be set before to date (before check still not working)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Working on add functionality -- timePicker in TimeDoseViewHolder still does not work, got it so from date has to be set before to date (before check still not working)" />
   </component>
 </project>

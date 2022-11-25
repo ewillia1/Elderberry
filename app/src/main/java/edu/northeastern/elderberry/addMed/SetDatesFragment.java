@@ -24,8 +24,6 @@ import edu.northeastern.elderberry.R;
  * create an instance of this fragment.
  */
 
-// TODO: Make it so the user have to input a from date before the to date
-// TODO: Make it so the user to date has to be after the from date
 // TODO: Make fields required
 // TODO: Get landscape layout to look good/work as expected.
 public class SetDatesFragment extends Fragment {
@@ -59,97 +57,8 @@ public class SetDatesFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "_____onCreate");
         this.fromDateSet = false;
-        this.fromDate = new Calendar() {
-            @Override
-            protected void computeTime() {
-                Log.d(TAG, "_____computeTime -- this.fromDate");
-            }
-
-            @Override
-            protected void computeFields() {
-                Log.d(TAG, "_____computeFields -- this.fromDate");
-            }
-
-            @Override
-            public void add(int field, int amount) {
-                Log.d(TAG, "_____add -- this.fromDate");
-            }
-
-            @Override
-            public void roll(int field, boolean up) {
-                Log.d(TAG, "_____roll -- this.fromDate");
-            }
-
-            @Override
-            public int getMinimum(int field) {
-                Log.d(TAG, "_____getMinimum -- this.fromDate");
-                return 0;
-            }
-
-            @Override
-            public int getMaximum(int field) {
-                Log.d(TAG, "_____getMaximum -- this.fromDate");
-                return 0;
-            }
-
-            @Override
-            public int getGreatestMinimum(int field) {
-                Log.d(TAG, "_____getGreatestMinimum -- this.fromDate");
-                return 0;
-            }
-
-            @Override
-            public int getLeastMaximum(int field) {
-                Log.d(TAG, "_____getLeastMaximum -- this.fromDate");
-                return 0;
-            }
-        };
-
-        this.toDate = new Calendar() {
-            @Override
-            protected void computeTime() {
-                Log.d(TAG, "_____computeTime -- this.toDate");
-            }
-
-            @Override
-            protected void computeFields() {
-                Log.d(TAG, "_____computeFields -- this.toDate");
-            }
-
-            @Override
-            public void add(int field, int amount) {
-                Log.d(TAG, "_____add -- this.toDate");
-            }
-
-            @Override
-            public void roll(int field, boolean up) {
-                Log.d(TAG, "_____roll -- this.toDate");
-            }
-
-            @Override
-            public int getMinimum(int field) {
-                Log.d(TAG, "_____getMinimum -- this.toDate");
-                return 0;
-            }
-
-            @Override
-            public int getMaximum(int field) {
-                Log.d(TAG, "_____getMaximum -- this.toDate");
-                return 0;
-            }
-
-            @Override
-            public int getGreatestMinimum(int field) {
-                Log.d(TAG, "_____getGreatestMinimum -- this.toDate");
-                return 0;
-            }
-
-            @Override
-            public int getLeastMaximum(int field) {
-                Log.d(TAG, "_____getLeastMaximum -- this.toDate");
-                return 0;
-            }
-        };
+        this.fromDate = Calendar.getInstance();
+        this.toDate = Calendar.getInstance();
     }
 
     @Override
@@ -201,35 +110,16 @@ public class SetDatesFragment extends Fragment {
         // To date.
         DatePickerDialog.OnDateSetListener to_dateSetListener = (view, year, month, day) -> {
             Log.d(TAG, "_____initDatePicker");
-//            String date = makeDateString(day, month, year);
-//            this.set_to.setText(date);
-//            this.set_to.setTextSize(25);
-
-
-//            if (this.fromDateSet) {
-//                String date = makeDateString(day, month, year);
-//                this.set_to.setText(date);
-//                this.set_to.setTextSize(25);
-//            } else {
-//                Log.d(TAG, "_____initDatePicker: (this.fromDateSet == false, toDate)");
-//                Toast.makeText(this.getContext(), "Please set a from date first.", Toast.LENGTH_SHORT).show();
-//            }
-
-            // TODO: Make sure this.fromDateSet gets set back to false when you reenter the add functionality (it should since it is set to false in the onCreate...but just check).
             if (this.fromDateSet) {
                 Log.d(TAG, "_____initDatePicker (this.fromDateSet == true, toDate)");
                 this.toDate.set(year, month, day);
-
-                // TODO: Get this to work!!!! DOES NOT WORK correctly!
                 if (this.toDate.before(this.fromDate)) {
-//                if (this.toDate.get(Calendar.YEAR) < this.fromDate.get(Calendar.YEAR) && this.toDate.get(Calendar.MONTH) < this.fromDate.get(Calendar.MONTH) && this.toDate.get(Calendar.DAY_OF_MONTH) < this.fromDate.get(Calendar.DAY_OF_MONTH)) {
-                    Log.d(TAG, "_____initDatePicker: (this.toDate.before(this.fromDate)");
-                    Log.d(TAG, "initDatePicker: this.fromDate = " + (this.fromDate.get(Calendar.MONTH) + 1) + "/" + this.fromDate.get(Calendar.DAY_OF_MONTH) + "/" + this.fromDate.get(Calendar.YEAR) + ", this.toDate = " + (this.toDate.get(Calendar.MONTH) + 1) + "/" + this.toDate.get(Calendar.DAY_OF_MONTH) + "/" + this.toDate.get(Calendar.YEAR));
-                    Log.d(TAG, "initDatePicker: to date -- this.fromDate = " + this.fromDate);
+                    Log.d(TAG, "_____initDatePicker: IF -- try to set the to do again");
+                    Log.d(TAG, "_____initDatePicker: this.fromDate = " + (this.fromDate.get(Calendar.MONTH) + 1) + "/" + this.fromDate.get(Calendar.DAY_OF_MONTH) + "/" + this.fromDate.get(Calendar.YEAR) + ", this.toDate = " + (this.toDate.get(Calendar.MONTH) + 1) + "/" + this.toDate.get(Calendar.DAY_OF_MONTH) + "/" + this.toDate.get(Calendar.YEAR));
                     Toast.makeText(this.getContext(), "Your to date has to be after your from date. Please try again.", Toast.LENGTH_SHORT).show();
                 } else {
-                    Log.d(TAG, "_____initDatePicker: the to date was set correctly");
-                    Log.d(TAG, "initDatePicker: this.fromDate = " + (this.fromDate.get(Calendar.MONTH) + 1) + "/" + this.fromDate.get(Calendar.DAY_OF_MONTH) + "/" + this.fromDate.get(Calendar.YEAR) + ", this.toDate = " + (this.toDate.get(Calendar.MONTH) + 1) + "/" + this.toDate.get(Calendar.DAY_OF_MONTH) + "/" + this.toDate.get(Calendar.YEAR));
+                    Log.d(TAG, "_____initDatePicker: ELSE -- the to date was set correctly");
+                    Log.d(TAG, "_____initDatePicker: this.fromDate = " + (this.fromDate.get(Calendar.MONTH) + 1) + "/" + this.fromDate.get(Calendar.DAY_OF_MONTH) + "/" + this.fromDate.get(Calendar.YEAR) + ", this.toDate = " + (this.toDate.get(Calendar.MONTH) + 1) + "/" + this.toDate.get(Calendar.DAY_OF_MONTH) + "/" + this.toDate.get(Calendar.YEAR));
                     String date = makeDateString(day, month, year);
                     this.set_to.setText(date);
                     this.set_to.setTextSize(25);
