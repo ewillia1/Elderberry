@@ -24,8 +24,8 @@ import edu.northeastern.elderberry.R;
  * create an instance of this fragment.
  */
 
-// TODO: Make fields required
-// TODO: Get landscape layout to look good/work as expected.
+// TODO: Make fields required.
+// TODO: Save from and to dates in database.
 public class SetDatesFragment extends Fragment {
     private static final String TAG = "SetDatesFragment";
     private DatePickerDialog from_datePickerDialog;
@@ -72,12 +72,12 @@ public class SetDatesFragment extends Fragment {
         ImageView from_image = view.findViewById(R.id.from_image);
         from_image.setOnClickListener(v -> {
             Log.d(TAG, "_____onClick (from_image)");
-            from_datePickerDialog.show();
+            this.from_datePickerDialog.show();
         });
         ImageView to_image = view.findViewById(R.id.to_image);
         to_image.setOnClickListener(v -> {
             Log.d(TAG, "_____onClick (to_image)");
-            to_datePickerDialog.show();
+            this.to_datePickerDialog.show();
         });
 
         initDatePicker();
@@ -104,7 +104,7 @@ public class SetDatesFragment extends Fragment {
         int month1 = calendar.get(Calendar.MONTH);
         int day1 = calendar.get(Calendar.DAY_OF_MONTH);
         int style = 0;              // 0 is the default style/theme.
-        // Take input from user on date selected from calendar
+        // Take input from user on date selected from calendar.
         this.from_datePickerDialog = new DatePickerDialog(getContext(), style, from_dateSetListener, year1, month1, day1);
 
         // To date.

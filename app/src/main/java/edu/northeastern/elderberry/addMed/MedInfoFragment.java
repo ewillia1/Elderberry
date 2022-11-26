@@ -17,9 +17,9 @@ import edu.northeastern.elderberry.R;
  * create an instance of this fragment.
  */
 
-// TODO: Fix the layout design in landscape mode
-// TODO: Make fields required
-// TODO: Get landscape layout to look good/work as expected.
+// TODO: Fix the layout design in landscape mode.
+// TODO: Make fields required.
+// TODO: Save medication name and information in database.
 public class MedInfoFragment extends Fragment {
     private static final String TAG = "MedInfoFragment";
 

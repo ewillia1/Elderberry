@@ -47,23 +47,12 @@
             android:hint="@string/click_to_set_dose"
             android:importantForAutofill="no"
             android:inputType="numberDecimal"
+            android:imeOptions="actionDone"
             android:textAlignment="center"
             android:textColor="@color/textHintColor"
             android:textColorHint="@color/textHintColor"
             android:textSize="20sp"
             android:textStyle="bold" />
-
-<!--        <TextView-->
-<!--            android:id="@+id/unit_recyclerView"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="@string/click_to_set_unit"-->
-<!--            android:textAlignment="center"-->
-<!--            android:textColor="@color/textHintColor"-->
-<!--            android:fontFamily="@font/elsie"-->
-<!--            android:textStyle="bold"-->
-<!--            android:textColorHint="@color/textHintColor"-->
-<!--            android:textSize="20sp" />-->
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
