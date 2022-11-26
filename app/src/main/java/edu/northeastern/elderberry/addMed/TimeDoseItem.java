@@ -61,11 +61,6 @@ public class TimeDoseItem implements Parcelable {
         return this.dose;
     }
 
-    public String getUnit() {
-        Log.d(TAG, "_____getUnit");
-        return this.unit;
-    }
-
     @Override
     public int describeContents() {
         Log.d(TAG, "_____describeContents");

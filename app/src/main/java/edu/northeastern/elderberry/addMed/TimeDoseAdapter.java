@@ -39,7 +39,7 @@ public class TimeDoseAdapter extends RecyclerView.Adapter<TimeDoseViewHolder> {
         Log.d(TAG, "_____onBindViewHolder");
         holder.bindThisData(this.timeDoseItemArrayList.get(position));
         this.timeDoseItemArrayList.get(position).setItemNumber(position + 1);
-        holder.itemNumber.setText(String.format(Locale.getDefault(),"%d", this.timeDoseItemArrayList.get(position).getItemNumber()));
+        holder.itemNumber.setText(String.format(Locale.getDefault(), "%d", this.timeDoseItemArrayList.get(position).getItemNumber()));
         holder.timeTextView.setText(this.timeDoseItemArrayList.get(position).getTime());
         holder.doseEditText.setText(this.timeDoseItemArrayList.get(position).getDose());
     }

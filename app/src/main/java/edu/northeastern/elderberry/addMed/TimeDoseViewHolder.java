@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +18,6 @@ import edu.northeastern.elderberry.R;
 // TODO: Save unit, time(s), and dose(s) in database.
 public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private final String TAG = "TimeDoseViewHolder";
-    private static final String TIME_PICKER_TAG = "time_picker";
     public final TextView itemNumber;
     public final TextView timeTextView;
     public final EditText doseEditText;
@@ -70,7 +68,7 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
                 st_min = "0" + st_min;
             }
 
-            timeTextView.setText(itemView.getContext().getString(R.string.set_time, hourOfDay, st_min, am_pm));
+            this.timeTextView.setText(itemView.getContext().getString(R.string.set_time, hourOfDay, st_min, am_pm));
         };
 
         Calendar calendar = Calendar.getInstance();

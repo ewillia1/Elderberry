@@ -11,8 +11,8 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 
-import edu.northeastern.elderberry.util.MedAdapter;
 import edu.northeastern.elderberry.R;
+import edu.northeastern.elderberry.util.MedAdapter;
 
 public class AddMedicationActivity extends AppCompatActivity {
 
