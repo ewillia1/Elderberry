@@ -11,7 +11,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Cleaned and reformatted code" />
+    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Updated ExampleUnitTest.java" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -176,20 +176,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666133441374</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Updated layouts and added menus">
-      <created>1668818218976</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1668818218977</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Updated workspace.xml">
-      <created>1668818256560</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1668818256560</updated>
     </task>
     <task id="LOCAL-00018" summary="Updated CreateAccountActivity.java, LoginActivity.java">
       <created>1668820918630</created>
@@ -520,7 +506,21 @@
       <option name="project" value="LOCAL" />
       <updated>1669431785900</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="Upated workspace.xml">
+      <created>1669431977431</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1669431977431</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Updated ExampleUnitTest.java">
+      <created>1669432084371</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1669432084371</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -535,8 +535,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Just a save to have the remember me checkbox code (but I am going to remove it)" />
-    <MESSAGE value="Reverted back to now Remember Me checkbox -- user stays logged in until they log out" />
     <MESSAGE value="Working on activity_add_medication.xml" />
     <MESSAGE value="Override onBackPressed() in CreateAccountActivity.java" />
     <MESSAGE value="Override onBackPressed() in CreateAccountActivity.java, still working on add medication functionality" />
@@ -560,6 +558,8 @@
     <MESSAGE value="Got the from and to date functionality working" />
     <MESSAGE value="Force portrait mode, got check to work on number keyboard, got timePicker to work" />
     <MESSAGE value="Cleaned and reformatted code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleaned and reformatted code" />
+    <MESSAGE value="Upated workspace.xml" />
+    <MESSAGE value="Updated ExampleUnitTest.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated ExampleUnitTest.java" />
   </component>
 </project>
