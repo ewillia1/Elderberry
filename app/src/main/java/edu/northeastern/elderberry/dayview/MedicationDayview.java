@@ -32,13 +32,14 @@ public class MedicationDayview extends AppCompatActivity {
     LinearLayout hiddenView;
     CardView cardView;
     private DatabaseReference userDB;
-    private ArrayList<String> medicines = new ArrayList<>();
+    private List<ParentItem> medicineList = new ArrayList<>();
 
     // Todo show the data of the medication
     // Todo add database reference
     // Todo add checkbox to the collapsable card view
     // Todo checkbox should result in data updated somewhere
     // Todo get user id to this view for db query
+    // Todo add functionality allowing users to make edits, checkbox
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,38 @@ public class MedicationDayview extends AppCompatActivity {
         setContentView(R.layout.activity_recycle_med_dayview);
         // setting up db
         this.userDB = FirebaseDatabase.getInstance().getReference();
+
+        // Todo to provide the correct username based on log-in info
+        this.userDB.child("Gavin").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                medicineList.clear();
+                //medicines.add(snapshot.getValue(Medicine.class).getName());
+                //Medicine md = snapshot.getValue(Medicine.class);
+                // Todo instantiate parent item from medicine
+                // Todo instantiate child item from medicine
+                // Todo add child item to parent item
+
+
+                //Log.d(TAG, "_____onDataChange: medicine is " + md.getName());
+                for (DataSnapshot d: snapshot.getChildren()) {
+                    ChildItem childitem = new ChildItem(String.valueOf(d.child("name").getValue()));
+                    List<ChildItem> children = new ArrayList<>();
+                    children.add(childitem);
+                    medicineList.add(new ParentItem("medicine1", children));
+                    //Medicine md = d.getValue(Medicine.class);
+
+                    //Log.d(TAG, "onDataChange: " + "med is " + md.getName());
+                    //medicines.add();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         RecyclerView
                 ParentRecyclerViewItem
                 = findViewById(
@@ -62,11 +95,12 @@ public class MedicationDayview extends AppCompatActivity {
         // to the parentItemAdapter.
         // These arguments are passed
         // using a method ParentItemList()
-        ParentItemAdapter
-                parentItemAdapter
-                = new ParentItemAdapter(
-                ParentItemList());
+//        ParentItemAdapter
+//                parentItemAdapter
+//                = new ParentItemAdapter(
+//                ParentItemList());
 
+        ParentItemAdapter parentItemAdapter = new ParentItemAdapter(medicineList);
         // Set the layout manager
         // and adapter for items
         // of the parent recyclerview
@@ -75,26 +109,6 @@ public class MedicationDayview extends AppCompatActivity {
         ParentRecyclerViewItem
                 .setLayoutManager(layoutManager);
 
-        // Todo to provide the correct username based on log-in info
-        this.userDB.child("Gavin").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //medicines.add(snapshot.getValue(Medicine.class).getName());
-                //Medicine md = snapshot.getValue(Medicine.class);
-                //Log.d(TAG, "_____onDataChange: medicine is " + md.getName());
-                 for (DataSnapshot d: snapshot.getChildren()) {
-                     //Medicine md = d.getValue(Medicine.class);
-
-                     //Log.d(TAG, "onDataChange: " + "med is " + md.getName());
-                    //medicines.add();
-                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 
     private List<ParentItem> ParentItemList()
