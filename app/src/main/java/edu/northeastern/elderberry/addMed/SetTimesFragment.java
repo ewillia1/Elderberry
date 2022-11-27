@@ -30,7 +30,6 @@ import edu.northeastern.elderberry.R;
 // TODO: Save unit, time(s), and dose(s)...and maybe the time frequency, if necessary (use TimeDoseViewHolder.java for this).
 public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener {
     private static final String TAG = "SetTimesFragment";
-    private static final String LIST_STATE = "list_state";
     private int numOfTimes;
     private TimeDoseAdapter timeDoseAdapter;
 

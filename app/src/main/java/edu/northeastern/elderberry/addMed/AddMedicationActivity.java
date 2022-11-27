@@ -10,6 +10,9 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
+
+import java.util.HashMap;
 
 import edu.northeastern.elderberry.R;
 
@@ -68,32 +71,13 @@ public class AddMedicationActivity extends AppCompatActivity {
         final MedAdapter adapter = new MedAdapter(this, getSupportFragmentManager(), getLifecycle(), tabLayout.getTabCount());
         viewPager2.setAdapter(adapter);
 
-        // Click tab listener.
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                Log.d(TAG, "_____onTabSelected");
-                viewPager2.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                Log.d(TAG, "_____onTabUnselected");
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                Log.d(TAG, "_____onTabReselected");
-            }
-        });
-
-        // TODO: Get the scrolling to work as expected.
-        // Scroll tab listener.
-//        tabLayout.getViewTreeObserver().addOnScrollChangedListener(() -> {
-//            int scrollX = tabLayout.getScrollX(); // Current x scrolling position
-//            TabLayout.Tab tab = tabLayout.getTabAt(scrollX);
-//            viewPager2.setCurrentItem(tab.getPosition());
-//        });
+        HashMap<Integer, String> tabNames = new HashMap<>();
+        tabNames.put(0, getString(R.string.med_info));
+        tabNames.put(1, getString(R.string.set_dates));
+        tabNames.put(2, getString(R.string.set_times));
+        // Needed so that not only the selecting of the tabs works as expected, but also the swiping of the tabs.
+        // https://developer.android.com/guide/navigation/navigation-swipe-view-2#java
+        new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> tab.setText(tabNames.get(position))).attach();
     }
 
     // TODO: finish.
