@@ -68,7 +68,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.add_med_tabLayout);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         ViewPager2 viewPager2 = findViewById(R.id.viewPager);
-        final MedAdapter adapter = new MedAdapter(this, getSupportFragmentManager(), getLifecycle(), tabLayout.getTabCount());
+        final MedAdapter adapter = new MedAdapter(getSupportFragmentManager(), getLifecycle(), tabLayout.getTabCount());
         viewPager2.setAdapter(adapter);
 
         HashMap<Integer, String> tabNames = new HashMap<>();

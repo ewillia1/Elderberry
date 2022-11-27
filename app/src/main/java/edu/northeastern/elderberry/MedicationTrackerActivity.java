@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.CalendarView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,7 +42,7 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
-        CalendarView calendarView = findViewById(R.id.calendar);
+//        CalendarView calendarView = findViewById(R.id.calendar);
 
         // BottomNavigationView functionality.
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);

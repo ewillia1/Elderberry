@@ -49,6 +49,14 @@
     <string name="click_to_set_time">Click to set time</string>
     <string name="unit">Unit</string>
     <string name="set_times_dose">Set Times and Doses</string>
+    <string name="lowercase_about">about</string>
+    <string name="uppercase_about">About</string>
+    <string name="version">version</string>
+    <string name="build_version">Build Version</string>
+    <string name="notifications_cat">notification_cat</string>
+    <string name="notifications">Notifications</string>
+    <string name="voice_notifications">voice_notifications</string>
+    <string name="enable_voice_notifications">Enable Voice Notifications</string>
     <string-array name="time_frequencies">
         <item>1 time</item>
         <item>2 times</item>

@@ -30,5 +30,11 @@ public class SettingsActivity extends AppCompatActivity {
         // Methods to display the icon in the ActionBar.
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
+
+        // https://developer.android.com/develop/ui/views/components/settings
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(android.R.id.content, new MySettingsFragment())
+                .commit();
     }
 }

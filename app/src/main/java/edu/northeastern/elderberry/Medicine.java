@@ -22,16 +22,16 @@ public class Medicine {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
-    public String getFromDate() {
-        return fromDate;
-    }
-
-    public String getToDate() {
-        return toDate;
-    }
+//    public String getFromDate() {
+//        return this.fromDate;
+//    }
+//
+//    public String getToDate() {
+//        return this.toDate;
+//    }
 
     @NonNull
     @Override
