@@ -18,6 +18,7 @@ import edu.northeastern.elderberry.R;
 
 // TODO: Make fields required.
 // TODO: Save medication name and information in database.
+// TODO: Make screen scrollable so you can still see everything when people type a lot of information.
 public class MedInfoFragment extends Fragment {
     private static final String TAG = "MedInfoFragment";
 
