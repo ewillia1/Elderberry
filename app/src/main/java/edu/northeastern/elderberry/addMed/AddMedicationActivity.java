@@ -12,8 +12,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import edu.northeastern.elderberry.R;
-import edu.northeastern.elderberry.util.MedAdapter;
 
+// TODO: Add database functionality and check to see all required fields are filled in.
+// TODO: Get the add button to work.
 public class AddMedicationActivity extends AppCompatActivity {
 
     private static final String TAG = "AddMedicationActivity";
@@ -47,10 +48,12 @@ public class AddMedicationActivity extends AppCompatActivity {
                 return true;
             } else if (itemId == R.id.add_med) {
                 Toast.makeText(AddMedicationActivity.this, R.string.successful_add, Toast.LENGTH_SHORT).show();
-                // TODO: Add database functionality and check to see all required fields are filled in.
                 if (completeFieldsFilled()) {
                     // Add fields to database.
 
+                } else {
+                    // TODO: Potentially tell the user what field(s) they are missing.
+                    Toast.makeText(this, "Please fill in all required fields before hitting add.", Toast.LENGTH_SHORT).show();
                 }
                 finish();
                 return true;
@@ -65,6 +68,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         final MedAdapter adapter = new MedAdapter(this, getSupportFragmentManager(), getLifecycle(), tabLayout.getTabCount());
         viewPager2.setAdapter(adapter);
 
+        // Click tab listener.
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -82,6 +86,14 @@ public class AddMedicationActivity extends AppCompatActivity {
                 Log.d(TAG, "_____onTabReselected");
             }
         });
+
+        // TODO: Get the scrolling to work as expected.
+        // Scroll tab listener.
+//        tabLayout.getViewTreeObserver().addOnScrollChangedListener(() -> {
+//            int scrollX = tabLayout.getScrollX(); // Current x scrolling position
+//            TabLayout.Tab tab = tabLayout.getTabAt(scrollX);
+//            viewPager2.setCurrentItem(tab.getPosition());
+//        });
     }
 
     // TODO: finish.

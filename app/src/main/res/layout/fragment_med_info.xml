@@ -55,7 +55,7 @@
             android:hint="@string/information"
             android:maxLength="5000"
             android:textColor="@color/main"
-            android:textColorHint="#78909C"
+            android:textColorHint="@color/main"
             android:textSize="30sp"
             android:textStyle="bold"
             tools:ignore="TextContrastCheck" />

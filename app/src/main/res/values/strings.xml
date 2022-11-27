@@ -48,7 +48,7 @@
     <string name="click_to_set_dose">Click to set dose</string>
     <string name="click_to_set_time">Click to set time</string>
     <string name="unit">Unit</string>
-    <string name="set_times_dose">Set Times and Dose</string>
+    <string name="set_times_dose">Set Times and Doses</string>
     <string-array name="time_frequencies">
         <item>1 time</item>
         <item>2 times</item>

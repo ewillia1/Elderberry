@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
-// TODO: Finish
 public class TimeDoseItem implements Parcelable {
     private static final String TAG = "TimeDoseItem";
     private int itemNumber;
@@ -25,6 +24,10 @@ public class TimeDoseItem implements Parcelable {
             return new TimeDoseItem[size];
         }
     };
+
+    public TimeDoseItem(int itemNumber) {
+        this(itemNumber, null, null, null);
+    }
 
     public TimeDoseItem(int itemNumber, String time, String dose, String unit) {
         Log.d(TAG, "_____LinkItem constructor");

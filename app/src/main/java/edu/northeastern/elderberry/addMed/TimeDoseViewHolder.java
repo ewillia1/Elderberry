@@ -14,8 +14,6 @@ import java.util.Calendar;
 
 import edu.northeastern.elderberry.R;
 
-// TODO: Finish.
-// TODO: Save unit, time(s), and dose(s) in database.
 public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private final String TAG = "TimeDoseViewHolder";
     public final TextView itemNumber;

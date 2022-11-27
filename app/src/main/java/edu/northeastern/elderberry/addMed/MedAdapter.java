@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-// TODO: Ask about createFragment not returning null.
 public class MedAdapter extends FragmentStateAdapter {
     private int totalTabs;
 
@@ -30,7 +29,7 @@ public class MedAdapter extends FragmentStateAdapter {
         super(fragmentManager, lifecycle);
     }
 
-    // TODO: Fix null issue!!!!
+    @NonNull
     @Override
     public Fragment createFragment(int position) {
         switch (position) {
@@ -38,10 +37,8 @@ public class MedAdapter extends FragmentStateAdapter {
                 return MedInfoFragment.newInstance();
             case 1:
                 return SetDatesFragment.newInstance();
-            case 2:
-                return SetTimesFragment.newInstance();
             default:
-                return null;
+                return SetTimesFragment.newInstance();
         }
     }
 
