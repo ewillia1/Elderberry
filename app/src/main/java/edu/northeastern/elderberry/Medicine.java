@@ -1,9 +1,5 @@
 package edu.northeastern.elderberry;
 
-import java.util.Date;
-
-import edu.northeastern.elderberry.enums.Unit;
-
 public class Medicine {
     private String name;
     //private String dose;
@@ -58,14 +54,5 @@ public class Medicine {
 
     public String getToDate() {
         return toDate;
-    }
-
-    @Override
-    public String toString() {
-        return "Medicine{" +
-                "name='" + name + '\'' +
-                ", fromDate='" + fromDate + '\'' +
-                ", toDate='" + toDate + '\'' +
-                '}';
     }
 }

@@ -7,7 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.MotionEvent;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 import edu.northeastern.elderberry.AddMedicationActivity;
 import edu.northeastern.elderberry.LoginActivity;
 import edu.northeastern.elderberry.MedicationTrackerActivity;
+import edu.northeastern.elderberry.OnListItemClick;
 import edu.northeastern.elderberry.R;
 
 public class YourMedicationsActivity extends AppCompatActivity {
@@ -36,6 +38,7 @@ public class YourMedicationsActivity extends AppCompatActivity {
     private MedicineAdapter medAdapter;
     private ArrayList<MedicineRow> medicines = new ArrayList<>();
     private DatabaseReference medicineDB;
+    private String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,22 +79,26 @@ public class YourMedicationsActivity extends AppCompatActivity {
 
         // init db data
         // Todo to make db query more generic
+        this.user = "Gavin";
         this.medicineDB = FirebaseDatabase.getInstance().getReference();
-        this.medicineDB.child("Gavin").addValueEventListener(new ValueEventListener() {
+        this.medicineDB.child(this.user).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d(TAG, "_____onDataChange: ");
                 medicines.clear();
+                // Todo enable this when add medicine to db is auto
+                //Iterator<DataSnapshot> it = snapshot.getChildren().iterator();
+                //while (it.hasNext()) {
+                //    DataSnapshot d = it.next();
+                //    //Medicine md = d.getValue(Medicine.class);
+                //    //System.out.println("medicine is " + d.toString());
+                //}
 
                 for (DataSnapshot d : snapshot.getChildren()) {
-                    //System.out.println(d.child("name"));
-                    //System.out.println(d.child("fromDate"));
-                    //System.out.println(d.child("toDate"));
-                    //System.out.println(d.child("name").getValue());
-                    //MedicineRow medRow = new MedicineRow((String) d.child("name").getValue(), (String) d.child("fromDate").getValue(), (String) d.child("toDate").getValue());
                     MedicineRow medRow = new MedicineRow(String.valueOf(d.child("name").getValue()), String.valueOf(d.child("fromDate").getValue()), String.valueOf(d.child("toDate").getValue()));
                     medicines.add(medRow);
                 }
+
                 medAdapter.notifyDataSetChanged();
             }
 
@@ -108,13 +115,39 @@ public class YourMedicationsActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         // passing an array into the recyclerview adapter
         // Test data
-        //this.medicines.add(new MedicineRow("Vitamin A", "20221001", "20221101"));
-        //this.medicines.add(new MedicineRow("Vitamin B", "20221101", "20221201"));
-        //this.medicines.add(new MedicineRow("Vitamin C", "20221201", "20230101"));
         this.medAdapter = new MedicineAdapter(this.medicines);
+        // Todo enable edits within recycler view
+        // Todo reference https://stackoverflow.com/questions/48791643/edit-recyclerview-item-and-update-them-on-firebase
+        OnListItemClick onListItemClick = new OnListItemClick() {
+            @Override
+            public void onClick(int position) {
+                Log.d(TAG, "_____onClick: ");
+                // Todo include position information in click
+                Intent intent = new Intent(YourMedicationsActivity.this, AddMedicationActivity.class);
+                startActivity(intent);
+            }
+
+        };
+        this.medAdapter.setClickListener(onListItemClick);
         recyclerView.setAdapter(this.medAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        // Todo enable edits within recycler view
+
+        //recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+        //    @Override
+        //    public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+        //        return false;
+        //    }
+
+        //    @Override
+        //    public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+
+        //    }
+
+        //    @Override
+        //    public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+        //    }
+        //});
         // Todo edit the UI of the recycler view to display the "right" info, include the field name
     }
 
