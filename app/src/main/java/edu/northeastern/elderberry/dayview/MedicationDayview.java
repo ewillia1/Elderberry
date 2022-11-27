@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
@@ -34,12 +36,10 @@ public class MedicationDayview extends AppCompatActivity {
     private DatabaseReference userDB;
     private List<ParentItem> medicineList = new ArrayList<>();
 
-    // Todo show the data of the medication
-    // Todo add database reference
-    // Todo add checkbox to the collapsable card view
     // Todo checkbox should result in data updated somewhere
     // Todo get user id to this view for db query
     // Todo add functionality allowing users to make edits, checkbox
+    // Todo restrict each day view to only show for that particular day selected
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,17 +56,13 @@ public class MedicationDayview extends AppCompatActivity {
                 medicineList.clear();
                 //medicines.add(snapshot.getValue(Medicine.class).getName());
                 //Medicine md = snapshot.getValue(Medicine.class);
-                // Todo instantiate parent item from medicine
-                // Todo instantiate child item from medicine
-                // Todo add child item to parent item
-
 
                 //Log.d(TAG, "_____onDataChange: medicine is " + md.getName());
                 for (DataSnapshot d: snapshot.getChildren()) {
-                    ChildItem childitem = new ChildItem(String.valueOf(d.child("name").getValue()));
+                    ChildItem childitem = new ChildItem(String.valueOf(d.child("fromDate").getValue()));
                     List<ChildItem> children = new ArrayList<>();
                     children.add(childitem);
-                    medicineList.add(new ParentItem("medicine1", children));
+                    medicineList.add(new ParentItem(String.valueOf(d.child("name").getValue()), children));
                     //Medicine md = d.getValue(Medicine.class);
 
                     //Log.d(TAG, "onDataChange: " + "med is " + md.getName());
@@ -79,6 +75,8 @@ public class MedicationDayview extends AppCompatActivity {
 
             }
         });
+
+
 
         RecyclerView
                 ParentRecyclerViewItem
@@ -109,6 +107,23 @@ public class MedicationDayview extends AppCompatActivity {
         ParentRecyclerViewItem
                 .setLayoutManager(layoutManager);
 
+    }
+
+    public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+
+        // Check which checkbox was clicked
+        switch(view.getId()) {
+            case R.id.checkbox_child_item:
+                if (checked)
+                    break;
+                // Put some meat on the sandwich
+            else
+                // Remove the meat
+                break;
+            // TODO: Veggie sandwich
+        }
     }
 
     private List<ParentItem> ParentItemList()
