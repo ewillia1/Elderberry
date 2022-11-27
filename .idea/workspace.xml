@@ -11,7 +11,17 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Adjusted viewpager2 in add_med_main.xml, made fragment_med_info.xml scrollable so when there is a lot of information the user can still see everything." />
+    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Added another TODO.">
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/add_med_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/add_med_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_med_info.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_med_info.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -176,6 +186,13 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666133441374</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Updated LoginActivity.java, added ForgotEmailActivity and ForgotPasswordActivity">
+      <created>1668822472634</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1668822472634</updated>
     </task>
     <task id="LOCAL-00024" summary="Updated login/create user functionality">
       <created>1668828021880</created>
@@ -513,14 +530,7 @@
       <option name="project" value="LOCAL" />
       <updated>1669521829849</updated>
     </task>
-    <task id="LOCAL-00072" summary="Adjusted viewpager2 in add_med_main.xml, made fragment_med_info.xml scrollable so when there is a lot of information the user can still see everything.">
-      <created>1669523039670</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1669523039671</updated>
-    </task>
-    <option name="localTasksCounter" value="73" />
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -535,6 +545,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="Updated activity_add_medication.xml, renames the add_button and delete_button drawables" />
     <MESSAGE value="Updated activity_add_medication.xml" />
     <MESSAGE value="Update workspace.xml" />
     <MESSAGE value="Working on add medication xml file" />
@@ -559,7 +570,6 @@
     <MESSAGE value="Got on frequency time functionality to work!" />
     <MESSAGE value="Got swiping through tabs to work." />
     <MESSAGE value="Added another TODO." />
-    <MESSAGE value="Adjusted viewpager2 in add_med_main.xml, made fragment_med_info.xml scrollable so when there is a lot of information the user can still see everything." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adjusted viewpager2 in add_med_main.xml, made fragment_med_info.xml scrollable so when there is a lot of information the user can still see everything." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added another TODO." />
   </component>
 </project>
