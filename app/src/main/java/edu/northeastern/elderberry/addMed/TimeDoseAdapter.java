@@ -1,5 +1,6 @@
 package edu.northeastern.elderberry.addMed;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -49,5 +50,15 @@ public class TimeDoseAdapter extends RecyclerView.Adapter<TimeDoseViewHolder> {
         Log.d(TAG, "_____getItemCount");
         // Returns the size of the recyclerview that is the list of the arraylist.
         return this.timeDoseItemArrayList.size();
+    }
+
+    // Clear the recycler view. Remove all items in the recycler view.
+    @SuppressLint("NotifyDataSetChanged")
+    public void clear() {
+        Log.d(TAG, "_____clear");
+        int size = this.timeDoseItemArrayList.size();
+        this.timeDoseItemArrayList.clear();
+        notifyItemRangeRemoved(0, size);
+        this.notifyDataSetChanged();                    // Need to use this since the whole recycler view is changed.
     }
 }

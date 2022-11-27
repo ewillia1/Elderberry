@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
@@ -33,6 +32,7 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
     private static final String TAG = "SetTimesFragment";
     private static final String LIST_STATE = "list_state";
     private int numOfTimes;
+    private TimeDoseAdapter timeDoseAdapter;
 
     public SetTimesFragment() {
         Log.d(TAG, "_____SetTimesFragment");
@@ -87,14 +87,17 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
         // Instantiate the ArrayList.
         ArrayList<TimeDoseItem> timeDoseItemArrayList = new ArrayList<>();
 
+        // Instantiate recyclerView adapter. Associate the adapter with the recyclerView.
+        this.timeDoseAdapter = new TimeDoseAdapter(timeDoseItemArrayList, getContext(), this);
+
         // What happens when an time frequency is clicked on.
-        ArrayList<TimeDoseItem> finalTimeDoseItemArrayList = timeDoseItemArrayList;
         autoCompleteTimeFreq.setOnItemClickListener((parent, view1, position, id) -> {
             Log.d(TAG, "_____onItemClick: clicked on item " + (position + 1));
             // Clear the finalTimeDoseItemArrayList.
-            finalTimeDoseItemArrayList.clear();
+            timeDoseItemArrayList.clear();
 
-            // TODO: Add TimeDoseAdapter reference and change UI.
+            // Clear timeDoseAdapter (clearing the RecyclerView).
+            timeDoseAdapter.clear();
 
             switch (position) {
                 case 0:
@@ -138,24 +141,16 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
             }
 
             for (int i = 0; i < this.numOfTimes; i++) {
-                finalTimeDoseItemArrayList.add(new TimeDoseItem(position));
+                timeDoseItemArrayList.add(new TimeDoseItem(position));
             }
         });
 
         // Instantiate the recyclerView.
         RecyclerView timeDoseRecyclerView = view.findViewById(R.id.recyclerView);
-
-        // Restore ArrayList of linked items, if the screen is rotated.
-        if (savedInstanceState != null && savedInstanceState.getParcelableArrayList(LIST_STATE) != null) {
-            timeDoseItemArrayList = savedInstanceState.getParcelableArrayList(LIST_STATE);
-        }
-
         timeDoseRecyclerView.setHasFixedSize(true);
         timeDoseRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         timeDoseRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        // Instantiate recyclerView adapter. Associate the adapter with the recyclerView.
-        TimeDoseAdapter timeDoseAdapter = new TimeDoseAdapter(timeDoseItemArrayList, getContext(), this);
         timeDoseRecyclerView.setAdapter(timeDoseAdapter);
 
         return view;
