@@ -26,6 +26,7 @@ import edu.northeastern.elderberry.R;
 
 // TODO: Make fields required.
 // TODO: Save from and to dates in database.
+// TODO: If user re-picks From date, recheck to date.
 public class SetDatesFragment extends Fragment {
     private static final String TAG = "SetDatesFragment";
     private DatePickerDialog from_datePickerDialog;
