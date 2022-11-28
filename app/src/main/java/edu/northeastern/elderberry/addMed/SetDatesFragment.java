@@ -26,7 +26,6 @@ import edu.northeastern.elderberry.R;
 
 // TODO: Make fields required.
 // TODO: Save from and to dates in database.
-// TODO: If user re-picks From date, recheck to date.
 public class SetDatesFragment extends Fragment {
     private static final String TAG = "SetDatesFragment";
     private DatePickerDialog from_datePickerDialog;
@@ -35,6 +34,7 @@ public class SetDatesFragment extends Fragment {
     private TextView set_to;
 
     private boolean fromDateSet;
+    private int numOfTimeSetFromDate;
     private Calendar fromDate;
     private Calendar toDate;
 
@@ -58,6 +58,7 @@ public class SetDatesFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "_____onCreate");
         this.fromDateSet = false;
+        this.numOfTimeSetFromDate = 0;
         this.fromDate = Calendar.getInstance();
         this.toDate = Calendar.getInstance();
     }
@@ -98,6 +99,14 @@ public class SetDatesFragment extends Fragment {
             Log.d(TAG, "_____initDatePicker fromDate -- this.fromDate = " + this.fromDate);
             this.fromDate.set(year, month, day);
             Log.d(TAG, "_____initDatePicker fromDate -- this.fromDate = " + this.fromDate);
+
+            if (this.numOfTimeSetFromDate > 0 && this.toDate.before(this.fromDate)) {
+                Log.d(TAG, "_____initDatePicker: this.numOfTimeSetFromDate > 1 && this.toDate.before(this.fromDate)");
+                this.set_to.setText("");
+                Toast.makeText(this.getContext(), "Please re-enter a to date that is after your from date.", Toast.LENGTH_SHORT).show();
+            }
+
+            this.numOfTimeSetFromDate++;
         };
 
         Calendar calendar = Calendar.getInstance();
