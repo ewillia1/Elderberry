@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <!--CardView that holds the elements
+        of the child RecyclerView -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <!--Image in the CardView-->
+            <!--Here we have already given
+                the source for the ImageView
+                and we will not assign it
+                in the Java code-->
+            <!--So all the ImageViews will
+                hold the same image-->
+
+
+            <LinearLayout
+                android:id="@+id/medScheduleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <!--Text in the CardView-->
+                <TextView
+                    android:id="@+id/child_item_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/checkbox_child_item"
+                android:layout_toEndOf="@id/medScheduleTextView"
+                android:layout_below="@+id/medScheduleTextView"
+                android:layout_alignParentStart="true"
+                android:layout_width="83dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="5dp"
+                android:onClick="onCheckboxClicked"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

@@ -2,22 +2,31 @@
 <project version="4">
   <component name="AndroidLayouts">
     <shared>
-      <config>
-        <option name="nonWearDeviceLastStateName" value="Landscape" />
-      </config>
+      <config />
     </shared>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Updated TODOs (they are all in AddMedicationActivity.java now)" />
+    <list default="true" id="13556392-2823-4189-9d7f-bb770af20f28" name="Changes" comment="Reverted back to now Remember Me checkbox -- user stays logged in until they log out">
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/dayview/MedicationDayview.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/dayview/MedicationDayview.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/elizabethwilliams/.android/avd/Pixel_3_API_30.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/Gavin/.android/avd/Pixel_5_API_27.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -26,9 +35,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="resourceFile" />
+        <option value="Enum" />
         <option value="layoutResourceFile" />
         <option value="Class" />
-        <option value="resourceFile" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -37,6 +48,9 @@
     <option name="KEY_ALIAS" value="team5signkey" />
     <option name="REMEMBER_PASSWORDS" value="true" />
     <option name="BUILD_TARGET_KEY" value="apk" />
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/main" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -48,6 +62,18 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/build.gradle" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/src/main/res/values-night/themes.xml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/proguard-rules.pro" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/build 2.gradle" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/build.gradle" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/local.properties" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/gradle.properties" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/src/main/res/values/themes.xml" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -64,6 +90,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ApkExportedModule" value="Elderberry.app" />
     <property name="ExportApk.ApkPath" value="$PROJECT_DIR$/app" />
     <property name="ExportApk.BuildVariants" value="release" />
@@ -72,13 +99,13 @@
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="cidr.known.project.marker" value="true" />
-    <property name="com.android.tools.idea.emulator.zoom.toolbar.visible" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/layout" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="settings.editor.selected.configurable" value="preferences.externalResources" />
   </component>
   <component name="PsdUISettings">
     <option name="MODULE_TAB" value="Default Config" />
@@ -86,7 +113,6 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
-      <recent name="edu.northeastern.elderberry.helpAndConfigs" />
       <recent name="edu.northeastern.elderberry" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
@@ -94,17 +120,15 @@
       <recent name="$PROJECT_DIR$/app/src/main/res/menu" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
-      <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
       <recent name="$PROJECT_DIR$/app" />
     </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+    <key name="android.template.320519422">
       <recent name="edu.northeastern.elderberry" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="edu.northeastern.elderberry.your_medication" />
     </key>
     <key name="android.template.424079550">
-      <recent name="edu.northeastern.elderberry" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="edu.northeastern.elderberry" />
     </key>
   </component>
@@ -172,11 +196,207 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Merge branch 'main' into elizabeth&#10;&#10;# Conflicts:&#10;#&#9;.gradle/7.4/executionHistory/executionHistory.bin&#10;#&#9;.gradle/7.4/executionHistory/executionHistory.lock&#10;#&#9;.gradle/7.4/fileHashes/fileHashes.bin&#10;#&#9;.gradle/7.4/fileHashes/fileHashes.lock&#10;#&#9;.gradle/7.4/fileHashes/resourceHashesCache.bin&#10;#&#9;.gradle/buildOutputCleanup/buildOutputCleanup.lock&#10;#&#9;.idea/workspace.xml" />
+      <changelist id="13556392-2823-4189-9d7f-bb770af20f28" name="Changes" comment="" />
       <created>1666133441374</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666133441374</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Added a lot of files -- started the first draft of the app">
+      <created>1668713149630</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1668713149630</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Update">
+      <created>1668713416368</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1668713416368</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added Firebase Realtime Database">
+      <created>1668744954107</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1668744954107</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Updated strings.xml">
+      <created>1668785293545</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1668785293545</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Updated strings.xml">
+      <created>1668786305431</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1668786305431</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Updated strings.xml">
+      <created>1668786360336</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1668786360337</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Updated activity_login.xml">
+      <created>1668786504272</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1668786504272</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Updated activity_about.xml, strings.xml">
+      <created>1668786857391</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1668786857391</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Updated activity_add_medication.xml">
+      <created>1668787415763</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1668787415763</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Updated fontFamily">
+      <created>1668789367205</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1668789367205</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Updated LoginActivity.java">
+      <created>1668791238166</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1668791238166</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Updated LoginActivity.java">
+      <created>1668791296013</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1668791296013</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Updated build.gradle">
+      <created>1668817915932</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1668817915932</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Updated build.gradle">
+      <created>1668817924452</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1668817924452</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Updated strings.xml">
+      <created>1668817956108</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1668817956108</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Updated layouts and added menus">
+      <created>1668818218976</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1668818218977</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Updated workspace.xml">
+      <created>1668818256560</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1668818256560</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Updated CreateAccountActivity.java, LoginActivity.java">
+      <created>1668820918630</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1668820918630</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Update">
+      <created>1668820935535</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1668820935535</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Update workspace.xml">
+      <created>1668821187786</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1668821187786</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Update activity_create_account.xml, activity_login.xml, strings.xml, workspace.xml">
+      <created>1668821574805</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1668821574805</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Updated LoginActivity.java">
+      <created>1668821879213</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1668821879213</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Updated LoginActivity.java, added ForgotEmailActivity and ForgotPasswordActivity">
+      <created>1668822472634</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1668822472634</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Updated login/create user functionality">
+      <created>1668828021880</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1668828021880</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Updated login/create user functionality again, cleaned code">
+      <created>1668828824718</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1668828824718</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Updated deploymentTargetDropDown.xml">
+      <created>1668868087752</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1668868087752</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Skip LoginActivity, if already successfully logged in, got logo screen to show up and then go away">
+      <created>1668872842971</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1668872842971</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Updated workspace.xml">
+      <created>1668872874064</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1668872874064</updated>
     </task>
     <task id="LOCAL-00029" summary="Made textStyle bold and added Remember Me Checkbox to activity_login.xml">
       <created>1668873506812</created>
@@ -213,315 +433,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668876124475</updated>
     </task>
-    <task id="LOCAL-00034" summary="Working on activity_add_medication.xml">
-      <created>1668880113586</created>
+    <task id="LOCAL-00034" summary="Updated day view functionality to display proper medicine from database. &#10;Added a nested recycler view.&#10;Co-authored-by: Gavin">
+      <created>1669566890324</created>
       <option name="number" value="00034" />
       <option name="presentableId" value="LOCAL-00034" />
       <option name="project" value="LOCAL" />
-      <updated>1668880113586</updated>
+      <updated>1669566890324</updated>
     </task>
-    <task id="LOCAL-00035" summary="Override onBackPressed() in CreateAccountActivity.java, still working on add medication functionality">
-      <created>1668887691053</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1668887691053</updated>
-    </task>
-    <task id="LOCAL-00036" summary="Added delete_med_button.xml">
-      <created>1668888452847</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1668888452847</updated>
-    </task>
-    <task id="LOCAL-00037" summary="Updated delete_med_button.xml">
-      <created>1668889245438</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1668889245438</updated>
-    </task>
-    <task id="LOCAL-00038" summary="Updated delete_med_button.xml">
-      <created>1668889305957</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1668889305957</updated>
-    </task>
-    <task id="LOCAL-00039" summary="Updated activity_add_medication.xml">
-      <created>1668889495511</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1668889495511</updated>
-    </task>
-    <task id="LOCAL-00040" summary="Updated activity_add_medication.xml, renames the add_button and delete_button drawables">
-      <created>1668889681989</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1668889681989</updated>
-    </task>
-    <task id="LOCAL-00041" summary="Updated activity_add_medication.xml">
-      <created>1668890070721</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1668890070721</updated>
-    </task>
-    <task id="LOCAL-00042" summary="Update workspace.xml">
-      <created>1668897602500</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1668897602500</updated>
-    </task>
-    <task id="LOCAL-00043" summary="Working on add medication xml file">
-      <created>1668990694746</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1668990694746</updated>
-    </task>
-    <task id="LOCAL-00044" summary="Updated MedicationTrackerActivity.java, still working on add medication functionality">
-      <created>1669004212948</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1669004212948</updated>
-    </task>
-    <task id="LOCAL-00045" summary="Still working on add medication functionality">
-      <created>1669004709740</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1669004709740</updated>
-    </task>
-    <task id="LOCAL-00046" summary="Still working on add medication functionality">
-      <created>1669047792773</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1669047792773</updated>
-    </task>
-    <task id="LOCAL-00047" summary="Added a home button to bottom_nav_menu.xml, add bottom nav menu to TodaysMedicationsActivity and YourMedicationsActivity, still working on add medication functionality">
-      <created>1669048485423</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1669048485423</updated>
-    </task>
-    <task id="LOCAL-00048" summary="Working on add medication functionality">
-      <created>1669081847214</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1669081847215</updated>
-    </task>
-    <task id="LOCAL-00049" summary="Working on cancel and add medication button functionality">
-      <created>1669084435225</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1669084435225</updated>
-    </task>
-    <task id="LOCAL-00050" summary="Working on time frequency functionality">
-      <created>1669086984648</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1669086984649</updated>
-    </task>
-    <task id="LOCAL-00051" summary="Working on time frequency functionality (adding a RecyclerView)">
-      <created>1669090062701</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1669090062701</updated>
-    </task>
-    <task id="LOCAL-00052" summary="Working on time frequency, time, dose, and unit functionality">
-      <created>1669168909900</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1669168909901</updated>
-    </task>
-    <task id="LOCAL-00053" summary="Working on time frequency, time, dose, and unit functionality">
-      <created>1669173953881</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1669173953882</updated>
-    </task>
-    <task id="LOCAL-00054" summary="Working on time frequency, time, dose, and unit functionality">
-      <created>1669230152384</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1669230152385</updated>
-    </task>
-    <task id="LOCAL-00055" summary="Working on time frequency, time, dose, and unit functionality">
-      <created>1669231901419</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1669231901420</updated>
-    </task>
-    <task id="LOCAL-00056" summary="Working on time frequency, time, dose, and unit functionality">
-      <created>1669234287870</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1669234287870</updated>
-    </task>
-    <task id="LOCAL-00057" summary="Working on time frequency, time, dose, and unit functionality">
-      <created>1669235170445</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1669235170445</updated>
-    </task>
-    <task id="LOCAL-00058" summary="Added TODOs">
-      <created>1669235602056</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1669235602056</updated>
-    </task>
-    <task id="LOCAL-00059" summary="Added TODOs">
-      <created>1669235770602</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1669235770603</updated>
-    </task>
-    <task id="LOCAL-00060" summary="Working on add functionality (specifically the time frequency, time, dose, unit page)">
-      <created>1669237605872</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1669237605872</updated>
-    </task>
-    <task id="LOCAL-00061" summary="Working on add functionality -- timePicker in TimeDoseViewHolder still does not work, got it so from date has to be set before to date (before check still not working)">
-      <created>1669266088488</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1669266088489</updated>
-    </task>
-    <task id="LOCAL-00062" summary="Got the from and to date functionality working">
-      <created>1669412053219</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1669412053220</updated>
-    </task>
-    <task id="LOCAL-00063" summary="Force portrait mode, got check to work on number keyboard, got timePicker to work">
-      <created>1669430645396</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1669430645397</updated>
-    </task>
-    <task id="LOCAL-00064" summary="Cleaned and reformatted code">
-      <created>1669431785900</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1669431785900</updated>
-    </task>
-    <task id="LOCAL-00065" summary="Upated workspace.xml">
-      <created>1669431977431</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1669431977431</updated>
-    </task>
-    <task id="LOCAL-00066" summary="Updated ExampleUnitTest.java">
-      <created>1669432084371</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1669432084371</updated>
-    </task>
-    <task id="LOCAL-00067" summary="Updated workspace.xml">
-      <created>1669432201474</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1669432201475</updated>
-    </task>
-    <task id="LOCAL-00068" summary="Fixed nullability warning in MedAdapter.java, better named variables in SetTimesFragment.java, working on frequency time functionality, added another constructor to TimeDoseItem.java (still need to get UI to change when new time freq is clicked, get tab scrolling to work when adding a med)">
-      <created>1669517485625</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1669517485625</updated>
-    </task>
-    <task id="LOCAL-00069" summary="Got on frequency time functionality to work!">
-      <created>1669518885016</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1669518885016</updated>
-    </task>
-    <task id="LOCAL-00070" summary="Got swiping through tabs to work.">
-      <created>1669521690589</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1669521690589</updated>
-    </task>
-    <task id="LOCAL-00071" summary="Added another TODO.">
-      <created>1669521829849</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1669521829849</updated>
-    </task>
-    <task id="LOCAL-00072" summary="Updated activity_settings.xml and SettingsActivity.java. Added MySettingsFragment.java and preferences.xml.">
-      <created>1669581625215</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1669581625216</updated>
-    </task>
-    <task id="LOCAL-00073" summary="Added a TODO in SetDatesFragment.java">
-      <created>1669664802661</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1669664802662</updated>
-    </task>
-    <task id="LOCAL-00074" summary="Update">
-      <created>1669664827220</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1669664827220</updated>
-    </task>
-    <task id="LOCAL-00075" summary="Got this to work: if user re-picks from date, recheck to date.">
-      <created>1669666323304</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1669666323304</updated>
-    </task>
-    <task id="LOCAL-00076" summary="Added Enable Notifications to preferences.xml">
-      <created>1669666755268</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1669666755268</updated>
-    </task>
-    <task id="LOCAL-00077" summary="Updated TODOs (they are all in AddMedicationActivity.java now)">
-      <created>1669666871006</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1669666871006</updated>
-    </task>
-    <option name="localTasksCounter" value="78" />
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -536,31 +455,32 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added a home button to bottom_nav_menu.xml, add bottom nav menu to TodaysMedicationsActivity and YourMedicationsActivity, still working on add medication functionality" />
-    <MESSAGE value="Working on add medication functionality" />
-    <MESSAGE value="Working on cancel and add medication button functionality" />
-    <MESSAGE value="Working on time frequency functionality" />
-    <MESSAGE value="Working on time frequency functionality (adding a RecyclerView)" />
-    <MESSAGE value="Working on time frequency, time, dose, and unit functionality" />
-    <MESSAGE value="Added TODOs" />
-    <MESSAGE value="Working on add functionality (specifically the time frequency, time, dose, unit page)" />
-    <MESSAGE value="Working on add functionality -- timePicker in TimeDoseViewHolder still does not work, got it so from date has to be set before to date (before check still not working)" />
-    <MESSAGE value="Got the from and to date functionality working" />
-    <MESSAGE value="Force portrait mode, got check to work on number keyboard, got timePicker to work" />
-    <MESSAGE value="Cleaned and reformatted code" />
-    <MESSAGE value="Upated workspace.xml" />
-    <MESSAGE value="Updated ExampleUnitTest.java" />
-    <MESSAGE value="Updated workspace.xml" />
-    <MESSAGE value="Fixed nullability warning in MedAdapter.java, better named variables in SetTimesFragment.java, working on frequency time functionality, added another constructor to TimeDoseItem.java (still need to get UI to change when new time freq is clicked, get tab scrolling to work when adding a med)" />
-    <MESSAGE value="Got on frequency time functionality to work!" />
-    <MESSAGE value="Got swiping through tabs to work." />
-    <MESSAGE value="Added another TODO." />
-    <MESSAGE value="Updated activity_settings.xml and SettingsActivity.java. Added MySettingsFragment.java and preferences.xml." />
-    <MESSAGE value="Added a TODO in SetDatesFragment.java" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Updated activity_add_medication.xml (still in the works)" />
+    <MESSAGE value="Added Firebase Realtime Database" />
+    <MESSAGE value="Updated activity_login.xml" />
+    <MESSAGE value="Updated activity_about.xml, strings.xml" />
+    <MESSAGE value="Updated activity_add_medication.xml" />
+    <MESSAGE value="Updated fontFamily" />
+    <MESSAGE value="Updated build.gradle" />
+    <MESSAGE value="Updated layouts and added menus" />
+    <MESSAGE value="Updated CreateAccountActivity.java, LoginActivity.java" />
     <MESSAGE value="Update" />
-    <MESSAGE value="Got this to work: if user re-picks from date, recheck to date." />
-    <MESSAGE value="Added Enable Notifications to preferences.xml" />
-    <MESSAGE value="Updated TODOs (they are all in AddMedicationActivity.java now)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated TODOs (they are all in AddMedicationActivity.java now)" />
+    <MESSAGE value="Update workspace.xml" />
+    <MESSAGE value="Update activity_create_account.xml, activity_login.xml, strings.xml, workspace.xml" />
+    <MESSAGE value="Updated LoginActivity.java" />
+    <MESSAGE value="Updated LoginActivity.java, added ForgotEmailActivity and ForgotPasswordActivity" />
+    <MESSAGE value="Updated login/create user functionality" />
+    <MESSAGE value="Updated login/create user functionality again, cleaned code" />
+    <MESSAGE value="Updated deploymentTargetDropDown.xml" />
+    <MESSAGE value="Skip LoginActivity, if already successfully logged in, got logo screen to show up and then go away" />
+    <MESSAGE value="Updated workspace.xml" />
+    <MESSAGE value="Made textStyle bold and added Remember Me Checkbox to activity_login.xml" />
+    <MESSAGE value="Updated strings.xml" />
+    <MESSAGE value="Made mode MODE_PRIVATE for shared preferences" />
+    <MESSAGE value="Just a save to have the remember me checkbox code (but I am going to remove it)" />
+    <MESSAGE value="Reverted back to now Remember Me checkbox -- user stays logged in until they log out" />
+    <MESSAGE value="Updated day view functionality to display proper medicine from database. &#10;Added a nested recycler view.&#10;Co-authored-by: Gavin" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated day view functionality to display proper medicine from database. &#10;Added a nested recycler view.&#10;Co-authored-by: Gavin" />
   </component>
 </project>
