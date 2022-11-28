@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -27,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import edu.northeastern.elderberry.AddMedicationActivity;
+import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 import edu.northeastern.elderberry.LoginActivity;
 import edu.northeastern.elderberry.MedicationTrackerActivity;
 import edu.northeastern.elderberry.OnListItemClick;
@@ -36,9 +34,7 @@ import edu.northeastern.elderberry.R;
 public class YourMedicationsActivity extends AppCompatActivity {
     private static final String TAG = "YourMedicationsActivity";
     private MedicineAdapter medAdapter;
-    private ArrayList<MedicineRow> medicines = new ArrayList<>();
-    private DatabaseReference medicineDB;
-    private String user;
+    private final ArrayList<MedicineRow> medicines = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,9 +75,9 @@ public class YourMedicationsActivity extends AppCompatActivity {
 
         // init db data
         // Todo to make db query more generic
-        this.user = "Gavin";
-        this.medicineDB = FirebaseDatabase.getInstance().getReference();
-        this.medicineDB.child(this.user).addValueEventListener(new ValueEventListener() {
+        String user = "Gavin";
+        DatabaseReference medicineDB = FirebaseDatabase.getInstance().getReference();
+        medicineDB.child(user).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d(TAG, "_____onDataChange: ");
@@ -118,15 +114,11 @@ public class YourMedicationsActivity extends AppCompatActivity {
         this.medAdapter = new MedicineAdapter(this.medicines);
         // Todo enable edits within recycler view
         // Todo reference https://stackoverflow.com/questions/48791643/edit-recyclerview-item-and-update-them-on-firebase
-        OnListItemClick onListItemClick = new OnListItemClick() {
-            @Override
-            public void onClick(int position) {
-                Log.d(TAG, "_____onClick: ");
-                // Todo include position information in click
-                Intent intent = new Intent(YourMedicationsActivity.this, AddMedicationActivity.class);
-                startActivity(intent);
-            }
-
+        OnListItemClick onListItemClick = position -> {
+            Log.d(TAG, "_____onClick: ");
+            // Todo include position information in click
+            Intent intent = new Intent(YourMedicationsActivity.this, AddMedicationActivity.class);
+            startActivity(intent);
         };
         this.medAdapter.setClickListener(onListItemClick);
         recyclerView.setAdapter(this.medAdapter);
