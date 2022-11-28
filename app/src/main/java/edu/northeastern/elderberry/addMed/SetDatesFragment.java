@@ -24,8 +24,6 @@ import edu.northeastern.elderberry.R;
  * create an instance of this fragment.
  */
 
-// TODO: Make fields required.
-// TODO: Save from and to dates in database.
 public class SetDatesFragment extends Fragment {
     private static final String TAG = "SetDatesFragment";
     private DatePickerDialog from_datePickerDialog;

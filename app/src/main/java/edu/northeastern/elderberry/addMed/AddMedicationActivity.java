@@ -17,6 +17,8 @@ import java.util.HashMap;
 import edu.northeastern.elderberry.R;
 
 // TODO: Add database functionality and check to see all required fields are filled in.
+// TODO: Make fields required.
+// TODO: Save from and to dates in database.
 // TODO: Get the add button to work.
 public class AddMedicationActivity extends AppCompatActivity {
 

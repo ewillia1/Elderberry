@@ -25,9 +25,6 @@ import edu.northeastern.elderberry.R;
  * create an instance of this fragment.
  */
 
-// TODO: Make it so once the user picks a time frequency the correct number of times and corresponding doses show up.
-// TODO: Make fields required.
-// TODO: Save unit, time(s), and dose(s)...and maybe the time frequency, if necessary (use TimeDoseViewHolder.java for this).
 public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener {
     private static final String TAG = "SetTimesFragment";
     private int numOfTimes;
