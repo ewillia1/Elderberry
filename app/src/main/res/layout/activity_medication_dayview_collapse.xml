@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E4E3E3"
     tools:context=".MainActivity">
 
     <!-- Base CardView -->
@@ -54,15 +53,16 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/fixed_layout"
                     app:layout_constraintTop_toTopOf="@+id/fixed_layout"
-                    app:layout_constraintVertical_bias="1.0" />
+                    app:layout_constraintVertical_bias="1.0"
+                    android:contentDescription="@string/elderberry_image" />
 
                 <TextView
                     android:id="@+id/medicationName1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1. Med Name"
+                    android:text="@string/_1_med_name"
                     android:textColor="#006600"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/fixed_layout"
                     app:layout_constraintEnd_toEndOf="@+id/fixed_layout"
@@ -79,8 +79,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="58dp"
-                    android:text="Scheduled Time(s)"
-                    android:textSize="20dp"
+                    android:text="@string/scheduled_time_s"
+                    android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="@+id/fixed_layout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.911"
@@ -121,7 +121,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="50dp"
@@ -130,23 +131,25 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
-                        android:src="@drawable/elderberryplant" />
+                        android:src="@drawable/elderberryplant"
+                        android:contentDescription="@string/elderberry_image" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
-                        android:text="Time 1"
+                        android:text="@string/time_1"
                         android:textColor="#000000"
-                        android:textSize="20dp" />
+                        android:textSize="20sp" />
                 </LinearLayout>
 
                 <!-- Child LinearLayout 2 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="50dp"
@@ -155,23 +158,25 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
-                        android:src="@drawable/elderberryplant" />
+                        android:src="@drawable/elderberryplant"
+                        android:contentDescription="@string/elderberry_image" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
-                        android:text="Time 2"
+                        android:text="@string/time_2"
                         android:textColor="#000000"
-                        android:textSize="20dp" />
+                        android:textSize="20sp" />
                 </LinearLayout>
 
                 <!-- Child LinearLayout 3 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="50dp"
@@ -180,16 +185,17 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
-                        android:src="@drawable/elderberryplant" />
+                        android:src="@drawable/elderberryplant"
+                        android:contentDescription="@string/elderberry_image" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
-                        android:text="Time 3"
+                        android:text="@string/time_3"
                         android:textColor="#000000"
-                        android:textSize="20dp" />
+                        android:textSize="20sp" />
                 </LinearLayout>
             </LinearLayout>
 

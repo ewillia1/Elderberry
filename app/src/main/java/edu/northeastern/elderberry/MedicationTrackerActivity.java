@@ -1,7 +1,5 @@
 package edu.northeastern.elderberry;
 
-import static edu.northeastern.elderberry.util.DatetimeFormat.makeDateString;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,13 +7,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.CalendarView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+
+import edu.northeastern.elderberry.addMed.AddMedicationActivity;
+import edu.northeastern.elderberry.helpAndConfigs.AboutActivity;
+import edu.northeastern.elderberry.helpAndConfigs.SettingsActivity;
 
 import edu.northeastern.elderberry.AboutActivity;
 import edu.northeastern.elderberry.AddMedicationActivity;

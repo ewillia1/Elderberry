@@ -1,5 +1,7 @@
 package edu.northeastern.elderberry;
 
+import androidx.annotation.NonNull;
+
 public class Medicine {
     private String name;
     //private String dose;
@@ -45,14 +47,23 @@ public class Medicine {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getFromDate() {
-        return fromDate;
+        return this.fromDate;
     }
 
     public String getToDate() {
-        return toDate;
+        return this.toDate;
+    }
+    @NonNull
+    @Override
+    public String toString() {
+        return "Medicine{" +
+                "name='" + this.name + '\'' +
+                ", fromDate='" + this.fromDate + '\'' +
+                ", toDate='" + this.toDate + '\'' +
+                '}';
     }
 }

@@ -1,4 +1,4 @@
-package edu.northeastern.elderberry;
+package edu.northeastern.elderberry.helpAndConfigs;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -6,14 +6,16 @@ import android.util.Log;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SettingsActivity extends AppCompatActivity {
-    private static final String TAG = "SettingsActivity";
+import edu.northeastern.elderberry.R;
+
+public class AboutActivity extends AppCompatActivity {
+    private static final String TAG = "AboutActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "_____onCreate");
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_about);
 
         // Calling this activity's function to use ActionBar utility methods.
         ActionBar actionBar = getSupportActionBar();
