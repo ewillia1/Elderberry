@@ -1,7 +1,5 @@
 package edu.northeastern.elderberry;
 
-import static edu.northeastern.elderberry.util.DatetimeFormat.makeDateString;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,13 +7,25 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.CalendarView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+
+import edu.northeastern.elderberry.addMed.AddMedicationActivity;
+import edu.northeastern.elderberry.helpAndConfigs.AboutActivity;
+import edu.northeastern.elderberry.helpAndConfigs.SettingsActivity;
+
+import edu.northeastern.elderberry.AboutActivity;
+import edu.northeastern.elderberry.AddMedicationActivity;
+import edu.northeastern.elderberry.LoginActivity;
+import edu.northeastern.elderberry.MedicationHistory;
+import edu.northeastern.elderberry.R;
+import edu.northeastern.elderberry.SettingsActivity;
+import edu.northeastern.elderberry.dayview.MedicationDayview;
+import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 public class MedicationTrackerActivity extends AppCompatActivity {
     private static final String TAG = "MedicationTrackerActivity";
@@ -42,6 +52,16 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
 
         CalendarView calendarView = findViewById(R.id.calendar);
+
+        // Add Listener in calendar
+        calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
+            String date = makeDateString(dayOfMonth, month, year);
+            // date_view.setText(date);
+            // Todo ask user if to navigate to the activity
+            // https://developer.android.com/guide/topics/location/transitions reference this
+            Intent intent = new Intent(this, MedicationDayview.class);
+            startActivity(intent);
+        });
 
         // BottomNavigationView functionality.
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
