@@ -13,7 +13,7 @@
         android:theme="@style/Theme.TestApp"
         tools:targetApi="31">
         <activity
-            android:name=".MedicationDayview"
+            android:name=".dayview.MedicationDayview"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
@@ -70,7 +70,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".YourMedicationsActivity"
+            android:name=".your_medication.YourMedicationsActivity"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
