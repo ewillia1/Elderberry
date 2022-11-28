@@ -1,4 +1,4 @@
-package edu.northeastern.elderberry;
+package edu.northeastern.elderberry.helpAndConfigs;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -6,14 +6,16 @@ import android.util.Log;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class AboutActivity extends AppCompatActivity {
-    private static final String TAG = "AboutActivity";
+import edu.northeastern.elderberry.R;
+
+public class SettingsActivity extends AppCompatActivity {
+    private static final String TAG = "SettingsActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "_____onCreate");
-        setContentView(R.layout.activity_about);
+        setContentView(R.layout.activity_settings);
 
         // Calling this activity's function to use ActionBar utility methods.
         ActionBar actionBar = getSupportActionBar();
@@ -28,5 +30,11 @@ public class AboutActivity extends AppCompatActivity {
         // Methods to display the icon in the ActionBar.
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
+
+        // https://developer.android.com/develop/ui/views/components/settings
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(android.R.id.content, new MySettingsFragment())
+                .commit();
     }
 }

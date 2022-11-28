@@ -1,8 +1,6 @@
 package edu.northeastern.elderberry;
 
-import java.util.Date;
-
-import edu.northeastern.elderberry.enums.Unit;
+import androidx.annotation.NonNull;
 
 public class Medicine {
     private String name;
@@ -24,17 +22,18 @@ public class Medicine {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
-    public String getFromDate() {
-        return fromDate;
-    }
+//    public String getFromDate() {
+//        return this.fromDate;
+//    }
+//
+//    public String getToDate() {
+//        return this.toDate;
+//    }
 
-    public String getToDate() {
-        return toDate;
-    }
-
+    @NonNull
     @Override
     public String toString() {
         return "Medicine{" +
