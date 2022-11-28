@@ -55,7 +55,7 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         // Add Listener in calendar
         calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
             String date = makeDateString(dayOfMonth, month, year);
-            //date_view.setText(date);
+            // date_view.setText(date);
             // Todo ask user if to navigate to the activity
             // https://developer.android.com/guide/topics/location/transitions reference this
             Intent intent = new Intent(this, MedicationDayview.class);
