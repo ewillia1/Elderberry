@@ -35,7 +35,7 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
         itemView.setOnClickListener(this);
 
         itemView.setOnClickListener(view -> {
-            int position = getAdapterPosition();
+            int position = getAbsoluteAdapterPosition();
             Log.d(TAG, "_____itemView.setOnClickListener: item clicked " + (position + 1));
             this.onTimeDoseItemListener.onTimeDoseItemClick(position);
         });
@@ -85,6 +85,6 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
     @Override
     public void onClick(View view) {
         Log.d(TAG, "_____onClick");
-        this.onTimeDoseItemListener.onTimeDoseItemClick(getAdapterPosition());
+        this.onTimeDoseItemListener.onTimeDoseItemClick(getAbsoluteAdapterPosition());
     }
 }
