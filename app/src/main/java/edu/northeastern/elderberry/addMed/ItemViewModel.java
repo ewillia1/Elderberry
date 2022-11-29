@@ -8,23 +8,45 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class ItemViewModel extends ViewModel {
-    private final MutableLiveData<String> selectedItem = new MutableLiveData<>();
+    private final MutableLiveData<String> medName = new MutableLiveData<>();
+    private final MutableLiveData<String> fromDate = new MutableLiveData<>();
+    private final MutableLiveData<String> toDate = new MutableLiveData<>();
     private static final String TAG = "ItemViewModel";
 
-    public void setItem(String item) {
-        Log.d(TAG, "_____selectItem");
-        this.selectedItem.setValue(item);
+    public void setMedName(String item) {
+        Log.d(TAG, "_____setMedName");
+        this.medName.setValue(item);
     }
 
-    public LiveData<String> getSelectedItemArray() {
-        Log.d(TAG, "_____getSelectedItem");
-        return this.selectedItem;
+    public void setFromDate(String item) {
+        Log.d(TAG, "_____setFromDate");
+        this.fromDate.setValue(item);
+    }
+
+    public void setToDate(String item) {
+        Log.d(TAG, "_____setToDate");
+        this.toDate.setValue(item);
+    }
+
+    public MutableLiveData<String> getMedName() {
+        return this.medName;
+    }
+
+    public MutableLiveData<String> getFromDate() {
+        return this.fromDate;
+    }
+
+    public MutableLiveData<String> getToDate() {
+        return this.toDate;
     }
 
     @NonNull
     @Override
     public String toString() {
-        Log.d(TAG, "_____toString");
-        return "ItemViewModel{selectedItem=" + this.selectedItem + '}';
+        return "ItemViewModel{" +
+                "medName=" + this.medName +
+                ", fromDate=" + this.fromDate +
+                ", toDate=" + this.toDate +
+                '}';
     }
 }

@@ -28,7 +28,7 @@ import edu.northeastern.elderberry.R;
 
 public class MedInfoFragment extends Fragment {
     private static final String TAG = "MedInfoFragment";
-    private ItemViewModel medNameViewModel;
+    private ItemViewModel viewModel;
     private TextInputEditText medNameEditText;
     private String medName;
 
@@ -64,7 +64,7 @@ public class MedInfoFragment extends Fragment {
         this.medNameEditText.setOnFocusChangeListener((v, hasFocus) -> {
             this.medName = Objects.requireNonNull(this.medNameEditText.getText()).toString();
             Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + this.medName);
-            this.medNameViewModel.setItem(this.medName);
+            this.viewModel.setMedName(this.medName);
         });
 
         return view;
@@ -74,6 +74,6 @@ public class MedInfoFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.d(TAG, "_____onViewCreated");
-        this.medNameViewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
+        this.viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
     }
 }

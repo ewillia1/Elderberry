@@ -31,9 +31,7 @@ public class AddMedicationActivity extends AppCompatActivity {
     private static final String TAG = "AddMedicationActivity";
     private DatabaseReference userDatabase;
     private FirebaseAuth mAuth;
-    private ItemViewModel medNameViewModel;
-    private ItemViewModel fromDateViewModel;
-    private ItemViewModel toDateViewModel;
+    private ItemViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,23 +96,10 @@ public class AddMedicationActivity extends AppCompatActivity {
         new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> tab.setText(tabNames.get(position))).attach();
 
         // ViewModel functionality.
-        this.medNameViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
-        this. medNameViewModel.getSelectedItemArray().observe(this, item -> {
-            // TODO: Perform an action with the latest item data.
-            Log.d(TAG, "____(medNameViewModel) onCreate: item entered = " + item);
-        });
-
-        this.fromDateViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
-        this. fromDateViewModel.getSelectedItemArray().observe(this, item -> {
-            // TODO: Perform an action with the latest item data.
-            Log.d(TAG, "____(fromDateViewModel) onCreate: item entered = " + item);
-        });
-
-        this.toDateViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
-        this. toDateViewModel.getSelectedItemArray().observe(this, item -> {
-            // TODO: Perform an action with the latest item data.
-            Log.d(TAG, "____(toDateViewModel) onCreate: item entered = " + item);
-        });
+        this.viewModel = new ViewModelProvider(this).get(ItemViewModel.class);
+        this.viewModel.getMedName().observe(this, item -> Log.d(TAG, "____onCreate: med name entered = " + item));
+        this.viewModel.getFromDate().observe(this, item-> Log.d(TAG, "onCreate: from date entered = " + item));
+        this.viewModel.getToDate().observe(this, item-> Log.d(TAG, "onCreate: to date entered = " + item));
     }
 
     private void doAddDataToDb() {
@@ -122,10 +107,10 @@ public class AddMedicationActivity extends AppCompatActivity {
         assert user != null;
         Log.d(TAG, "_____doAddDataToDb: user.getUid() = " + user.getUid());
         DatabaseReference push = this.userDatabase.child(user.getUid()).push();
-        Log.d(TAG, "_____doAddDataToDb: this.medNameViewModel.getSelectedItemArray() = " + this.medNameViewModel.getSelectedItemArray().toString());
-        Log.d(TAG, "_____doAddDataToDb: this.fromDateViewModel.getSelectedItemArray() = " + this.fromDateViewModel.getSelectedItemArray().toString());
-        Log.d(TAG, "_____doAddDataToDb: this.toDateViewModel.getSelectedItemArray() = " + this.toDateViewModel.getSelectedItemArray().toString());
-        push.setValue(new Medicine(this.medNameViewModel.getSelectedItemArray().getValue(), this.fromDateViewModel.getSelectedItemArray().getValue(), this.toDateViewModel.getSelectedItemArray().getValue()));
+        Log.d(TAG, "_____doAddDataToDb: this.viewModel.getMedName() = " + this.viewModel.getMedName().toString());
+        Log.d(TAG, "_____doAddDataToDb: this.viewModel.getFromDate() = " + this.viewModel.getFromDate().toString());
+        Log.d(TAG, "_____doAddDataToDb: this.viewModel.getToDate() = " + this.viewModel.getToDate().toString());
+        push.setValue(new Medicine(this.viewModel.getMedName().getValue(), this.viewModel.getFromDate().getValue(), this.viewModel.getToDate().getValue()));
     }
 
     // TODO: finish.
