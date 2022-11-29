@@ -110,7 +110,10 @@ public class AddMedicationActivity extends AppCompatActivity {
         Log.d(TAG, "_____doAddDataToDb: this.viewModel.getMedName() = " + this.viewModel.getMedName().toString());
         Log.d(TAG, "_____doAddDataToDb: this.viewModel.getFromDate() = " + this.viewModel.getFromDate().toString());
         Log.d(TAG, "_____doAddDataToDb: this.viewModel.getToDate() = " + this.viewModel.getToDate().toString());
-        push.setValue(new Medicine(this.viewModel.getMedName().getValue(), this.viewModel.getFromDate().getValue(), this.viewModel.getToDate().getValue()));
+        push.setValue(new Medicine(this.viewModel.getMedName().getValue(),
+                this.viewModel.getFromDate().getValue(),
+                this.viewModel.getToDate().getValue(),
+                this.viewModel.getUnit().getValue()));
     }
 
     // TODO: finish.

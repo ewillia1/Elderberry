@@ -6,11 +6,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +33,7 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
     private static final String TAG = "SetTimesFragment";
     private int numOfTimes;
     private TimeDoseAdapter timeDoseAdapter;
+    private ItemViewModel viewModel;
 
     public SetTimesFragment() {
         Log.d(TAG, "_____SetTimesFragment");
@@ -57,17 +62,23 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
         Log.d(TAG, "_____onCreateView");
         View view = inflater.inflate(R.layout.fragment_set_times, container, false);
 
-        // Set dose functionality.
+        // Set unit functionality.
         // Get reference to the string array.
         Resources res = getResources();
         String[] units_array = res.getStringArray(R.array.units_array);
         // Create an array adapter and pass the context, drop down layout, and array.
         ArrayAdapter<String> arrayAdapterForUnits = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, units_array);
         arrayAdapterForUnits.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         // Get reference to the autocomplete text view.
         AutoCompleteTextView autoCompleteUnit = view.findViewById(R.id.setUnit);
         // Set adapter to the autocomplete tv to the arrayAdapter.
         autoCompleteUnit.setAdapter(arrayAdapterForUnits);
+        autoCompleteUnit.setOnItemClickListener((parent, view12, position, id) -> {
+            String unitSelection = (String) parent.getItemAtPosition(position);
+            Log.d(TAG, "_____onItemClick: position = " + position + ", id = " + id + ", unitSelection = " + unitSelection);
+            viewModel.setUnit(unitSelection);
+        });
 
         // Set time frequency functionality.
         // Get reference to the string array.
@@ -155,5 +166,12 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
     @Override
     public void onTimeDoseItemClick(int position) {
         Log.d(TAG, "_____onTimeDoseItemClick: clicked item " + position + 1);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.d(TAG, "_____onViewCreated");
+        this.viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
     }
 }
