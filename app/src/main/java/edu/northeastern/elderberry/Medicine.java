@@ -1,8 +1,11 @@
 package edu.northeastern.elderberry;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 public class Medicine {
+    private static final String TAG = "Medicine";
     private String name;
     //private String dose;
     private String fromDate;
@@ -37,29 +40,34 @@ public class Medicine {
 
 
     public Medicine() {
-
+        Log.d(TAG, "_____Medicine -- zero argument constructor");
     }
 
     public Medicine(String name, String fromDate, String toDate) {
+        Log.d(TAG, "_____Medicine -- three argument constructor");
         this.name = name;
         this.fromDate = fromDate;
         this.toDate = toDate;
     }
 
     public String getName() {
+        Log.d(TAG, "_____getName");
         return this.name;
     }
 
     public String getFromDate() {
+        Log.d(TAG, "_____getFromDate");
         return this.fromDate;
     }
 
     public String getToDate() {
+        Log.d(TAG, "_____getToDate");
         return this.toDate;
     }
     @NonNull
     @Override
     public String toString() {
+        Log.d(TAG, "_____toString");
         return "Medicine{" +
                 "name='" + this.name + '\'' +
                 ", fromDate='" + this.fromDate + '\'' +
