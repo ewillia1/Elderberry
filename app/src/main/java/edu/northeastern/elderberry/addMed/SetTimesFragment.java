@@ -77,7 +77,7 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
         autoCompleteUnit.setOnItemClickListener((parent, view12, position, id) -> {
             String unitSelection = (String) parent.getItemAtPosition(position);
             Log.d(TAG, "_____onItemClick: position = " + position + ", id = " + id + ", unitSelection = " + unitSelection);
-            viewModel.setUnit(unitSelection);
+            this.viewModel.setUnit(unitSelection);
         });
 
         // Set time frequency functionality.
@@ -106,47 +106,9 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
             // Clear timeDoseAdapter (clearing the RecyclerView).
             timeDoseAdapter.clear();
 
-            switch (position) {
-                case 0:
-                    this.numOfTimes = 1;
-                    break;
-                case 1:
-                    this.numOfTimes = 2;
-                    break;
-                case 2:
-                    this.numOfTimes = 3;
-                    break;
-                case 3:
-                    this.numOfTimes = 4;
-                    break;
-                case 4:
-                    this.numOfTimes = 5;
-                    break;
-                case 5:
-                    this.numOfTimes = 6;
-                    break;
-                case 6:
-                    this.numOfTimes = 7;
-                    break;
-                case 7:
-                    this.numOfTimes = 8;
-                    break;
-                case 8:
-                    this.numOfTimes = 9;
-                    break;
-                case 9:
-                    this.numOfTimes = 10;
-                    break;
-                case 10:
-                    this.numOfTimes = 11;
-                    break;
-                case 11:
-                    this.numOfTimes = 12;
-                    break;
-                default:
-                    Toast.makeText(getContext(), "An error occurred. Somehow you clicked a menu item that does not exist.", Toast.LENGTH_SHORT).show();
-            }
+            this.numOfTimes = position + 1;
 
+            // Add number of cards in recycler view corresponding to the time frequency the user picked.
             for (int i = 0; i < this.numOfTimes; i++) {
                 timeDoseItemArrayList.add(new TimeDoseItem(position));
             }
@@ -164,8 +126,10 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
     }
 
     @Override
-    public void onTimeDoseItemClick(int position) {
-        Log.d(TAG, "_____onTimeDoseItemClick: clicked item " + position + 1);
+    public void onTimeDoseItemClick(int position, String time, String dose) {
+        Log.d(TAG, "_____onTimeDoseItemClick: clicked item " + position + 1 + ", time = " + time + ", dose = " + dose);
+        this.viewModel.setTime1(time);
+        this.viewModel.setDose1(dose);
     }
 
     @Override

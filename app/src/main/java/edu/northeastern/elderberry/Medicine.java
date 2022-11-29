@@ -49,6 +49,16 @@ public class Medicine {
 //        this.unit = unit;
     }
 
+    public Medicine(String name, String fromDate, String toDate, String unit, String time1, String dose1) {
+        this(name, fromDate,toDate, unit, time1, "", "", "", "", "", "", "", "", "", "", "",
+                dose1, "", "", "", "", "", "", "", "", "", "", "");
+        Log.d(TAG, "_____Medicine -- three argument constructor");
+//        this.name = name;
+//        this.fromDate = fromDate;
+//        this.toDate = toDate;
+//        this.unit = unit;
+    }
+
     public Medicine(String name, String fromDate, String toDate, String unit,
                     String time1, String time2, String time3, String time4, String time5, String time6,
                     String time7, String time8, String time9, String time10, String time11, String time12,

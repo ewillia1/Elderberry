@@ -100,6 +100,8 @@ public class AddMedicationActivity extends AppCompatActivity {
         this.viewModel.getMedName().observe(this, item -> Log.d(TAG, "____onCreate: med name entered = " + item));
         this.viewModel.getFromDate().observe(this, item-> Log.d(TAG, "onCreate: from date entered = " + item));
         this.viewModel.getToDate().observe(this, item-> Log.d(TAG, "onCreate: to date entered = " + item));
+        this.viewModel.getTime1().observe(this, item-> Log.d(TAG, "onCreate: to time1 entered = " + item));
+        this.viewModel.getDose1().observe(this, item-> Log.d(TAG, "onCreate: to dose1 entered = " + item));
     }
 
     private void doAddDataToDb() {
@@ -110,10 +112,14 @@ public class AddMedicationActivity extends AppCompatActivity {
         Log.d(TAG, "_____doAddDataToDb: this.viewModel.getMedName() = " + this.viewModel.getMedName().toString());
         Log.d(TAG, "_____doAddDataToDb: this.viewModel.getFromDate() = " + this.viewModel.getFromDate().toString());
         Log.d(TAG, "_____doAddDataToDb: this.viewModel.getToDate() = " + this.viewModel.getToDate().toString());
+        Log.d(TAG, "_____doAddDataToDb: this.viewModel.getTime1() = " + this.viewModel.getTime1().toString());
+        Log.d(TAG, "_____doAddDataToDb: this.viewModel.getDose1() = " + this.viewModel.getDose1().toString());
         push.setValue(new Medicine(this.viewModel.getMedName().getValue(),
                 this.viewModel.getFromDate().getValue(),
                 this.viewModel.getToDate().getValue(),
-                this.viewModel.getUnit().getValue()));
+                this.viewModel.getUnit().getValue(),
+                this.viewModel.getTime1().getValue(),
+                this.viewModel.getDose1().getValue()));
     }
 
     // TODO: finish.

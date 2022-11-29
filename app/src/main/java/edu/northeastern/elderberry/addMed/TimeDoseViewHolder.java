@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Calendar;
@@ -22,6 +23,8 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
     public final OnTimeDoseItemListener onTimeDoseItemListener;
     private TimePickerDialog timePickerDialog;
     private final Context context;
+    private String time;
+    private String dose;
 
     public TimeDoseViewHolder(@NonNull View itemView, OnTimeDoseItemListener onTimeDoseItemListener, Context context) {
         super(itemView);
@@ -34,12 +37,14 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
 
         itemView.setOnClickListener(this);
 
+        // This onClickListener does not really add functionality to our app.
         itemView.setOnClickListener(view -> {
             int position = getAbsoluteAdapterPosition();
             Log.d(TAG, "_____itemView.setOnClickListener: item clicked " + (position + 1));
-            this.onTimeDoseItemListener.onTimeDoseItemClick(position);
+            this.onTimeDoseItemListener.onTimeDoseItemClick(position, this.time, this.dose);
         });
 
+        // This is an important onClickListener.
         this.timeTextView.setOnClickListener(v -> {
             Log.d(TAG, "_____onClick (this.time)");
             this.timePickerDialog.show();
@@ -47,7 +52,11 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
 
         initTimePicker();
 
-        this.doseEditText.setOnClickListener(v -> Log.d(TAG, "_____onClick (this.dose)"));
+        // This is an important onClickListener.
+        this.doseEditText.setOnClickListener(v -> {
+            Log.d(TAG, "_____onClick (this.dose)");
+            this.dose = this.doseEditText.getText().toString();
+        });
     }
 
     private void initTimePicker() {
@@ -67,6 +76,7 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
             }
 
             this.timeTextView.setText(itemView.getContext().getString(R.string.set_time, hourOfDay, st_min, am_pm));
+            this.time = itemView.getContext().getString(R.string.set_time, hourOfDay, st_min, am_pm);
         };
 
         Calendar calendar = Calendar.getInstance();
@@ -85,6 +95,6 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
     @Override
     public void onClick(View view) {
         Log.d(TAG, "_____onClick");
-        this.onTimeDoseItemListener.onTimeDoseItemClick(getAbsoluteAdapterPosition());
+        this.onTimeDoseItemListener.onTimeDoseItemClick(getAbsoluteAdapterPosition(), this.time, this.dose);
     }
 }
