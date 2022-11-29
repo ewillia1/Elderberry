@@ -23,7 +23,7 @@ import edu.northeastern.elderberry.R;
  * Use the {@link MedInfoFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-
+// TODO: When keyboard is closed lose focus on Medication Name TextInputEditText.
 public class MedInfoFragment extends Fragment {
     private static final String TAG = "MedInfoFragment";
     private ItemViewModel viewModel;

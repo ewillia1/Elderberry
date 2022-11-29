@@ -22,9 +22,4 @@
         <item name="colorAccent">@color/main</item>
     </style>
 
-    <style name="Theme.TestApp.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
 </resources>
