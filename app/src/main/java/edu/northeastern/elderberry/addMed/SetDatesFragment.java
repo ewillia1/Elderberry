@@ -12,7 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.util.Calendar;
 
@@ -35,6 +38,10 @@ public class SetDatesFragment extends Fragment {
     private int numOfTimeSetFromDate;
     private Calendar fromDate;
     private Calendar toDate;
+    private ItemViewModel fromDateViewModel;
+    private ItemViewModel toDateViewModel;
+    private String fromDate_db;
+    private String toDate_db;
 
     public SetDatesFragment() {
         Log.d(TAG, "_____SetDatesFragment");
@@ -85,6 +92,14 @@ public class SetDatesFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.d(TAG, "_____onViewCreated");
+        this.fromDateViewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
+        this.toDateViewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
+    }
+
     private void initDatePicker() {
         Log.d(TAG, "_____initDatePicker");
         // From date.
@@ -96,6 +111,9 @@ public class SetDatesFragment extends Fragment {
             this.set_from.setTextSize(25);
             Log.d(TAG, "_____initDatePicker fromDate -- this.fromDate = " + this.fromDate);
             this.fromDate.set(year, month, day);
+            this.fromDate_db = makeDateString(day, month, year);
+            this.fromDateViewModel.setItem(this.fromDate_db);
+            Log.d(TAG, "_____initDatePicker: this.fromDate_db = " + this.fromDate_db);
             Log.d(TAG, "_____initDatePicker fromDate -- this.fromDate = " + this.fromDate);
 
             if (this.numOfTimeSetFromDate > 0 && this.toDate.before(this.fromDate)) {
@@ -121,6 +139,9 @@ public class SetDatesFragment extends Fragment {
             if (this.fromDateSet) {
                 Log.d(TAG, "_____initDatePicker (this.fromDateSet == true, toDate)");
                 this.toDate.set(year, month, day);
+                this.toDate_db = makeDateString(day, month, year);
+                Log.d(TAG, "_____initDatePicker: this.toDate_db = " + this.toDate_db);
+                this.toDateViewModel.setItem(this.toDate_db);
                 if (this.toDate.before(this.fromDate)) {
                     Log.d(TAG, "_____initDatePicker: IF -- try to set the to do again");
                     Log.d(TAG, "_____initDatePicker: this.fromDate = " + (this.fromDate.get(Calendar.MONTH) + 1) + "/" + this.fromDate.get(Calendar.DAY_OF_MONTH) + "/" + this.fromDate.get(Calendar.YEAR) + ", this.toDate = " + (this.toDate.get(Calendar.MONTH) + 1) + "/" + this.toDate.get(Calendar.DAY_OF_MONTH) + "/" + this.toDate.get(Calendar.YEAR));

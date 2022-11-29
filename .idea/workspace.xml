@@ -9,17 +9,20 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Added app logo to MedicationDayview.java&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher">
+    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Working on getting the add button to add medication to database. Figured out how to retrieve the user and user Uid.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/ItemViewModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/Medicine.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/Medicine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/AddMedicationActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/AddMedicationActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/MedInfoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/MedInfoFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/SetDatesFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/SetDatesFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_med_info.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_med_info.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -455,7 +458,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669737271492</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Working on getting the add button to add medication to database. Figured out how to retrieve the user and user Uid.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher">
+      <created>1669739525385</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1669739525385</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -471,7 +481,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Updated activity_login.xml" />
     <MESSAGE value="Updated activity_about.xml, strings.xml" />
     <MESSAGE value="Updated activity_add_medication.xml" />
     <MESSAGE value="Updated fontFamily" />
@@ -496,6 +505,7 @@
     <MESSAGE value="Updated day view functionality to display proper medicine from database. &#10;Added a nested recycler view.&#10;Co-authored-by: Gavin" />
     <MESSAGE value="Made small modifications on import statements&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Shriya&#10;Co-authored by: Christopher" />
     <MESSAGE value="Added app logo to MedicationDayview.java&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added app logo to MedicationDayview.java&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
+    <MESSAGE value="Working on getting the add button to add medication to database. Figured out how to retrieve the user and user Uid.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
+    <option name="LAST_COMMIT_MESSAGE" value="Working on getting the add button to add medication to database. Figured out how to retrieve the user and user Uid.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
   </component>
 </project>

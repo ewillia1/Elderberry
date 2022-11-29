@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -30,6 +31,9 @@ public class AddMedicationActivity extends AppCompatActivity {
     private static final String TAG = "AddMedicationActivity";
     private DatabaseReference userDatabase;
     private FirebaseAuth mAuth;
+    private ItemViewModel medNameViewModel;
+    private ItemViewModel fromDateViewModel;
+    private ItemViewModel toDateViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +96,25 @@ public class AddMedicationActivity extends AppCompatActivity {
         // Needed so that not only the selecting of the tabs works as expected, but also the swiping of the tabs.
         // https://developer.android.com/guide/navigation/navigation-swipe-view-2#java
         new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> tab.setText(tabNames.get(position))).attach();
+
+        // ViewModel functionality.
+        this.medNameViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
+        this. medNameViewModel.getSelectedItemArray().observe(this, item -> {
+            // TODO: Perform an action with the latest item data.
+            Log.d(TAG, "____(medNameViewModel) onCreate: item entered = " + item);
+        });
+
+        this.fromDateViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
+        this. fromDateViewModel.getSelectedItemArray().observe(this, item -> {
+            // TODO: Perform an action with the latest item data.
+            Log.d(TAG, "____(fromDateViewModel) onCreate: item entered = " + item);
+        });
+
+        this.toDateViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
+        this. toDateViewModel.getSelectedItemArray().observe(this, item -> {
+            // TODO: Perform an action with the latest item data.
+            Log.d(TAG, "____(toDateViewModel) onCreate: item entered = " + item);
+        });
     }
 
     private void doAddDataToDb() {
@@ -99,7 +122,10 @@ public class AddMedicationActivity extends AppCompatActivity {
         assert user != null;
         Log.d(TAG, "_____doAddDataToDb: user.getUid() = " + user.getUid());
         DatabaseReference push = this.userDatabase.child(user.getUid()).push();
-        push.setValue(new Medicine("Medication 1", "Nov 20, 2022", "Dec 12, 2022"));
+        Log.d(TAG, "_____doAddDataToDb: this.medNameViewModel.getSelectedItemArray() = " + this.medNameViewModel.getSelectedItemArray().toString());
+        Log.d(TAG, "_____doAddDataToDb: this.fromDateViewModel.getSelectedItemArray() = " + this.fromDateViewModel.getSelectedItemArray().toString());
+        Log.d(TAG, "_____doAddDataToDb: this.toDateViewModel.getSelectedItemArray() = " + this.toDateViewModel.getSelectedItemArray().toString());
+        push.setValue(new Medicine(this.medNameViewModel.getSelectedItemArray().getValue(), this.fromDateViewModel.getSelectedItemArray().getValue(), this.toDateViewModel.getSelectedItemArray().getValue()));
     }
 
     // TODO: finish.
