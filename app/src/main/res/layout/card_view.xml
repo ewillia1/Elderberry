@@ -52,7 +52,9 @@
             android:textColor="@color/textHintColor"
             android:textColorHint="@color/textHintColor"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

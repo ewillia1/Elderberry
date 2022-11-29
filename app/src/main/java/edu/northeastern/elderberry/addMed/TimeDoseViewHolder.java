@@ -41,7 +41,7 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
         itemView.setOnClickListener(view -> {
             int position = getAbsoluteAdapterPosition();
             Log.d(TAG, "_____itemView.setOnClickListener: item clicked " + (position + 1));
-            this.onTimeDoseItemListener.onTimeDoseItemClick(position, this.time, this.dose);
+            this.onTimeDoseItemListener.onTimeDoseItemClick(position);
         });
 
         // This is an important onClickListener.
@@ -53,9 +53,10 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
         initTimePicker();
 
         // This is an important onClickListener.
-        this.doseEditText.setOnClickListener(v -> {
-            Log.d(TAG, "_____onClick (this.dose)");
+        this.doseEditText.setOnFocusChangeListener((v, hasFocus) -> {
             this.dose = this.doseEditText.getText().toString();
+            Log.d(TAG, "_____onFocusChange");
+            this.onTimeDoseItemListener.doseWasAdded(this.dose);
         });
     }
 
@@ -77,6 +78,8 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
 
             this.timeTextView.setText(itemView.getContext().getString(R.string.set_time, hourOfDay, st_min, am_pm));
             this.time = itemView.getContext().getString(R.string.set_time, hourOfDay, st_min, am_pm);
+
+            this.onTimeDoseItemListener.timeWasAdded(this.time);
         };
 
         Calendar calendar = Calendar.getInstance();
@@ -95,6 +98,6 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
     @Override
     public void onClick(View view) {
         Log.d(TAG, "_____onClick");
-        this.onTimeDoseItemListener.onTimeDoseItemClick(getAbsoluteAdapterPosition(), this.time, this.dose);
+        this.onTimeDoseItemListener.onTimeDoseItemClick(getAbsoluteAdapterPosition());
     }
 }

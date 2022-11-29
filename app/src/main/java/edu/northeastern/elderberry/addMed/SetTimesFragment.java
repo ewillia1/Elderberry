@@ -126,9 +126,19 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
     }
 
     @Override
-    public void onTimeDoseItemClick(int position, String time, String dose) {
-        Log.d(TAG, "_____onTimeDoseItemClick: clicked item " + position + 1 + ", time = " + time + ", dose = " + dose);
+    public void onTimeDoseItemClick(int position) {
+        Log.d(TAG, "_____onTimeDoseItemClick: clicked item " + (position + 1));
+    }
+
+    @Override
+    public void timeWasAdded(String time) {
+        Log.d(TAG, "_____timeWasAdded: time = " + time);
         this.viewModel.setTime1(time);
+    }
+
+    @Override
+    public void doseWasAdded(String dose) {
+        Log.d(TAG, "_____doseWasAdded: dose = " + dose);
         this.viewModel.setDose1(dose);
     }
 
