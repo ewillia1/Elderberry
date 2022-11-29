@@ -19,7 +19,6 @@
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="false"
             android:label="@string/title_activity_medication_dayview"
-            android:theme="@style/Theme.TestApp.NoActionBar"
             tools:ignore="LockedOrientationActivity">
             <meta-data
                 android:name="android.app.lib_name"
