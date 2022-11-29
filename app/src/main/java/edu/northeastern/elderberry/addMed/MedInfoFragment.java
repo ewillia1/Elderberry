@@ -75,30 +75,30 @@ public class MedInfoFragment extends Fragment {
 //            this.viewModel.selectItem(this.medName);
 //        });
 
-//        this.medNameEditText.setOnFocusChangeListener((v, hasFocus) -> {
-//            this.medName = this.medNameEditText.getText().toString();
-//            Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + this.medName);
-//            this.viewModel.selectItem(this.medName);
-//        });
-
-        this.medNameEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                medName = Objects.requireNonNull(medNameEditText.getText()).toString();
-                Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + medName);
-                medNameViewModel.setItem(medName);
-            }
+        this.medNameEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            this.medName = Objects.requireNonNull(this.medNameEditText.getText()).toString();
+            Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + this.medName);
+            this.medNameViewModel.setItem(this.medName);
         });
+
+//        this.medNameEditText.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                medName = Objects.requireNonNull(medNameEditText.getText()).toString();
+//                Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + medName);
+//                medNameViewModel.setItem(medName);
+//            }
+//        });
 
         return view;
     }

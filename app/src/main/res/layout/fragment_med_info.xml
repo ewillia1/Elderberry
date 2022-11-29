@@ -36,7 +36,9 @@
                 android:textColor="@color/main"
                 android:textColorHint="@color/main"
                 android:textSize="30sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
