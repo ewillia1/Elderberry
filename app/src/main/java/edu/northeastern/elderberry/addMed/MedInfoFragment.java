@@ -61,44 +61,11 @@ public class MedInfoFragment extends Fragment {
         TextInputLayout textInputMedName = view.findViewById(R.id.textInputMedName);
         this.medNameEditText = view.findViewById(R.id.medNameEditText);
 
-        // TODO: Figure out what listener I need to use here! Only want the listener to be called when leaving the edit text (so long as there is a non-empty string inside).
-
-//        this.textInputMedName.addOnEditTextAttachedListener(textInputLayout -> {
-//            this.medName = this.medNameEditText.getText().toString();
-//            Log.d(TAG, "_____onEditTextAttached: this.medName = " + this.medName);
-//            this.viewModel.selectItem(this.medName);
-//        });
-
-//        this.medNameEditText.setOnClickListener(v -> {
-//            this.medName = this.medNameEditText.getText().toString();
-//            Log.d(TAG, "_____onClick: this.medName = " + this.medName);
-//            this.viewModel.selectItem(this.medName);
-//        });
-
         this.medNameEditText.setOnFocusChangeListener((v, hasFocus) -> {
             this.medName = Objects.requireNonNull(this.medNameEditText.getText()).toString();
             Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + this.medName);
             this.medNameViewModel.setItem(this.medName);
         });
-
-//        this.medNameEditText.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                medName = Objects.requireNonNull(medNameEditText.getText()).toString();
-//                Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + medName);
-//                medNameViewModel.setItem(medName);
-//            }
-//        });
 
         return view;
     }
