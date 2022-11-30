@@ -41,13 +41,13 @@ public class Medicine {
     }
 
     public Medicine(String name, String information, String fromDate, String toDate, String unit) {
-        this(name, information, fromDate,toDate, unit, "", "", "", "", "", "", "", "", "", "", "", "",
+        this(name, information, fromDate, toDate, unit, "", "", "", "", "", "", "", "", "", "", "", "",
                 "", "", "", "", "", "", "", "", "", "", "", "");
         Log.d(TAG, "_____Medicine -- three argument constructor");
     }
 
     public Medicine(String name, String information, String fromDate, String toDate, String unit, String time1, String dose1) {
-        this(name, information, fromDate,toDate, unit, time1, "", "", "", "", "", "", "", "", "", "", "",
+        this(name, information, fromDate, toDate, unit, time1, "", "", "", "", "", "", "", "", "", "", "",
                 dose1, "", "", "", "", "", "", "", "", "", "", "");
         Log.d(TAG, "_____Medicine -- three argument constructor");
     }

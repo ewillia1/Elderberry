@@ -26,6 +26,7 @@ import edu.northeastern.elderberry.R;
 // TODO: Make fields required.
 // TODO: Save from and to dates in database.
 // TODO: Get the add button to work.
+// TODO: Get focus to change when keyboard is collapsed.
 public class AddMedicationActivity extends AppCompatActivity {
 
     private static final String TAG = "AddMedicationActivity";
@@ -99,10 +100,10 @@ public class AddMedicationActivity extends AppCompatActivity {
         this.viewModel = new ViewModelProvider(this).get(ItemViewModel.class);
         this.viewModel.getMedName().observe(this, item -> Log.d(TAG, "____onCreate: med name entered = " + item));
         this.viewModel.getInformation().observe(this, item -> Log.d(TAG, "____onCreate: information entered = " + item));
-        this.viewModel.getFromDate().observe(this, item-> Log.d(TAG, "onCreate: from date entered = " + item));
-        this.viewModel.getToDate().observe(this, item-> Log.d(TAG, "onCreate: to date entered = " + item));
-        this.viewModel.getTime1().observe(this, item-> Log.d(TAG, "onCreate: to time1 entered = " + item));
-        this.viewModel.getDose1().observe(this, item-> Log.d(TAG, "onCreate: to dose1 entered = " + item));
+        this.viewModel.getFromDate().observe(this, item -> Log.d(TAG, "onCreate: from date entered = " + item));
+        this.viewModel.getToDate().observe(this, item -> Log.d(TAG, "onCreate: to date entered = " + item));
+        this.viewModel.getTime1().observe(this, item -> Log.d(TAG, "onCreate: to time1 entered = " + item));
+        this.viewModel.getDose1().observe(this, item -> Log.d(TAG, "onCreate: to dose1 entered = " + item));
     }
 
     private void doAddDataToDb() {
