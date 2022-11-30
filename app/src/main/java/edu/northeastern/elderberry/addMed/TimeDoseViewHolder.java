@@ -4,11 +4,11 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Calendar;
@@ -44,7 +44,6 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
             this.onTimeDoseItemListener.onTimeDoseItemClick(position);
         });
 
-        // This is an important onClickListener.
         this.timeTextView.setOnClickListener(v -> {
             Log.d(TAG, "_____onClick (this.time)");
             this.timePickerDialog.show();
@@ -52,11 +51,19 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
 
         initTimePicker();
 
-        // This is an important onClickListener.
         this.doseEditText.setOnFocusChangeListener((v, hasFocus) -> {
             this.dose = this.doseEditText.getText().toString();
             Log.d(TAG, "_____onFocusChange");
             this.onTimeDoseItemListener.doseWasAdded(this.dose);
+        });
+
+        this.doseEditText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                this.dose = this.doseEditText.getText().toString();
+                Log.d(TAG, "_____onEditorAction");
+                this.onTimeDoseItemListener.doseWasAdded(this.dose);
+            }
+            return false;
         });
     }
 

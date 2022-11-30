@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Need to figure out a way to lose focus when keyboard closed. Time 1 and dose 1 are added to database.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher">
+    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Got med information to be added to the database, still working of changing the focus when collapsing the keyboard. Added setOnEditorActionListeners for the infoEditText in MedInfoFragment.java and this.doseEditText in TimeDoseViewHolder.java.">
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
@@ -18,6 +18,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/Medicine.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/Medicine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/AddMedicationActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/AddMedicationActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/ItemViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/ItemViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/MedInfoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/MedInfoFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/TimeDoseViewHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/TimeDoseViewHolder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_med_info.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_med_info.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -201,13 +206,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666133441374</updated>
-    </task>
-    <task id="LOCAL-00001" summary="Added a lot of files -- started the first draft of the app">
-      <created>1668713149630</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1668713149630</updated>
     </task>
     <task id="LOCAL-00002" summary="Update">
       <created>1668713416368</created>
@@ -545,7 +543,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669753595041</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Updated workspace.xml">
+      <created>1669775202910</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1669775202910</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -561,7 +566,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Updated login/create user functionality" />
     <MESSAGE value="Updated login/create user functionality again, cleaned code" />
     <MESSAGE value="Updated deploymentTargetDropDown.xml" />
     <MESSAGE value="Skip LoginActivity, if already successfully logged in, got logo screen to show up and then go away" />
@@ -581,11 +585,12 @@
     <MESSAGE value="Got unit to work when add button is clicked. Updated input types in some xml files for better user interaction." />
     <MESSAGE value="Added all times and doses to Medicine.java" />
     <MESSAGE value="Changed getAdapterPosition to getAbsoluteAdapterPosition in TimeDoseViewHolder" />
-    <MESSAGE value="Updated workspace.xml" />
     <MESSAGE value="Interim save&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
     <MESSAGE value="Added a TODO to MedInfoFragment.java&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
     <MESSAGE value="Need to figure out a way to lose focus when keyboard closed. Working version of adding one time and one dose to database.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
     <MESSAGE value="Need to figure out a way to lose focus when keyboard closed. Time 1 and dose 1 are added to database.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
-    <option name="LAST_COMMIT_MESSAGE" value="Need to figure out a way to lose focus when keyboard closed. Time 1 and dose 1 are added to database.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
+    <MESSAGE value="Updated workspace.xml" />
+    <MESSAGE value="Got med information to be added to the database, still working of changing the focus when collapsing the keyboard. Added setOnEditorActionListeners for the infoEditText in MedInfoFragment.java and this.doseEditText in TimeDoseViewHolder.java." />
+    <option name="LAST_COMMIT_MESSAGE" value="Got med information to be added to the database, still working of changing the focus when collapsing the keyboard. Added setOnEditorActionListeners for the infoEditText in MedInfoFragment.java and this.doseEditText in TimeDoseViewHolder.java." />
   </component>
 </project>

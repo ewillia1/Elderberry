@@ -2,9 +2,12 @@ package edu.northeastern.elderberry.addMed;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,7 +31,9 @@ public class MedInfoFragment extends Fragment {
     private static final String TAG = "MedInfoFragment";
     private ItemViewModel viewModel;
     private TextInputEditText medNameEditText;
+    private TextInputEditText infoEditText;
     private String medName;
+    private String information;
 
     public MedInfoFragment() {
         Log.d(TAG, "_____MedInfoFragment");
@@ -63,6 +68,32 @@ public class MedInfoFragment extends Fragment {
             this.medName = Objects.requireNonNull(this.medNameEditText.getText()).toString();
             Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + this.medName);
             this.viewModel.setMedName(this.medName);
+        });
+
+//        this.medNameEditText.setOnEditorActionListener((v, actionId, event) -> {
+//            if (actionId == EditorInfo.IME_ACTION_DONE) {
+//                this.medName = Objects.requireNonNull(this.medNameEditText.getText()).toString();
+//                Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + this.medName);
+//                this.viewModel.setMedName(this.medName);
+//            }
+//            return false;
+//        });
+
+        this.infoEditText = view.findViewById(R.id.infoEditText);
+
+        this.infoEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            this.information = Objects.requireNonNull(this.infoEditText.getText()).toString();
+            Log.d(TAG, "setOnFocusChangeListener: this.information = " + this.information);
+            this.viewModel.setInformation(this.information);
+        });
+
+        this.infoEditText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                this.information = Objects.requireNonNull(this.infoEditText.getText()).toString();
+                Log.d(TAG, "_____setOnFocusChangeListener: this.information = " + this.information);
+                this.viewModel.setInformation(this.information);
+            }
+            return false;
         });
 
         return view;

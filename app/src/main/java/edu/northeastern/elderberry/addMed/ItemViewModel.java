@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 public class ItemViewModel extends ViewModel {
     private final MutableLiveData<String> medName = new MutableLiveData<>();
+    private final MutableLiveData<String> information = new MutableLiveData<>();
     private final MutableLiveData<String> fromDate = new MutableLiveData<>();
     private final MutableLiveData<String> toDate = new MutableLiveData<>();
     private final MutableLiveData<String> unit = new MutableLiveData<>();
@@ -18,6 +19,11 @@ public class ItemViewModel extends ViewModel {
     public void setMedName(String item) {
         Log.d(TAG, "_____setMedName");
         this.medName.setValue(item);
+    }
+
+    public void setInformation(String item) {
+        Log.d(TAG, "_____setInformation");
+        this.information.setValue(item);
     }
 
     public void setFromDate(String item) {
@@ -50,6 +56,11 @@ public class ItemViewModel extends ViewModel {
         return this.medName;
     }
 
+    public MutableLiveData<String> getInformation() {
+        Log.d(TAG, "_____getInformation");
+        return this.information;
+    }
+
     public MutableLiveData<String> getFromDate() {
         Log.d(TAG, "_____getFromDate");
         return this.fromDate;
@@ -78,8 +89,12 @@ public class ItemViewModel extends ViewModel {
     public String toString() {
         return "ItemViewModel{" +
                 "medName=" + this.medName +
+                ", information=" + this.information +
                 ", fromDate=" + this.fromDate +
                 ", toDate=" + this.toDate +
+                ", unit=" + this.unit +
+                ", time1=" + this.time1 +
+                ", dose1=" + this.dose1 +
                 '}';
     }
 }

@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 public class Medicine {
     private static final String TAG = "Medicine";
     private String name;
+    private String information;
     private String fromDate;
     private String toDate;
     private String unit;
@@ -39,33 +40,26 @@ public class Medicine {
         Log.d(TAG, "_____Medicine -- zero argument constructor");
     }
 
-    public Medicine(String name, String fromDate, String toDate, String unit) {
-        this(name, fromDate,toDate, unit, "", "", "", "", "", "", "", "", "", "", "", "",
+    public Medicine(String name, String information, String fromDate, String toDate, String unit) {
+        this(name, information, fromDate,toDate, unit, "", "", "", "", "", "", "", "", "", "", "", "",
                 "", "", "", "", "", "", "", "", "", "", "", "");
         Log.d(TAG, "_____Medicine -- three argument constructor");
-//        this.name = name;
-//        this.fromDate = fromDate;
-//        this.toDate = toDate;
-//        this.unit = unit;
     }
 
-    public Medicine(String name, String fromDate, String toDate, String unit, String time1, String dose1) {
-        this(name, fromDate,toDate, unit, time1, "", "", "", "", "", "", "", "", "", "", "",
+    public Medicine(String name, String information, String fromDate, String toDate, String unit, String time1, String dose1) {
+        this(name, information, fromDate,toDate, unit, time1, "", "", "", "", "", "", "", "", "", "", "",
                 dose1, "", "", "", "", "", "", "", "", "", "", "");
         Log.d(TAG, "_____Medicine -- three argument constructor");
-//        this.name = name;
-//        this.fromDate = fromDate;
-//        this.toDate = toDate;
-//        this.unit = unit;
     }
 
-    public Medicine(String name, String fromDate, String toDate, String unit,
+    public Medicine(String name, String information, String fromDate, String toDate, String unit,
                     String time1, String time2, String time3, String time4, String time5, String time6,
                     String time7, String time8, String time9, String time10, String time11, String time12,
                     String dose1, String dose2, String dose3, String dose4, String dose5, String dose6,
                     String dose7, String dose8, String dose9, String dose10, String dose11, String dose12) {
         Log.d(TAG, "_____Medicine -- three argument constructor");
         this.name = name;
+        this.information = information;
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.unit = unit;
@@ -98,6 +92,11 @@ public class Medicine {
     public String getName() {
         Log.d(TAG, "_____getName");
         return this.name;
+    }
+
+    public String getInformation() {
+        Log.d(TAG, "_____getInformation");
+        return this.information;
     }
 
     public String getFromDate() {
@@ -215,6 +214,7 @@ public class Medicine {
     public String toString() {
         return "Medicine{" +
                 "name='" + this.name + '\'' +
+                ", information='" + this.information + '\'' +
                 ", fromDate='" + this.fromDate + '\'' +
                 ", toDate='" + this.toDate + '\'' +
                 ", unit='" + this.unit + '\'' +

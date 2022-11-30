@@ -98,6 +98,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         // ViewModel functionality.
         this.viewModel = new ViewModelProvider(this).get(ItemViewModel.class);
         this.viewModel.getMedName().observe(this, item -> Log.d(TAG, "____onCreate: med name entered = " + item));
+        this.viewModel.getInformation().observe(this, item -> Log.d(TAG, "____onCreate: information entered = " + item));
         this.viewModel.getFromDate().observe(this, item-> Log.d(TAG, "onCreate: from date entered = " + item));
         this.viewModel.getToDate().observe(this, item-> Log.d(TAG, "onCreate: to date entered = " + item));
         this.viewModel.getTime1().observe(this, item-> Log.d(TAG, "onCreate: to time1 entered = " + item));
@@ -110,11 +111,13 @@ public class AddMedicationActivity extends AppCompatActivity {
         Log.d(TAG, "_____doAddDataToDb: user.getUid() = " + user.getUid());
         DatabaseReference push = this.userDatabase.child(user.getUid()).push();
         Log.d(TAG, "_____doAddDataToDb: this.viewModel.getMedName() = " + this.viewModel.getMedName().toString());
+        Log.d(TAG, "_____doAddDataToDb: this.viewModel.getInformation() = " + this.viewModel.getInformation().toString());
         Log.d(TAG, "_____doAddDataToDb: this.viewModel.getFromDate() = " + this.viewModel.getFromDate().toString());
         Log.d(TAG, "_____doAddDataToDb: this.viewModel.getToDate() = " + this.viewModel.getToDate().toString());
         Log.d(TAG, "_____doAddDataToDb: this.viewModel.getTime1() = " + this.viewModel.getTime1().toString());
         Log.d(TAG, "_____doAddDataToDb: this.viewModel.getDose1() = " + this.viewModel.getDose1().toString());
         push.setValue(new Medicine(this.viewModel.getMedName().getValue(),
+                this.viewModel.getInformation().getValue(),
                 this.viewModel.getFromDate().getValue(),
                 this.viewModel.getToDate().getValue(),
                 this.viewModel.getUnit().getValue(),

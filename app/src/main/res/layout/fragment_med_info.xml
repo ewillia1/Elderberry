@@ -57,6 +57,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputMedName">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/infoEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/elsie"
@@ -67,6 +68,9 @@
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:inputType="textMultiLine|textLongMessage"
+                android:imeOptions="actionDone"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 tools:ignore="TextContrastCheck" />
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
