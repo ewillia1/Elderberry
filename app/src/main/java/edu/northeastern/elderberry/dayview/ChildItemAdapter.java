@@ -15,7 +15,7 @@ public class ChildItemAdapter
         extends RecyclerView
         .Adapter<ChildItemAdapter.ChildViewHolder> {
 
-    private List<ChildItem> ChildItemList;
+    private final List<ChildItem> ChildItemList;
 
     // Constructor
     ChildItemAdapter(List<ChildItem> childItemList)
@@ -78,10 +78,10 @@ public class ChildItemAdapter
     // This class is to initialize
     // the Views present
     // in the child RecyclerView
-    class ChildViewHolder
+    static class ChildViewHolder
             extends RecyclerView.ViewHolder {
 
-        TextView ChildItemTitle;
+        final TextView ChildItemTitle;
 
         ChildViewHolder(View itemView)
         {

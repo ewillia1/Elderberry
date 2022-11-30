@@ -78,6 +78,7 @@ public class YourMedicationsActivity extends AppCompatActivity {
         String user = "Gavin";
         DatabaseReference medicineDB = FirebaseDatabase.getInstance().getReference();
         medicineDB.child(user).addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d(TAG, "_____onDataChange: ");

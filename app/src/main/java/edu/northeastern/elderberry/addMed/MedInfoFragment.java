@@ -68,15 +68,6 @@ public class MedInfoFragment extends Fragment {
             this.viewModel.setMedName(this.medName);
         });
 
-//        this.medNameEditText.setOnEditorActionListener((v, actionId, event) -> {
-//            if (actionId == EditorInfo.IME_ACTION_DONE) {
-//                this.medName = Objects.requireNonNull(this.medNameEditText.getText()).toString();
-//                Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + this.medName);
-//                this.viewModel.setMedName(this.medName);
-//            }
-//            return false;
-//        });
-
         this.infoEditText = view.findViewById(R.id.infoEditText);
 
         this.infoEditText.setOnFocusChangeListener((v, hasFocus) -> {

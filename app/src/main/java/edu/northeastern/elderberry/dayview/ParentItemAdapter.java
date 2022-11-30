@@ -19,8 +19,8 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
     // is created to share the Views
     // between the child and
     // the parent RecyclerViews
-    private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
-    private List<ParentItem> itemList;
+    private final RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
+    private final List<ParentItem> itemList;
 
     ParentItemAdapter(List<ParentItem> itemList) {
         this.itemList = itemList;
@@ -89,10 +89,10 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
     // This class is to initialize
     // the Views present in
     // the parent RecyclerView
-    class ParentViewHolder extends RecyclerView.ViewHolder {
+    static class ParentViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView ParentItemTitle;
-        private RecyclerView ChildRecyclerView;
+        private final TextView ParentItemTitle;
+        private final RecyclerView ChildRecyclerView;
 
         ParentViewHolder(final View itemView) {
             super(itemView);
