@@ -1,5 +1,7 @@
 package edu.northeastern.elderberry.addMed;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
+
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -73,9 +75,11 @@ public class MedInfoFragment extends Fragment {
             this.viewModel.setMedName(this.medName);
 
 //            if(!hasFocus) {
-//                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+//                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+////                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 //                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 //            }
+//            hideSoftKeyBoard();
         });
 
         this.infoEditText = view.findViewById(R.id.infoEditText);
@@ -104,6 +108,15 @@ public class MedInfoFragment extends Fragment {
         Log.d(TAG, "_____onViewCreated");
         this.viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
     }
+
+//    private void hideSoftKeyBoard() {
+//        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+//
+//        // Verify if the soft keyboard is open.
+//        if (imm.isAcceptingText()) {
+//            imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+//        }
+//    }
 
 //    @Override
 //    public void onConfigurationChanged(@NonNull Configuration newConfig) {
