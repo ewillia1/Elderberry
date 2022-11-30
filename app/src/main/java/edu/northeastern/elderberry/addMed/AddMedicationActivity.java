@@ -106,7 +106,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         this.viewModel.getToDate().observe(this, item -> Log.d(TAG, "onCreate: to date entered = " + item));
 
         Log.d(TAG, "_____for Loop prior");
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 12; i++) {
             int finalI = i;
             this.viewModel.getTime(i).observe(this, item -> Log.d(TAG, "onCreate: to time " + (finalI + 1) + " entered = " + item));
             this.viewModel.getDose(i).observe(this, item -> Log.d(TAG, "onCreate: to dose " + (finalI + 1) + " entered = " + item));
@@ -134,7 +134,10 @@ public class AddMedicationActivity extends AppCompatActivity {
                 this.viewModel.getToDate().getValue(),
                 this.viewModel.getUnit().getValue(),
                 this.viewModel.getTime(0).getValue(),
-                this.viewModel.getDose(0).getValue()));
+                this.viewModel.getDose(0).getValue(),
+                this.viewModel.getTime(1).getValue(),
+                this.viewModel.getDose(1).getValue()));
+
     }
 
     // TODO: finish.

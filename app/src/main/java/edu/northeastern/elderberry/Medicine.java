@@ -52,6 +52,11 @@ public class Medicine {
         Log.d(TAG, "_____Medicine -- three argument constructor");
     }
 
+    public Medicine(String name, String information, String fromDate, String toDate, String unit, String time1, String dose1, String time2, String dose2) {
+        this(name, information, fromDate, toDate, unit, time1, time2, "", "", "", "", "", "", "", "", "", "",
+                dose1, dose2, "", "", "", "", "", "", "", "", "", "");
+        Log.d(TAG, "_____Medicine -- nine argument constructor");
+    }
     public Medicine(String name, String information, String fromDate, String toDate, String unit,
                     String time1, String time2, String time3, String time4, String time5, String time6,
                     String time7, String time8, String time9, String time10, String time11, String time12,
