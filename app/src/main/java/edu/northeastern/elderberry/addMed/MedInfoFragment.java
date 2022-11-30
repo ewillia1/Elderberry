@@ -1,5 +1,6 @@
 package edu.northeastern.elderberry.addMed;
 
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethod;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -68,6 +71,11 @@ public class MedInfoFragment extends Fragment {
             this.medName = Objects.requireNonNull(this.medNameEditText.getText()).toString();
             Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + this.medName);
             this.viewModel.setMedName(this.medName);
+
+//            if(!hasFocus) {
+//                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+//                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+//            }
         });
 
         this.infoEditText = view.findViewById(R.id.infoEditText);
