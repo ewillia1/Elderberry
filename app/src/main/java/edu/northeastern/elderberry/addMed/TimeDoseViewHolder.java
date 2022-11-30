@@ -52,19 +52,23 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
         initTimePicker();
 
         this.doseEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            int position = getAbsoluteAdapterPosition();
             this.dose = this.doseEditText.getText().toString();
             Log.d(TAG, "_____onFocusChange");
-            this.onTimeDoseItemListener.doseWasAdded(this.dose);
+            this.onTimeDoseItemListener.doseWasAdded(position, this.dose);
         });
 
         this.doseEditText.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
+                int position = getAbsoluteAdapterPosition();
                 this.dose = this.doseEditText.getText().toString();
                 Log.d(TAG, "_____onEditorAction");
-                this.onTimeDoseItemListener.doseWasAdded(this.dose);
+                this.onTimeDoseItemListener.doseWasAdded(position, this.dose);
             }
             return false;
         });
+
+
     }
 
     private void initTimePicker() {
@@ -86,7 +90,8 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
             this.timeTextView.setText(itemView.getContext().getString(R.string.set_time, hourOfDay, st_min, am_pm));
             this.time = itemView.getContext().getString(R.string.set_time, hourOfDay, st_min, am_pm);
 
-            this.onTimeDoseItemListener.timeWasAdded(this.time);
+            int position = getAbsoluteAdapterPosition();
+            this.onTimeDoseItemListener.timeWasAdded(position, this.time);
         };
 
         Calendar calendar = Calendar.getInstance();

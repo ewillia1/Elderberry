@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.ArrayList;
+
 public class ItemViewModel extends ViewModel {
     private final MutableLiveData<String> medName = new MutableLiveData<>();
     private final MutableLiveData<String> information = new MutableLiveData<>();
@@ -15,6 +17,22 @@ public class ItemViewModel extends ViewModel {
     private final MutableLiveData<String> time1 = new MutableLiveData<>();
     private final MutableLiveData<String> dose1 = new MutableLiveData<>();
     private static final String TAG = "ItemViewModel";
+    //private final ArrayList<MutableLiveData<String>> time = new ArrayList<>();
+    //private final ArrayList<MutableLiveData<String>> dose = new ArrayList<>();
+    private final MutableLiveData<String> time[] = new MutableLiveData[12];
+    private final MutableLiveData<String> dose[] = new MutableLiveData[12];
+
+    public void initializeTimeArray() {
+        for (int i = 0; i < 12; i++) {
+            this.time[i] = new MutableLiveData<>();
+        }
+    }
+
+    public void initializeDoseArray() {
+        for (int i = 0; i < 12; i++) {
+            this.dose[i] = new MutableLiveData<>();
+        }
+    }
 
     public void setMedName(String item) {
         Log.d(TAG, "_____setMedName");
@@ -46,13 +64,25 @@ public class ItemViewModel extends ViewModel {
         this.time1.setValue(item);
     }
 
+    public void setTime(int index, String item) {
+        Log.d(TAG, "_____setTime");
+        this.time[index].setValue(item);
+        Log.d(TAG, "_____setTime " + (this.time[index]));
+    }
+
+    public void setDose(int index, String item) {
+        Log.d(TAG, "_____setDose");
+        this.dose[index].setValue(item);
+        Log.d(TAG, "_____setDose " + (this.dose[index]));
+    }
+
     public void setDose1(String item) {
         Log.d(TAG, "_____setDose1");
         this.dose1.setValue(item);
     }
 
     public MutableLiveData<String> getMedName() {
-        Log.d(TAG, "_____getMedName");
+        Log.d(TAG, "_____getMedName " + this.medName);
         return this.medName;
     }
 
@@ -83,6 +113,17 @@ public class ItemViewModel extends ViewModel {
     public MutableLiveData<String> getDose1() {
         return this.dose1;
     }
+
+    public MutableLiveData<String> getTime(int index) {
+        Log.d(TAG, "_____getTime " + this.time[index]);
+        return this.time[index];
+    }
+
+    public MutableLiveData<String> getDose(int index) {
+        Log.d(TAG, "_____getDose " + this.dose[index]);
+        return this.dose[index];
+    }
+
 
     @NonNull
     @Override

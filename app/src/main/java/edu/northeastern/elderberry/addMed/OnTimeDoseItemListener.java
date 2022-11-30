@@ -6,7 +6,7 @@ package edu.northeastern.elderberry.addMed;
 public interface OnTimeDoseItemListener {
     void onTimeDoseItemClick(int position);
 
-    void timeWasAdded(String time);
+    void timeWasAdded(int index, String time);
 
-    void doseWasAdded(String dose);
+    void doseWasAdded(int index, String dose);
 }
