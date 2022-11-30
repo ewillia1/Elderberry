@@ -1,11 +1,13 @@
 package edu.northeastern.elderberry.addMed;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -94,4 +96,17 @@ public class MedInfoFragment extends Fragment {
         Log.d(TAG, "_____onViewCreated");
         this.viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
     }
+
+//    @Override
+//    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+//        super.onConfigurationChanged(newConfig);
+//        Log.d(TAG, "_____onConfigurationChanged");
+//
+//        // Checks whether a hardware keyboard is available
+//        if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO) {
+//            Toast.makeText(getContext(), "keyboard visible", Toast.LENGTH_SHORT).show();
+//        } else if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES) {
+//            Toast.makeText(getContext(), "keyboard hidden", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 }
