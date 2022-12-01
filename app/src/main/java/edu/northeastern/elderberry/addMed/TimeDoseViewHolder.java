@@ -51,13 +51,14 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
 
         initTimePicker();
 
+        // TODO!!!!!
         this.doseEditText.setOnFocusChangeListener((v, hasFocus) -> {
             int position = getAbsoluteAdapterPosition();
             this.dose = this.doseEditText.getText().toString();
             Log.d(TAG, "_____onFocusChange");
             this.onTimeDoseItemListener.doseWasAdded(position, this.dose);
         });
-
+        // TODO!!!!!
         this.doseEditText.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 int position = getAbsoluteAdapterPosition();

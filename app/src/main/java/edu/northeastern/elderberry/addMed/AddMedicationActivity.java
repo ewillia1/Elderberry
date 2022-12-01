@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -27,24 +28,35 @@ import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.Time;
 
 // TODO: Add database functionality and check to see all required fields are filled in.
-// TODO: Make fields required.
-// TODO: Save from and to dates in database.
 // TODO: Get the add button to work.
 // TODO: Get focus to change when keyboard is collapsed.
 // TODO: How to get time picker to show hour first and not minute (happens at time 7).
 // TODO: Click enter in time recycler.
+// TODO: Try to recreate losing times and doses and figure out why that is happening.
 public class AddMedicationActivity extends AppCompatActivity {
 
     private static final String TAG = "AddMedicationActivity";
     private DatabaseReference userDatabase;
     private FirebaseAuth mAuth;
     private ItemViewModel viewModel;
+    private boolean medNameComplete;
+    private boolean medInfoComplete;
+    private boolean medFromDateComplete;
+    private boolean medToDateComplete;
+    private boolean medUnitComplete;
+    private boolean allRequiredFieldsComplete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "_____onCreate");
         setContentView(R.layout.add_med_main);
+        this.medNameComplete = false;
+        this.medInfoComplete = false;
+        this.medFromDateComplete = false;
+        this.medToDateComplete = false;
+        this.medUnitComplete = false;
+        this.allRequiredFieldsComplete = false;
 
         this.userDatabase = FirebaseDatabase.getInstance().getReference();
         // Initialize Firebase Auth.
@@ -74,7 +86,8 @@ public class AddMedicationActivity extends AppCompatActivity {
                 return true;
             } else if (itemId == R.id.add_med) {
                 Toast.makeText(AddMedicationActivity.this, R.string.successful_add, Toast.LENGTH_SHORT).show();
-                if (completeFieldsFilled()) {
+                // TODO!!!
+                if (true) {
                     // Add fields to database.
                     doAddDataToDb();
                 } else {
@@ -105,14 +118,45 @@ public class AddMedicationActivity extends AppCompatActivity {
         this.viewModel = new ViewModelProvider(this).get(ItemViewModel.class);
         this.viewModel.initializeTimeArray();
         this.viewModel.initializeDoseArray();
-        this.viewModel.getMedName().observe(this, item -> Log.d(TAG, "____onCreate: med name entered = " + item));
-        this.viewModel.getInformation().observe(this, item -> Log.d(TAG, "____onCreate: information entered = " + item));
-        this.viewModel.getFromDate().observe(this, item -> Log.d(TAG, "onCreate: from date entered = " + item));
-        this.viewModel.getToDate().observe(this, item -> Log.d(TAG, "onCreate: to date entered = " + item));
+        this.viewModel.getMedName().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Log.d(TAG, "onChanged: med name entered = " + s);
+            }
+        });
+        this.viewModel.getFromDate().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Log.d(TAG, "_____onChanged: from date entered = " + s);
+            }
+        });
+        this.viewModel.getToDate().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Log.d(TAG, "_____onChanged: to date entered = " + s);
+            }
+        });
+        this.viewModel.getUnit().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Log.d(TAG, "_____onChanged: unit entered = " + s);
+            }
+        });
+
         for (int i = 0; i < 12; i++) {
             int finalI = i;
-            this.viewModel.getTime(i).observe(this, item -> Log.d(TAG, "onCreate: to time " + (finalI + 1) + " entered = " + item));
-            this.viewModel.getDose(i).observe(this, item -> Log.d(TAG, "onCreate: to dose " + (finalI + 1) + " entered = " + item));
+            this.viewModel.getTime(i).observe(this, new Observer<String>() {
+                @Override
+                public void onChanged(String s) {
+                    Log.d(TAG, "_____onChanged: time " + (finalI + 1) + " entered = " + s);
+                }
+            });
+            this.viewModel.getDose(i).observe(this, new Observer<String>() {
+                @Override
+                public void onChanged(String s) {
+                    Log.d(TAG, "_____onChanged: dose " + (finalI + 1) + " entered = " + s);
+                }
+            });
         }
     }
 
@@ -121,25 +165,20 @@ public class AddMedicationActivity extends AppCompatActivity {
         assert user != null;
         Log.d(TAG, "_____doAddDataToDb: user.getUid() = " + user.getUid());
         DatabaseReference databaseReference = this.userDatabase.child(user.getUid());
-        databaseReference.push().setValue(new Medicine(this.viewModel.getMedName().getValue(),
+        Log.d(TAG, "_____doAddDataToDb: databaseReference.getKey() = " + databaseReference.getKey());
+        DatabaseReference db = databaseReference.push();
+        db.setValue(new Medicine(this.viewModel.getMedName().getValue(),
                 this.viewModel.getInformation().getValue(),
                 this.viewModel.getFromDate().getValue(),
                 this.viewModel.getToDate().getValue(),
                 this.viewModel.getUnit().getValue()));
-
-//        Query lastQuery = databaseReference.child(user.getUid()).orderByKey().limitToLast(1);
+        Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
         for (int i = 0; i < 12; i++) {
-            databaseReference.child("time").push().setValue(new Time(this.viewModel.getTime(i).getValue()));
+            databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(new Time(this.viewModel.getTime(i).getValue()));
         }
 
         for (int j = 0; j < 12; j++) {
-            databaseReference.child("dose").push().setValue(new Dose(this.viewModel.getDose(j).getValue()));
+            databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").push().setValue(new Dose(this.viewModel.getDose(j).getValue()));
         }
-    }
-
-    // TODO: finish.
-    private boolean completeFieldsFilled() {
-
-        return true;
     }
 }

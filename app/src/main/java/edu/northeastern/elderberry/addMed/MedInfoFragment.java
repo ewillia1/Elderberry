@@ -5,13 +5,17 @@ import static android.content.Context.INPUT_METHOD_SERVICE;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethod;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,7 +39,6 @@ import edu.northeastern.elderberry.R;
 public class MedInfoFragment extends Fragment {
     private static final String TAG = "MedInfoFragment";
     private ItemViewModel viewModel;
-    private TextInputEditText medNameEditText;
     private TextInputEditText infoEditText;
     private String medName;
     private String information;
@@ -67,28 +70,59 @@ public class MedInfoFragment extends Fragment {
         Log.d(TAG, "_____onCreateView");
         View view = inflater.inflate(R.layout.fragment_med_info, container, false);
         TextInputLayout textInputMedName = view.findViewById(R.id.textInputMedName);
-        this.medNameEditText = view.findViewById(R.id.medNameEditText);
+        TextInputEditText medNameEditText = view.findViewById(R.id.medNameEditText);
 
-        this.medNameEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            this.medName = Objects.requireNonNull(this.medNameEditText.getText()).toString();
-            Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + this.medName);
-            this.viewModel.setMedName(this.medName);
+//        this.medNameEditText.setOnEditorActionListener((v, actionId, event) -> {
+//            this.medName = Objects.requireNonNull(this.medNameEditText.getText()).toString();
+//            Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + this.medName);
+//            this.viewModel.setMedName(this.medName);
+//            return false;
+//        });
 
-//            if(!hasFocus) {
-//                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
-////                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-//            }
-//            hideSoftKeyBoard();
+        // TODO!!!!!
+        medNameEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                medName = Objects.requireNonNull(medNameEditText.getText()).toString();
+//                Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + medName);
+//                viewModel.setMedName(medName);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+//                medName = Objects.requireNonNull(medNameEditText.getText()).toString();
+//                Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + medName);
+//                viewModel.setMedName(medName);
+            }
         });
+
+//        this.medNameEditText.setOnFocusChangeListener((v, hasFocus) -> {
+//            this.medName = Objects.requireNonNull(this.medNameEditText.getText()).toString();
+//            Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + this.medName);
+//            this.viewModel.setMedName(this.medName);
+//
+////            if(!hasFocus) {
+////                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+//////                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+////                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+////            }
+//
+////            hideSoftKeyBoard();
+//        });
 
         this.infoEditText = view.findViewById(R.id.infoEditText);
 
-        this.infoEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            this.information = Objects.requireNonNull(this.infoEditText.getText()).toString();
-            Log.d(TAG, "setOnFocusChangeListener: this.information = " + this.information);
-            this.viewModel.setInformation(this.information);
-        });
+        // TODO!!!!!
+//        this.infoEditText.setOnFocusChangeListener((v, hasFocus) -> {
+//            this.information = Objects.requireNonNull(this.infoEditText.getText()).toString();
+//            Log.d(TAG, "setOnFocusChangeListener: this.information = " + this.information);
+//            this.viewModel.setInformation(this.information);
+//        });
 
         this.infoEditText.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {

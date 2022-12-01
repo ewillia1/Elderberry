@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Remove comments from AddMedicationActivity.java and Medicine.java.">
+    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Need to update listeners in MedInfoFragment.java and TimeDoseViewHolder.java (see TODOs; hint: addTextChangedListener). Got database functionality to work. Need to work on checking required fields. Other small issues need to be worked out too.">
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
@@ -18,6 +18,8 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/AddMedicationActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/AddMedicationActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/MedInfoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/MedInfoFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/TimeDoseViewHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/TimeDoseViewHolder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -200,13 +202,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666133441374</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Updated build.gradle">
-      <created>1668817915932</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1668817915932</updated>
     </task>
     <task id="LOCAL-00014" summary="Updated build.gradle">
       <created>1668817924452</created>
@@ -544,7 +539,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669857097895</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Updating AddMedicationActivity.java">
+      <created>1669865134454</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1669865134455</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -560,8 +562,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Made small modifications on import statements&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Shriya&#10;Co-authored by: Christopher" />
-    <MESSAGE value="Added app logo to MedicationDayview.java&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
     <MESSAGE value="Working on getting the add button to add medication to database. Figured out how to retrieve the user and user Uid.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
     <MESSAGE value="Working on sharing data from fragments to host activity -- still not working correctly.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
     <MESSAGE value="Got setOnFocusChangeListener to work in MedInfoFragment.java.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
@@ -585,6 +585,8 @@
     <MESSAGE value="Updated AddMedicationActivity.java and ItemViewModel.java." />
     <MESSAGE value="Updated ItemViewModel.java." />
     <MESSAGE value="Updated AddMedicationActivity.java and Medicine.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated AddMedicationActivity.java and Medicine.java" />
+    <MESSAGE value="Updating AddMedicationActivity.java" />
+    <MESSAGE value="Need to update listeners in MedInfoFragment.java and TimeDoseViewHolder.java (see TODOs; hint: addTextChangedListener). Got database functionality to work. Need to work on checking required fields. Other small issues need to be worked out too." />
+    <option name="LAST_COMMIT_MESSAGE" value="Need to update listeners in MedInfoFragment.java and TimeDoseViewHolder.java (see TODOs; hint: addTextChangedListener). Got database functionality to work. Need to work on checking required fields. Other small issues need to be worked out too." />
   </component>
 </project>
