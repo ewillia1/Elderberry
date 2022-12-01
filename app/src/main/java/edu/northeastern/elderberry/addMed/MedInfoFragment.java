@@ -35,7 +35,6 @@ import edu.northeastern.elderberry.R;
  * Use the {@link MedInfoFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-// TODO: When keyboard is closed lose focus on Medication Name TextInputEditText.
 public class MedInfoFragment extends Fragment {
     private static final String TAG = "MedInfoFragment";
     private ItemViewModel viewModel;
@@ -72,14 +71,7 @@ public class MedInfoFragment extends Fragment {
         TextInputLayout textInputMedName = view.findViewById(R.id.textInputMedName);
         TextInputEditText medNameEditText = view.findViewById(R.id.medNameEditText);
 
-//        this.medNameEditText.setOnEditorActionListener((v, actionId, event) -> {
-//            this.medName = Objects.requireNonNull(this.medNameEditText.getText()).toString();
-//            Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + this.medName);
-//            this.viewModel.setMedName(this.medName);
-//            return false;
-//        });
-
-        // TODO!!!!!
+        // Every time a new character is added to the TextInputEditText for medication name, the viewModel is updated.
         medNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -88,49 +80,41 @@ public class MedInfoFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                medName = Objects.requireNonNull(medNameEditText.getText()).toString();
-//                Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + medName);
-//                viewModel.setMedName(medName);
+                medName = Objects.requireNonNull(medNameEditText.getText()).toString();
+                Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + medName);
+                viewModel.setMedName(medName);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-//                medName = Objects.requireNonNull(medNameEditText.getText()).toString();
-//                Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + medName);
-//                viewModel.setMedName(medName);
+                medName = Objects.requireNonNull(medNameEditText.getText()).toString();
+                Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + medName);
+                viewModel.setMedName(medName);
             }
         });
 
-//        this.medNameEditText.setOnFocusChangeListener((v, hasFocus) -> {
-//            this.medName = Objects.requireNonNull(this.medNameEditText.getText()).toString();
-//            Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + this.medName);
-//            this.viewModel.setMedName(this.medName);
-//
-////            if(!hasFocus) {
-////                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
-//////                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-////                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-////            }
-//
-////            hideSoftKeyBoard();
-//        });
-
         this.infoEditText = view.findViewById(R.id.infoEditText);
 
-        // TODO!!!!!
-//        this.infoEditText.setOnFocusChangeListener((v, hasFocus) -> {
-//            this.information = Objects.requireNonNull(this.infoEditText.getText()).toString();
-//            Log.d(TAG, "setOnFocusChangeListener: this.information = " + this.information);
-//            this.viewModel.setInformation(this.information);
-//        });
+        // Every time a new character is added to the TextInputEditText for information, the viewModel is updated.
+        this.infoEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        this.infoEditText.setOnEditorActionListener((v, actionId, event) -> {
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                this.information = Objects.requireNonNull(this.infoEditText.getText()).toString();
-                Log.d(TAG, "_____setOnFocusChangeListener: this.information = " + this.information);
-                this.viewModel.setInformation(this.information);
             }
-            return false;
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                information = Objects.requireNonNull(infoEditText.getText()).toString();
+                Log.d(TAG, "setOnFocusChangeListener: this.information = " + information);
+                viewModel.setInformation(information);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                information = Objects.requireNonNull(infoEditText.getText()).toString();
+                Log.d(TAG, "setOnFocusChangeListener: this.information = " + information);
+                viewModel.setInformation(information);
+            }
         });
 
         return view;
@@ -142,26 +126,4 @@ public class MedInfoFragment extends Fragment {
         Log.d(TAG, "_____onViewCreated");
         this.viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
     }
-
-//    private void hideSoftKeyBoard() {
-//        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
-//
-//        // Verify if the soft keyboard is open.
-//        if (imm.isAcceptingText()) {
-//            imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
-//        }
-//    }
-
-//    @Override
-//    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-//        super.onConfigurationChanged(newConfig);
-//        Log.d(TAG, "_____onConfigurationChanged");
-//
-//        // Checks whether a hardware keyboard is available
-//        if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO) {
-//            Toast.makeText(getContext(), "keyboard visible", Toast.LENGTH_SHORT).show();
-//        } else if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES) {
-//            Toast.makeText(getContext(), "keyboard hidden", Toast.LENGTH_SHORT).show();
-//        }
-//    }
 }

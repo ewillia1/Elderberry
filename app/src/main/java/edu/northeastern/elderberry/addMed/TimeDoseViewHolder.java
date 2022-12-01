@@ -2,6 +2,8 @@ package edu.northeastern.elderberry.addMed;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -51,25 +53,29 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
 
         initTimePicker();
 
-        // TODO!!!!!
-        this.doseEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            int position = getAbsoluteAdapterPosition();
-            this.dose = this.doseEditText.getText().toString();
-            Log.d(TAG, "_____onFocusChange");
-            this.onTimeDoseItemListener.doseWasAdded(position, this.dose);
-        });
-        // TODO!!!!!
-        this.doseEditText.setOnEditorActionListener((v, actionId, event) -> {
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                int position = getAbsoluteAdapterPosition();
-                this.dose = this.doseEditText.getText().toString();
-                Log.d(TAG, "_____onEditorAction");
-                this.onTimeDoseItemListener.doseWasAdded(position, this.dose);
+        // Every time a new character is added to the TextInputEditText for dose, the viewModel is updated.
+        this.doseEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
-            return false;
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                int position = getAbsoluteAdapterPosition();
+                dose = doseEditText.getText().toString();
+                Log.d(TAG, "_____onFocusChange");
+                onTimeDoseItemListener.doseWasAdded(position, dose);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                int position = getAbsoluteAdapterPosition();
+                dose = doseEditText.getText().toString();
+                Log.d(TAG, "_____onFocusChange");
+                onTimeDoseItemListener.doseWasAdded(position, dose);
+            }
         });
-
-
     }
 
     private void initTimePicker() {

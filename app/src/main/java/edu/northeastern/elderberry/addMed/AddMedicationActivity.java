@@ -17,15 +17,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 
 import java.util.HashMap;
 import java.util.Objects;
 
-import edu.northeastern.elderberry.Dose;
 import edu.northeastern.elderberry.Medicine;
 import edu.northeastern.elderberry.R;
-import edu.northeastern.elderberry.Time;
 
 // TODO: Add database functionality and check to see all required fields are filled in.
 // TODO: Get the add button to work.
@@ -174,11 +171,11 @@ public class AddMedicationActivity extends AppCompatActivity {
                 this.viewModel.getUnit().getValue()));
         Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
         for (int i = 0; i < 12; i++) {
-            databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(new Time(this.viewModel.getTime(i).getValue()));
+            databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").child("time" + i).push().setValue(this.viewModel.getTime(i).getValue());
         }
 
         for (int j = 0; j < 12; j++) {
-            databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").push().setValue(new Dose(this.viewModel.getDose(j).getValue()));
+            databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").child("dose" + j).push().setValue(this.viewModel.getDose(j).getValue());
         }
     }
 }
