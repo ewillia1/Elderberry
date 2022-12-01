@@ -105,9 +105,11 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
             timeDoseAdapter.clear();
 
             this.numOfTimes = position + 1;
+            Log.d(TAG, "_____onCreateView: this.numOfTimes = " + this.numOfTimes);
 
             // Add number of cards in recycler view corresponding to the time frequency the user picked.
             for (int i = 0; i < this.numOfTimes; i++) {
+                Log.d(TAG, "_____onCreateView: for loop iteration: " + i);
                 timeDoseItemArrayList.add(new TimeDoseItem(position));
             }
         });
@@ -130,13 +132,13 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
 
     @Override
     public void timeWasAdded(int index, String time) {
-        Log.d(TAG, "_____timeWasAdded: time = " + time);
+        Log.d(TAG, "_____timeWasAdded: time = " + time + ", index = " + index);
         this.viewModel.setTime(index, time);
     }
 
     @Override
     public void doseWasAdded(int index, String dose) {
-        Log.d(TAG, "_____doseWasAdded: dose = " + dose);
+        Log.d(TAG, "_____doseWasAdded: dose = " + dose + ", index = " + index);
         this.viewModel.setDose(index, dose);
     }
 

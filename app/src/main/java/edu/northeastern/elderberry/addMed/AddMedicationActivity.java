@@ -178,11 +178,8 @@ public class AddMedicationActivity extends AppCompatActivity {
 
         Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
         for (int i = 0; i < 12; i++) {
-            databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").child("time" + i).push().setValue(this.viewModel.getTime(i).getValue());
-        }
-
-        for (int j = 0; j < 12; j++) {
-            databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").child("dose" + j).push().setValue(this.viewModel.getDose(j).getValue());
+            databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").child("time" + (i + 1)).push().setValue(this.viewModel.getTime(i).getValue());
+            databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").child("dose" + (i + 1)).push().setValue(this.viewModel.getDose(i).getValue());
         }
     }
 }

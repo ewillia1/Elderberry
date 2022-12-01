@@ -80,9 +80,9 @@ public class MedInfoFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                medName = Objects.requireNonNull(medNameEditText.getText()).toString();
-                Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + medName);
-                viewModel.setMedName(medName);
+//                medName = Objects.requireNonNull(medNameEditText.getText()).toString();
+//                Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + medName);
+//                viewModel.setMedName(medName);
             }
 
             @Override

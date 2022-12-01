@@ -54,6 +54,7 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
         initTimePicker();
 
         // Every time a new character is added to the TextInputEditText for dose, the viewModel is updated.
+        // TODO: doseWasAdded is being called even at the beginning once the time frequency is picked. This should not happen. Weirdly it is only triggering the first one (and the second one if clicked more than 1 for time frequency).
         this.doseEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
