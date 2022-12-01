@@ -104,17 +104,11 @@ public class AddMedicationActivity extends AppCompatActivity {
         this.viewModel.getInformation().observe(this, item -> Log.d(TAG, "____onCreate: information entered = " + item));
         this.viewModel.getFromDate().observe(this, item -> Log.d(TAG, "onCreate: from date entered = " + item));
         this.viewModel.getToDate().observe(this, item -> Log.d(TAG, "onCreate: to date entered = " + item));
-
-        Log.d(TAG, "_____for Loop prior");
         for (int i = 0; i < 12; i++) {
             int finalI = i;
             this.viewModel.getTime(i).observe(this, item -> Log.d(TAG, "onCreate: to time " + (finalI + 1) + " entered = " + item));
             this.viewModel.getDose(i).observe(this, item -> Log.d(TAG, "onCreate: to dose " + (finalI + 1) + " entered = " + item));
         }
-
-        Log.d(TAG, "_____for Loop afterwards");
-        //this.viewModel.getTime1().observe(this, item -> Log.d(TAG, "onCreate: to time1 entered = " + item));
-        //this.viewModel.getDose1().observe(this, item -> Log.d(TAG, "onCreate: to dose1 entered = " + item));
     }
 
     private void doAddDataToDb() {
@@ -122,12 +116,6 @@ public class AddMedicationActivity extends AppCompatActivity {
         assert user != null;
         Log.d(TAG, "_____doAddDataToDb: user.getUid() = " + user.getUid());
         DatabaseReference push = this.userDatabase.child(user.getUid()).push();
-        Log.d(TAG, "_____doAddDataToDb: this.viewModel.getMedName() = " + this.viewModel.getMedName().toString());
-        Log.d(TAG, "_____doAddDataToDb: this.viewModel.getInformation() = " + this.viewModel.getInformation().toString());
-        Log.d(TAG, "_____doAddDataToDb: this.viewModel.getFromDate() = " + this.viewModel.getFromDate().toString());
-        Log.d(TAG, "_____doAddDataToDb: this.viewModel.getToDate() = " + this.viewModel.getToDate().toString());
-        Log.d(TAG, "_____doAddDataToDb: this.viewModel.getTime1() = " + this.viewModel.getTime1().toString());
-        Log.d(TAG, "_____doAddDataToDb: this.viewModel.getDose1() = " + this.viewModel.getDose1().toString());
         push.setValue(new Medicine(this.viewModel.getMedName().getValue(),
                 this.viewModel.getInformation().getValue(),
                 this.viewModel.getFromDate().getValue(),

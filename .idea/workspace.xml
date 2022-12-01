@@ -9,9 +9,10 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Tried !hasFocus in MedInfoFragment.java with no luck (it is commented out).">
+    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Updated Log.ds in Medicine.java">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/Medicine.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/Medicine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/AddMedicationActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/AddMedicationActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/ItemViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/ItemViewModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,13 +195,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666133441374</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Updated activity_about.xml, strings.xml">
-      <created>1668786857391</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1668786857391</updated>
     </task>
     <task id="LOCAL-00009" summary="Updated activity_add_medication.xml">
       <created>1668787415763</created>
@@ -538,7 +532,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669845841386</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="Updated Log.ds in Medicine.java">
+      <created>1669846884325</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1669846884326</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -554,7 +555,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Made mode MODE_PRIVATE for shared preferences" />
     <MESSAGE value="Just a save to have the remember me checkbox code (but I am going to remove it)" />
     <MESSAGE value="Reverted back to now Remember Me checkbox -- user stays logged in until they log out" />
     <MESSAGE value="Updated day view functionality to display proper medicine from database. &#10;Added a nested recycler view.&#10;Co-authored-by: Gavin" />
@@ -579,6 +579,7 @@
     <MESSAGE value="Added onConfigurationChanged to MedInfoFragment.java (it is commented out since I did not do anything)." />
     <MESSAGE value="Tried !hasFocus in MedInfoFragment.java with no luck (it is commented out)." />
     <MESSAGE value="Updated AddMedicationActivity.java &amp; ItemViewModel.java to properly work with correct time and dose to display.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Elizabeth" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated AddMedicationActivity.java &amp; ItemViewModel.java to properly work with correct time and dose to display.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Elizabeth" />
+    <MESSAGE value="Updated Log.ds in Medicine.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Log.ds in Medicine.java" />
   </component>
 </project>
