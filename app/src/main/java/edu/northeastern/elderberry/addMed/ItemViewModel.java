@@ -125,14 +125,6 @@ public class ItemViewModel extends ViewModel {
         return this.dose.get(index);
     }
 
-    public ArrayList<MutableLiveData<String>> getTimeArray() {
-        return this.time;
-    }
-
-    public ArrayList<MutableLiveData<String>> getDoseArray() {
-        return this.dose;
-    }
-
     @NonNull
     @Override
     public String toString() {

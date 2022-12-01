@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -17,14 +15,9 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.MutableData;
-import com.google.firebase.database.Transaction;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -32,12 +25,8 @@ import java.util.Objects;
 import edu.northeastern.elderberry.Medicine;
 import edu.northeastern.elderberry.R;
 
-// TODO: Add database functionality and check to see all required fields are filled in.
-// TODO: Get the add button to work.
-// TODO: How to get time picker to show hour first and not minute (happens at time 7).
-// TODO: Click enter in time/dose recycler view.
-// TODO: Try to recreate losing times and doses and figure out why that is happening.
-// TODO: doseWasAdded is being called even at the beginning once the time frequency is picked. This should not happen. Weirdly it is only triggering the first one (and the second one if clicked more than 1 for time frequency).
+// TODO: Before adding to database, check to see all required fields are filled in.
+// TODO: TextChangedListener in TimeDowViewHolder and thus doseWasAdded is be triggered/called when it is not supposed to.
 public class AddMedicationActivity extends AppCompatActivity {
 
     private static final String TAG = "AddMedicationActivity";
@@ -178,76 +167,10 @@ public class AddMedicationActivity extends AppCompatActivity {
                 this.viewModel.getFromDate().getValue(),
                 this.viewModel.getToDate().getValue(),
                 this.viewModel.getUnit().getValue()));
-
-        // TODO!!!!! Change MutableLiveData to String!
-//        List timeList = this.viewModel.getTimeArray();
-        List timeList = this.viewModel.getTimeStringArray();
-
-//        ArrayList timeList = new ArrayList<String>();
-//        timeList.add("BLAH");
-//        timeList.add("BLEH");
-//        timeList.add("BLOH");
-
-        databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(timeList);
-
+        List<String> timeList = this.viewModel.getTimeStringArray();
+        List<String> doseList = this.viewModel.getTimeStringArray();
         Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
-//        for (int i = 0; i < 12; i++) {
-//            databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").child("" + (i + 1)).push().setValue(this.viewModel.getTime(i).getValue());
-//            databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").child("" + (i + 1)).push().setValue(this.viewModel.getDose(i).getValue());
-//        }
+        databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(timeList);
+        databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").push().setValue(doseList);
     }
 }
-
-
-
-/*
-       DatabaseReference timeDb = this.userDatabase.child(user.getUid()).child(Objects.requireNonNull(db.getKey())).child("time");
-        timeDb.runTransaction(new Transaction.Handler() {
-            @NonNull
-            @Override
-            public Transaction.Result doTransaction(@NonNull MutableData currentData) {
-                Log.d(TAG, "_____doTransaction");
-                return null;
-            }
-
-            @Override
-            public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
-                Log.d(TAG, "_____onComplete: " + error);
-            }
-        });
-
-DatabaseReference timeDb = this.userDatabase.child(user.getUid()).child(Objects.requireNonNull(db.getKey())).child("time");
-        timeDb.runTransaction(new Transaction.Handler() {
-            @NonNull
-            @Override
-            public Transaction.Result doTransaction(@NonNull MutableData currentData) {
-                Log.d(TAG, "_____doTransaction");
-                return null;
-            }
-
-            @Override
-            public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
-                Log.d(TAG, "_____onComplete: " + error);
-            }
-        });
-
-        DatabaseReference doseDb = this.userDatabase.child(user.getUid()).child(Objects.requireNonNull(db.getKey())).child("dose");
-        doseDb.runTransaction(new Transaction.Handler() {
-            @NonNull
-            @Override
-            public Transaction.Result doTransaction(@NonNull MutableData currentData) {
-                Log.d(TAG, "_____doTransaction");
-                DoseTracker doseTracker = currentData.getValue(DoseTracker.class);
-                if (doseTracker == null) {
-                    doseTracker = new DoseTracker(null, null, null, null, null, null, null, null, null, null, null, null);
-                }
-                currentData.setValue(doseTracker);
-                return Transaction.success(currentData);
-            }
-
-            @Override
-            public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
-                Log.d(TAG, "_____onComplete: " + error);
-            }
-        });
- */
