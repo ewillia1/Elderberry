@@ -9,10 +9,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Go the check for required fields to work! Cleaned up other code and added final constants.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/lint.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/lint.xml" afterDir="false" />
-    </list>
+    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Updated Elderberry.app.unitTest.iml, lint.xml, and workspace.xml." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -194,13 +191,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666133441374</updated>
-    </task>
-    <task id="LOCAL-00027" summary="Skip LoginActivity, if already successfully logged in, got logo screen to show up and then go away">
-      <created>1668872842971</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1668872842971</updated>
     </task>
     <task id="LOCAL-00028" summary="Updated workspace.xml">
       <created>1668872874064</created>
@@ -538,7 +528,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669936348542</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="Updated Elderberry.app.unitTest.iml, lint.xml, and workspace.xml.">
+      <created>1669936832670</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1669936832670</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -554,7 +551,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Updated workspace.xml" />
     <MESSAGE value="Got med information to be added to the database, still working of changing the focus when collapsing the keyboard. Added setOnEditorActionListeners for the infoEditText in MedInfoFragment.java and this.doseEditText in TimeDoseViewHolder.java." />
     <MESSAGE value="Reformatted code and added a TODO to AddMedicationActivity.java" />
     <MESSAGE value="Cleaned up warnings" />
@@ -579,6 +575,7 @@
     <MESSAGE value="Fixed doseList in AddMedicationActivity.java." />
     <MESSAGE value="Working on checking the required fields." />
     <MESSAGE value="Go the check for required fields to work! Cleaned up other code and added final constants." />
-    <option name="LAST_COMMIT_MESSAGE" value="Go the check for required fields to work! Cleaned up other code and added final constants." />
+    <MESSAGE value="Updated Elderberry.app.unitTest.iml, lint.xml, and workspace.xml." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Elderberry.app.unitTest.iml, lint.xml, and workspace.xml." />
   </component>
 </project>
