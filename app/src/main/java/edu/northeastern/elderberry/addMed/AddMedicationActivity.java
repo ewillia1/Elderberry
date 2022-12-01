@@ -34,7 +34,7 @@ import edu.northeastern.elderberry.R;
 // TODO: Get the add button to work.
 // TODO: Get focus to change when keyboard is collapsed.
 // TODO: How to get time picker to show hour first and not minute (happens at time 7).
-// TODO: Click enter in time recycler.
+// TODO: Click enter in time/dose recycler view.
 // TODO: Try to recreate losing times and doses and figure out why that is happening.
 public class AddMedicationActivity extends AppCompatActivity {
 

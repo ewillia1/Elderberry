@@ -2,9 +2,12 @@ package edu.northeastern.elderberry.addMed;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -46,6 +49,16 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
             this.onTimeDoseItemListener.onTimeDoseItemClick(position);
         });
 
+        // So when the user clicks enter while in the last card (time/dose item) in the recycler view it goes to the add button.
+        itemView.setOnKeyListener((v, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                Log.d(TAG, "_____onKey");
+                v.setFocusable(true);
+                v.setFocusableInTouchMode(true);
+            }
+            return false;
+        });
+
         this.timeTextView.setOnClickListener(v -> {
             Log.d(TAG, "_____onClick (this.time)");
             this.timePickerDialog.show();
@@ -58,7 +71,7 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
         this.doseEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                Log.d(TAG, "_____beforeTextChanged");
             }
 
             @Override
