@@ -23,10 +23,10 @@ public class MedicineHolder extends RecyclerView.ViewHolder {
 
         itemView.setOnClickListener(v -> {
             Log.d(TAG, "_____MedicineHolder: ");
-            if (listener!=null) {
+            if (listener != null) {
                 int position = getLayoutPosition();
 
-                if (position!= RecyclerView.NO_POSITION) {
+                if (position != RecyclerView.NO_POSITION) {
                     listener.onClick(position);
                 }
             }

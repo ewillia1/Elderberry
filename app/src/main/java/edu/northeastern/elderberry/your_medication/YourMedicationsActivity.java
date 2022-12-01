@@ -25,11 +25,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 import edu.northeastern.elderberry.LoginActivity;
 import edu.northeastern.elderberry.MedicationTrackerActivity;
 import edu.northeastern.elderberry.OnListItemClick;
 import edu.northeastern.elderberry.R;
+import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 
 public class YourMedicationsActivity extends AppCompatActivity {
     private static final String TAG = "YourMedicationsActivity";
@@ -59,6 +59,7 @@ public class YourMedicationsActivity extends AppCompatActivity {
         // BottomNavigationView functionality.
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnItemSelectedListener(item -> {
+            Log.d(TAG, "_____onCreate: bottomNavigationView.setOnItemSelectedListener");
             int itemId = item.getItemId();
             if (itemId == R.id.home) {
                 startMedicationTrackerActivity();

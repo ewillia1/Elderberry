@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -25,11 +26,11 @@ import java.util.Objects;
 import edu.northeastern.elderberry.Medicine;
 import edu.northeastern.elderberry.R;
 
-// TODO: Before adding to database, check to see all required fields are filled in.
 // TODO: TextChangedListener in TimeDowViewHolder and thus doseWasAdded is be triggered/called when it is not supposed to.
 public class AddMedicationActivity extends AppCompatActivity {
 
     private static final String TAG = "AddMedicationActivity";
+    private static final int MAX_INT = 12;
     private DatabaseReference userDatabase;
     private FirebaseAuth mAuth;
     private ItemViewModel viewModel;
@@ -67,7 +68,8 @@ public class AddMedicationActivity extends AppCompatActivity {
                 finish();
                 return true;
             } else if (itemId == R.id.add_med) {
-                // TODO!!!
+                // Check to see if all the required fields are filled out. If they are, go ahead and add the medication
+                // to the database, if not tell the user they need to fill in all required fields.
                 if (filledInRequiredFields()) {
                     // Add fields to database.
                     Log.d(TAG, "_____onCreate: Successful add.");
@@ -103,12 +105,12 @@ public class AddMedicationActivity extends AppCompatActivity {
         this.viewModel = new ViewModelProvider(this).get(ItemViewModel.class);
         this.viewModel.initializeTimeArray();
         this.viewModel.initializeDoseArray();
-        this.viewModel.getMedName().observe(this, s -> Log.d(TAG, "onChanged: med name entered = " + s));
+        this.viewModel.getMedName().observe(this, s -> Log.d(TAG, "_____onChanged: med name entered = " + s));
         this.viewModel.getFromDate().observe(this, s -> Log.d(TAG, "_____onChanged: from date entered = " + s));
         this.viewModel.getToDate().observe(this, s -> Log.d(TAG, "_____onChanged: to date entered = " + s));
         this.viewModel.getUnit().observe(this, s -> Log.d(TAG, "_____onChanged: unit entered = " + s));
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < MAX_INT; i++) {
             int finalI = i;
             this.viewModel.getTime(i).observe(this, s -> Log.d(TAG, "_____onChanged: time " + (finalI + 1) + " entered = " + s));
             this.viewModel.getDose(i).observe(this, s -> Log.d(TAG, "_____onChanged: dose " + (finalI + 1) + " entered = " + s));
@@ -137,10 +139,31 @@ public class AddMedicationActivity extends AppCompatActivity {
 
     private boolean filledInRequiredFields() {
         Log.d(TAG, "_____filledInRequiredFields");
-        if (this.viewModel.getMedName().getValue() == null || this.viewModel.getMedName().getValue().isBlank() || this.viewModel.getMedName().getValue().isEmpty()) {
-            Log.d(TAG, "_____filledInRequiredFields: false");
+        if (this.viewModel.getMedName().getValue() == null || this.viewModel.getFromDate().getValue() == null
+                || this.viewModel.getToDate().getValue() == null || this.viewModel.getUnit().getValue() == null) {
+            Log.d(TAG, "filledInRequiredFields: (a field is null) false");
+            return false;
+        } else if (this.viewModel.getMedName().getValue().isBlank() || this.viewModel.getMedName().getValue().isEmpty() ||
+                this.viewModel.getFromDate().getValue().isBlank() || this.viewModel.getFromDate().getValue().isEmpty() ||
+                this.viewModel.getToDate().getValue().isBlank() || this.viewModel.getToDate().getValue().isEmpty() ||
+                this.viewModel.getUnit().getValue().isBlank() || this.viewModel.getUnit().getValue().isEmpty()) {
+            Log.d(TAG, "filledInRequiredFields: (a non-time/dose field is blank or empty) false");
             return false;
         }
+
+        ArrayList<String> timeList = this.viewModel.getTimeStringArray();
+        ArrayList<String> doseList = this.viewModel.getDoseStringArray();
+
+        Log.d(TAG, "____filledInRequiredFields: timeList = " + timeList + ", doseList = " + doseList);
+
+        for (int i = 0; i < MAX_INT; i++) {
+            if (timeList.get(i) == null || doseList.get(i) == null || timeList.get(i).isBlank() || timeList.get(i).isEmpty() ||
+                    doseList.get(i).isBlank() || doseList.get(i).isEmpty()) {
+                Log.d(TAG, "_____filledInRequiredFields: (a field is null or blank or empty) false");
+                return false;
+            }
+        }
+
         Log.d(TAG, "_____filledInRequiredFields: true");
         return true;
     }

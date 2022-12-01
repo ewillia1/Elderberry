@@ -13,6 +13,7 @@ public class Medicine {
     private final String unit;
 
     public Medicine(String name, String information, String fromDate, String toDate, String unit) {
+        Log.d(TAG, "_____Medicine");
         this.name = name;
         this.information = information;
         this.fromDate = fromDate;
@@ -41,6 +42,7 @@ public class Medicine {
     }
 
     public String getUnit() {
+        Log.d(TAG, "_____getUnit");
         return this.unit;
     }
 

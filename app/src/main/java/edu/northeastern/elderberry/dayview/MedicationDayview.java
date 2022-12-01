@@ -28,11 +28,10 @@ import edu.northeastern.elderberry.R;
 
 public class MedicationDayview extends AppCompatActivity {
     private static final String TAG = "MedicationDayViewActivity";
-
+    private final List<ParentItem> medicineList = new ArrayList<>();
     ImageButton arrow;
     LinearLayout hiddenView;
     CardView cardView;
-    private final List<ParentItem> medicineList = new ArrayList<>();
 
     // Todo restrict each day view to only show for that particular day selected
     // Todo add app logo to top menu bar

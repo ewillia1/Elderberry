@@ -19,6 +19,8 @@ import edu.northeastern.elderberry.R;
 
 public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private final String TAG = "TimeDoseViewHolder";
+    private final int MAX_HOUR = 12;
+    private final int TEN_MIN = 10;
     public final TextView itemNumber;
     public final TextView timeTextView;
     public final EditText doseEditText;
@@ -94,14 +96,14 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
         // Time.
         TimePickerDialog.OnTimeSetListener timeSetListener = (view, hourOfDay, minute) -> {
             Log.d(TAG, "_____onTimeSet");
-            String am_pm = (hourOfDay < 12) ? " AM" : " PM";
+            String am_pm = (hourOfDay < MAX_HOUR) ? " AM" : " PM";
             String st_min = Integer.toString(minute);
 
-            if (hourOfDay > 12) {
-                hourOfDay %= 12;
+            if (hourOfDay > MAX_HOUR) {
+                hourOfDay %= MAX_HOUR;
             }
 
-            if (minute < 10) {
+            if (minute < TEN_MIN) {
                 st_min = "0" + st_min;
             }
 
