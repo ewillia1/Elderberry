@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -15,8 +17,12 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -169,6 +175,7 @@ public class AddMedicationActivity extends AppCompatActivity {
                 this.viewModel.getFromDate().getValue(),
                 this.viewModel.getToDate().getValue(),
                 this.viewModel.getUnit().getValue()));
+
         Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
         for (int i = 0; i < 12; i++) {
             databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").child("time" + i).push().setValue(this.viewModel.getTime(i).getValue());
@@ -179,3 +186,42 @@ public class AddMedicationActivity extends AppCompatActivity {
         }
     }
 }
+
+
+
+/*
+DatabaseReference timeDb = this.userDatabase.child(user.getUid()).child(Objects.requireNonNull(db.getKey())).child("time");
+        timeDb.runTransaction(new Transaction.Handler() {
+            @NonNull
+            @Override
+            public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                Log.d(TAG, "_____doTransaction");
+                return null;
+            }
+
+            @Override
+            public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
+                Log.d(TAG, "_____onComplete: " + error);
+            }
+        });
+
+        DatabaseReference doseDb = this.userDatabase.child(user.getUid()).child(Objects.requireNonNull(db.getKey())).child("dose");
+        doseDb.runTransaction(new Transaction.Handler() {
+            @NonNull
+            @Override
+            public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                Log.d(TAG, "_____doTransaction");
+                DoseTracker doseTracker = currentData.getValue(DoseTracker.class);
+                if (doseTracker == null) {
+                    doseTracker = new DoseTracker(null, null, null, null, null, null, null, null, null, null, null, null);
+                }
+                currentData.setValue(doseTracker);
+                return Transaction.success(currentData);
+            }
+
+            @Override
+            public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
+                Log.d(TAG, "_____onComplete: " + error);
+            }
+        });
+ */
