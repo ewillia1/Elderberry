@@ -9,8 +9,8 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Trying to work on listeners to get the focus of items to be as expected.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="workspace.xml">
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/TimeDoseViewHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/TimeDoseViewHolder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,13 +193,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666133441374</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Update">
-      <created>1668820935535</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1668820935535</updated>
     </task>
     <task id="LOCAL-00020" summary="Update workspace.xml">
       <created>1668821187786</created>
@@ -537,7 +530,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669919774030</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="workspace.xml">
+      <created>1669923212174</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1669923212174</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -553,7 +553,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Got viewModel to work in MedInfoFragment.java and SetDatesFragment.java.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
     <MESSAGE value="Got unit to work when add button is clicked. Updated input types in some xml files for better user interaction." />
     <MESSAGE value="Added all times and doses to Medicine.java" />
     <MESSAGE value="Changed getAdapterPosition to getAbsoluteAdapterPosition in TimeDoseViewHolder" />
@@ -578,6 +577,7 @@
     <MESSAGE value="Working on database functionality. Added DoseTracker and TimeTracker (but will probably delete those files)." />
     <MESSAGE value="Add TODO to TimeDoseViewHolder.java. Need to fix the doseWasAdded -- it is being called when it is not supposed to/the TextChangedListener is being triggered when it is not supposed to be." />
     <MESSAGE value="Trying to work on listeners to get the focus of items to be as expected." />
-    <option name="LAST_COMMIT_MESSAGE" value="Trying to work on listeners to get the focus of items to be as expected." />
+    <MESSAGE value="workspace.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="workspace.xml" />
   </component>
 </project>
