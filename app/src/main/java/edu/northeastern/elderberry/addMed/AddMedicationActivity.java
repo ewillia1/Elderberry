@@ -27,7 +27,7 @@ import edu.northeastern.elderberry.R;
 // TODO: Save from and to dates in database.
 // TODO: Get the add button to work.
 // TODO: Get focus to change when keyboard is collapsed.
-// TODO: How to get time picker to show hour first and not minute.
+// TODO: How to get time picker to show hour first and not minute (happens at time 7).
 // TODO: Click enter in time recycler.
 public class AddMedicationActivity extends AppCompatActivity {
 
@@ -74,7 +74,6 @@ public class AddMedicationActivity extends AppCompatActivity {
                     // Add fields to database.
                     doAddDataToDb();
                 } else {
-                    // TODO: Potentially tell the user what field(s) they are missing.
                     Toast.makeText(this, "Please fill in all required fields before hitting add.", Toast.LENGTH_SHORT).show();
                 }
                 finish();
@@ -124,10 +123,29 @@ public class AddMedicationActivity extends AppCompatActivity {
                 this.viewModel.getToDate().getValue(),
                 this.viewModel.getUnit().getValue(),
                 this.viewModel.getTime(0).getValue(),
-                this.viewModel.getDose(0).getValue(),
                 this.viewModel.getTime(1).getValue(),
-                this.viewModel.getDose(1).getValue()));
-
+                this.viewModel.getTime(2).getValue(),
+                this.viewModel.getTime(3).getValue(),
+                this.viewModel.getTime(4).getValue(),
+                this.viewModel.getTime(5).getValue(),
+                this.viewModel.getTime(6).getValue(),
+                this.viewModel.getTime(7).getValue(),
+                this.viewModel.getTime(8).getValue(),
+                this.viewModel.getTime(9).getValue(),
+                this.viewModel.getTime(10).getValue(),
+                this.viewModel.getTime(11).getValue(),
+                this.viewModel.getDose(0).getValue(),
+                this.viewModel.getDose(1).getValue(),
+                this.viewModel.getDose(2).getValue(),
+                this.viewModel.getDose(3).getValue(),
+                this.viewModel.getDose(4).getValue(),
+                this.viewModel.getDose(5).getValue(),
+                this.viewModel.getDose(6).getValue(),
+                this.viewModel.getDose(7).getValue(),
+                this.viewModel.getDose(8).getValue(),
+                this.viewModel.getDose(9).getValue(),
+                this.viewModel.getDose(10).getValue(),
+                this.viewModel.getDose(11).getValue()));
     }
 
     // TODO: finish.

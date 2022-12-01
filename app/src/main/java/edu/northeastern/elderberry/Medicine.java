@@ -6,57 +6,36 @@ import androidx.annotation.NonNull;
 
 public class Medicine {
     private static final String TAG = "Medicine";
-    private String name;
-    private String information;
-    private String fromDate;
-    private String toDate;
-    private String unit;
-    private String time1;
-    private String time2;
-    private String time3;
-    private String time4;
-    private String time5;
-    private String time6;
-    private String time7;
-    private String time8;
-    private String time9;
-    private String time10;
-    private String time11;
-    private String time12;
-    private String dose1;
-    private String dose2;
-    private String dose3;
-    private String dose4;
-    private String dose5;
-    private String dose6;
-    private String dose7;
-    private String dose8;
-    private String dose9;
-    private String dose10;
-    private String dose11;
-    private String dose12;
+    private final String name;
+    private final String information;
+    private final String fromDate;
+    private final String toDate;
+    private final String unit;
+    private final String time1;
+    private final String time2;
+    private final String time3;
+    private final String time4;
+    private final String time5;
+    private final String time6;
+    private final String time7;
+    private final String time8;
+    private final String time9;
+    private final String time10;
+    private final String time11;
+    private final String time12;
+    private final String dose1;
+    private final String dose2;
+    private final String dose3;
+    private final String dose4;
+    private final String dose5;
+    private final String dose6;
+    private final String dose7;
+    private final String dose8;
+    private final String dose9;
+    private final String dose10;
+    private final String dose11;
+    private final String dose12;
 
-    public Medicine() {
-        Log.d(TAG, "_____Medicine -- zero argument constructor");
-    }
-
-    public Medicine(String name, String information, String fromDate, String toDate, String unit) {
-        this(name, information, fromDate, toDate, unit, "", "", "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "", "", "");
-        Log.d(TAG, "_____Medicine -- five argument constructor");
-    }
-
-    public Medicine(String name, String information, String fromDate, String toDate, String unit, String time1, String dose1) {
-        this(name, information, fromDate, toDate, unit, time1, "", "", "", "", "", "", "", "", "", "", "",
-                dose1, "", "", "", "", "", "", "", "", "", "", "");
-        Log.d(TAG, "_____Medicine -- seven argument constructor");
-    }
-
-    public Medicine(String name, String information, String fromDate, String toDate, String unit, String time1, String dose1, String time2, String dose2) {
-        this(name, information, fromDate, toDate, unit, time1, time2, "", "", "", "", "", "", "", "", "", "",
-                dose1, dose2, "", "", "", "", "", "", "", "", "", "");
-        Log.d(TAG, "_____Medicine -- nine argument constructor");
-    }
     public Medicine(String name, String information, String fromDate, String toDate, String unit,
                     String time1, String time2, String time3, String time4, String time5, String time6,
                     String time7, String time8, String time9, String time10, String time11, String time12,
