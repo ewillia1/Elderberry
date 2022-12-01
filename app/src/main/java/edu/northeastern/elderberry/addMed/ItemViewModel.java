@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class ItemViewModel extends ViewModel {
     private static final String TAG = "ItemViewModel";
+    private static final int MAX_INDEX = 12;
     private final MutableLiveData<String> medName = new MutableLiveData<>();
     private final MutableLiveData<String> information = new MutableLiveData<>();
     private final MutableLiveData<String> fromDate = new MutableLiveData<>();
@@ -22,16 +23,34 @@ public class ItemViewModel extends ViewModel {
 
     public void initializeTimeArray() {
         Log.d(TAG, "_____initializeTimeArray");
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < MAX_INDEX; i++) {
             this.time.add(i, new MutableLiveData<>());
         }
     }
 
     public void initializeDoseArray() {
         Log.d(TAG, "_____initializeDoseArray");
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < MAX_INDEX; i++) {
             this.dose.add(i, new MutableLiveData<>());
         }
+    }
+
+    public ArrayList<String> getTimeStringArray() {
+        Log.d(TAG, "_____getTimeStringArray");
+        ArrayList<String> timeStringArray = new ArrayList<>();
+        for (int i = 0; i < MAX_INDEX; i++) {
+            timeStringArray.add(this.time.get(i).getValue());
+        }
+        return timeStringArray;
+    }
+
+    public ArrayList<String> getDoseStringArray() {
+        Log.d(TAG, "_____getDoseStringArray");
+        ArrayList<String> doseStringArray = new ArrayList<>();
+        for (int i = 0; i < MAX_INDEX; i++) {
+            doseStringArray.add(this.dose.get(i).getValue());
+        }
+        return doseStringArray;
     }
 
     public void setMedName(String item) {
@@ -104,6 +123,14 @@ public class ItemViewModel extends ViewModel {
     public MutableLiveData<String> getDose(int index) {
         Log.d(TAG, "_____getDose: " + this.dose.get(index));
         return this.dose.get(index);
+    }
+
+    public ArrayList<MutableLiveData<String>> getTimeArray() {
+        return this.time;
+    }
+
+    public ArrayList<MutableLiveData<String>> getDoseArray() {
+        return this.dose;
     }
 
     @NonNull

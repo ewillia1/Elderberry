@@ -24,7 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 import edu.northeastern.elderberry.Medicine;
@@ -168,7 +170,8 @@ public class AddMedicationActivity extends AppCompatActivity {
         assert user != null;
         Log.d(TAG, "_____doAddDataToDb: user.getUid() = " + user.getUid());
         DatabaseReference databaseReference = this.userDatabase.child(user.getUid());
-        Log.d(TAG, "_____doAddDataToDb: databaseReference.getKey() = " + databaseReference.getKey());
+
+        // Get reference to medication node. And add the values to it.
         DatabaseReference db = databaseReference.push();
         db.setValue(new Medicine(this.viewModel.getMedName().getValue(),
                 this.viewModel.getInformation().getValue(),
@@ -176,17 +179,43 @@ public class AddMedicationActivity extends AppCompatActivity {
                 this.viewModel.getToDate().getValue(),
                 this.viewModel.getUnit().getValue()));
 
+        // TODO!!!!! Change MutableLiveData to String!
+//        List timeList = this.viewModel.getTimeArray();
+        List timeList = this.viewModel.getTimeStringArray();
+
+//        ArrayList timeList = new ArrayList<String>();
+//        timeList.add("BLAH");
+//        timeList.add("BLEH");
+//        timeList.add("BLOH");
+
+        databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(timeList);
+
         Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
-        for (int i = 0; i < 12; i++) {
-            databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").child("" + (i + 1)).push().setValue(this.viewModel.getTime(i).getValue());
-            databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").child("" + (i + 1)).push().setValue(this.viewModel.getDose(i).getValue());
-        }
+//        for (int i = 0; i < 12; i++) {
+//            databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").child("" + (i + 1)).push().setValue(this.viewModel.getTime(i).getValue());
+//            databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").child("" + (i + 1)).push().setValue(this.viewModel.getDose(i).getValue());
+//        }
     }
 }
 
 
 
 /*
+       DatabaseReference timeDb = this.userDatabase.child(user.getUid()).child(Objects.requireNonNull(db.getKey())).child("time");
+        timeDb.runTransaction(new Transaction.Handler() {
+            @NonNull
+            @Override
+            public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                Log.d(TAG, "_____doTransaction");
+                return null;
+            }
+
+            @Override
+            public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
+                Log.d(TAG, "_____onComplete: " + error);
+            }
+        });
+
 DatabaseReference timeDb = this.userDatabase.child(user.getUid()).child(Objects.requireNonNull(db.getKey())).child("time");
         timeDb.runTransaction(new Transaction.Handler() {
             @NonNull
