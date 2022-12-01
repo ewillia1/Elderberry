@@ -32,10 +32,10 @@ import edu.northeastern.elderberry.R;
 
 // TODO: Add database functionality and check to see all required fields are filled in.
 // TODO: Get the add button to work.
-// TODO: Get focus to change when keyboard is collapsed.
 // TODO: How to get time picker to show hour first and not minute (happens at time 7).
 // TODO: Click enter in time/dose recycler view.
 // TODO: Try to recreate losing times and doses and figure out why that is happening.
+// TODO: doseWasAdded is being called even at the beginning once the time frequency is picked. This should not happen. Weirdly it is only triggering the first one (and the second one if clicked more than 1 for time frequency).
 public class AddMedicationActivity extends AppCompatActivity {
 
     private static final String TAG = "AddMedicationActivity";
@@ -178,8 +178,8 @@ public class AddMedicationActivity extends AppCompatActivity {
 
         Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
         for (int i = 0; i < 12; i++) {
-            databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").child("time" + (i + 1)).push().setValue(this.viewModel.getTime(i).getValue());
-            databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").child("dose" + (i + 1)).push().setValue(this.viewModel.getDose(i).getValue());
+            databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").child("" + (i + 1)).push().setValue(this.viewModel.getTime(i).getValue());
+            databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").child("" + (i + 1)).push().setValue(this.viewModel.getDose(i).getValue());
         }
     }
 }
