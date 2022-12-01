@@ -168,7 +168,7 @@ public class AddMedicationActivity extends AppCompatActivity {
                 this.viewModel.getToDate().getValue(),
                 this.viewModel.getUnit().getValue()));
         List<String> timeList = this.viewModel.getTimeStringArray();
-        List<String> doseList = this.viewModel.getTimeStringArray();
+        List<String> doseList = this.viewModel.getDoseStringArray();
         Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
         databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(timeList);
         databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").push().setValue(doseList);
