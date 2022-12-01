@@ -27,6 +27,8 @@ import edu.northeastern.elderberry.R;
 // TODO: Save from and to dates in database.
 // TODO: Get the add button to work.
 // TODO: Get focus to change when keyboard is collapsed.
+// TODO: How to get time picker to show hour first and not minute.
+// TODO: Click enter in time recycler.
 public class AddMedicationActivity extends AppCompatActivity {
 
     private static final String TAG = "AddMedicationActivity";

@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.ArrayList;
+
 public class ItemViewModel extends ViewModel {
     private final MutableLiveData<String> medName = new MutableLiveData<>();
     private final MutableLiveData<String> information = new MutableLiveData<>();
@@ -15,22 +17,24 @@ public class ItemViewModel extends ViewModel {
     private final MutableLiveData<String> time1 = new MutableLiveData<>();
     private final MutableLiveData<String> dose1 = new MutableLiveData<>();
     private static final String TAG = "ItemViewModel";
-    //private final ArrayList<MutableLiveData<String>> time = new ArrayList<>();
-    //private final ArrayList<MutableLiveData<String>> dose = new ArrayList<>();
-    private final MutableLiveData<String>[] time = new MutableLiveData[12];
-    private final MutableLiveData<String>[] dose = new MutableLiveData[12];
+    private final ArrayList<MutableLiveData<String>> time = new ArrayList<>();
+    private final ArrayList<MutableLiveData<String>> dose = new ArrayList<>();
+//    private final MutableLiveData<String>[] time = new MutableLiveData[12];
+//    private final MutableLiveData<String>[] dose = new MutableLiveData[12];
 
     public void initializeTimeArray() {
         Log.d(TAG, "_____initializeTimeArray");
         for (int i = 0; i < 12; i++) {
-            this.time[i] = new MutableLiveData<>();
+//            this.time[i] = new MutableLiveData<>();
+            this.time.add(i, new MutableLiveData<>());
         }
     }
 
     public void initializeDoseArray() {
         Log.d(TAG, "_____initializeDoseArray");
         for (int i = 0; i < 12; i++) {
-            this.dose[i] = new MutableLiveData<>();
+//            this.dose[i] = new MutableLiveData<>();
+            this.dose.add(i, new MutableLiveData<>());
         }
     }
 
@@ -61,14 +65,18 @@ public class ItemViewModel extends ViewModel {
 
     public void setTime(int index, String item) {
         Log.d(TAG, "_____setTime");
-        this.time[index].setValue(item);
-        Log.d(TAG, "_____setTime " + (this.time[index]));
+//        this.time[index].setValue(item);
+//        Log.d(TAG, "_____setTime " + (this.time[index]));
+        this.time.set(index, new MutableLiveData<>(item));
+        Log.d(TAG, "_____setTime: " + this.time.get(index));
     }
 
     public void setDose(int index, String item) {
         Log.d(TAG, "_____setDose");
-        this.dose[index].setValue(item);
-        Log.d(TAG, "_____setDose " + (this.dose[index]));
+//        this.dose[index].setValue(item);
+//        Log.d(TAG, "_____setDose " + (this.dose[index]));
+        this.dose.set(index, new MutableLiveData<>(item));
+        Log.d(TAG, "_____setDose: " + this.dose.get(index));
     }
 
     public MutableLiveData<String> getMedName() {
@@ -97,13 +105,17 @@ public class ItemViewModel extends ViewModel {
     }
 
     public MutableLiveData<String> getTime(int index) {
-        Log.d(TAG, "_____getTime " + this.time[index]);
-        return this.time[index];
+//        Log.d(TAG, "_____getTime " + this.time[index]);
+//        return this.time[index];
+        Log.d(TAG, "_____getTime: " + this.time.get(index));
+        return this.time.get(index);
     }
 
     public MutableLiveData<String> getDose(int index) {
-        Log.d(TAG, "_____getDose " + this.dose[index]);
-        return this.dose[index];
+//        Log.d(TAG, "_____getDose " + this.dose[index]);
+//        return this.dose[index];
+        Log.d(TAG, "_____getDose: " + this.dose.get(index));
+        return this.dose.get(index);
     }
 
     @NonNull
