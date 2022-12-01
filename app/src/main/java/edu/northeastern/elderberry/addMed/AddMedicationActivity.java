@@ -127,8 +127,7 @@ public class AddMedicationActivity extends AppCompatActivity {
                 this.viewModel.getToDate().getValue(),
                 this.viewModel.getUnit().getValue()));
 
-//        Query lastQuery = databaseReference.child("mp").orderByKey().limitToLast(1);
-
+//        Query lastQuery = databaseReference.child(user.getUid()).orderByKey().limitToLast(1);
         for (int i = 0; i < 12; i++) {
             databaseReference.child("time").push().setValue(new Time(this.viewModel.getTime(i).getValue()));
         }
