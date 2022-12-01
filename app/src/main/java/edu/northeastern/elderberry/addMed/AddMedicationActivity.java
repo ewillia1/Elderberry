@@ -33,24 +33,12 @@ public class AddMedicationActivity extends AppCompatActivity {
     private DatabaseReference userDatabase;
     private FirebaseAuth mAuth;
     private ItemViewModel viewModel;
-    private boolean medNameComplete;
-    private boolean medInfoComplete;
-    private boolean medFromDateComplete;
-    private boolean medToDateComplete;
-    private boolean medUnitComplete;
-    private boolean allRequiredFieldsComplete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "_____onCreate");
         setContentView(R.layout.add_med_main);
-        this.medNameComplete = false;
-        this.medInfoComplete = false;
-        this.medFromDateComplete = false;
-        this.medToDateComplete = false;
-        this.medUnitComplete = false;
-        this.allRequiredFieldsComplete = false;
 
         this.userDatabase = FirebaseDatabase.getInstance().getReference();
         // Initialize Firebase Auth.
@@ -79,15 +67,18 @@ public class AddMedicationActivity extends AppCompatActivity {
                 finish();
                 return true;
             } else if (itemId == R.id.add_med) {
-                Toast.makeText(AddMedicationActivity.this, R.string.successful_add, Toast.LENGTH_SHORT).show();
                 // TODO!!!
-                if (true) {
+                if (filledInRequiredFields()) {
                     // Add fields to database.
+                    Log.d(TAG, "_____onCreate: Successful add.");
                     doAddDataToDb();
+                    Toast.makeText(AddMedicationActivity.this, R.string.successful_add, Toast.LENGTH_SHORT).show();
+                    finish();
+                    return true;
                 } else {
-                    Toast.makeText(this, "Please fill in all required fields before hitting add.", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "_____onCreate: Unsuccessful add. Need to fill in all required fields.");
+                    Toast.makeText(this, "Please fill in all required fields before clicking add.", Toast.LENGTH_SHORT).show();
                 }
-                finish();
                 return true;
             }
             return false;
@@ -112,45 +103,15 @@ public class AddMedicationActivity extends AppCompatActivity {
         this.viewModel = new ViewModelProvider(this).get(ItemViewModel.class);
         this.viewModel.initializeTimeArray();
         this.viewModel.initializeDoseArray();
-        this.viewModel.getMedName().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                Log.d(TAG, "onChanged: med name entered = " + s);
-            }
-        });
-        this.viewModel.getFromDate().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                Log.d(TAG, "_____onChanged: from date entered = " + s);
-            }
-        });
-        this.viewModel.getToDate().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                Log.d(TAG, "_____onChanged: to date entered = " + s);
-            }
-        });
-        this.viewModel.getUnit().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                Log.d(TAG, "_____onChanged: unit entered = " + s);
-            }
-        });
+        this.viewModel.getMedName().observe(this, s -> Log.d(TAG, "onChanged: med name entered = " + s));
+        this.viewModel.getFromDate().observe(this, s -> Log.d(TAG, "_____onChanged: from date entered = " + s));
+        this.viewModel.getToDate().observe(this, s -> Log.d(TAG, "_____onChanged: to date entered = " + s));
+        this.viewModel.getUnit().observe(this, s -> Log.d(TAG, "_____onChanged: unit entered = " + s));
 
         for (int i = 0; i < 12; i++) {
             int finalI = i;
-            this.viewModel.getTime(i).observe(this, new Observer<String>() {
-                @Override
-                public void onChanged(String s) {
-                    Log.d(TAG, "_____onChanged: time " + (finalI + 1) + " entered = " + s);
-                }
-            });
-            this.viewModel.getDose(i).observe(this, new Observer<String>() {
-                @Override
-                public void onChanged(String s) {
-                    Log.d(TAG, "_____onChanged: dose " + (finalI + 1) + " entered = " + s);
-                }
-            });
+            this.viewModel.getTime(i).observe(this, s -> Log.d(TAG, "_____onChanged: time " + (finalI + 1) + " entered = " + s));
+            this.viewModel.getDose(i).observe(this, s -> Log.d(TAG, "_____onChanged: dose " + (finalI + 1) + " entered = " + s));
         }
     }
 
@@ -172,5 +133,15 @@ public class AddMedicationActivity extends AppCompatActivity {
         Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
         databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(timeList);
         databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").push().setValue(doseList);
+    }
+
+    private boolean filledInRequiredFields() {
+        Log.d(TAG, "_____filledInRequiredFields");
+        if (this.viewModel.getMedName().getValue() == null || this.viewModel.getMedName().getValue().isBlank() || this.viewModel.getMedName().getValue().isEmpty()) {
+            Log.d(TAG, "_____filledInRequiredFields: false");
+            return false;
+        }
+        Log.d(TAG, "_____filledInRequiredFields: true");
+        return true;
     }
 }
