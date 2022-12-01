@@ -16,11 +16,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import java.util.HashMap;
+import java.util.Objects;
 
+import edu.northeastern.elderberry.Dose;
 import edu.northeastern.elderberry.Medicine;
 import edu.northeastern.elderberry.R;
+import edu.northeastern.elderberry.Time;
 
 // TODO: Add database functionality and check to see all required fields are filled in.
 // TODO: Make fields required.
@@ -116,36 +120,53 @@ public class AddMedicationActivity extends AppCompatActivity {
         FirebaseUser user = this.mAuth.getCurrentUser();
         assert user != null;
         Log.d(TAG, "_____doAddDataToDb: user.getUid() = " + user.getUid());
-        DatabaseReference push = this.userDatabase.child(user.getUid()).push();
-        push.setValue(new Medicine(this.viewModel.getMedName().getValue(),
+        DatabaseReference databaseReference = this.userDatabase.child(user.getUid());
+        databaseReference.push().setValue(new Medicine(this.viewModel.getMedName().getValue(),
                 this.viewModel.getInformation().getValue(),
                 this.viewModel.getFromDate().getValue(),
                 this.viewModel.getToDate().getValue(),
-                this.viewModel.getUnit().getValue(),
-                this.viewModel.getTime(0).getValue(),
-                this.viewModel.getTime(1).getValue(),
-                this.viewModel.getTime(2).getValue(),
-                this.viewModel.getTime(3).getValue(),
-                this.viewModel.getTime(4).getValue(),
-                this.viewModel.getTime(5).getValue(),
-                this.viewModel.getTime(6).getValue(),
-                this.viewModel.getTime(7).getValue(),
-                this.viewModel.getTime(8).getValue(),
-                this.viewModel.getTime(9).getValue(),
-                this.viewModel.getTime(10).getValue(),
-                this.viewModel.getTime(11).getValue(),
-                this.viewModel.getDose(0).getValue(),
-                this.viewModel.getDose(1).getValue(),
-                this.viewModel.getDose(2).getValue(),
-                this.viewModel.getDose(3).getValue(),
-                this.viewModel.getDose(4).getValue(),
-                this.viewModel.getDose(5).getValue(),
-                this.viewModel.getDose(6).getValue(),
-                this.viewModel.getDose(7).getValue(),
-                this.viewModel.getDose(8).getValue(),
-                this.viewModel.getDose(9).getValue(),
-                this.viewModel.getDose(10).getValue(),
-                this.viewModel.getDose(11).getValue()));
+                this.viewModel.getUnit().getValue()));
+
+//        Query lastQuery = databaseReference.child("mp").orderByKey().limitToLast(1);
+
+        for (int i = 0; i < 12; i++) {
+            databaseReference.child("time").push().setValue(new Time(this.viewModel.getTime(i).getValue()));
+        }
+
+        for (int j = 0; j < 12; j++) {
+            databaseReference.child("dose").push().setValue(new Dose(this.viewModel.getDose(j).getValue()));
+        }
+
+//        DatabaseReference push = this.userDatabase.child(user.getUid()).push();
+//        push.setValue(new Medicine(this.viewModel.getMedName().getValue(),
+//                this.viewModel.getInformation().getValue(),
+//                this.viewModel.getFromDate().getValue(),
+//                this.viewModel.getToDate().getValue(),
+//                this.viewModel.getUnit().getValue()),
+//                this.viewModel.getTime(0).getValue(),
+//                this.viewModel.getTime(1).getValue(),
+//                this.viewModel.getTime(2).getValue(),
+//                this.viewModel.getTime(3).getValue(),
+//                this.viewModel.getTime(4).getValue(),
+//                this.viewModel.getTime(5).getValue(),
+//                this.viewModel.getTime(6).getValue(),
+//                this.viewModel.getTime(7).getValue(),
+//                this.viewModel.getTime(8).getValue(),
+//                this.viewModel.getTime(9).getValue(),
+//                this.viewModel.getTime(10).getValue(),
+//                this.viewModel.getTime(11).getValue(),
+//                this.viewModel.getDose(0).getValue(),
+//                this.viewModel.getDose(1).getValue(),
+//                this.viewModel.getDose(2).getValue(),
+//                this.viewModel.getDose(3).getValue(),
+//                this.viewModel.getDose(4).getValue(),
+//                this.viewModel.getDose(5).getValue(),
+//                this.viewModel.getDose(6).getValue(),
+//                this.viewModel.getDose(7).getValue(),
+//                this.viewModel.getDose(8).getValue(),
+//                this.viewModel.getDose(9).getValue(),
+//                this.viewModel.getDose(10).getValue(),
+//                this.viewModel.getDose(11).getValue()));
     }
 
     // TODO: finish.
