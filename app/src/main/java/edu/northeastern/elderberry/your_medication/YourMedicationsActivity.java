@@ -35,6 +35,7 @@ public class YourMedicationsActivity extends AppCompatActivity {
     private static final String TAG = "YourMedicationsActivity";
     private MedicineAdapter medAdapter;
     private final ArrayList<MedicineRow> medicines = new ArrayList<>();
+    private final ArrayList<String> medKey = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +93,7 @@ public class YourMedicationsActivity extends AppCompatActivity {
                 //}
 
                 for (DataSnapshot d : snapshot.getChildren()) {
+                    medKey.add(d.getKey());
                     MedicineRow medRow = new MedicineRow(String.valueOf(d.child("name").getValue()), String.valueOf(d.child("fromDate").getValue()), String.valueOf(d.child("toDate").getValue()));
                     medicines.add(medRow);
                 }
@@ -119,6 +121,9 @@ public class YourMedicationsActivity extends AppCompatActivity {
             Log.d(TAG, "_____onClick: ");
             // Todo include position information in click
             Intent intent = new Intent(YourMedicationsActivity.this, AddMedicationActivity.class);
+            Log.d(TAG, "_____onCreate, OnListItemClick, prior to medKey " + medKey.get(position));
+            intent.putExtra("medKey", medKey.get(position));
+            Log.d(TAG, "_____onCreate, OnListItemClick, post medKey");
             startActivity(intent);
         };
         this.medAdapter.setClickListener(onListItemClick);
