@@ -136,37 +136,6 @@ public class AddMedicationActivity extends AppCompatActivity {
         for (int j = 0; j < 12; j++) {
             databaseReference.child("dose").push().setValue(new Dose(this.viewModel.getDose(j).getValue()));
         }
-
-//        DatabaseReference push = this.userDatabase.child(user.getUid()).push();
-//        push.setValue(new Medicine(this.viewModel.getMedName().getValue(),
-//                this.viewModel.getInformation().getValue(),
-//                this.viewModel.getFromDate().getValue(),
-//                this.viewModel.getToDate().getValue(),
-//                this.viewModel.getUnit().getValue()),
-//                this.viewModel.getTime(0).getValue(),
-//                this.viewModel.getTime(1).getValue(),
-//                this.viewModel.getTime(2).getValue(),
-//                this.viewModel.getTime(3).getValue(),
-//                this.viewModel.getTime(4).getValue(),
-//                this.viewModel.getTime(5).getValue(),
-//                this.viewModel.getTime(6).getValue(),
-//                this.viewModel.getTime(7).getValue(),
-//                this.viewModel.getTime(8).getValue(),
-//                this.viewModel.getTime(9).getValue(),
-//                this.viewModel.getTime(10).getValue(),
-//                this.viewModel.getTime(11).getValue(),
-//                this.viewModel.getDose(0).getValue(),
-//                this.viewModel.getDose(1).getValue(),
-//                this.viewModel.getDose(2).getValue(),
-//                this.viewModel.getDose(3).getValue(),
-//                this.viewModel.getDose(4).getValue(),
-//                this.viewModel.getDose(5).getValue(),
-//                this.viewModel.getDose(6).getValue(),
-//                this.viewModel.getDose(7).getValue(),
-//                this.viewModel.getDose(8).getValue(),
-//                this.viewModel.getDose(9).getValue(),
-//                this.viewModel.getDose(10).getValue(),
-//                this.viewModel.getDose(11).getValue()));
     }
 
     // TODO: finish.
