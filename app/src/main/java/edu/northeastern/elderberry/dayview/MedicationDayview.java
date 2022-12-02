@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,12 +28,10 @@ import edu.northeastern.elderberry.R;
 
 public class MedicationDayview extends AppCompatActivity {
     private static final String TAG = "MedicationDayViewActivity";
-
+    private final List<ParentItem> medicineList = new ArrayList<>();
     ImageButton arrow;
     LinearLayout hiddenView;
     CardView cardView;
-    private DatabaseReference userDB;
-    private List<ParentItem> medicineList = new ArrayList<>();
 
     // Todo restrict each day view to only show for that particular day selected
     // Todo add app logo to top menu bar
@@ -41,13 +40,28 @@ public class MedicationDayview extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "_____onCreate");
         setContentView(R.layout.activity_recycle_med_dayview);
 
-        // setting up db
-        this.userDB = FirebaseDatabase.getInstance().getReference();
+        // Calling this activity's function to use ActionBar utility methods.
+        ActionBar actionBar = getSupportActionBar();
+
+        // Providing a subtitle for the ActionBar.
+        assert actionBar != null;
+        actionBar.setSubtitle(getString(R.string.medication_tracker));
+
+        // Adding an icon in the ActionBar.
+        actionBar.setIcon(R.mipmap.app_logo);
+
+        // Methods to display the icon in the ActionBar.
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+
+        // Setting up db.
+        DatabaseReference userDB = FirebaseDatabase.getInstance().getReference();
 
         // Todo to provide the correct username based on log-in info
-        this.userDB.child("Gavin").addValueEventListener(new ValueEventListener() {
+        userDB.child("Gavin").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d(TAG, "_____onDataChange: ");
@@ -103,16 +117,14 @@ public class MedicationDayview extends AppCompatActivity {
         boolean checked = ((CheckBox) view).isChecked();
 
         // Check which checkbox was clicked
-        switch (view.getId()) {
-            case R.id.checkbox_child_item:
-                if (checked) {
-                    setComplete();
-                    // update flag to true in db
-                } else {
-                }
-                // update flag to false in db
-                // setIncomplete();
-                break;
+        if (view.getId() == R.id.checkbox_child_item) {
+            if (checked) {
+                setComplete();
+                // update flag to true in db
+            } else {
+            }
+            // update flag to false in db
+            // setIncomplete();
         }
     }
 

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content" >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -27,10 +27,14 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/medNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:fontFamily="@font/elsie"
                 android:hint="@string/medication_name"
+                android:inputType="textPersonName"
                 android:maxLength="50"
                 android:textColor="@color/main"
                 android:textColorHint="@color/main"
@@ -53,10 +57,15 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputMedName">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/infoEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:fontFamily="@font/elsie"
                 android:hint="@string/information"
+                android:imeOptions="actionDone"
+                android:inputType="textMultiLine|textLongMessage"
                 android:maxLength="5000"
                 android:textColor="@color/main"
                 android:textColorHint="@color/main"

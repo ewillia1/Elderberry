@@ -50,10 +50,10 @@ public class MedicationTrackerActivity extends AppCompatActivity {
 
         CalendarView calendarView = findViewById(R.id.calendar);
 
-        // Add Listener in calendar
+        // Add Listener in calendar.
         calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
+            Log.d(TAG, "_____onCreate: calendarView.setOnDateChangeListener");
             String date = makeDateString(dayOfMonth, month, year);
-            // date_view.setText(date);
             // Todo ask user if to navigate to the activity
             // https://developer.android.com/guide/topics/location/transitions reference this
             Intent intent = new Intent(this, MedicationDayview.class);
@@ -63,6 +63,7 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         // BottomNavigationView functionality.
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnItemSelectedListener(item -> {
+            Log.d(TAG, "_____onCreate: bottomNavigationView.setOnItemSelectedListener");
             int itemId = item.getItemId();
             if (itemId == R.id.home) {
                 startMedicationTrackerActivity();

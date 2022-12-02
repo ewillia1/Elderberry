@@ -2,7 +2,10 @@ package edu.northeastern.elderberry.addMed;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,12 +19,16 @@ import edu.northeastern.elderberry.R;
 
 public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private final String TAG = "TimeDoseViewHolder";
+    private final int MAX_HOUR = 12;
+    private final int TEN_MIN = 10;
     public final TextView itemNumber;
     public final TextView timeTextView;
     public final EditText doseEditText;
     public final OnTimeDoseItemListener onTimeDoseItemListener;
     private TimePickerDialog timePickerDialog;
     private final Context context;
+    private String time;
+    private String dose;
 
     public TimeDoseViewHolder(@NonNull View itemView, OnTimeDoseItemListener onTimeDoseItemListener, Context context) {
         super(itemView);
@@ -34,10 +41,21 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
 
         itemView.setOnClickListener(this);
 
+        // This onClickListener does not really add functionality to our app.
         itemView.setOnClickListener(view -> {
-            int position = getAdapterPosition();
+            int position = getAbsoluteAdapterPosition();
             Log.d(TAG, "_____itemView.setOnClickListener: item clicked " + (position + 1));
             this.onTimeDoseItemListener.onTimeDoseItemClick(position);
+        });
+
+        // So when the user clicks enter while in the last card (time/dose item) in the recycler view it goes to the add button.
+        itemView.setOnKeyListener((v, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                Log.d(TAG, "_____onKey");
+                v.setFocusable(true);
+                v.setFocusableInTouchMode(true);
+            }
+            return false;
         });
 
         this.timeTextView.setOnClickListener(v -> {
@@ -47,7 +65,30 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
 
         initTimePicker();
 
-        this.doseEditText.setOnClickListener(v -> Log.d(TAG, "_____onClick (this.dose)"));
+        // Every time a new character is added to the TextInputEditText for dose, the viewModel is updated.
+        // TODO: doseWasAdded is being called even at the beginning once the time frequency is picked. This should not happen. Weirdly it is only triggering the first one (and the second one if clicked more than 1 for time frequency).
+        this.doseEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                Log.d(TAG, "_____beforeTextChanged");
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                int position = getAbsoluteAdapterPosition();
+                dose = doseEditText.getText().toString();
+                Log.d(TAG, "_____onFocusChange");
+                onTimeDoseItemListener.doseWasAdded(position, dose);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                int position = getAbsoluteAdapterPosition();
+                dose = doseEditText.getText().toString();
+                Log.d(TAG, "_____onFocusChange");
+                onTimeDoseItemListener.doseWasAdded(position, dose);
+            }
+        });
     }
 
     private void initTimePicker() {
@@ -55,18 +96,22 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
         // Time.
         TimePickerDialog.OnTimeSetListener timeSetListener = (view, hourOfDay, minute) -> {
             Log.d(TAG, "_____onTimeSet");
-            String am_pm = (hourOfDay < 12) ? " AM" : " PM";
+            String am_pm = (hourOfDay < MAX_HOUR) ? " AM" : " PM";
             String st_min = Integer.toString(minute);
 
-            if (hourOfDay > 12) {
-                hourOfDay %= 12;
+            if (hourOfDay > MAX_HOUR) {
+                hourOfDay %= MAX_HOUR;
             }
 
-            if (minute < 10) {
+            if (minute < TEN_MIN) {
                 st_min = "0" + st_min;
             }
 
             this.timeTextView.setText(itemView.getContext().getString(R.string.set_time, hourOfDay, st_min, am_pm));
+            this.time = itemView.getContext().getString(R.string.set_time, hourOfDay, st_min, am_pm);
+
+            int position = getAbsoluteAdapterPosition();
+            this.onTimeDoseItemListener.timeWasAdded(position, this.time);
         };
 
         Calendar calendar = Calendar.getInstance();
@@ -85,6 +130,6 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
     @Override
     public void onClick(View view) {
         Log.d(TAG, "_____onClick");
-        this.onTimeDoseItemListener.onTimeDoseItemClick(getAdapterPosition());
+        this.onTimeDoseItemListener.onTimeDoseItemClick(getAbsoluteAdapterPosition());
     }
 }

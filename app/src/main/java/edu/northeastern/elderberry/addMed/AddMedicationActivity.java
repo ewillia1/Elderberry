@@ -6,29 +6,45 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 
+import edu.northeastern.elderberry.Medicine;
 import edu.northeastern.elderberry.R;
 
-// TODO: Add database functionality and check to see all required fields are filled in.
-// TODO: Make fields required.
-// TODO: Save from and to dates in database.
-// TODO: Get the add button to work.
+// TODO: TextChangedListener in TimeDowViewHolder and thus doseWasAdded is be triggered/called when it is not supposed to.
 public class AddMedicationActivity extends AppCompatActivity {
 
     private static final String TAG = "AddMedicationActivity";
+    private static final int MAX_INT = 12;
+    private DatabaseReference userDatabase;
+    private FirebaseAuth mAuth;
+    private ItemViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "_____onCreate");
         setContentView(R.layout.add_med_main);
+
+        this.userDatabase = FirebaseDatabase.getInstance().getReference();
+        // Initialize Firebase Auth.
+        // Get the shared instance of the FirebaseAuth object.
+        this.mAuth = FirebaseAuth.getInstance();
 
         // Calling this activity's function to use ActionBar utility methods.
         ActionBar actionBar = getSupportActionBar();
@@ -52,15 +68,19 @@ public class AddMedicationActivity extends AppCompatActivity {
                 finish();
                 return true;
             } else if (itemId == R.id.add_med) {
-                Toast.makeText(AddMedicationActivity.this, R.string.successful_add, Toast.LENGTH_SHORT).show();
-                if (completeFieldsFilled()) {
+                // Check to see if all the required fields are filled out. If they are, go ahead and add the medication
+                // to the database, if not tell the user they need to fill in all required fields.
+                if (filledInRequiredFields()) {
                     // Add fields to database.
-
+                    Log.d(TAG, "_____onCreate: Successful add.");
+                    doAddDataToDb();
+                    Toast.makeText(AddMedicationActivity.this, R.string.successful_add, Toast.LENGTH_SHORT).show();
+                    finish();
+                    return true;
                 } else {
-                    // TODO: Potentially tell the user what field(s) they are missing.
-                    Toast.makeText(this, "Please fill in all required fields before hitting add.", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "_____onCreate: Unsuccessful add. Need to fill in all required fields.");
+                    Toast.makeText(this, "Please fill in all required fields before clicking add.", Toast.LENGTH_SHORT).show();
                 }
-                finish();
                 return true;
             }
             return false;
@@ -80,11 +100,71 @@ public class AddMedicationActivity extends AppCompatActivity {
         // Needed so that not only the selecting of the tabs works as expected, but also the swiping of the tabs.
         // https://developer.android.com/guide/navigation/navigation-swipe-view-2#java
         new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> tab.setText(tabNames.get(position))).attach();
+
+        // ViewModel functionality.
+        this.viewModel = new ViewModelProvider(this).get(ItemViewModel.class);
+        this.viewModel.initializeTimeArray();
+        this.viewModel.initializeDoseArray();
+        this.viewModel.getMedName().observe(this, s -> Log.d(TAG, "_____onChanged: med name entered = " + s));
+        this.viewModel.getFromDate().observe(this, s -> Log.d(TAG, "_____onChanged: from date entered = " + s));
+        this.viewModel.getToDate().observe(this, s -> Log.d(TAG, "_____onChanged: to date entered = " + s));
+        this.viewModel.getUnit().observe(this, s -> Log.d(TAG, "_____onChanged: unit entered = " + s));
+
+        for (int i = 0; i < MAX_INT; i++) {
+            int finalI = i;
+            this.viewModel.getTime(i).observe(this, s -> Log.d(TAG, "_____onChanged: time " + (finalI + 1) + " entered = " + s));
+            this.viewModel.getDose(i).observe(this, s -> Log.d(TAG, "_____onChanged: dose " + (finalI + 1) + " entered = " + s));
+        }
     }
 
-    // TODO: finish.
-    private boolean completeFieldsFilled() {
+    private void doAddDataToDb() {
+        FirebaseUser user = this.mAuth.getCurrentUser();
+        assert user != null;
+        Log.d(TAG, "_____doAddDataToDb: user.getUid() = " + user.getUid());
+        DatabaseReference databaseReference = this.userDatabase.child(user.getUid());
 
+        // Get reference to medication node. And add the values to it.
+        DatabaseReference db = databaseReference.push();
+        db.setValue(new Medicine(this.viewModel.getMedName().getValue(),
+                this.viewModel.getInformation().getValue(),
+                this.viewModel.getFromDate().getValue(),
+                this.viewModel.getToDate().getValue(),
+                this.viewModel.getUnit().getValue()));
+        List<String> timeList = this.viewModel.getTimeStringArray();
+        List<String> doseList = this.viewModel.getDoseStringArray();
+        Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
+        databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(timeList);
+        databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").push().setValue(doseList);
+    }
+
+    private boolean filledInRequiredFields() {
+        Log.d(TAG, "_____filledInRequiredFields");
+        if (this.viewModel.getMedName().getValue() == null || this.viewModel.getFromDate().getValue() == null
+                || this.viewModel.getToDate().getValue() == null || this.viewModel.getUnit().getValue() == null) {
+            Log.d(TAG, "filledInRequiredFields: (a field is null) false");
+            return false;
+        } else if (this.viewModel.getMedName().getValue().isBlank() || this.viewModel.getMedName().getValue().isEmpty() ||
+                this.viewModel.getFromDate().getValue().isBlank() || this.viewModel.getFromDate().getValue().isEmpty() ||
+                this.viewModel.getToDate().getValue().isBlank() || this.viewModel.getToDate().getValue().isEmpty() ||
+                this.viewModel.getUnit().getValue().isBlank() || this.viewModel.getUnit().getValue().isEmpty()) {
+            Log.d(TAG, "filledInRequiredFields: (a non-time/dose field is blank or empty) false");
+            return false;
+        }
+
+        ArrayList<String> timeList = this.viewModel.getTimeStringArray();
+        ArrayList<String> doseList = this.viewModel.getDoseStringArray();
+
+        Log.d(TAG, "____filledInRequiredFields: timeList = " + timeList + ", doseList = " + doseList);
+
+        for (int i = 0; i < MAX_INT; i++) {
+            if (timeList.get(i) == null || doseList.get(i) == null || timeList.get(i).isBlank() || timeList.get(i).isEmpty() ||
+                    doseList.get(i).isBlank() || doseList.get(i).isEmpty()) {
+                Log.d(TAG, "_____filledInRequiredFields: (a field is null or blank or empty) false");
+                return false;
+            }
+        }
+
+        Log.d(TAG, "_____filledInRequiredFields: true");
         return true;
     }
 }
