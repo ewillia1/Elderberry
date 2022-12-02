@@ -25,7 +25,6 @@ import java.util.Objects;
 import edu.northeastern.elderberry.Medicine;
 import edu.northeastern.elderberry.R;
 
-// TODO: Delete times and doses every time user change time frequency.
 public class AddMedicationActivity extends AppCompatActivity {
 
     private static final String TAG = "AddMedicationActivity";

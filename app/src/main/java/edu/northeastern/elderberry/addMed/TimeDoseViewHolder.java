@@ -66,12 +66,10 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
         initTimePicker();
 
         // Every time a new character is added to the TextInputEditText for dose, the viewModel is updated.
-        // TODO: Delete times and doses every time user change time frequency.
         this.doseEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 Log.d(TAG, "_____beforeTextChanged: s = " + s);
-
             }
 
             @Override
