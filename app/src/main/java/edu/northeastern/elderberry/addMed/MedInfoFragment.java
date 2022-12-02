@@ -1,22 +1,12 @@
 package edu.northeastern.elderberry.addMed;
 
-import static android.content.Context.INPUT_METHOD_SERVICE;
-
-import android.content.Context;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethod;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +19,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.Objects;
 
 import edu.northeastern.elderberry.R;
+import edu.northeastern.elderberry.editMed.EditMedicationActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,8 +30,10 @@ public class MedInfoFragment extends Fragment {
     private static final String TAG = "MedInfoFragment";
     private ItemViewModel viewModel;
     private TextInputEditText infoEditText;
+    private TextInputEditText medNameEditText;
     private String medName;
     private String information;
+    private String editMedKey;
 
     public MedInfoFragment() {
         Log.d(TAG, "_____MedInfoFragment");
@@ -61,6 +54,7 @@ public class MedInfoFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "_____onCreate");
+
     }
 
     @Override
@@ -68,8 +62,8 @@ public class MedInfoFragment extends Fragment {
         // Inflate the layout for this fragment
         Log.d(TAG, "_____onCreateView");
         View view = inflater.inflate(R.layout.fragment_med_info, container, false);
-        TextInputLayout textInputMedName = view.findViewById(R.id.textInputMedName);
-        TextInputEditText medNameEditText = view.findViewById(R.id.medNameEditText);
+        TextInputLayout textInputMedName = view.findViewById(R.id.EditTextInputMedName);
+        medNameEditText = view.findViewById(R.id.EditMedNameText);
 
         // Every time a new character is added to the TextInputEditText for medication name, the viewModel is updated.
         medNameEditText.addTextChangedListener(new TextWatcher() {
@@ -93,7 +87,7 @@ public class MedInfoFragment extends Fragment {
             }
         });
 
-        this.infoEditText = view.findViewById(R.id.infoEditText);
+        this.infoEditText = view.findViewById(R.id.EditInfoEditText);
 
         // Every time a new character is added to the TextInputEditText for information, the viewModel is updated.
         this.infoEditText.addTextChangedListener(new TextWatcher() {
@@ -117,6 +111,18 @@ public class MedInfoFragment extends Fragment {
             }
         });
 
+        // moving from onViewCreated to OnCreatedView
+        this.viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
+
+        // retrieve medKey selected from the yourMedication activity
+        AddMedicationActivity addMedicationActivity = (AddMedicationActivity) getActivity();
+        editMedKey = addMedicationActivity.getEditMedKey();
+
+        // pre-fill fields is a existing medication is selected
+        if (editMedKey != null) {
+            medNameEditText.setText(this.viewModel.getMedName().getValue());
+        }
+
         return view;
     }
 
@@ -124,6 +130,7 @@ public class MedInfoFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.d(TAG, "_____onViewCreated");
+        // Todo comment out the next line with Elizabeth's alignment
         this.viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
     }
 }

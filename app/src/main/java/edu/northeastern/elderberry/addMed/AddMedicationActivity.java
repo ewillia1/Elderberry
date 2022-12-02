@@ -5,7 +5,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -17,13 +16,10 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.MutableData;
-import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
@@ -165,6 +161,10 @@ public class AddMedicationActivity extends AppCompatActivity {
                 }
             });
         }
+
+        // get Intent from your Medication
+        editMedKey = getIntent().getStringExtra(YourMedicationsActivity.YOUR_MED_TO_EDIT_MED_KEY);
+        retrieveMedData(editMedKey);
     }
 
     private void doAddDataToDb() {
@@ -189,25 +189,67 @@ public class AddMedicationActivity extends AppCompatActivity {
             databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").child("dose" + j).push().setValue(this.viewModel.getDose(j).getValue());
         }
     }
-        //for (var d: medDatabase.getRoot().child(editMedKey)) {
-        //
-        //}
-        //medDatabase.addValueEventListener(new ValueEventListener() {
-        //    @Override
-        //    public void onDataChange(@NonNull DataSnapshot snapshot) {
-        //        for (DataSnapshot d: snapshot.getChildren()){
-        //            Log.d(TAG, "______onDataChange: d is " + d.toString());
-        //        }
+    //for (var d: medDatabase.getRoot().child(editMedKey)) {
+    //
+    //}
+    //medDatabase.addValueEventListener(new ValueEventListener() {
+    //    @Override
+    //    public void onDataChange(@NonNull DataSnapshot snapshot) {
+    //        for (DataSnapshot d: snapshot.getChildren()){
+    //            Log.d(TAG, "______onDataChange: d is " + d.toString());
+    //        }
 
-        //    }
+    //    }
 
-        //    @Override
-        //    public void onCancelled(@NonNull DatabaseError error) {
+    //    @Override
+    //    public void onCancelled(@NonNull DatabaseError error) {
 
-        //    }
-        //});
+    //    }
+    //});
 
+    /**
+     * Based on the user selection from yourMedication, this function retrieve the corresponding
+     * data from the database and pass these data to the viewModel so that other fragments
+     * can use these data to pre-fill the fields
+     * @param editMedKey
+     */
+
+    private void retrieveMedData(String editMedKey) {
+        Log.d(TAG, "_____retrieveMedData: editMedKey is " + editMedKey);
+        if (editMedKey == null) return;
+
+        // Todo revert to using actual data
+        //DatabaseReference medDatabase = this.userDatabase.child(this.mAuth.getCurrentUser().getUid());
+        DatabaseReference medDatabase = this.userDatabase.child("Gavin");
+
+        medDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d(TAG, "onDataChange: snapshot getChildren returns" + snapshot.child(editMedKey));
+                // Todo remove hardcode
+                // Todo fine tune medication activity to represent the datastructure in the database
+                // Todo retrieve all fields and pass it to viewModel
+                String medName = String.valueOf(snapshot.child(editMedKey).child("name").getValue());
+                viewModel.setMedName(medName);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
+
+    /**
+     * This function enables hosted fragments to access medication key the user has selected.
+     * Fragments then subsequently retrieve the right medication information
+     * @return the hashed key of the medication selected in the database
+     */
+    public String getEditMedKey() {
+        return this.editMedKey;
+    }
+
+}
 
 
 

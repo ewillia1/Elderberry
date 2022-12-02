@@ -28,8 +28,8 @@ import edu.northeastern.elderberry.R;
 public class MedInfoFragment extends Fragment {
     private static final String TAG = "EditMedInfoFragment";
     private ItemViewModel viewModel;
-    private TextInputEditText infoEditText;
-    private TextInputEditText medNameEditText;
+    private TextInputEditText editInfoEditText;
+    private TextInputEditText editMedNameEditText;
     private String medName;
     private String information;
     private String editMedKey;
@@ -63,7 +63,7 @@ public class MedInfoFragment extends Fragment {
         Log.d(TAG, "onCreate: edit MedKey is " + editMedKey);
         if (editMedKey != null) {
             Log.d(TAG, "onCreate: medName from viewModel is " + this.viewModel.getMedName().getValue());
-            medNameEditText.setText(this.viewModel.getMedName().getValue());
+            editMedNameEditText.setText(this.viewModel.getMedName().getValue());
         }
     }
 
@@ -71,12 +71,12 @@ public class MedInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Log.d(TAG, "_____onCreateView");
-        View view = inflater.inflate(R.layout.fragment_med_info, container, false);
-        TextInputLayout textInputMedName = view.findViewById(R.id.textInputMedName);
-        medNameEditText = view.findViewById(R.id.medNameEditText);
+        View view = inflater.inflate(R.layout.fragment_edit_med_info, container, false);
+        //TextInputLayout textInputMedName = view.findViewById(R.id.EditTextInputMedName);
+        editMedNameEditText = view.findViewById(R.id.EditMedNameText);
 
         // Every time a new character is added to the TextInputEditText for medication name, the viewModel is updated.
-        medNameEditText.addTextChangedListener(new TextWatcher() {
+        editMedNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -84,23 +84,23 @@ public class MedInfoFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                medName = Objects.requireNonNull(medNameEditText.getText()).toString();
+                medName = Objects.requireNonNull(editMedNameEditText.getText()).toString();
                 Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + medName);
                 viewModel.setMedName(medName);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                medName = Objects.requireNonNull(medNameEditText.getText()).toString();
+                medName = Objects.requireNonNull(editMedNameEditText.getText()).toString();
                 Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + medName);
                 viewModel.setMedName(medName);
             }
         });
 
-        this.infoEditText = view.findViewById(R.id.infoEditText);
+        this.editInfoEditText = view.findViewById(R.id.EditInfoEditText);
 
         // Every time a new character is added to the TextInputEditText for information, the viewModel is updated.
-        this.infoEditText.addTextChangedListener(new TextWatcher() {
+        this.editInfoEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -108,14 +108,14 @@ public class MedInfoFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                information = Objects.requireNonNull(infoEditText.getText()).toString();
+                information = Objects.requireNonNull(editInfoEditText.getText()).toString();
                 Log.d(TAG, "setOnFocusChangeListener: this.information = " + information);
                 viewModel.setInformation(information);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                information = Objects.requireNonNull(infoEditText.getText()).toString();
+                information = Objects.requireNonNull(editInfoEditText.getText()).toString();
                 Log.d(TAG, "setOnFocusChangeListener: this.information = " + information);
                 viewModel.setInformation(information);
             }
