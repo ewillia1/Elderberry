@@ -30,12 +30,14 @@ import edu.northeastern.elderberry.LoginActivity;
 import edu.northeastern.elderberry.MedicationTrackerActivity;
 import edu.northeastern.elderberry.OnListItemClick;
 import edu.northeastern.elderberry.R;
+import edu.northeastern.elderberry.editMed.EditMedicationActivity;
 
 public class YourMedicationsActivity extends AppCompatActivity {
     private static final String TAG = "YourMedicationsActivity";
     private MedicineAdapter medAdapter;
     private final ArrayList<MedicineRow> medicines = new ArrayList<>();
     private final ArrayList<String> medKey = new ArrayList<>();
+    public static final String YOUR_MED_TO_EDIT_MED_KEY = "medKey";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,9 +122,9 @@ public class YourMedicationsActivity extends AppCompatActivity {
         OnListItemClick onListItemClick = position -> {
             Log.d(TAG, "_____onClick: ");
             // Todo include position information in click
-            Intent intent = new Intent(YourMedicationsActivity.this, AddMedicationActivity.class);
+            Intent intent = new Intent(YourMedicationsActivity.this, EditMedicationActivity.class);
             Log.d(TAG, "_____onCreate, OnListItemClick, prior to medKey " + medKey.get(position));
-            intent.putExtra("medKey", medKey.get(position));
+            intent.putExtra(YOUR_MED_TO_EDIT_MED_KEY, medKey.get(position));
             Log.d(TAG, "_____onCreate, OnListItemClick, post medKey");
             startActivity(intent);
         };

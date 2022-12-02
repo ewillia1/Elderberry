@@ -17,18 +17,21 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Objects;
 
 import edu.northeastern.elderberry.Medicine;
 import edu.northeastern.elderberry.R;
+import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 // TODO: Add database functionality and check to see all required fields are filled in.
 // TODO: Get the add button to work.
@@ -38,7 +41,7 @@ import edu.northeastern.elderberry.R;
 // TODO: Try to recreate losing times and doses and figure out why that is happening.
 public class AddMedicationActivity extends AppCompatActivity {
 
-    private static final String TAG = "AddMedicationActivity";
+    private static final String TAG = "EditMedicationActivity";
     private DatabaseReference userDatabase;
     private FirebaseAuth mAuth;
     private ItemViewModel viewModel;
@@ -48,6 +51,7 @@ public class AddMedicationActivity extends AppCompatActivity {
     private boolean medToDateComplete;
     private boolean medUnitComplete;
     private boolean allRequiredFieldsComplete;
+    private String editMedKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -185,7 +189,25 @@ public class AddMedicationActivity extends AppCompatActivity {
             databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").child("dose" + j).push().setValue(this.viewModel.getDose(j).getValue());
         }
     }
-}
+        //for (var d: medDatabase.getRoot().child(editMedKey)) {
+        //
+        //}
+        //medDatabase.addValueEventListener(new ValueEventListener() {
+        //    @Override
+        //    public void onDataChange(@NonNull DataSnapshot snapshot) {
+        //        for (DataSnapshot d: snapshot.getChildren()){
+        //            Log.d(TAG, "______onDataChange: d is " + d.toString());
+        //        }
+
+        //    }
+
+        //    @Override
+        //    public void onCancelled(@NonNull DatabaseError error) {
+
+        //    }
+        //});
+
+    }
 
 
 
