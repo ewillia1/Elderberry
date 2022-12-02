@@ -15,6 +15,7 @@ public class ItemViewModel extends ViewModel {
     private final MutableLiveData<String> information = new MutableLiveData<>();
     private final MutableLiveData<String> fromDate = new MutableLiveData<>();
     private final MutableLiveData<String> toDate = new MutableLiveData<>();
+    private final MutableLiveData<String> timeFreq = new MutableLiveData<>();
     private final MutableLiveData<String> unit = new MutableLiveData<>();
     private final MutableLiveData<String> time1 = new MutableLiveData<>();
     private final MutableLiveData<String> dose1 = new MutableLiveData<>();
@@ -73,6 +74,11 @@ public class ItemViewModel extends ViewModel {
         this.toDate.setValue(item);
     }
 
+    public void setTimeFreq(String item) {
+        Log.d(TAG, "_____setTimeFreq");
+        this.timeFreq.setValue(item);
+    }
+
     public void setUnit(String item) {
         Log.d(TAG, "_____setUnit");
         this.unit.setValue(item);
@@ -110,6 +116,10 @@ public class ItemViewModel extends ViewModel {
         return this.toDate;
     }
 
+    public MutableLiveData<String> getTimeFreq() {
+        return this.timeFreq;
+    }
+
     public MutableLiveData<String> getUnit() {
         Log.d(TAG, "_____getUnit");
         return this.unit;
@@ -128,15 +138,17 @@ public class ItemViewModel extends ViewModel {
     @NonNull
     @Override
     public String toString() {
-        Log.d(TAG, "_____toString");
         return "ItemViewModel{" +
                 "medName=" + this.medName +
                 ", information=" + this.information +
                 ", fromDate=" + this.fromDate +
                 ", toDate=" + this.toDate +
+                ", timeFreq=" + this.timeFreq +
                 ", unit=" + this.unit +
                 ", time1=" + this.time1 +
                 ", dose1=" + this.dose1 +
+                ", time=" + this.time +
+                ", dose=" + this.dose +
                 '}';
     }
 }

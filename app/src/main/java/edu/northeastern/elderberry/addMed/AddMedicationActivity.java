@@ -6,7 +6,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -26,7 +25,7 @@ import java.util.Objects;
 import edu.northeastern.elderberry.Medicine;
 import edu.northeastern.elderberry.R;
 
-// TODO: TextChangedListener in TimeDowViewHolder and thus doseWasAdded is be triggered/called when it is not supposed to.
+// TODO: Delete times and doses every time user change time frequency.
 public class AddMedicationActivity extends AppCompatActivity {
 
     private static final String TAG = "AddMedicationActivity";
@@ -108,6 +107,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         this.viewModel.getMedName().observe(this, s -> Log.d(TAG, "_____onChanged: med name entered = " + s));
         this.viewModel.getFromDate().observe(this, s -> Log.d(TAG, "_____onChanged: from date entered = " + s));
         this.viewModel.getToDate().observe(this, s -> Log.d(TAG, "_____onChanged: to date entered = " + s));
+        this.viewModel.getTimeFreq().observe(this, s -> Log.d(TAG, "_____onChanged: time frequency entered = " + s));
         this.viewModel.getUnit().observe(this, s -> Log.d(TAG, "_____onChanged: unit entered = " + s));
 
         for (int i = 0; i < MAX_INT; i++) {
@@ -140,12 +140,13 @@ public class AddMedicationActivity extends AppCompatActivity {
     private boolean filledInRequiredFields() {
         Log.d(TAG, "_____filledInRequiredFields");
         if (this.viewModel.getMedName().getValue() == null || this.viewModel.getFromDate().getValue() == null
-                || this.viewModel.getToDate().getValue() == null || this.viewModel.getUnit().getValue() == null) {
+                || this.viewModel.getToDate().getValue() == null || this.viewModel.getTimeFreq() == null || this.viewModel.getUnit().getValue() == null) {
             Log.d(TAG, "filledInRequiredFields: (a field is null) false");
             return false;
         } else if (this.viewModel.getMedName().getValue().isBlank() || this.viewModel.getMedName().getValue().isEmpty() ||
                 this.viewModel.getFromDate().getValue().isBlank() || this.viewModel.getFromDate().getValue().isEmpty() ||
                 this.viewModel.getToDate().getValue().isBlank() || this.viewModel.getToDate().getValue().isEmpty() ||
+                Objects.requireNonNull(this.viewModel.getTimeFreq().getValue()).isBlank() || this.viewModel.getTimeFreq().getValue().isEmpty() ||
                 this.viewModel.getUnit().getValue().isBlank() || this.viewModel.getUnit().getValue().isEmpty()) {
             Log.d(TAG, "filledInRequiredFields: (a non-time/dose field is blank or empty) false");
             return false;
@@ -154,9 +155,12 @@ public class AddMedicationActivity extends AppCompatActivity {
         ArrayList<String> timeList = this.viewModel.getTimeStringArray();
         ArrayList<String> doseList = this.viewModel.getDoseStringArray();
 
-        Log.d(TAG, "____filledInRequiredFields: timeList = " + timeList + ", doseList = " + doseList);
+        Log.d(TAG, "____filledInRequiredFields: timeList = " + timeList + ",\n doseList = " + doseList);
 
-        for (int i = 0; i < MAX_INT; i++) {
+        // We know that this.viewModel.getTimeFreq().getValue() is not null, blank, or empty if it gets down to here.
+        int numOfTimesAndDoses = Integer.parseInt(this.viewModel.getTimeFreq().getValue());
+        Log.d(TAG, "_____filledInRequiredFields: numOfTimesAndDoses = " + numOfTimesAndDoses);
+        for (int i = 0; i < numOfTimesAndDoses; i++) {
             if (timeList.get(i) == null || doseList.get(i) == null || timeList.get(i).isBlank() || timeList.get(i).isEmpty() ||
                     doseList.get(i).isBlank() || doseList.get(i).isEmpty()) {
                 Log.d(TAG, "_____filledInRequiredFields: (a field is null or blank or empty) false");
