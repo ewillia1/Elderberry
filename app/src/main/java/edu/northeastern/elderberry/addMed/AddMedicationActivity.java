@@ -220,8 +220,8 @@ public class AddMedicationActivity extends AppCompatActivity {
         if (editMedKey == null) return;
 
         // Todo revert to using actual data
-        //DatabaseReference medDatabase = this.userDatabase.child(this.mAuth.getCurrentUser().getUid());
-        DatabaseReference medDatabase = this.userDatabase.child("Gavin");
+        DatabaseReference medDatabase = this.userDatabase.child(this.mAuth.getCurrentUser().getUid());
+        //DatabaseReference medDatabase = this.userDatabase.child("Gavin");
 
         medDatabase.addValueEventListener(new ValueEventListener() {
             @Override

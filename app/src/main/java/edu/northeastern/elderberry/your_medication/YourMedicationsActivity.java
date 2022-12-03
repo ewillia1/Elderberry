@@ -24,7 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
+import edu.northeastern.elderberry.Medicine;
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 import edu.northeastern.elderberry.LoginActivity;
 import edu.northeastern.elderberry.MedicationTrackerActivity;
@@ -38,6 +40,9 @@ public class YourMedicationsActivity extends AppCompatActivity {
     private final ArrayList<MedicineRow> medicines = new ArrayList<>();
     private final ArrayList<String> medKey = new ArrayList<>();
     public static final String YOUR_MED_TO_EDIT_MED_KEY = "medKey";
+    private DatabaseReference userDatabase;
+    private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,27 +83,35 @@ public class YourMedicationsActivity extends AppCompatActivity {
 
         // init db data
         // Todo to make db query more generic
-        String user = "Gavin";
-        DatabaseReference medicineDB = FirebaseDatabase.getInstance().getReference();
-        medicineDB.child(user).addValueEventListener(new ValueEventListener() {
+        //String user = "Gavin";
+        Log.d(TAG, "onCreate: Prior to user med db");
+
+        this.mAuth = FirebaseAuth.getInstance();
+        userDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference medDatabase = this.userDatabase.child(this.mAuth.getCurrentUser().getUid());
+        Log.d(TAG, "onCreate: Retrieving user med db");
+        //DatabaseReference medicineDB = FirebaseDatabase.getInstance().getReference();
+        //medicineDB.child(user).addValueEventListener(new ValueEventListener() {
+        medDatabase.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d(TAG, "_____onDataChange: ");
                 medicines.clear();
                 // Todo enable this when add medicine to db is auto
-                //Iterator<DataSnapshot> it = snapshot.getChildren().iterator();
-                //while (it.hasNext()) {
-                //    DataSnapshot d = it.next();
-                //    //Medicine md = d.getValue(Medicine.class);
-                //    //System.out.println("medicine is " + d.toString());
-                //}
-
-                for (DataSnapshot d : snapshot.getChildren()) {
-                    medKey.add(d.getKey());
-                    MedicineRow medRow = new MedicineRow(String.valueOf(d.child("name").getValue()), String.valueOf(d.child("fromDate").getValue()), String.valueOf(d.child("toDate").getValue()));
-                    medicines.add(medRow);
+                Iterator<DataSnapshot> it = snapshot.getChildren().iterator();
+                while (it.hasNext()) {
+                    DataSnapshot d = it.next();
+                    Medicine md = d.getValue(Medicine.class);
+                    medKey.add((d.getKey()));
+                    Log.d(TAG, "onDataChange: medicine is " + md.toString());
                 }
+
+//                for (DataSnapshot d : snapshot.getChildren()) {
+//                    medKey.add(d.getKey());
+//                    MedicineRow medRow = new MedicineRow(String.valueOf(d.child("name").getValue()), String.valueOf(d.child("fromDate").getValue()), String.valueOf(d.child("toDate").getValue()));
+//                    medicines.add(medRow);
+//                }
 
                 medAdapter.notifyDataSetChanged();
             }
