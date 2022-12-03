@@ -37,7 +37,7 @@ import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 // TODO: Try to recreate losing times and doses and figure out why that is happening.
 public class AddMedicationActivity extends AppCompatActivity {
 
-    private static final String TAG = "EditMedicationActivity";
+    private static final String TAG = "AddMedicationActivity";
     private DatabaseReference userDatabase;
     private FirebaseAuth mAuth;
     private ItemViewModel viewModel;
@@ -179,6 +179,7 @@ public class AddMedicationActivity extends AppCompatActivity {
                 this.viewModel.getFromDate().getValue(),
                 this.viewModel.getToDate().getValue(),
                 this.viewModel.getUnit().getValue()));
+        // Todo add time and taken
 
         Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
         for (int i = 0; i < 12; i++) {
@@ -227,10 +228,24 @@ public class AddMedicationActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d(TAG, "onDataChange: snapshot getChildren returns" + snapshot.child(editMedKey));
                 // Todo remove hardcode
-                // Todo fine tune medication activity to represent the datastructure in the database
+                // Todo fine tune medication activity to represent the data structure in the database
                 // Todo retrieve all fields and pass it to viewModel
                 String medName = String.valueOf(snapshot.child(editMedKey).child("name").getValue());
+                String fromDate = String.valueOf(snapshot.child(editMedKey).child("fromDate").getValue());
+                String toDate = String.valueOf(snapshot.child(editMedKey).child("toDate").getValue());
+                String unit = String.valueOf(snapshot.child(editMedKey).child("unit").getValue());
+                String information = String.valueOf(snapshot.child(editMedKey).child("information").getValue());
+                // Todo extract array from the database
+                //String[] time = String.valueOf(snapshot.child(editMedKey).child("time").getValue());
+                //String dose = String.valueOf(snapshot.child(editMedKey).child("dose").getValue());
                 viewModel.setMedName(medName);
+                viewModel.setFromDate(fromDate);
+                viewModel.setToDate(toDate);
+                viewModel.setUnit(unit);
+                viewModel.setInformation(information);
+                // Todo activate this once we transfer to real data
+                //Medicine med = snapshot.getValue(Medicine.class);
+                //Log.d(TAG, "onDataChange: med retrieved from db is " + med.toString());
             }
 
             @Override

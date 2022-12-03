@@ -121,6 +121,7 @@ public class MedInfoFragment extends Fragment {
         // pre-fill fields is a existing medication is selected
         if (editMedKey != null) {
             medNameEditText.setText(this.viewModel.getMedName().getValue());
+            infoEditText.setText(this.viewModel.getInformation().getValue());
         }
 
         return view;
