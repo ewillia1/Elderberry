@@ -15,6 +15,8 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -160,7 +162,27 @@ public class AddMedicationActivity extends AppCompatActivity {
             Log.d(TAG, "filledInRequiredFields: (a non-time/dose field is blank or empty) false");
             return false;
         }
+        ArrayList<String> timeList = this.viewModel.getTimeStringArray();
+        ArrayList<String> doseList = this.viewModel.getDoseStringArray();
+
+        Log.d(TAG, "____filledInRequiredFields: timeList = " + timeList + ",\n doseList = " + doseList);
+
+        // We know that this.viewModel.getTimeFreq().getValue() is not null, blank, or empty if it gets down to here.
+        int numOfTimesAndDoses = Integer.parseInt(this.viewModel.getTimeFreq().getValue());
+        Log.d(TAG, "_____filledInRequiredFields: numOfTimesAndDoses = " + numOfTimesAndDoses);
+        for (int i = 0; i < numOfTimesAndDoses; i++) {
+            if (timeList.get(i) == null || doseList.get(i) == null || timeList.get(i).isBlank() || timeList.get(i).isEmpty() ||
+                    doseList.get(i).isBlank() || doseList.get(i).isEmpty()) {
+                Log.d(TAG, "_____filledInRequiredFields: (a field is null or blank or empty) false");
+                return false;
+            }
+        }
+
+        Log.d(TAG, "_____filledInRequiredFields: true");
+        return true;
     }
+
+
     //for (var d: medDatabase.getRoot().child(editMedKey)) {
     //
     //}
@@ -233,27 +255,5 @@ public class AddMedicationActivity extends AppCompatActivity {
      */
     public String getEditMedKey() {
         return this.editMedKey;
-    }
-
-}
-
-        ArrayList<String> timeList = this.viewModel.getTimeStringArray();
-        ArrayList<String> doseList = this.viewModel.getDoseStringArray();
-
-        Log.d(TAG, "____filledInRequiredFields: timeList = " + timeList + ",\n doseList = " + doseList);
-
-        // We know that this.viewModel.getTimeFreq().getValue() is not null, blank, or empty if it gets down to here.
-        int numOfTimesAndDoses = Integer.parseInt(this.viewModel.getTimeFreq().getValue());
-        Log.d(TAG, "_____filledInRequiredFields: numOfTimesAndDoses = " + numOfTimesAndDoses);
-        for (int i = 0; i < numOfTimesAndDoses; i++) {
-            if (timeList.get(i) == null || doseList.get(i) == null || timeList.get(i).isBlank() || timeList.get(i).isEmpty() ||
-                    doseList.get(i).isBlank() || doseList.get(i).isEmpty()) {
-                Log.d(TAG, "_____filledInRequiredFields: (a field is null or blank or empty) false");
-                return false;
-            }
-        }
-
-        Log.d(TAG, "_____filledInRequiredFields: true");
-        return true;
     }
 }
