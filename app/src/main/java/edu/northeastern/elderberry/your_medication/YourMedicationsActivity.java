@@ -32,6 +32,7 @@ import edu.northeastern.elderberry.LoginActivity;
 import edu.northeastern.elderberry.MedicationTrackerActivity;
 import edu.northeastern.elderberry.OnListItemClick;
 import edu.northeastern.elderberry.R;
+import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 import edu.northeastern.elderberry.editMed.EditMedicationActivity;
 
 public class YourMedicationsActivity extends AppCompatActivity {
@@ -67,6 +68,7 @@ public class YourMedicationsActivity extends AppCompatActivity {
         // BottomNavigationView functionality.
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnItemSelectedListener(item -> {
+            Log.d(TAG, "_____onCreate: bottomNavigationView.setOnItemSelectedListener");
             int itemId = item.getItemId();
             if (itemId == R.id.home) {
                 startMedicationTrackerActivity();

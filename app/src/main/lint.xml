@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
+    <issue id="IconDuplicates">
+        <ignore path="res/mipmap-hdpi/app_logo.png" />
+        <ignore path="res/mipmap-hdpi/app_logo_round.png" />
+        <ignore path="res/mipmap-mdpi/app_logo.png" />
+        <ignore path="res/mipmap-mdpi/app_logo_round.png" />
+        <ignore path="res/mipmap-xhdpi/app_logo.png" />
+        <ignore path="res/mipmap-xhdpi/app_logo_round.png" />
+        <ignore path="res/mipmap-xxhdpi/app_logo.png" />
+        <ignore path="res/mipmap-xxhdpi/app_logo_round.png" />
+        <ignore path="res/mipmap-xxxhdpi/app_logo.png" />
+        <ignore path="res/mipmap-xxxhdpi/app_logo_round.png" />
+    </issue>
     <issue id="IconLocation">
         <ignore path="res/drawable/elderberryplant.jpg" />
     </issue>

@@ -69,20 +69,20 @@ public class MedInfoFragment extends Fragment {
         medNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                Log.d(TAG, "_____beforeTextChanged");
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 medName = Objects.requireNonNull(medNameEditText.getText()).toString();
-                Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + medName);
+                Log.d(TAG, "_____addTextChangedListener (onTextChanged): this.medName = " + medName);
                 viewModel.setMedName(medName);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 medName = Objects.requireNonNull(medNameEditText.getText()).toString();
-                Log.d(TAG, "_____setOnFocusChangeListener: this.medName = " + medName);
+                Log.d(TAG, "_____addTextChangedListener (afterTextChanged): this.medName = " + medName);
                 viewModel.setMedName(medName);
             }
         });
@@ -93,20 +93,20 @@ public class MedInfoFragment extends Fragment {
         this.infoEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                Log.d(TAG, "_____beforeTextChanged");
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 information = Objects.requireNonNull(infoEditText.getText()).toString();
-                Log.d(TAG, "setOnFocusChangeListener: this.information = " + information);
+                Log.d(TAG, "_____addTextChangedListener: this.information = " + information);
                 viewModel.setInformation(information);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 information = Objects.requireNonNull(infoEditText.getText()).toString();
-                Log.d(TAG, "setOnFocusChangeListener: this.information = " + information);
+                Log.d(TAG, "_____addTextChangedListener: this.information = " + information);
                 viewModel.setInformation(information);
             }
         });
