@@ -69,12 +69,12 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
         this.doseEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                Log.d(TAG, "_____beforeTextChanged: s = " + s);
+                Log.d(TAG, "_____addTextChangedListener (beforeTextChanged): s = " + s);
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Log.d(TAG, "_____onTextChanged: s = " + s);
+                Log.d(TAG, "_____addTextChangedListener (onTextChanged): s = " + s);
             }
 
             @Override
@@ -82,7 +82,7 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
                 if (!s.toString().equals("")) {
                     int position = getAbsoluteAdapterPosition();
                     dose = doseEditText.getText().toString();
-                    Log.d(TAG, "_____afterTextChanged: position = " + position + ", s = " + s);
+                    Log.d(TAG, "_____addTextChangedListener (afterTextChanged): position = " + position + ", s = " + s);
                     onTimeDoseItemListener.doseWasAdded(position, dose);
                 }
             }
