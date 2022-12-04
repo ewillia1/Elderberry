@@ -134,13 +134,15 @@ public class AddMedicationActivity extends AppCompatActivity {
 
         // Get reference to medication node. And add the values to it.
         DatabaseReference db = databaseReference.push();
+
+        List<String> timeList = this.viewModel.getTimeStringArray();
+        List<String> doseList = this.viewModel.getDoseStringArray();
+
         db.setValue(new Medicine(this.viewModel.getMedName().getValue(),
                 this.viewModel.getInformation().getValue(),
                 this.viewModel.getFromDate().getValue(),
                 this.viewModel.getToDate().getValue(),
                 this.viewModel.getUnit().getValue()));
-        List<String> timeList = this.viewModel.getTimeStringArray();
-        List<String> doseList = this.viewModel.getDoseStringArray();
         // Todo add time and taken
 
         Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
@@ -157,7 +159,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         } else if (this.viewModel.getMedName().getValue().isBlank() || this.viewModel.getMedName().getValue().isEmpty() ||
                 this.viewModel.getFromDate().getValue().isBlank() || this.viewModel.getFromDate().getValue().isEmpty() ||
                 this.viewModel.getToDate().getValue().isBlank() || this.viewModel.getToDate().getValue().isEmpty() ||
-                Objects.requireNonNull(this.viewModel.getTimeFreq().getValue()).isBlank() || this.viewModel.getTimeFreq().getValue().isEmpty() ||
+                this.viewModel.getTimeFreq().getValue() == null || this.viewModel.getTimeFreq().getValue().isEmpty() ||
                 this.viewModel.getUnit().getValue().isBlank() || this.viewModel.getUnit().getValue().isEmpty()) {
             Log.d(TAG, "filledInRequiredFields: (a non-time/dose field is blank or empty) false");
             return false;
@@ -209,7 +211,6 @@ public class AddMedicationActivity extends AppCompatActivity {
      */
 
     private void retrieveMedData(String editMedKey) {
-        Log.d(TAG, "_____retrieveMedData: editMedKey is " + editMedKey);
         if (editMedKey == null) return;
 
         // Todo revert to using actual data

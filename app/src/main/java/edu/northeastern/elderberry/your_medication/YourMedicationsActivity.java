@@ -91,7 +91,7 @@ public class YourMedicationsActivity extends AppCompatActivity {
         this.mAuth = FirebaseAuth.getInstance();
         userDatabase = FirebaseDatabase.getInstance().getReference();
         DatabaseReference medDatabase = this.userDatabase.child(this.mAuth.getCurrentUser().getUid());
-        Log.d(TAG, "onCreate: Retrieving user med db");
+        Log.d(TAG, "onCreate: Retrieving user med db with user ID" + this.mAuth.getCurrentUser().getUid());
         //DatabaseReference medicineDB = FirebaseDatabase.getInstance().getReference();
         //medicineDB.child(user).addValueEventListener(new ValueEventListener() {
         medDatabase.addValueEventListener(new ValueEventListener() {
@@ -101,19 +101,19 @@ public class YourMedicationsActivity extends AppCompatActivity {
                 Log.d(TAG, "_____onDataChange: ");
                 medicines.clear();
                 // Todo enable this when add medicine to db is auto
-                Iterator<DataSnapshot> it = snapshot.getChildren().iterator();
-                while (it.hasNext()) {
-                    DataSnapshot d = it.next();
-                    Medicine md = d.getValue(Medicine.class);
-                    medKey.add((d.getKey()));
-                    Log.d(TAG, "onDataChange: medicine is " + md.toString());
-                }
-
-//                for (DataSnapshot d : snapshot.getChildren()) {
-//                    medKey.add(d.getKey());
-//                    MedicineRow medRow = new MedicineRow(String.valueOf(d.child("name").getValue()), String.valueOf(d.child("fromDate").getValue()), String.valueOf(d.child("toDate").getValue()));
-//                    medicines.add(medRow);
+//                Iterator<DataSnapshot> it = snapshot.getChildren().iterator();
+//                while (it.hasNext()) {
+//                    DataSnapshot d = it.next();
+//                    Medicine md = d.getValue(Medicine.class);
+//                    medKey.add((d.getKey()));
+//                    Log.d(TAG, "onDataChange: medicine is " + md.toString());
 //                }
+
+                for (DataSnapshot d : snapshot.getChildren()) {
+                    medKey.add(d.getKey());
+                    MedicineRow medRow = new MedicineRow(String.valueOf(d.child("name").getValue()), String.valueOf(d.child("fromDate").getValue()), String.valueOf(d.child("toDate").getValue()));
+                    medicines.add(medRow);
+                }
 
                 medAdapter.notifyDataSetChanged();
             }
