@@ -24,9 +24,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import edu.northeastern.elderberry.Medicine;
+import edu.northeastern.elderberry.MedicineDoseTime;
 import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
@@ -138,6 +140,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         List<String> timeList = this.viewModel.getTimeStringArray();
         List<String> doseList = this.viewModel.getDoseStringArray();
 
+        // Todo check if we came from yourMedication activity, if yes, override original
         db.setValue(new Medicine(this.viewModel.getMedName().getValue(),
                 this.viewModel.getInformation().getValue(),
                 this.viewModel.getFromDate().getValue(),
@@ -221,25 +224,43 @@ public class AddMedicationActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d(TAG, "onDataChange: snapshot getChildren returns" + snapshot.child(editMedKey));
-                // Todo remove hardcode
                 // Todo fine tune medication activity to represent the data structure in the database
-                // Todo retrieve all fields and pass it to viewModel
-                String medName = String.valueOf(snapshot.child(editMedKey).child("name").getValue());
-                String fromDate = String.valueOf(snapshot.child(editMedKey).child("fromDate").getValue());
-                String toDate = String.valueOf(snapshot.child(editMedKey).child("toDate").getValue());
-                String unit = String.valueOf(snapshot.child(editMedKey).child("unit").getValue());
-                String information = String.valueOf(snapshot.child(editMedKey).child("information").getValue());
-                // Todo extract array from the database
+
+                MedicineDoseTime med = snapshot.child(editMedKey).getValue(MedicineDoseTime.class);
+                Log.d(TAG, "onDataChange: med retrieved from db is " + med.toString());
+                //for (DataSnapshot d : snapshot.getChildren()) {
+                //    MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
+                //    medicineList.add(medicineDoseTime);
+                //}
+                //scheduleMedicationNotifications(medicineList);
                 //String[] time = String.valueOf(snapshot.child(editMedKey).child("time").getValue());
                 //String dose = String.valueOf(snapshot.child(editMedKey).child("dose").getValue());
-                viewModel.setMedName(medName);
-                viewModel.setFromDate(fromDate);
-                viewModel.setToDate(toDate);
-                viewModel.setUnit(unit);
-                viewModel.setInformation(information);
-                // Todo activate this once we transfer to real data
-                //Medicine med = snapshot.getValue(Medicine.class);
-                //Log.d(TAG, "onDataChange: med retrieved from db is " + med.toString());
+                viewModel.setMedName(med.getName());
+                viewModel.setFromDate(med.getFromDate());
+                viewModel.setToDate(med.getToDate());
+                viewModel.setUnit(med.getUnit());
+                viewModel.setInformation(med.getInformation());
+                //viewModel.setDose(med.getDose());
+                Log.d(TAG, "onDataChange: med getTime() returns " + med.getTime().toString());
+                // Todo to set time & dose in the viewModel based on what we retrieve
+                // med.getTime() return a Map<String, List<String>>
+                for (Map.Entry<String, List<String>> entry: med.getTime().entrySet()) {
+                    // there is only one key in the hashmap
+                    List<String> times = entry.getValue(); // List of String
+                    for (int i=0; i < times.size(); i++) viewModel.setTime(i, times.get(i));
+                    Log.d(TAG, "onDataChange: set viewModel time as" + viewModel.getTimeStringArray().toString());
+                }
+
+                for (Map.Entry<String, List<String>> entry: med.getDose().entrySet()) {
+                    // there is only one key in the hashmap
+                    List<String> doses = entry.getValue(); // List of String
+                    for (int i=0; i < doses.size(); i++) viewModel.setDose(i, doses.get(i));
+                    Log.d(TAG, "onDataChange: set viewModel dose as" + viewModel.getDoseStringArray().toString());
+                }
+
+
+                //viewModel.setTime(med.getTime());
+                // Todo extract array from the database
             }
 
             @Override
