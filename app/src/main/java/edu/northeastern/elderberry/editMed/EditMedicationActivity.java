@@ -122,8 +122,8 @@ public class EditMedicationActivity extends AppCompatActivity {
 
         // ViewModel functionality.
         this.viewModel = new ViewModelProvider(this).get(ItemViewModel.class);
-        this.viewModel.initializeTimeArray();
-        this.viewModel.initializeDoseArray();
+        //this.viewModel.initializeTimeArray();
+        //this.viewModel.initializeDoseArray();
         this.viewModel.getMedName().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {

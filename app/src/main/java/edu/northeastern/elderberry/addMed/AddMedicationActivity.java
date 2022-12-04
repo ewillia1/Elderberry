@@ -109,8 +109,8 @@ public class AddMedicationActivity extends AppCompatActivity {
 
         // ViewModel functionality.
         this.viewModel = new ViewModelProvider(this).get(ItemViewModel.class);
-        this.viewModel.initializeTimeArray();
-        this.viewModel.initializeDoseArray();
+        //this.viewModel.initializeTimeArray(); // moved this to viewModel class
+        //this.viewModel.initializeDoseArray();
         this.viewModel.getMedName().observe(this, s -> Log.d(TAG, "_____onChanged: med name entered = " + s));
         this.viewModel.getFromDate().observe(this, s -> Log.d(TAG, "_____onChanged: from date entered = " + s));
         this.viewModel.getToDate().observe(this, s -> Log.d(TAG, "_____onChanged: to date entered = " + s));
@@ -243,18 +243,15 @@ public class AddMedicationActivity extends AppCompatActivity {
                 //viewModel.setDose(med.getDose());
                 Log.d(TAG, "onDataChange: med getTime() returns " + med.getTime().toString());
                 // Todo to set time & dose in the viewModel based on what we retrieve
-                // med.getTime() return a Map<String, List<String>>
                 for (Map.Entry<String, List<String>> entry: med.getTime().entrySet()) {
                     // there is only one key in the hashmap
-                    List<String> times = entry.getValue(); // List of String
-                    for (int i=0; i < times.size(); i++) viewModel.setTime(i, times.get(i));
+                    viewModel.setTime(entry.getValue());
                     Log.d(TAG, "onDataChange: set viewModel time as" + viewModel.getTimeStringArray().toString());
                 }
 
                 for (Map.Entry<String, List<String>> entry: med.getDose().entrySet()) {
                     // there is only one key in the hashmap
-                    List<String> doses = entry.getValue(); // List of String
-                    for (int i=0; i < doses.size(); i++) viewModel.setDose(i, doses.get(i));
+                    viewModel.setDose(entry.getValue());
                     Log.d(TAG, "onDataChange: set viewModel dose as" + viewModel.getDoseStringArray().toString());
                 }
 

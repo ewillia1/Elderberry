@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ItemViewModel extends ViewModel {
     private static final String TAG = "ItemViewModel";
@@ -17,23 +18,19 @@ public class ItemViewModel extends ViewModel {
     private final MutableLiveData<String> toDate = new MutableLiveData<>();
     private final MutableLiveData<String> timeFreq = new MutableLiveData<>();
     private final MutableLiveData<String> unit = new MutableLiveData<>();
-    //    private final MutableLiveData<String> time1 = new MutableLiveData<>();
-//    private final MutableLiveData<String> dose1 = new MutableLiveData<>();
-    private final ArrayList<MutableLiveData<String>> time = new ArrayList<>();
-    private final ArrayList<MutableLiveData<String>> dose = new ArrayList<>();
+    private ArrayList<MutableLiveData<String>> time = initializeArray();
+    private ArrayList<MutableLiveData<String>> dose = initializeArray();
 
-    public void initializeTimeArray() {
+    private ArrayList initializeArray() {
+        ArrayList res = new ArrayList<>();
         Log.d(TAG, "_____initializeTimeArray");
-        for (int i = 0; i < MAX_INDEX; i++) {
-            this.time.add(i, new MutableLiveData<>());
-        }
+        for (int i = 0; i < MAX_INDEX; i++) res.add(i, new MutableLiveData<>());
+        return res;
     }
 
-    public void initializeDoseArray() {
-        Log.d(TAG, "_____initializeDoseArray");
-        for (int i = 0; i < MAX_INDEX; i++) {
-            this.dose.add(i, new MutableLiveData<>());
-        }
+    public void clear() {
+        time = initializeArray();
+        dose = initializeArray();
     }
 
     public ArrayList<String> getTimeStringArray() {
@@ -58,6 +55,20 @@ public class ItemViewModel extends ViewModel {
         Log.d(TAG, "_____setTime");
         this.time.add(index, new MutableLiveData<>(item));
         Log.d(TAG, "_____setTime: " + this.time.get(index));
+    }
+
+    public void setTime(List<String> timeList) {
+        Log.d(TAG, "_____setTime array version");
+        for (int i=0; i < Math.min(timeList.size(), this.time.size()); i++) {
+            this.time.add(i, new MutableLiveData<>(timeList.get(i)));
+        }
+    }
+
+    public void setDose(List<String> doseList) {
+        Log.d(TAG, "_____setDose array version");
+        for (int i=0; i < Math.min(doseList.size(), this.time.size()); i++) {
+            this.dose.add(i, new MutableLiveData<>(doseList.get(i)));
+        }
     }
 
     public void setDose(int index, String item) {
@@ -113,6 +124,14 @@ public class ItemViewModel extends ViewModel {
     public void setTimeFreq(String item) {
         Log.d(TAG, "_____setTimeFreq");
         this.timeFreq.setValue(item);
+    }
+
+    public int inferTimeFreq() {
+        int count = 0;
+        for (int i=0; i< time.size(); i++) {
+            if (time.get(i).getValue() != null) count++;
+        }
+        return count;
     }
 
     public MutableLiveData<String> getUnit() {
