@@ -32,6 +32,7 @@ import edu.northeastern.elderberry.MedicineDoseTime;
 import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
+// Todo enable delete medicine
 public class AddMedicationActivity extends AppCompatActivity {
 
     private static final String TAG = "AddMedicationActivity";
@@ -133,9 +134,10 @@ public class AddMedicationActivity extends AppCompatActivity {
         assert user != null;
         Log.d(TAG, "_____doAddDataToDb: user.getUid() = " + user.getUid());
         DatabaseReference databaseReference = this.userDatabase.child(user.getUid());
+        DatabaseReference db;
 
-        // Get reference to medication node. And add the values to it.
-        DatabaseReference db = databaseReference.push();
+        // If coming from yourMed activity, then don't create new node
+        db = editMedKey != null ? databaseReference.child(editMedKey): databaseReference.push() ;
 
         List<String> timeList = this.viewModel.getTimeStringArray();
         List<String> doseList = this.viewModel.getDoseStringArray();
@@ -156,13 +158,13 @@ public class AddMedicationActivity extends AppCompatActivity {
     private boolean filledInRequiredFields() {
         Log.d(TAG, "_____filledInRequiredFields");
         if (this.viewModel.getMedName().getValue() == null || this.viewModel.getFromDate().getValue() == null
-                || this.viewModel.getToDate().getValue() == null || this.viewModel.getTimeFreq() == null || this.viewModel.getUnit().getValue() == null) {
+                || this.viewModel.getToDate().getValue() == null || this.viewModel.getTimeFreq().getValue() == null || this.viewModel.getUnit().getValue() == null) {
             Log.d(TAG, "filledInRequiredFields: (a field is null) false");
             return false;
         } else if (this.viewModel.getMedName().getValue().isBlank() || this.viewModel.getMedName().getValue().isEmpty() ||
                 this.viewModel.getFromDate().getValue().isBlank() || this.viewModel.getFromDate().getValue().isEmpty() ||
                 this.viewModel.getToDate().getValue().isBlank() || this.viewModel.getToDate().getValue().isEmpty() ||
-                this.viewModel.getTimeFreq().getValue() == null || this.viewModel.getTimeFreq().getValue().isEmpty() ||
+                this.viewModel.getTimeFreq().getValue().isBlank() || this.viewModel.getTimeFreq().getValue().isEmpty() ||
                 this.viewModel.getUnit().getValue().isBlank() || this.viewModel.getUnit().getValue().isEmpty()) {
             Log.d(TAG, "filledInRequiredFields: (a non-time/dose field is blank or empty) false");
             return false;
@@ -241,10 +243,10 @@ public class AddMedicationActivity extends AppCompatActivity {
                 viewModel.setUnit(med.getUnit());
                 viewModel.setInformation(med.getInformation());
                 //viewModel.setDose(med.getDose());
-                Log.d(TAG, "onDataChange: med getTime() returns " + med.getTime().toString());
                 // Todo to set time & dose in the viewModel based on what we retrieve
                 for (Map.Entry<String, List<String>> entry: med.getTime().entrySet()) {
                     // there is only one key in the hashmap
+                    // Todo when we save old data, this is invoked again and triggered an error.
                     viewModel.setTime(entry.getValue());
                     Log.d(TAG, "onDataChange: set viewModel time as" + viewModel.getTimeStringArray().toString());
                 }
@@ -255,6 +257,7 @@ public class AddMedicationActivity extends AppCompatActivity {
                     Log.d(TAG, "onDataChange: set viewModel dose as" + viewModel.getDoseStringArray().toString());
                 }
 
+                viewModel.setTimeFreq(Integer.toString(viewModel.inferTimeFreq()));
 
                 //viewModel.setTime(med.getTime());
                 // Todo extract array from the database

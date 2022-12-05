@@ -85,8 +85,8 @@ public class MedicineDoseTime {
     @Override
     public String toString() {
         return "MedicineDoseTime{" +
-                "dose=" + dose.toString() +
-                ", time=" + time.toString() +
+                "dose=" + dose +
+                ", time=" + time +
                 ", name='" + name + '\'' +
                 ", information='" + information + '\'' +
                 ", fromDate='" + fromDate + '\'' +

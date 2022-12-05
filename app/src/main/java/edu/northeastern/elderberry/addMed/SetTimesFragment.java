@@ -75,7 +75,6 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
         // Get reference to the autocomplete text view.
         AutoCompleteTextView autoCompleteUnit = view.findViewById(R.id.setUnit);
         // Set adapter to the autocomplete tv to the arrayAdapter.
-        autoCompleteUnit.setAdapter(arrayAdapterForUnits);
         autoCompleteUnit.setOnItemClickListener((parent, view12, position, id) -> {
             String unitSelection = (String) parent.getItemAtPosition(position);
             Log.d(TAG, "_____onItemClick: position = " + position + ", id = " + id + ", unitSelection = " + unitSelection);
@@ -106,11 +105,15 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
             int freq = viewModel.inferTimeFreq();
             int pos = freq - 1;
             autoCompleteTimeFreq.setText(time_frequencies[pos]);
-            for (int i = 0; i < freq; i++) timeDoseItemArrayList.add(new TimeDoseItem(pos));
+            autoCompleteUnit.setText(viewModel.getUnit().getValue());
+            for (int i = 0; i < freq; i++) {
+                timeDoseItemArrayList.add(new TimeDoseItem(pos, viewModel.getTime(i).getValue(), viewModel.getDose(i).getValue(), viewModel.getUnit().getValue()));
+            }
         }
 
         // Set adapter to the autocomplete tv to the arrayAdapter.
         autoCompleteTimeFreq.setAdapter(arrayAdapterForFreq);
+        autoCompleteUnit.setAdapter(arrayAdapterForUnits);
 
         // What happens when an time frequency is clicked on.
         autoCompleteTimeFreq.setOnItemClickListener((parent, view1, position, id) -> {

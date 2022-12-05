@@ -26,8 +26,8 @@ public class Medicine {
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.unit = unit;
-        this.taken = new ArrayList<>();
-        this.time = new ArrayList<>(Arrays.asList("NOV 15, 2022", "NOV 16, 2022", "NOV 17, 2022", "NOV 18, 2022", "NOV 19, 2022", "NOV 20, 2022", "NOV 21, 2022", "NOV 22, 2022", "NOV 23, 2022", "NOV 24, 2022", "NOV 25, 2022", "NOV 26, 2022"));
+        //this.taken = new ArrayList<>();
+        //this.time = new ArrayList<>(Arrays.asList("NOV 15, 2022", "NOV 16, 2022", "NOV 17, 2022", "NOV 18, 2022", "NOV 19, 2022", "NOV 20, 2022", "NOV 21, 2022", "NOV 22, 2022", "NOV 23, 2022", "NOV 24, 2022", "NOV 25, 2022", "NOV 26, 2022"));
     }
 
     //public Medicine(String name, String information, String fromDate, String toDate, String unit, ArrayList taken, ArrayList time) {

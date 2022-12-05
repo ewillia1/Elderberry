@@ -35,6 +35,7 @@ import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 import edu.northeastern.elderberry.editMed.EditMedicationActivity;
 
+// Todo Add a few fields to the UI and make it complete
 public class YourMedicationsActivity extends AppCompatActivity {
     private static final String TAG = "YourMedicationsActivity";
     private MedicineAdapter medAdapter;
