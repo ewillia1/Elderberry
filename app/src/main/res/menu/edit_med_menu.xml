@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--    <menu xmlns:android="http://schemas.android.com/apk/res/android">-->
+<!--        <item-->
+<!--            android:id="@+id/cancel_edit"-->
+<!--            android:title="@string/cancel"-->
+<!--            android:icon="@drawable/cancel_edit"/>-->
+<!--        <item-->
+<!--            android:id="@+id/edit_med"-->
+<!--            android:title="@string/save"-->
+<!--            android:icon="@drawable/edit_icon"/>-->
+<!--    </menu>-->
+</menu>
