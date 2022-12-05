@@ -15,6 +15,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,8 +24,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import edu.northeastern.elderberry.MedicineDoseTime;
 import edu.northeastern.elderberry.R;
+import edu.northeastern.elderberry.your_medication.MedicineRow;
 
 public class MedicationDayview extends AppCompatActivity {
     private static final String TAG = "MedicationDayViewActivity";
@@ -32,6 +36,9 @@ public class MedicationDayview extends AppCompatActivity {
     ImageButton arrow;
     LinearLayout hiddenView;
     CardView cardView;
+    private FirebaseAuth mAuth;
+    private DatabaseReference userDatabase;
+    private ArrayList<String> medKey = new ArrayList<>();
 
     // Todo restrict each day view to only show for that particular day selected
     // Todo add app logo to top menu bar
@@ -58,27 +65,58 @@ public class MedicationDayview extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
 
         // Setting up db.
-        DatabaseReference userDB = FirebaseDatabase.getInstance().getReference();
+        //DatabaseReference userDB = FirebaseDatabase.getInstance().getReference();
+
+        this.mAuth = FirebaseAuth.getInstance();
+        userDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference medDatabase = this.userDatabase.child(this.mAuth.getCurrentUser().getUid());
+        Log.d(TAG, "onCreate: Retrieving user med db with user ID" + this.mAuth.getCurrentUser().getUid());
 
         // Todo to provide the correct username based on log-in info
-        userDB.child("Gavin").addValueEventListener(new ValueEventListener() {
+        medDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d(TAG, "_____onDataChange: ");
 
                 medicineList.clear();
 
+//                for (DataSnapshot d : snapshot.getChildren()) {
+//                    // td stands for time data
+//                    List<ChildItem> children = new ArrayList<>();
+//                    for (DataSnapshot td : d.child("time").getChildren()) {
+//                        ChildItem fd = new ChildItem(String.valueOf(td.getValue()));
+//                        children.add(fd);
+//                    }
+
+
                 for (DataSnapshot d : snapshot.getChildren()) {
-                    // td stands for time data
+                    medKey.add(d.getKey());
                     List<ChildItem> children = new ArrayList<>();
-                    for (DataSnapshot td : d.child("time").getChildren()) {
-                        ChildItem fd = new ChildItem(String.valueOf(td.getValue()));
-                        children.add(fd);
+                    //for (DataSnapshot td : d.getChildren()) {
+                    Log.d(TAG, "onDataChange: level 1 ");
+                    MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
+                    for (Map.Entry<String, List<String>> entry : medicineDoseTime.getTime().entrySet()) {
+                        // there is only one key in the hashmap
+                        Log.d(TAG, "onDataChange: level 2 ");
+                        for (String t : entry.getValue()) {
+                            ChildItem fd = new ChildItem(t);
+                            children.add(fd);
+                        }
+
+                        Log.d(TAG, "onDataChange: level 3 retrieve correct medicineDoseTime successfully ");
                     }
-                    // add time to take the medicine to list
-                    medicineList.add(new ParentItem(String.valueOf(d.child("name").getValue()), children));
+                    medicineList.add(new ParentItem(medicineDoseTime.getName(), children));
                 }
+
+
+                // MedicineDoseTime med = snapshot.child(editMedKey).getValue(MedicineDoseTime.class);
+
+                // add time to take the medicine to list
+                //medicineList.add(new ParentItem(String.valueOf(d.child("name").getValue()), children));
+
+                // medAdapter.notifyDataSetChanged();
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -130,36 +168,6 @@ public class MedicationDayview extends AppCompatActivity {
 
     public void setComplete() {
         // Todo update completion flag in database
-    }
-
-    private List<ParentItem> ParentItemList() {
-        List<ParentItem> itemList = new ArrayList<>();
-
-        ParentItem item = new ParentItem("Title 1", ChildItemList());
-        itemList.add(item);
-        ParentItem item1 = new ParentItem("Title 2", ChildItemList());
-        itemList.add(item1);
-        ParentItem item2 = new ParentItem("Title 3", ChildItemList());
-        itemList.add(item2);
-        ParentItem item3 = new ParentItem("Title 4", ChildItemList());
-        itemList.add(item3);
-
-        return itemList;
-    }
-
-    // Method to pass the arguments
-    // for the elements
-    // of child RecyclerView
-    private List<ChildItem> ChildItemList() {
-        List<ChildItem> ChildItemList = new ArrayList<>();
-
-        ChildItemList.add(new ChildItem("Card 1"));
-        ChildItemList.add(new ChildItem("Card 2"));
-        ChildItemList.add(new ChildItem("Card 3"));
-        ChildItemList.add(new ChildItem("Card 4"));
-
-        return ChildItemList;
-
     }
 
     // Method to inflate the options menu when the user opens the menu for the first time.

@@ -20,6 +20,7 @@ public class ItemViewModel extends ViewModel {
     private final MutableLiveData<String> unit = new MutableLiveData<>();
     private ArrayList<MutableLiveData<String>> time = initializeArray();
     private ArrayList<MutableLiveData<String>> dose = initializeArray();
+    private ArrayList<MutableLiveData<Boolean>> taken = initializeArray();
 
     private ArrayList initializeArray() {
         ArrayList res = new ArrayList<>();
@@ -40,6 +41,15 @@ public class ItemViewModel extends ViewModel {
             timeStringArray.add(this.time.get(i).getValue());
         }
         return timeStringArray;
+    }
+
+    public ArrayList<Boolean> getTakenBooleanArray() {
+        Log.d(TAG, "_____getTimeStringArray");
+        ArrayList<Boolean> takenBooleanArray = new ArrayList<>();
+        for (int i = 0; i < MAX_INDEX; i++) {
+            takenBooleanArray.add(this.taken.get(i).getValue());
+        }
+        return takenBooleanArray;
     }
 
     public ArrayList<String> getDoseStringArray() {
@@ -74,7 +84,19 @@ public class ItemViewModel extends ViewModel {
     public void setDose(int index, String item) {
         Log.d(TAG, "_____setDose");
         this.dose.add(index, new MutableLiveData<>(item));
-        Log.d(TAG, "_____setDose: " + this.dose.get(index));
+    }
+
+    public void resetTaken() {
+        for (int i = 0 ; i < MAX_INDEX ; i++) {
+            if (i < Integer.valueOf(this.timeFreq.getValue())) {
+                this.taken.add(i, new MutableLiveData<>(Boolean.FALSE));
+            }
+            else {
+                this.taken.add(i, new MutableLiveData<>());
+            }
+            this.taken = taken;
+
+        }
     }
 
     public MutableLiveData<String> getMedName() {
@@ -152,6 +174,11 @@ public class ItemViewModel extends ViewModel {
     public MutableLiveData<String> getDose(int index) {
         Log.d(TAG, "_____getDose: " + this.dose.get(index));
         return this.dose.get(index);
+    }
+
+    public MutableLiveData<Boolean> getTaken(int index) {
+        Log.d(TAG, "_____getDose: " + this.taken.get(index));
+        return this.taken.get(index);
     }
 
     @NonNull

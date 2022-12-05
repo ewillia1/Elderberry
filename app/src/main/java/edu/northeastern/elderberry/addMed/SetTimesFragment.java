@@ -138,6 +138,7 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
                 timeDoseItemArrayList.add(new TimeDoseItem(position));
             }
             this.viewModel.setTimeFreq(Integer.toString(this.numOfTimes));
+            this.viewModel.resetTaken();
         });
 
         // Instantiate the recyclerView.

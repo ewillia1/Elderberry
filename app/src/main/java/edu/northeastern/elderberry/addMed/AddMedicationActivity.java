@@ -141,6 +141,8 @@ public class AddMedicationActivity extends AppCompatActivity {
 
         List<String> timeList = this.viewModel.getTimeStringArray();
         List<String> doseList = this.viewModel.getDoseStringArray();
+        List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
+
 
         // Todo check if we came from yourMedication activity, if yes, override original
         db.setValue(new Medicine(this.viewModel.getMedName().getValue(),
@@ -153,6 +155,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
         databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(timeList);
         databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").push().setValue(doseList);
+        databaseReference.child(Objects.requireNonNull(db.getKey())).child("taken").push().setValue(takenList);
     }
 
     private boolean filledInRequiredFields() {
