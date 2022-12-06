@@ -122,7 +122,7 @@ public class SetDatesFragment extends Fragment {
             this.set_from.setText(date);
             this.set_from.setTextSize(FONT_SIZE);
             Log.d(TAG, "_____initDatePicker fromDate -- this.fromDate = " + this.fromDate);
-            this.fromDate.set(year, month, day); // Todo check with Elizabeth on what this is doing
+            this.fromDate.set(year, month, day); // Check with Elizabeth on if this is a duplication
             this.fromDate_db = makeDateString(day, month, year);
             this.viewModel.setFromDate(this.fromDate_db);
             Log.d(TAG, "_____initDatePicker: this.fromDate_db = " + this.fromDate_db);

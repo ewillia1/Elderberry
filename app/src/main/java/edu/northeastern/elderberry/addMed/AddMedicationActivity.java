@@ -32,7 +32,8 @@ import edu.northeastern.elderberry.MedicineDoseTime;
 import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
-// Todo enable delete medicine
+//3 Todo to test if the taken field is working when frequency is changed when we edit the medication
+//2 Todo include the new UI icon for save/edit med
 public class AddMedicationActivity extends AppCompatActivity {
 
     private static final String TAG = "AddMedicationActivity";
@@ -144,13 +145,13 @@ public class AddMedicationActivity extends AppCompatActivity {
         List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
 
 
-        // Todo check if we came from yourMedication activity, if yes, override original
+        // 1 Todo properly update the db if we came from your medication activity
         db.setValue(new Medicine(this.viewModel.getMedName().getValue(),
                 this.viewModel.getInformation().getValue(),
                 this.viewModel.getFromDate().getValue(),
                 this.viewModel.getToDate().getValue(),
                 this.viewModel.getUnit().getValue()));
-        // Todo add time and taken
+        // 3 Todo add time and taken
 
         Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
         databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(timeList);
@@ -221,35 +222,24 @@ public class AddMedicationActivity extends AppCompatActivity {
     private void retrieveMedData(String editMedKey) {
         if (editMedKey == null) return;
 
-        // Todo revert to using actual data
         DatabaseReference medDatabase = this.userDatabase.child(this.mAuth.getCurrentUser().getUid());
-        //DatabaseReference medDatabase = this.userDatabase.child("Gavin");
 
         medDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d(TAG, "onDataChange: snapshot getChildren returns" + snapshot.child(editMedKey));
-                // Todo fine tune medication activity to represent the data structure in the database
 
                 MedicineDoseTime med = snapshot.child(editMedKey).getValue(MedicineDoseTime.class);
                 Log.d(TAG, "onDataChange: med retrieved from db is " + med.toString());
-                //for (DataSnapshot d : snapshot.getChildren()) {
-                //    MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
-                //    medicineList.add(medicineDoseTime);
-                //}
-                //scheduleMedicationNotifications(medicineList);
-                //String[] time = String.valueOf(snapshot.child(editMedKey).child("time").getValue());
-                //String dose = String.valueOf(snapshot.child(editMedKey).child("dose").getValue());
                 viewModel.setMedName(med.getName());
                 viewModel.setFromDate(med.getFromDate());
                 viewModel.setToDate(med.getToDate());
                 viewModel.setUnit(med.getUnit());
                 viewModel.setInformation(med.getInformation());
-                //viewModel.setDose(med.getDose());
-                // Todo to set time & dose in the viewModel based on what we retrieve
+
                 for (Map.Entry<String, List<String>> entry: med.getTime().entrySet()) {
                     // there is only one key in the hashmap
-                    // Todo when we save old data, this is invoked again and triggered an error.
+                    // 2 Todo when we save old data, this is invoked again and triggered an error.
                     viewModel.setTime(entry.getValue());
                     Log.d(TAG, "onDataChange: set viewModel time as" + viewModel.getTimeStringArray().toString());
                 }
@@ -261,9 +251,6 @@ public class AddMedicationActivity extends AppCompatActivity {
                 }
 
                 viewModel.setTimeFreq(Integer.toString(viewModel.inferTimeFreq()));
-
-                //viewModel.setTime(med.getTime());
-                // Todo extract array from the database
             }
 
             @Override

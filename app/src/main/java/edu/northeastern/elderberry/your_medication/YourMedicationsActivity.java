@@ -33,9 +33,9 @@ import edu.northeastern.elderberry.MedicationTrackerActivity;
 import edu.northeastern.elderberry.OnListItemClick;
 import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
-import edu.northeastern.elderberry.editMed.EditMedicationActivity;
 
-// Todo Add a few fields to the UI and make it complete
+// 1 Todo Add a few fields to the UI and make it complete i.e. title, from/to date?
+// 3 Todo enable deletion of a medication
 public class YourMedicationsActivity extends AppCompatActivity {
     private static final String TAG = "YourMedicationsActivity";
     private MedicineAdapter medAdapter;
@@ -84,10 +84,6 @@ public class YourMedicationsActivity extends AppCompatActivity {
             return false;
         });
 
-        // init db data
-        // Todo to make db query more generic
-        //String user = "Gavin";
-        Log.d(TAG, "onCreate: Prior to user med db");
 
         this.mAuth = FirebaseAuth.getInstance();
         userDatabase = FirebaseDatabase.getInstance().getReference();
@@ -101,20 +97,14 @@ public class YourMedicationsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d(TAG, "_____onDataChange: ");
                 medicines.clear();
-                // Todo enable this when add medicine to db is auto
-//                Iterator<DataSnapshot> it = snapshot.getChildren().iterator();
-//                while (it.hasNext()) {
-//                    DataSnapshot d = it.next();
-//                    Medicine md = d.getValue(Medicine.class);
-//                    medKey.add((d.getKey()));
-//                    Log.d(TAG, "onDataChange: medicine is " + md.toString());
-//                }
 
                 for (DataSnapshot d : snapshot.getChildren()) {
                     medKey.add(d.getKey());
+                    // 2 Todo update this to using medicine class
                     MedicineRow medRow = new MedicineRow(String.valueOf(d.child("name").getValue()), String.valueOf(d.child("fromDate").getValue()), String.valueOf(d.child("toDate").getValue()));
                     medicines.add(medRow);
                 }
+                // 2 Todo We can sort the medicine before we show it, maybe sorting in db is better
 
                 medAdapter.notifyDataSetChanged();
             }
@@ -133,11 +123,9 @@ public class YourMedicationsActivity extends AppCompatActivity {
         // passing an array into the recyclerview adapter
         // Test data
         this.medAdapter = new MedicineAdapter(this.medicines);
-        // Todo enable edits within recycler view
-        // Todo reference https://stackoverflow.com/questions/48791643/edit-recyclerview-item-and-update-them-on-firebase
+
         OnListItemClick onListItemClick = position -> {
             Log.d(TAG, "_____onClick: ");
-            // Todo include position information in click
             Intent intent = new Intent(YourMedicationsActivity.this, AddMedicationActivity.class);
             Log.d(TAG, "_____onCreate, OnListItemClick, prior to medKey " + medKey.get(position));
             intent.putExtra(YOUR_MED_TO_EDIT_MED_KEY, medKey.get(position));
@@ -148,23 +136,6 @@ public class YourMedicationsActivity extends AppCompatActivity {
         recyclerView.setAdapter(this.medAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        //recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-        //    @Override
-        //    public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-        //        return false;
-        //    }
-
-        //    @Override
-        //    public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-
-        //    }
-
-        //    @Override
-        //    public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-        //    }
-        //});
-        // Todo edit the UI of the recycler view to display the "right" info, include the field name
     }
 
     private void startMedicationTrackerActivity() {

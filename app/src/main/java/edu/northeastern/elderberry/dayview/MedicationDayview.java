@@ -30,6 +30,9 @@ import edu.northeastern.elderberry.MedicineDoseTime;
 import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.your_medication.MedicineRow;
 
+// 1 Todo restrict each day view to only show for that particular day selected
+// 1 Todo the UI does not load on first attempt
+// 1 Todo for bottom navigation bar to work
 public class MedicationDayview extends AppCompatActivity {
     private static final String TAG = "MedicationDayViewActivity";
     private final List<ParentItem> medicineList = new ArrayList<>();
@@ -39,10 +42,6 @@ public class MedicationDayview extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference userDatabase;
     private ArrayList<String> medKey = new ArrayList<>();
-
-    // Todo restrict each day view to only show for that particular day selected
-    // Todo add app logo to top menu bar
-    // Todo first click on calendar does only brings up an empty activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +71,6 @@ public class MedicationDayview extends AppCompatActivity {
         DatabaseReference medDatabase = this.userDatabase.child(this.mAuth.getCurrentUser().getUid());
         Log.d(TAG, "onCreate: Retrieving user med db with user ID" + this.mAuth.getCurrentUser().getUid());
 
-        // Todo to provide the correct username based on log-in info
         medDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -80,15 +78,7 @@ public class MedicationDayview extends AppCompatActivity {
 
                 medicineList.clear();
 
-//                for (DataSnapshot d : snapshot.getChildren()) {
-//                    // td stands for time data
-//                    List<ChildItem> children = new ArrayList<>();
-//                    for (DataSnapshot td : d.child("time").getChildren()) {
-//                        ChildItem fd = new ChildItem(String.valueOf(td.getValue()));
-//                        children.add(fd);
-//                    }
-
-
+                // 2 Todo adapt taken to accommodate all from and to dates
                 for (DataSnapshot d : snapshot.getChildren()) {
                     medKey.add(d.getKey());
                     List<ChildItem> children = new ArrayList<>();
@@ -167,7 +157,7 @@ public class MedicationDayview extends AppCompatActivity {
     }
 
     public void setComplete() {
-        // Todo update completion flag in database
+        // 2 Todo the ability to check and uncheck the boolean value in the database
     }
 
     // Method to inflate the options menu when the user opens the menu for the first time.

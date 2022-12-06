@@ -52,6 +52,7 @@
     <string name="enable_notifications">Enable Notifications</string>
     <string name="med_name_default">MedNameDefault</string>
     <string name="med_time_default">MedTimeDefault</string>
+    <string name="save">save</string>
     <string-array name="time_frequencies">
         <item>1 time</item>
         <item>2 times</item>

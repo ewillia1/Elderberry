@@ -131,7 +131,6 @@ public class MedInfoFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.d(TAG, "_____onViewCreated");
-        // Todo comment out the next line with Elizabeth's alignment
-        this.viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
+        this.viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class); // comment out the next line with Elizabeth's alignment
     }
 }
