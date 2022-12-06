@@ -30,9 +30,9 @@ import edu.northeastern.elderberry.MedicineDoseTime;
 import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.your_medication.MedicineRow;
 
-// 1 Todo restrict each day view to only show for that particular day selected
-// 1 Todo the UI does not load on first attempt
-// 1 Todo for bottom navigation bar to work
+// 1 Todo restrict each day view to only show for that particular day selected - Team
+// 1 Todo the UI does not load on first attempt - Christopher
+// 1 Todo for bottom navigation bar to work - Christopher
 public class MedicationDayview extends AppCompatActivity {
     private static final String TAG = "MedicationDayViewActivity";
     private final List<ParentItem> medicineList = new ArrayList<>();

@@ -42,7 +42,7 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
         ParentItem parentItem = itemList.get(position);
 
         // For the created instance, get the title and set it as the text for the TextView.
-        // 1 Todo to set the title to reflect the date selection from calendar
+        // 1 Todo to set the title to reflect the date selection from calendar - Christopher
         parentViewHolder.ParentItemTitle.setText(parentItem.getParentItemTitle());
 
         // Create a layout manager to assign a layout to the RecyclerView.

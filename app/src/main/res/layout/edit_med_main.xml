@@ -70,6 +70,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.996"
-        app:menu="@menu/add_med_menu" />
+        app:menu="@menu/edit_med_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

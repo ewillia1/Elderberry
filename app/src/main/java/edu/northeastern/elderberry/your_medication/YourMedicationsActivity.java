@@ -34,7 +34,6 @@ import edu.northeastern.elderberry.OnListItemClick;
 import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 
-// 1 Todo Add a few fields to the UI and make it complete i.e. title, from/to date?
 // 3 Todo enable deletion of a medication
 public class YourMedicationsActivity extends AppCompatActivity {
     private static final String TAG = "YourMedicationsActivity";

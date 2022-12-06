@@ -19,7 +19,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.Objects;
 
 import edu.northeastern.elderberry.R;
-import edu.northeastern.elderberry.editMed.EditMedicationActivity;
 
 /**
  * A simple {@link Fragment} subclass.

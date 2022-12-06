@@ -55,6 +55,7 @@ public class MedicationTrackerActivity extends AppCompatActivity {
             Log.d(TAG, "_____onCreate: calendarView.setOnDateChangeListener");
             String date = makeDateString(dayOfMonth, month, year);
             Intent intent = new Intent(this, MedicationDayview.class);
+            // Todo add the date info to the intent String - Christopher
             startActivity(intent);
         });
 

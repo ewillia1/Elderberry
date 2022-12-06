@@ -33,7 +33,6 @@ import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 //3 Todo to test if the taken field is working when frequency is changed when we edit the medication
-//2 Todo include the new UI icon for save/edit med
 public class AddMedicationActivity extends AppCompatActivity {
 
     private static final String TAG = "AddMedicationActivity";
@@ -47,7 +46,17 @@ public class AddMedicationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "_____onCreate");
-        setContentView(R.layout.add_med_main);
+
+        editMedKey = getIntent().getStringExtra(YourMedicationsActivity.YOUR_MED_TO_EDIT_MED_KEY);
+
+        if (editMedKey == null) {
+            Log.d(TAG, "onCreate: editMedKey is null");
+            setContentView(R.layout.add_med_main);
+        }
+        else {
+            Log.d(TAG, "onCreate: editMedKey is not null");
+            setContentView(R.layout.edit_med_main);
+        }
 
         this.userDatabase = FirebaseDatabase.getInstance().getReference();
         // Initialize Firebase Auth.
@@ -72,17 +81,18 @@ public class AddMedicationActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
-            if (itemId == R.id.cancel_add) {
+            if (itemId == R.id.cancel_add || itemId == R.id.cancel_edit) {
                 finish();
                 return true;
-            } else if (itemId == R.id.add_med) {
+            } else if (itemId == R.id.add_med || itemId == R.id.edit_med) {
                 // Check to see if all the required fields are filled out. If they are, go ahead and add the medication
                 // to the database, if not tell the user they need to fill in all required fields.
                 if (filledInRequiredFields()) {
                     // Add fields to database.
                     Log.d(TAG, "_____onCreate: Successful add.");
                     doAddDataToDb();
-                    Toast.makeText(AddMedicationActivity.this, R.string.successful_add, Toast.LENGTH_SHORT).show();
+                    int msg = itemId == R.id.add_med ? R.string.successful_add : R.string.successful_saved;
+                    Toast.makeText(AddMedicationActivity.this, msg, Toast.LENGTH_SHORT).show();
                     finish();
                     return true;
                 } else {
@@ -126,7 +136,6 @@ public class AddMedicationActivity extends AppCompatActivity {
         }
 
         // get Intent from your Medication
-        editMedKey = getIntent().getStringExtra(YourMedicationsActivity.YOUR_MED_TO_EDIT_MED_KEY);
         retrieveMedData(editMedKey);
     }
 
