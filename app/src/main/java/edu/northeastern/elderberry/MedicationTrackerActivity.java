@@ -94,72 +94,8 @@ public class MedicationTrackerActivity extends AppCompatActivity {
             }
             return false;
         });
-        getMedicationInfo();
-    }
-
-    private void scheduleMedicationNotifications(List<MedicineDoseTime> medicines)  {
-        List<DateTimeDose> dates = new ArrayList<>();
-        for(MedicineDoseTime doseTime: medicines) {
-            String fromDate = doseTime.getFromDate();
-            List<String> times = new ArrayList<>(doseTime.getTime().values()).get(0);
-            List<String> doses = new ArrayList<>(doseTime.getDose().values()).get(0);
-
-            SimpleDateFormat dateTimeFormatter =  new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US);
-            SimpleDateFormat toDateTimeFormatter =  new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US);
-
-            int i = 0;
-            for(String s: times) {
-                String fromDateString = fromDate + " " + s;
-                String toDateString = doseTime.getToDate() + " " + "11:59 PM";
-                try {
-                    DateTimeDose dateTimeDose = new DateTimeDose();
-                    dateTimeDose.setFromTime(dateTimeFormatter.parse(fromDateString));
-                    dateTimeDose.setToDate(toDateTimeFormatter.parse(toDateString));
-                    dateTimeDose.setName(doseTime.getName());
-                    dateTimeDose.setDose(Integer.parseInt(doses.get(i)));
-                    i++;
-                    dates.add(dateTimeDose);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
-            System.out.println("test");
-        }
-        for (DateTimeDose date: dates) {
-            MyNotificationPublisher.setAlarm(date, this);
-        }
-    }
-
-    private List<MedicineDoseTime> getMedicationInfo() {
-        DatabaseReference userDB;
-        List<MedicineDoseTime> medicineList = new ArrayList<>();
-
-        userDB = FirebaseDatabase.getInstance().getReference();
-        String userId = mAuth.getCurrentUser().getUid();
-
-        // Todo to provide the correct username based on log-in info
-        userDB.child(userId).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d(TAG, "_____onDataChange: ");
-                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                notificationManager.cancelAll();
-                medicineList.clear();
-
-                for (DataSnapshot d : snapshot.getChildren()) {
-                    MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
-                    medicineList.add(medicineDoseTime);
-                }
-                scheduleMedicationNotifications(medicineList);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        return null;
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationUtil.getMedicationInfo(this, notificationManager);
     }
 
     private void startMedicationTrackerActivity() {

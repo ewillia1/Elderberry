@@ -1,5 +1,7 @@
 package edu.northeastern.elderberry.addMed;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -23,6 +25,7 @@ import java.util.List;
 import java.util.Objects;
 
 import edu.northeastern.elderberry.Medicine;
+import edu.northeastern.elderberry.NotificationUtil;
 import edu.northeastern.elderberry.R;
 
 public class AddMedicationActivity extends AppCompatActivity {
@@ -74,11 +77,19 @@ public class AddMedicationActivity extends AppCompatActivity {
                     doAddDataToDb();
                     Toast.makeText(AddMedicationActivity.this, R.string.successful_add, Toast.LENGTH_SHORT).show();
                     finish();
+                    NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    NotificationUtil.getMedicationInfo(this, notificationManager);
                     return true;
                 } else {
                     Log.d(TAG, "_____onCreate: Unsuccessful add. Need to fill in all required fields.");
                     Toast.makeText(this, "Please fill in all required fields before clicking add.", Toast.LENGTH_SHORT).show();
                 }
+
                 return true;
             }
             return false;

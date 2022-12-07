@@ -40,10 +40,13 @@ public class MyNotificationPublisher extends BroadcastReceiver {
     }
 
     public static void setAlarm(DateTimeDose date, Context context) {
+        //TODO: Remove the i variable used for testing
+        int i = 0;
         do {
             if (date.getFromTime().toInstant().toEpochMilli() > System.currentTimeMillis()) {
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(context, default_notification_channel_id);
-                builder.setContentTitle("Time to take your medication");
+                // TODO: Change the Title of the notification
+                builder.setContentTitle(date.getName() + " " + date.getDose() + " " + date.getFromTime());
                 builder.setContentText("Take " + date.getDose() + " " + date.getName());
                 builder.setSmallIcon(R.drawable.elderberryplant);
                 builder.setAutoCancel(true);
@@ -64,8 +67,9 @@ public class MyNotificationPublisher extends BroadcastReceiver {
                 assert alarmManager != null;
                 System.out.println(date.getName() + " " + date.getDose() + " " + date.getFromTime() + " with requestId: "+ id);
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, date.getFromTime().toInstant().toEpochMilli(), pendingIntent);
+                i++;
             }
             date.getFromTime().setTime(date.getFromTime().getTime() + 300000);
-        } while ((date.getToDate().toInstant().toEpochMilli()) > (date.getFromTime().toInstant().toEpochMilli()));
+        } while (i <= 5 &&(date.getToDate().toInstant().toEpochMilli()) > (date.getFromTime().toInstant().toEpochMilli()));
     }
 }
