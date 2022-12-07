@@ -27,8 +27,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -46,6 +50,7 @@ public class MedicationDayview extends AppCompatActivity {
     CardView cardView;
 //    private final ArrayList<String> medKey = new ArrayList<>();
     ParentItemAdapter parentItemAdapter;
+    private String currentDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +61,13 @@ public class MedicationDayview extends AppCompatActivity {
         // Calling this activity's function to use ActionBar utility methods.
         ActionBar actionBar = getSupportActionBar();
 
+        currentDate = getIntent().getStringExtra("current_date");
+
         // Providing a subtitle for the ActionBar.
         assert actionBar != null;
         actionBar.setSubtitle(getString(R.string.medication_tracker));
 
         TextView medViewDate = findViewById(R.id.dayview_textView);
-        String currentDate = getIntent().getStringExtra("current_date");
         medViewDate.setText(currentDate);
 
         // Adding an icon in the ActionBar.
@@ -111,6 +117,13 @@ public class MedicationDayview extends AppCompatActivity {
                     Log.d(TAG, "onDataChange: level 1 ");
                     MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
                     assert medicineDoseTime != null;
+                    //1 Todo: make try-catch proper formatting
+                    try {
+                        if (!isCurrentDate(medicineDoseTime)) continue;
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
                     for (Map.Entry<String, List<String>> entry : medicineDoseTime.getTime().entrySet()) {
                         // there is only one key in the hashmap
                         Log.d(TAG, "onDataChange: level 2 ");
@@ -144,6 +157,18 @@ public class MedicationDayview extends AppCompatActivity {
         ParentRecyclerViewItem.setAdapter(parentItemAdapter);
         ParentRecyclerViewItem.setLayoutManager(layoutManager);
 
+    }
+
+    private boolean isCurrentDate(MedicineDoseTime medicineDoseTime) throws ParseException {
+
+        Date fromDate=new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(medicineDoseTime.getFromDate());
+        Date toDate=new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(medicineDoseTime.getToDate());
+        if (currentDate == null) {
+            currentDate = medicineDoseTime.getFromDate();
+        }
+        Date selectedDate=new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(currentDate);
+        Log.d(TAG, "isCurrentDate: " + fromDate.toString() + toDate.toString() + selectedDate.toString());
+        return fromDate.compareTo(selectedDate) <= 0 && selectedDate.compareTo(toDate) <= 0;
     }
 
     private void startMedicationTrackerActivity() {

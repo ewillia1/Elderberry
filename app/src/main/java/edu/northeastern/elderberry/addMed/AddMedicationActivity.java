@@ -120,7 +120,6 @@ public class AddMedicationActivity extends AppCompatActivity {
 
         // ViewModel functionality.
         this.viewModel = new ViewModelProvider(this).get(ItemViewModel.class);
-        this.viewModel.getMedId().observe(this, s -> Log.d(TAG, "onCreate: med id entered = " + s));
         this.viewModel.getMedName().observe(this, s -> Log.d(TAG, "_____onChanged: med name entered = " + s));
         this.viewModel.getFromDate().observe(this, s -> Log.d(TAG, "_____onChanged: from date entered = " + s));
         this.viewModel.getToDate().observe(this, s -> Log.d(TAG, "_____onChanged: to date entered = " + s));
@@ -228,8 +227,7 @@ public class AddMedicationActivity extends AppCompatActivity {
     /**
      * Based on the user selection from yourMedication, this function retrieve the corresponding
      * data from the database and pass these data to the viewModel so that other fragments
-     * can use these data to pre-fill the fields
-     *
+     * can use these data to pre-fill the fields.
      */
 
     private void retrieveMedData(String editMedKey) {
@@ -253,7 +251,7 @@ public class AddMedicationActivity extends AppCompatActivity {
                 viewModel.setUnit(med.getUnit());
                 viewModel.setInformation(med.getInformation());
 
-                // 2 Todo when we save old data, this is invoked again and triggered an error.
+                // 2 Todo when we save old data, this is invoked again and triggered an error. - Gavin
                 for (Map.Entry<String, List<String>> entry : med.getTime().entrySet()) {
                     // there is only one key in the hashmap
                     viewModel.setTime(entry.getValue());
