@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +22,7 @@ import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 import edu.northeastern.elderberry.helpAndConfigs.AboutActivity;
 import edu.northeastern.elderberry.helpAndConfigs.SettingsActivity;
 
-import edu.northeastern.elderberry.dayview.MedicationDayview;
+import edu.northeastern.elderberry.dayview.MedicationDayViewActivity;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 public class MedicationTrackerActivity extends AppCompatActivity {
@@ -39,7 +40,8 @@ public class MedicationTrackerActivity extends AppCompatActivity {
 
         // Providing a subtitle for the ActionBar.
         assert actionBar != null;
-        actionBar.setSubtitle(getString(R.string.medication_tracker));
+        actionBar.setSubtitle(Html.fromHtml("<small>" + getString(R.string.medication_tracker) + "</small>", Html.FROM_HTML_MODE_LEGACY));
+
 
         // Adding an icon in the ActionBar.
         actionBar.setIcon(R.mipmap.app_logo);
@@ -50,12 +52,11 @@ public class MedicationTrackerActivity extends AppCompatActivity {
 
         CalendarView calendarView = findViewById(R.id.calendar);
 
-
         // Add Listener in calendar.
         calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
             Log.d(TAG, "_____onCreate: calendarView.setOnDateChangeListener");
             String date = makeDateString(dayOfMonth, month, year);
-            Intent intent = new Intent(this, MedicationDayview.class);
+            Intent intent = new Intent(this, MedicationDayViewActivity.class);
             intent.putExtra("current_date" , date);
             startActivity(intent);
         });

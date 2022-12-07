@@ -3,6 +3,7 @@ package edu.northeastern.elderberry.dayview;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -42,7 +43,7 @@ import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 // 1 Todo restrict each day view to only show for that particular day selected - Team
-public class MedicationDayview extends AppCompatActivity {
+public class MedicationDayViewActivity extends AppCompatActivity {
     private static final String TAG = "MedicationDayViewActivity";
     private final List<ParentItem> medicineList = new ArrayList<>();
     ImageButton arrow;
@@ -65,7 +66,7 @@ public class MedicationDayview extends AppCompatActivity {
 
         // Providing a subtitle for the ActionBar.
         assert actionBar != null;
-        actionBar.setSubtitle(getString(R.string.medication_tracker));
+        actionBar.setSubtitle(Html.fromHtml("<small>" + getString(R.string.medication_tracker) + "</small>", Html.FROM_HTML_MODE_LEGACY));
 
         TextView medViewDate = findViewById(R.id.dayview_textView);
         medViewDate.setText(currentDate);
@@ -167,7 +168,10 @@ public class MedicationDayview extends AppCompatActivity {
             currentDate = medicineDoseTime.getFromDate();
         }
         Date selectedDate=new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(currentDate);
-        Log.d(TAG, "isCurrentDate: " + fromDate.toString() + toDate.toString() + selectedDate.toString());
+        assert fromDate != null;
+        assert toDate != null;
+        assert selectedDate != null;
+        Log.d(TAG, "isCurrentDate: " + fromDate + toDate + selectedDate);
         return fromDate.compareTo(selectedDate) <= 0 && selectedDate.compareTo(toDate) <= 0;
     }
 
