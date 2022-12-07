@@ -1,5 +1,10 @@
 package edu.northeastern.elderberry.dayview;
 
+import static android.content.Intent.getIntent;
+import static android.content.Intent.getIntentOld;
+import static android.content.Intent.parseUri;
+
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +15,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
+import edu.northeastern.elderberry.MedicationTrackerActivity;
 import edu.northeastern.elderberry.R;
 
 public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.ParentViewHolder> {
@@ -42,7 +50,6 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
         ParentItem parentItem = itemList.get(position);
 
         // For the created instance, get the title and set it as the text for the TextView.
-        // 1 Todo to set the title to reflect the date selection from calendar - Christopher
         parentViewHolder.ParentItemTitle.setText(parentItem.getParentItemTitle());
 
         // Create a layout manager to assign a layout to the RecyclerView.
@@ -60,6 +67,7 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
         parentViewHolder.ChildRecyclerView.setAdapter(childItemAdapter);
         parentViewHolder.ChildRecyclerView.setRecycledViewPool(viewPool);
     }
+
 
     // This method returns the number of items we have added in the ParentItemList i.e. the number
     // of instances we have created of the ParentItemList.

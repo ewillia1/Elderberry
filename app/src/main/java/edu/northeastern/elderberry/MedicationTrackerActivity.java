@@ -18,6 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
+import edu.northeastern.elderberry.dayview.ParentItem;
 import edu.northeastern.elderberry.helpAndConfigs.AboutActivity;
 import edu.northeastern.elderberry.helpAndConfigs.SettingsActivity;
 
@@ -50,12 +51,13 @@ public class MedicationTrackerActivity extends AppCompatActivity {
 
         CalendarView calendarView = findViewById(R.id.calendar);
 
+
         // Add Listener in calendar.
         calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
             Log.d(TAG, "_____onCreate: calendarView.setOnDateChangeListener");
             String date = makeDateString(dayOfMonth, month, year);
             Intent intent = new Intent(this, MedicationDayview.class);
-            // Todo add the date info to the intent String - Christopher
+            intent.putExtra("current_date" , date);
             startActivity(intent);
         });
 
