@@ -32,7 +32,6 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
     private int numOfTimes;
     private TimeDoseAdapter timeDoseAdapter;
     private ItemViewModel viewModel;
-    private String editMedKey;
 
     public SetTimesFragment() {
         Log.d(TAG, "_____SetTimesFragment");
@@ -98,7 +97,8 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
 
         // If user comes from your medication, auto fill the frequency
         AddMedicationActivity addMedicationActivity = (AddMedicationActivity) getActivity();
-        editMedKey = addMedicationActivity.getEditMedKey();
+        assert addMedicationActivity != null;
+        String editMedKey = addMedicationActivity.getEditMedKey();
 
         // pre-fill
         if (editMedKey != null) {
@@ -125,8 +125,6 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
             timeDoseAdapter.clear();
 
             // Clear the time and dose array in the view model.
-            //this.viewModel.initializeTimeArray();
-            //this.viewModel.initializeDoseArray();
             this.viewModel.clear();
 
             this.numOfTimes = position + 1;

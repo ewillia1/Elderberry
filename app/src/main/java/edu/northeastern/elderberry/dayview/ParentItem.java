@@ -1,14 +1,8 @@
 package edu.northeastern.elderberry.dayview;
 
-import android.content.Intent;
 import android.util.Log;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
-
-import edu.northeastern.elderberry.MedicationTrackerActivity;
 
 public class ParentItem {
     private static final String TAG = "ParentItem";

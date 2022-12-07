@@ -32,7 +32,6 @@ public class MedInfoFragment extends Fragment {
     private TextInputEditText medNameEditText;
     private String medName;
     private String information;
-    private String editMedKey;
 
     public MedInfoFragment() {
         Log.d(TAG, "_____MedInfoFragment");
@@ -115,7 +114,8 @@ public class MedInfoFragment extends Fragment {
 
         // retrieve medKey selected from the yourMedication activity
         AddMedicationActivity addMedicationActivity = (AddMedicationActivity) getActivity();
-        editMedKey = addMedicationActivity.getEditMedKey();
+        assert addMedicationActivity != null;
+        String editMedKey = addMedicationActivity.getEditMedKey();
 
         // pre-fill fields is a existing medication is selected
         if (editMedKey != null) {

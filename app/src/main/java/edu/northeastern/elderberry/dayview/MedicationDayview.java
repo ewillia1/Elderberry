@@ -1,5 +1,6 @@
 package edu.northeastern.elderberry.dayview;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,7 +9,6 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextClock;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,24 +30,21 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import edu.northeastern.elderberry.MedicineDoseTime;
 import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
-import edu.northeastern.elderberry.your_medication.MedicineRow;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 // 1 Todo restrict each day view to only show for that particular day selected - Team
-// 1 Todo the UI does not load on first attempt - Christopher
 public class MedicationDayview extends AppCompatActivity {
     private static final String TAG = "MedicationDayViewActivity";
     private final List<ParentItem> medicineList = new ArrayList<>();
     ImageButton arrow;
     LinearLayout hiddenView;
     CardView cardView;
-    private FirebaseAuth mAuth;
-    private DatabaseReference userDatabase;
-    private ArrayList<String> medKey = new ArrayList<>();
+//    private final ArrayList<String> medKey = new ArrayList<>();
     ParentItemAdapter parentItemAdapter;
 
     @Override
@@ -93,12 +90,13 @@ public class MedicationDayview extends AppCompatActivity {
         });
 
         // get correct db reference
-        this.mAuth = FirebaseAuth.getInstance();
-        userDatabase = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference medDatabase = this.userDatabase.child(this.mAuth.getCurrentUser().getUid());
-        Log.d(TAG, "onCreate: Retrieving user med db with user ID" + this.mAuth.getCurrentUser().getUid());
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        DatabaseReference userDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference medDatabase = userDatabase.child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
+        Log.d(TAG, "onCreate: Retrieving user med db with user ID" + mAuth.getCurrentUser().getUid());
 
         medDatabase.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d(TAG, "_____onDataChange: ");
@@ -107,11 +105,12 @@ public class MedicationDayview extends AppCompatActivity {
 
                 // 2 Todo adapt taken to accommodate all from and to dates
                 for (DataSnapshot d : snapshot.getChildren()) {
-                    medKey.add(d.getKey());
+//                    medKey.add(d.getKey());
                     List<ChildItem> children = new ArrayList<>();
                     //for (DataSnapshot td : d.getChildren()) {
                     Log.d(TAG, "onDataChange: level 1 ");
                     MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
+                    assert medicineDoseTime != null;
                     for (Map.Entry<String, List<String>> entry : medicineDoseTime.getTime().entrySet()) {
                         // there is only one key in the hashmap
                         Log.d(TAG, "onDataChange: level 2 ");
@@ -174,6 +173,7 @@ public class MedicationDayview extends AppCompatActivity {
                 setComplete();
                 // update flag to true in db
             } else {
+                // TODO finish this code
             }
             // update flag to false in db
             // setIncomplete();

@@ -120,8 +120,7 @@ public class AddMedicationActivity extends AppCompatActivity {
 
         // ViewModel functionality.
         this.viewModel = new ViewModelProvider(this).get(ItemViewModel.class);
-        //this.viewModel.initializeTimeArray(); // moved this to viewModel class
-        //this.viewModel.initializeDoseArray();
+        this.viewModel.getMedId().observe(this, s -> Log.d(TAG, "onCreate: med id entered = " + s));
         this.viewModel.getMedName().observe(this, s -> Log.d(TAG, "_____onChanged: med name entered = " + s));
         this.viewModel.getFromDate().observe(this, s -> Log.d(TAG, "_____onChanged: from date entered = " + s));
         this.viewModel.getToDate().observe(this, s -> Log.d(TAG, "_____onChanged: to date entered = " + s));
@@ -154,7 +153,7 @@ public class AddMedicationActivity extends AppCompatActivity {
 
 
         // 1 Todo properly update the db if we came from your medication activity
-        db.setValue(new Medicine(this.viewModel.getMedName().getValue(),
+        db.setValue(new Medicine(this.viewModel.getMedId().getValue(), this.viewModel.getMedName().getValue(),
                 this.viewModel.getInformation().getValue(),
                 this.viewModel.getFromDate().getValue(),
                 this.viewModel.getToDate().getValue(),
@@ -231,13 +230,12 @@ public class AddMedicationActivity extends AppCompatActivity {
      * data from the database and pass these data to the viewModel so that other fragments
      * can use these data to pre-fill the fields
      *
-     * @param editMedKey
      */
 
     private void retrieveMedData(String editMedKey) {
         if (editMedKey == null) return;
 
-        DatabaseReference medDatabase = this.userDatabase.child(this.mAuth.getCurrentUser().getUid());
+        DatabaseReference medDatabase = this.userDatabase.child(Objects.requireNonNull(this.mAuth.getCurrentUser()).getUid());
 
         medDatabase.addValueEventListener(new ValueEventListener() {
 
@@ -247,7 +245,8 @@ public class AddMedicationActivity extends AppCompatActivity {
 
                 MedicineDoseTime med = snapshot.child(editMedKey).getValue(MedicineDoseTime.class);
                 // Todo figure out why med retrieved here does not contain dose and time information
-                Log.d(TAG, "onDataChange: med retrieved from db is " + med.toString());
+                assert med != null;
+                Log.d(TAG, "onDataChange: med retrieved from db is " + med);
                 viewModel.setMedName(med.getName());
                 viewModel.setFromDate(med.getFromDate());
                 viewModel.setToDate(med.getToDate());

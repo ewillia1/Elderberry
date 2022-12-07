@@ -1,5 +1,7 @@
 package edu.northeastern.elderberry;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 import java.util.Map;
 
@@ -82,6 +84,7 @@ public class MedicineDoseTime {
         this.unit = unit;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "MedicineDoseTime{" +
