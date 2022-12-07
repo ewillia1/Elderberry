@@ -104,6 +104,10 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
             // Clear timeDoseAdapter (clearing the RecyclerView).
             timeDoseAdapter.clear();
 
+            // Clear the time and dose array in the view model.
+            this.viewModel.initializeTimeArray();
+            this.viewModel.initializeDoseArray();
+
             this.numOfTimes = position + 1;
             Log.d(TAG, "_____onCreateView: this.numOfTimes = " + this.numOfTimes);
 
@@ -112,6 +116,7 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
                 Log.d(TAG, "_____onCreateView: for loop iteration: " + i);
                 timeDoseItemArrayList.add(new TimeDoseItem(position));
             }
+            this.viewModel.setTimeFreq(Integer.toString(this.numOfTimes));
         });
 
         // Instantiate the recyclerView.

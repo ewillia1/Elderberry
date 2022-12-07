@@ -66,27 +66,25 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
         initTimePicker();
 
         // Every time a new character is added to the TextInputEditText for dose, the viewModel is updated.
-        // TODO: doseWasAdded is being called even at the beginning once the time frequency is picked. This should not happen. Weirdly it is only triggering the first one (and the second one if clicked more than 1 for time frequency).
         this.doseEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                Log.d(TAG, "_____beforeTextChanged");
+                Log.d(TAG, "_____addTextChangedListener (beforeTextChanged): s = " + s);
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                int position = getAbsoluteAdapterPosition();
-                dose = doseEditText.getText().toString();
-                Log.d(TAG, "_____onFocusChange");
-                onTimeDoseItemListener.doseWasAdded(position, dose);
+                Log.d(TAG, "_____addTextChangedListener (onTextChanged): s = " + s);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                int position = getAbsoluteAdapterPosition();
-                dose = doseEditText.getText().toString();
-                Log.d(TAG, "_____onFocusChange");
-                onTimeDoseItemListener.doseWasAdded(position, dose);
+                if (!s.toString().equals("")) {
+                    int position = getAbsoluteAdapterPosition();
+                    dose = doseEditText.getText().toString();
+                    Log.d(TAG, "_____addTextChangedListener (afterTextChanged): position = " + position + ", s = " + s);
+                    onTimeDoseItemListener.doseWasAdded(position, dose);
+                }
             }
         });
     }
@@ -96,7 +94,7 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
         // Time.
         TimePickerDialog.OnTimeSetListener timeSetListener = (view, hourOfDay, minute) -> {
             Log.d(TAG, "_____onTimeSet");
-            String am_pm = (hourOfDay < MAX_HOUR) ? " AM" : " PM";
+            String am_pm = (hourOfDay < MAX_HOUR) ? "AM" : "PM";
             String st_min = Integer.toString(minute);
 
             if (hourOfDay > MAX_HOUR) {

@@ -158,7 +158,7 @@ public class SetDatesFragment extends Fragment {
                 Toast.makeText(this.getContext(), "Please set a from date first.", Toast.LENGTH_SHORT).show();
             }
         };
-        
+
         this.to_datePickerDialog = new DatePickerDialog(getContext(), style, to_dateSetListener, year1, month1, day1);
     }
 }

@@ -9,13 +9,13 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Updated Elderberry.app.unitTest.iml, lint.xml, and workspace.xml." />
+    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Updated workspace.xml." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/elizabethwilliams/.android/avd/Pixel_3_API_30.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[8B2X12EH8]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -191,27 +191,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666133441374</updated>
-    </task>
-    <task id="LOCAL-00028" summary="Updated workspace.xml">
-      <created>1668872874064</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1668872874064</updated>
-    </task>
-    <task id="LOCAL-00029" summary="Made textStyle bold and added Remember Me Checkbox to activity_login.xml">
-      <created>1668873506812</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1668873506812</updated>
-    </task>
-    <task id="LOCAL-00030" summary="Updated strings.xml">
-      <created>1668873520951</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1668873520951</updated>
     </task>
     <task id="LOCAL-00031" summary="Made mode MODE_PRIVATE for shared preferences">
       <created>1668873804312</created>
@@ -535,7 +514,28 @@
       <option name="project" value="LOCAL" />
       <updated>1669936832670</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="Fixed an AM/PM space bug. Fixed required field check bug. Still an issue with the times, doses, the ViewModel, and the database.">
+      <created>1669952207001</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1669952207002</updated>
+    </task>
+    <task id="LOCAL-00078" summary="Fixed the issue with the times, doses, the ViewModel, and the database. Reinitialized time and dose array in View Model when a new time frequency is clicked.">
+      <created>1669954937662</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1669954937662</updated>
+    </task>
+    <task id="LOCAL-00079" summary="Updated workspace.xml.">
+      <created>1669955207719</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1669955207720</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -551,9 +551,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Got med information to be added to the database, still working of changing the focus when collapsing the keyboard. Added setOnEditorActionListeners for the infoEditText in MedInfoFragment.java and this.doseEditText in TimeDoseViewHolder.java." />
-    <MESSAGE value="Reformatted code and added a TODO to AddMedicationActivity.java" />
-    <MESSAGE value="Cleaned up warnings" />
     <MESSAGE value="Added onConfigurationChanged to MedInfoFragment.java (it is commented out since I did not do anything)." />
     <MESSAGE value="Tried !hasFocus in MedInfoFragment.java with no luck (it is commented out)." />
     <MESSAGE value="Updated AddMedicationActivity.java &amp; ItemViewModel.java to properly work with correct time and dose to display.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Elizabeth" />
@@ -576,6 +573,9 @@
     <MESSAGE value="Working on checking the required fields." />
     <MESSAGE value="Go the check for required fields to work! Cleaned up other code and added final constants." />
     <MESSAGE value="Updated Elderberry.app.unitTest.iml, lint.xml, and workspace.xml." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Elderberry.app.unitTest.iml, lint.xml, and workspace.xml." />
+    <MESSAGE value="Fixed an AM/PM space bug. Fixed required field check bug. Still an issue with the times, doses, the ViewModel, and the database." />
+    <MESSAGE value="Fixed the issue with the times, doses, the ViewModel, and the database. Reinitialized time and dose array in View Model when a new time frequency is clicked." />
+    <MESSAGE value="Updated workspace.xml." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated workspace.xml." />
   </component>
 </project>
