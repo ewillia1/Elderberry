@@ -83,8 +83,8 @@ public class MedicationDayview extends AppCompatActivity {
                     medKey.add(d.getKey());
                     List<ChildItem> children = new ArrayList<>();
                     //for (DataSnapshot td : d.getChildren()) {
-                    Log.d(TAG, "onDataChange: level 1 ");
                     MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
+                    Log.d(TAG, "onDataChange: level 1 medDoseTime is "+medicineDoseTime.toString());
                     for (Map.Entry<String, List<String>> entry : medicineDoseTime.getTime().entrySet()) {
                         // there is only one key in the hashmap
                         Log.d(TAG, "onDataChange: level 2 ");
@@ -97,6 +97,8 @@ public class MedicationDayview extends AppCompatActivity {
                     }
                     medicineList.add(new ParentItem(medicineDoseTime.getName(), children));
                 }
+                Log.d(TAG, "onDataChange: level 4 retrieve correct medicineDoseTime successfully " + medicineList.toString());
+
 
 
                 // MedicineDoseTime med = snapshot.child(editMedKey).getValue(MedicineDoseTime.class);
@@ -119,24 +121,9 @@ public class MedicationDayview extends AppCompatActivity {
 
         // Initialise the Linear layout manager
         LinearLayoutManager layoutManager = new LinearLayoutManager(MedicationDayview.this);
-
-        // Pass the arguments
-        // to the parentItemAdapter.
-        // These arguments are passed
-        // using a method ParentItemList()
-//        ParentItemAdapter
-//                parentItemAdapter
-//                = new ParentItemAdapter(
-//                ParentItemList());
-
         ParentItemAdapter parentItemAdapter = new ParentItemAdapter(medicineList);
-        // Set the layout manager
-        // and adapter for items
-        // of the parent recyclerview
         ParentRecyclerViewItem.setAdapter(parentItemAdapter);
         ParentRecyclerViewItem.setLayoutManager(layoutManager);
-
-        //findViewById(R.id.parent_item_title);
 
     }
 

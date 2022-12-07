@@ -52,8 +52,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         if (editMedKey == null) {
             Log.d(TAG, "onCreate: editMedKey is null");
             setContentView(R.layout.add_med_main);
-        }
-        else {
+        } else {
             Log.d(TAG, "onCreate: editMedKey is not null");
             setContentView(R.layout.edit_med_main);
         }
@@ -147,7 +146,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         DatabaseReference db;
 
         // If coming from yourMed activity, then don't create new node
-        db = editMedKey != null ? databaseReference.child(editMedKey): databaseReference.push() ;
+        db = editMedKey != null ? databaseReference.child(editMedKey) : databaseReference.push();
 
         List<String> timeList = this.viewModel.getTimeStringArray();
         List<String> doseList = this.viewModel.getDoseStringArray();
@@ -163,9 +162,15 @@ public class AddMedicationActivity extends AppCompatActivity {
         // 3 Todo add time and taken
 
         Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
-        databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(timeList);
-        databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").push().setValue(doseList);
-        databaseReference.child(Objects.requireNonNull(db.getKey())).child("taken").push().setValue(takenList);
+        if (editMedKey != null) {
+            databaseReference.child(editMedKey).child("time").push().setValue(timeList);
+            databaseReference.child(editMedKey).child("dose").push().setValue(doseList);
+            databaseReference.child(editMedKey).child("taken").push().setValue(takenList);
+        } else {
+            databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(timeList);
+            databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").push().setValue(doseList);
+            databaseReference.child(Objects.requireNonNull(db.getKey())).child("taken").push().setValue(takenList);
+        }
     }
 
     private boolean filledInRequiredFields() {
@@ -225,6 +230,7 @@ public class AddMedicationActivity extends AppCompatActivity {
      * Based on the user selection from yourMedication, this function retrieve the corresponding
      * data from the database and pass these data to the viewModel so that other fragments
      * can use these data to pre-fill the fields
+     *
      * @param editMedKey
      */
 
@@ -234,11 +240,13 @@ public class AddMedicationActivity extends AppCompatActivity {
         DatabaseReference medDatabase = this.userDatabase.child(this.mAuth.getCurrentUser().getUid());
 
         medDatabase.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d(TAG, "onDataChange: snapshot getChildren returns" + snapshot.child(editMedKey));
 
                 MedicineDoseTime med = snapshot.child(editMedKey).getValue(MedicineDoseTime.class);
+                // Todo figure out why med retrieved here does not contain dose and time information
                 Log.d(TAG, "onDataChange: med retrieved from db is " + med.toString());
                 viewModel.setMedName(med.getName());
                 viewModel.setFromDate(med.getFromDate());
@@ -246,14 +254,14 @@ public class AddMedicationActivity extends AppCompatActivity {
                 viewModel.setUnit(med.getUnit());
                 viewModel.setInformation(med.getInformation());
 
-                for (Map.Entry<String, List<String>> entry: med.getTime().entrySet()) {
+                // 2 Todo when we save old data, this is invoked again and triggered an error.
+                for (Map.Entry<String, List<String>> entry : med.getTime().entrySet()) {
                     // there is only one key in the hashmap
-                    // 2 Todo when we save old data, this is invoked again and triggered an error.
                     viewModel.setTime(entry.getValue());
                     Log.d(TAG, "onDataChange: set viewModel time as" + viewModel.getTimeStringArray().toString());
                 }
 
-                for (Map.Entry<String, List<String>> entry: med.getDose().entrySet()) {
+                for (Map.Entry<String, List<String>> entry : med.getDose().entrySet()) {
                     // there is only one key in the hashmap
                     viewModel.setDose(entry.getValue());
                     Log.d(TAG, "onDataChange: set viewModel dose as" + viewModel.getDoseStringArray().toString());
@@ -272,6 +280,7 @@ public class AddMedicationActivity extends AppCompatActivity {
     /**
      * This function enables hosted fragments to access medication key the user has selected.
      * Fragments then subsequently retrieve the right medication information
+     *
      * @return the hashed key of the medication selected in the database
      */
     public String getEditMedKey() {
