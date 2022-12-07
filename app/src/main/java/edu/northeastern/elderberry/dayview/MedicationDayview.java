@@ -1,5 +1,6 @@
 package edu.northeastern.elderberry.dayview;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,7 +9,6 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextClock;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,28 +27,30 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 import edu.northeastern.elderberry.MedicineDoseTime;
 import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
-import edu.northeastern.elderberry.your_medication.MedicineRow;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 // 1 Todo restrict each day view to only show for that particular day selected - Team
-// 1 Todo the UI does not load on first attempt - Christopher
 public class MedicationDayview extends AppCompatActivity {
     private static final String TAG = "MedicationDayViewActivity";
     private final List<ParentItem> medicineList = new ArrayList<>();
     ImageButton arrow;
     LinearLayout hiddenView;
     CardView cardView;
-    private FirebaseAuth mAuth;
-    private DatabaseReference userDatabase;
-    private ArrayList<String> medKey = new ArrayList<>();
+//    private final ArrayList<String> medKey = new ArrayList<>();
     ParentItemAdapter parentItemAdapter;
+    private String currentDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +61,13 @@ public class MedicationDayview extends AppCompatActivity {
         // Calling this activity's function to use ActionBar utility methods.
         ActionBar actionBar = getSupportActionBar();
 
+        currentDate = getIntent().getStringExtra("current_date");
+
         // Providing a subtitle for the ActionBar.
         assert actionBar != null;
         actionBar.setSubtitle(getString(R.string.medication_tracker));
 
         TextView medViewDate = findViewById(R.id.dayview_textView);
-        String currentDate = getIntent().getStringExtra("current_date");
         medViewDate.setText(currentDate);
 
         // Adding an icon in the ActionBar.
@@ -93,12 +96,13 @@ public class MedicationDayview extends AppCompatActivity {
         });
 
         // get correct db reference
-        this.mAuth = FirebaseAuth.getInstance();
-        userDatabase = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference medDatabase = this.userDatabase.child(this.mAuth.getCurrentUser().getUid());
-        Log.d(TAG, "onCreate: Retrieving user med db with user ID" + this.mAuth.getCurrentUser().getUid());
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        DatabaseReference userDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference medDatabase = userDatabase.child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
+        Log.d(TAG, "onCreate: Retrieving user med db with user ID" + mAuth.getCurrentUser().getUid());
 
         medDatabase.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d(TAG, "_____onDataChange: ");
@@ -107,11 +111,19 @@ public class MedicationDayview extends AppCompatActivity {
 
                 // 2 Todo adapt taken to accommodate all from and to dates
                 for (DataSnapshot d : snapshot.getChildren()) {
-                    medKey.add(d.getKey());
+//                    medKey.add(d.getKey());
                     List<ChildItem> children = new ArrayList<>();
                     //for (DataSnapshot td : d.getChildren()) {
                     Log.d(TAG, "onDataChange: level 1 ");
                     MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
+                    assert medicineDoseTime != null;
+                    //1 Todo: make try-catch proper formatting
+                    try {
+                        if (!isCurrentDate(medicineDoseTime)) continue;
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
                     for (Map.Entry<String, List<String>> entry : medicineDoseTime.getTime().entrySet()) {
                         // there is only one key in the hashmap
                         Log.d(TAG, "onDataChange: level 2 ");
@@ -147,6 +159,18 @@ public class MedicationDayview extends AppCompatActivity {
 
     }
 
+    private boolean isCurrentDate(MedicineDoseTime medicineDoseTime) throws ParseException {
+
+        Date fromDate=new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(medicineDoseTime.getFromDate());
+        Date toDate=new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(medicineDoseTime.getToDate());
+        if (currentDate == null) {
+            currentDate = medicineDoseTime.getFromDate();
+        }
+        Date selectedDate=new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(currentDate);
+        Log.d(TAG, "isCurrentDate: " + fromDate.toString() + toDate.toString() + selectedDate.toString());
+        return fromDate.compareTo(selectedDate) <= 0 && selectedDate.compareTo(toDate) <= 0;
+    }
+
     private void startMedicationTrackerActivity() {
         Log.d(TAG, "_____startMedicationTrackerActivity");
         finish();
@@ -174,6 +198,7 @@ public class MedicationDayview extends AppCompatActivity {
                 setComplete();
                 // update flag to true in db
             } else {
+                // TODO finish this code
             }
             // update flag to false in db
             // setIncomplete();

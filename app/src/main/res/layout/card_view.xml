@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textColor="@color/main"
-            android:fontFamily="@font/elsie"
+            android:fontFamily="@font/bellota_bold"
             android:textStyle="bold"
             android:textSize="30sp" />
 
@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:fontFamily="@font/elsie"
+            android:fontFamily="@font/bellota_bold"
             android:hint="@string/click_to_set_time"
             android:textAlignment="center"
             android:textColor="@color/textHintColor"
@@ -43,7 +43,7 @@
             android:id="@+id/dose_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/elsie"
+            android:fontFamily="@font/bellota_bold"
             android:hint="@string/click_to_set_dose"
             android:importantForAutofill="no"
             android:inputType="numberDecimal"

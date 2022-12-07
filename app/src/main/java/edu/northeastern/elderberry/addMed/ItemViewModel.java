@@ -8,10 +8,12 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ItemViewModel extends ViewModel {
     private static final String TAG = "ItemViewModel";
     private static final int MAX_INDEX = 12;
+    private final MutableLiveData<String> medId = new MutableLiveData<>();
     private final MutableLiveData<String> medName = new MutableLiveData<>();
     private final MutableLiveData<String> information = new MutableLiveData<>();
     private final MutableLiveData<String> fromDate = new MutableLiveData<>();
@@ -20,10 +22,17 @@ public class ItemViewModel extends ViewModel {
     private final MutableLiveData<String> unit = new MutableLiveData<>();
     private ArrayList<MutableLiveData<String>> time = initializeArray();
     private ArrayList<MutableLiveData<String>> dose = initializeArray();
-    private ArrayList<MutableLiveData<Boolean>> taken = initializeArray();
+    private final ArrayList<MutableLiveData<Boolean>> taken = initializeBooleanArray();
 
-    private ArrayList initializeArray() {
-        ArrayList res = new ArrayList<>();
+    private ArrayList<MutableLiveData<String>> initializeArray() {
+        ArrayList<MutableLiveData<String>> res = new ArrayList<>();
+        Log.d(TAG, "_____initializeTimeArray");
+        for (int i = 0; i < MAX_INDEX; i++) res.add(i, new MutableLiveData<>());
+        return res;
+    }
+
+    private ArrayList<MutableLiveData<Boolean>> initializeBooleanArray() {
+        ArrayList<MutableLiveData<Boolean>> res = new ArrayList<>();
         Log.d(TAG, "_____initializeTimeArray");
         for (int i = 0; i < MAX_INDEX; i++) res.add(i, new MutableLiveData<>());
         return res;
@@ -88,15 +97,18 @@ public class ItemViewModel extends ViewModel {
 
     public void resetTaken() {
         for (int i = 0 ; i < MAX_INDEX ; i++) {
-            if (i < Integer.valueOf(this.timeFreq.getValue())) {
+            if (i < Integer.parseInt(Objects.requireNonNull(this.timeFreq.getValue()))) {
                 this.taken.add(i, new MutableLiveData<>(Boolean.FALSE));
             }
             else {
                 this.taken.add(i, new MutableLiveData<>());
             }
-            this.taken = taken;
-
         }
+    }
+
+    public MutableLiveData<String> getMedId() {
+        Log.d(TAG, "_____getMedId");
+        return this.medId;
     }
 
     public MutableLiveData<String> getMedName() {
@@ -174,11 +186,6 @@ public class ItemViewModel extends ViewModel {
     public MutableLiveData<String> getDose(int index) {
         Log.d(TAG, "_____getDose: " + this.dose.get(index));
         return this.dose.get(index);
-    }
-
-    public MutableLiveData<Boolean> getTaken(int index) {
-        Log.d(TAG, "_____getDose: " + this.taken.get(index));
-        return this.taken.get(index);
     }
 
     @NonNull

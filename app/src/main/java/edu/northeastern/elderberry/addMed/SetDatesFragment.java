@@ -3,7 +3,6 @@ package edu.northeastern.elderberry.addMed;
 import static edu.northeastern.elderberry.util.DatetimeFormat.makeDateString;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,7 +43,6 @@ public class SetDatesFragment extends Fragment {
     private ItemViewModel viewModel;
     private String fromDate_db;
     private String toDate_db;
-    private String editMedKey;
 
     public SetDatesFragment() {
         Log.d(TAG, "_____SetDatesFragment");
@@ -108,7 +106,8 @@ public class SetDatesFragment extends Fragment {
         // If we calling from your Med, then we should pre-fill the from & to TextView
         // retrieve medKey selected from the yourMedication activity
         AddMedicationActivity addMedicationActivity = (AddMedicationActivity) getActivity();
-        editMedKey = addMedicationActivity.getEditMedKey();
+        assert addMedicationActivity != null;
+        String editMedKey = addMedicationActivity.getEditMedKey();
         if (editMedKey != null) {
             Log.d(TAG, "initDatePicker: non null editMedKey");
             set_from.setText(this.viewModel.getFromDate().getValue());

@@ -58,17 +58,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".editMed.EditMedicationActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|keyboard"
-            android:exported="false"
-            tools:ignore="LockedOrientationActivity">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".TodaysMedicationsActivity"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
