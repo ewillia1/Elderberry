@@ -144,13 +144,22 @@ public class MedicationDayview extends AppCompatActivity {
         });
 
 
+
         RecyclerView ParentRecyclerViewItem = findViewById(R.id.parent_recyclerview);
+        Log.d(TAG, "onCreate: 1");
         ParentRecyclerViewItem.setHasFixedSize(true);
         ParentRecyclerViewItem.setItemAnimator(new DefaultItemAnimator());
+        Log.d(TAG, "onCreate: 2");
 
         // Initialise the Linear layout manager
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-
+        Log.d(TAG, "onCreate: 3");
+        ParentItemAdapter parentItemAdapter = new ParentItemAdapter(medicineList);
+        Log.d(TAG, "onCreate: 4");
+        ParentRecyclerViewItem.setAdapter(parentItemAdapter);
+        Log.d(TAG, "onCreate: 5");
+        ParentRecyclerViewItem.setLayoutManager(layoutManager);
+        Log.d(TAG, "onCreate: 6");
         // Pass the arguments
         // to the parentItemAdapter.
         // These arguments are passed
@@ -160,12 +169,7 @@ public class MedicationDayview extends AppCompatActivity {
 //                = new ParentItemAdapter(
 //                ParentItemList());
 
-        ParentItemAdapter parentItemAdapter = new ParentItemAdapter(medicineList);
-        // Set the layout manager
-        // and adapter for items
-        // of the parent recyclerview
-        ParentRecyclerViewItem.setAdapter(parentItemAdapter);
-        ParentRecyclerViewItem.setLayoutManager(layoutManager);
+
 
         //findViewById(R.id.parent_item_title);
 
