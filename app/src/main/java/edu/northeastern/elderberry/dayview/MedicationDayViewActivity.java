@@ -147,8 +147,6 @@ public class MedicationDayViewActivity extends AppCompatActivity {
             }
         });
 
-
-
         RecyclerView ParentRecyclerViewItem = findViewById(R.id.parent_recyclerview);
         ParentRecyclerViewItem.setHasFixedSize(true);
         ParentRecyclerViewItem.setItemAnimator(new DefaultItemAnimator());
