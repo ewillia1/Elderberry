@@ -9,31 +9,42 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Updated Elderberry.app.unitTest.iml, lint.xml, and workspace.xml.">
+    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Merge with branch elizabeth.&#10;&#10;Co-authored by: Gavin">
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/Elderberry.app.unitTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/Elderberry.app.unitTest.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_28_22,_16_23_[Changes]1/buildOutputCleanup.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_28_22,_16_23_[Changes]1/executionHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_28_22,_16_23_[Changes]1/executionHistory.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_28_22,_16_23_[Changes]1/file-system.probe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_28_22,_16_23_[Changes]1/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_28_22,_16_23_[Changes]1/fileHashes.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_28_22,_16_23_[Changes]1/resourceHashesCache.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_28_22,_16_23_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_28_22__16_23__Changes_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/MedicationTrackerActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/MedicationTrackerActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/AddMedicationActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/AddMedicationActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/MedInfoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/MedInfoFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/SetDatesFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/SetDatesFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/dayview/MedicationDayview.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/dayview/MedicationDayview.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/dayview/ParentItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/dayview/ParentItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/dayview/ParentItemAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/dayview/ParentItemAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/your_medication/YourMedicationsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/your_medication/YourMedicationsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_your_medications.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_your_medications.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/edit_med_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/edit_med_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/edit_med_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/edit_med_menu.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_medication_tracker.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_medication_tracker.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_recycle_med_dayview.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_recycle_med_dayview.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/parent_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/parent_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/Gavin/.android/avd/Pixel_5_API_27.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/cowboy/.android/avd/Pixel_3_XL_API_30.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -77,15 +88,15 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/build.gradle" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/src/main/res/values-night/themes.xml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/proguard-rules.pro" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/build 2.gradle" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/build.gradle" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/local.properties" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/src/main/res/values-night/themes.xml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/gradle.properties" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/proguard-rules.pro" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/local.properties" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/build.gradle" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/build.gradle" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/app/src/main/res/values/themes.xml" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -111,6 +122,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TODO_SCOPE" value="All Places" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/layout" />

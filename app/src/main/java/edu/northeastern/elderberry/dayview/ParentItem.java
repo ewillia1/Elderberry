@@ -1,8 +1,14 @@
 package edu.northeastern.elderberry.dayview;
 
+import android.content.Intent;
 import android.util.Log;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
+
+import edu.northeastern.elderberry.MedicationTrackerActivity;
 
 public class ParentItem {
     private static final String TAG = "ParentItem";
@@ -10,12 +16,14 @@ public class ParentItem {
     private String ParentItemTitle;
     private List<ChildItem> ChildItemList;
 
+
     // Constructor of the class to initialize the variables
     public ParentItem(String ParentItemTitle, List<ChildItem> ChildItemList) {
         Log.d(TAG, "_____ParentItem");
         this.ParentItemTitle = ParentItemTitle;
         this.ChildItemList = ChildItemList;
     }
+
 
     // Getter and Setter methods for each parameter
     public String getParentItemTitle() {
