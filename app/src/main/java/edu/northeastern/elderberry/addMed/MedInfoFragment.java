@@ -29,6 +29,7 @@ public class MedInfoFragment extends Fragment {
     private static final String TAG = "MedInfoFragment";
     private ItemViewModel viewModel;
     private TextInputEditText infoEditText;
+    private TextInputEditText medNameEditText;
     private String medName;
     private String information;
 
@@ -51,6 +52,7 @@ public class MedInfoFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "_____onCreate");
+
     }
 
     @Override
@@ -58,8 +60,8 @@ public class MedInfoFragment extends Fragment {
         // Inflate the layout for this fragment
         Log.d(TAG, "_____onCreateView");
         View view = inflater.inflate(R.layout.fragment_med_info, container, false);
-        TextInputLayout textInputMedName = view.findViewById(R.id.textInputMedName);
-        TextInputEditText medNameEditText = view.findViewById(R.id.medNameEditText);
+        TextInputLayout textInputMedName = view.findViewById(R.id.EditTextInputMedName);
+        medNameEditText = view.findViewById(R.id.EditMedNameText);
 
         // Every time a new character is added to the TextInputEditText for medication name, the viewModel is updated.
         medNameEditText.addTextChangedListener(new TextWatcher() {
@@ -83,7 +85,7 @@ public class MedInfoFragment extends Fragment {
             }
         });
 
-        this.infoEditText = view.findViewById(R.id.infoEditText);
+        this.infoEditText = view.findViewById(R.id.EditInfoEditText);
 
         // Every time a new character is added to the TextInputEditText for information, the viewModel is updated.
         this.infoEditText.addTextChangedListener(new TextWatcher() {
@@ -107,6 +109,20 @@ public class MedInfoFragment extends Fragment {
             }
         });
 
+        // moving from onViewCreated to OnCreatedView
+        this.viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
+
+        // retrieve medKey selected from the yourMedication activity
+        AddMedicationActivity addMedicationActivity = (AddMedicationActivity) getActivity();
+        assert addMedicationActivity != null;
+        String editMedKey = addMedicationActivity.getEditMedKey();
+
+        // pre-fill fields is a existing medication is selected
+        if (editMedKey != null) {
+            medNameEditText.setText(this.viewModel.getMedName().getValue());
+            infoEditText.setText(this.viewModel.getInformation().getValue());
+        }
+
         return view;
     }
 
@@ -114,6 +130,6 @@ public class MedInfoFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.d(TAG, "_____onViewCreated");
-        this.viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
+        this.viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class); // comment out the next line with Elizabeth's alignment
     }
 }

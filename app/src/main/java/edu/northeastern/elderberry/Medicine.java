@@ -6,14 +6,18 @@ import androidx.annotation.NonNull;
 
 public class Medicine {
     private static final String TAG = "Medicine";
-    private final String name;
-    private final String information;
-    private final String fromDate;
-    private final String toDate;
-    private final String unit;
+    private String id;
+    private String name;
+    private String information;
+    private String fromDate;
+    private String toDate;
+    private String unit;
 
-    public Medicine(String name, String information, String fromDate, String toDate, String unit) {
+    Medicine() {}
+
+    public Medicine(String id, String name, String information, String fromDate, String toDate, String unit) {
         Log.d(TAG, "_____Medicine");
+        this.id = id;
         this.name = name;
         this.information = information;
         this.fromDate = fromDate;
@@ -21,14 +25,14 @@ public class Medicine {
         this.unit = unit;
     }
 
+    public String getId() {
+        Log.d(TAG, "_____getId");
+        return this.id;
+    }
+
     public String getName() {
         Log.d(TAG, "_____getName");
         return this.name;
-    }
-
-    public String getInformation() {
-        Log.d(TAG, "_____getInformation");
-        return this.information;
     }
 
     public String getFromDate() {
@@ -41,20 +45,16 @@ public class Medicine {
         return this.toDate;
     }
 
-    public String getUnit() {
-        Log.d(TAG, "_____getUnit");
-        return this.unit;
-    }
-
     @NonNull
     @Override
     public String toString() {
         return "Medicine{" +
-                "name='" + this.name + '\'' +
-                ", information='" + this.information + '\'' +
-                ", fromDate='" + this.fromDate + '\'' +
-                ", toDate='" + this.toDate + '\'' +
-                ", unit='" + this.unit + '\'' +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", information='" + information + '\'' +
+                ", fromDate='" + fromDate + '\'' +
+                ", toDate='" + toDate + '\'' +
+                ", unit='" + unit + '\'' +
                 '}';
     }
 }

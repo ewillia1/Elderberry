@@ -19,7 +19,7 @@
     <string name="add">Add</string>
     <string name="calendar_icon">calendar icon</string>
     <string name="set_time">%1$d:%2$s %3$s</string>
-    <string name="by_christopher_mccune_nelizabeth_williams_nshriya_hukkeri_nzhengyu_yang_n_npictures_by_virginia_gassman">By: Christopher McCune\nElizabeth Williams\nShriya Hukkeri\nZhengyu Yang\n\nPictures by: Virginia Gassman</string>
+    <string name="by_christopher_mccune_nelizabeth_williams_nshriya_hukkeri_nzhengyu_yang_n_ndrawings_by_virginia_gassman">By: Christopher McCune\nElizabeth Williams\nShriya Hukkeri\nZhengyu Yang\n\nDrawings by: Virginia Gassman</string>
     <string name="log_out">Log Out</string>
     <string name="email">Email</string>
     <string name="forgot_password">Forgot password?</string>
@@ -36,6 +36,7 @@
     <string name="set_times">Set Times</string>
     <string name="required">Required*</string>
     <string name="successful_add">Successful add!</string>
+    <string name="successful_saved">Successfully saved!</string>
     <string name="click_to_set_dose">Click to set dose</string>
     <string name="click_to_set_time">Click to set time</string>
     <string name="unit">Unit</string>
@@ -51,6 +52,9 @@
     <string name="enable_notifications">Enable Notifications</string>
     <string name="med_name_default">MedNameDefault</string>
     <string name="med_time_default">MedTimeDefault</string>
+    <string name="save">save</string>
+    <string name="yourMedFromField">From</string>
+    <string name="yourMedMedicineField">Medicine</string>
     <string-array name="time_frequencies">
         <item>1 time</item>
         <item>2 times</item>

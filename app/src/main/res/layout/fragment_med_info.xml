@@ -11,7 +11,7 @@
         tools:context=".addMed.MedInfoFragment">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputMedName"
+            android:id="@+id/EditTextInputMedName"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,12 +27,12 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/medNameEditText"
+                android:id="@+id/EditMedNameText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:fontFamily="@font/elsie"
+                android:fontFamily="@font/bellota_bold"
                 android:hint="@string/medication_name"
                 android:inputType="textPersonName"
                 android:maxLength="50"
@@ -54,15 +54,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputMedName">
+            app:layout_constraintTop_toBottomOf="@+id/EditTextInputMedName">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/infoEditText"
+                android:id="@+id/EditInfoEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:fontFamily="@font/elsie"
+                android:fontFamily="@font/bellota_bold"
                 android:hint="@string/information"
                 android:imeOptions="actionDone"
                 android:inputType="textMultiLine|textLongMessage"

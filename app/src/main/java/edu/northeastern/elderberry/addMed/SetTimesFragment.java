@@ -60,6 +60,9 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
         Log.d(TAG, "_____onCreateView");
         View view = inflater.inflate(R.layout.fragment_set_times, container, false);
 
+        // init view model moved from onViewCreate to here
+        this.viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
+
         // Set unit functionality.
         // Get reference to the string array.
         Resources res = getResources();
@@ -71,7 +74,6 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
         // Get reference to the autocomplete text view.
         AutoCompleteTextView autoCompleteUnit = view.findViewById(R.id.setUnit);
         // Set adapter to the autocomplete tv to the arrayAdapter.
-        autoCompleteUnit.setAdapter(arrayAdapterForUnits);
         autoCompleteUnit.setOnItemClickListener((parent, view12, position, id) -> {
             String unitSelection = (String) parent.getItemAtPosition(position);
             Log.d(TAG, "_____onItemClick: position = " + position + ", id = " + id + ", unitSelection = " + unitSelection);
@@ -86,14 +88,32 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
         arrayAdapterForFreq.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Get reference to the autocomplete text view.
         AutoCompleteTextView autoCompleteTimeFreq = view.findViewById(R.id.setTimeFrequency);
-        // Set adapter to the autocomplete tv to the arrayAdapter.
-        autoCompleteTimeFreq.setAdapter(arrayAdapterForFreq);
 
         // Instantiate the ArrayList.
         ArrayList<TimeDoseItem> timeDoseItemArrayList = new ArrayList<>();
 
         // Instantiate recyclerView adapter. Associate the adapter with the recyclerView.
         this.timeDoseAdapter = new TimeDoseAdapter(timeDoseItemArrayList, getContext(), this);
+
+        // If user comes from your medication, auto fill the frequency
+        AddMedicationActivity addMedicationActivity = (AddMedicationActivity) getActivity();
+        assert addMedicationActivity != null;
+        String editMedKey = addMedicationActivity.getEditMedKey();
+
+        // pre-fill
+        if (editMedKey != null) {
+            int freq = viewModel.inferTimeFreq();
+            int pos = freq - 1;
+            autoCompleteTimeFreq.setText(time_frequencies[pos]);
+            autoCompleteUnit.setText(viewModel.getUnit().getValue());
+            for (int i = 0; i < freq; i++) {
+                timeDoseItemArrayList.add(new TimeDoseItem(pos, viewModel.getTime(i).getValue(), viewModel.getDose(i).getValue(), viewModel.getUnit().getValue()));
+            }
+        }
+
+        // Set adapter to the autocomplete tv to the arrayAdapter.
+        autoCompleteTimeFreq.setAdapter(arrayAdapterForFreq);
+        autoCompleteUnit.setAdapter(arrayAdapterForUnits);
 
         // What happens when an time frequency is clicked on.
         autoCompleteTimeFreq.setOnItemClickListener((parent, view1, position, id) -> {
@@ -105,8 +125,7 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
             timeDoseAdapter.clear();
 
             // Clear the time and dose array in the view model.
-            this.viewModel.initializeTimeArray();
-            this.viewModel.initializeDoseArray();
+            this.viewModel.clear();
 
             this.numOfTimes = position + 1;
             Log.d(TAG, "_____onCreateView: this.numOfTimes = " + this.numOfTimes);
@@ -117,6 +136,7 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
                 timeDoseItemArrayList.add(new TimeDoseItem(position));
             }
             this.viewModel.setTimeFreq(Integer.toString(this.numOfTimes));
+            this.viewModel.resetTaken();
         });
 
         // Instantiate the recyclerView.
@@ -126,6 +146,7 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
         timeDoseRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         timeDoseRecyclerView.setAdapter(timeDoseAdapter);
+
 
         return view;
     }

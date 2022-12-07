@@ -10,12 +10,14 @@ public class ParentItem {
     private String ParentItemTitle;
     private List<ChildItem> ChildItemList;
 
+
     // Constructor of the class to initialize the variables
     public ParentItem(String ParentItemTitle, List<ChildItem> ChildItemList) {
         Log.d(TAG, "_____ParentItem");
         this.ParentItemTitle = ParentItemTitle;
         this.ChildItemList = ChildItemList;
     }
+
 
     // Getter and Setter methods for each parameter
     public String getParentItemTitle() {
