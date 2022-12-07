@@ -112,11 +112,6 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         int id = item.getItemId();
         Intent intent;
         switch (id) {
-            case R.id.medicationHistory:
-                Log.d(TAG, "_____onOptionsItemSelected (medicationHistory)");
-                intent = new Intent(this, MedicationHistory.class);
-                startActivity(intent);
-                return true;
             case R.id.settings:
                 Log.d(TAG, "_____onOptionsItemSelected (settings)");
                 intent = new Intent(this, SettingsActivity.class);

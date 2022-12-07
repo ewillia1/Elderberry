@@ -17,8 +17,6 @@ public class ItemViewModel extends ViewModel {
     private final MutableLiveData<String> toDate = new MutableLiveData<>();
     private final MutableLiveData<String> timeFreq = new MutableLiveData<>();
     private final MutableLiveData<String> unit = new MutableLiveData<>();
-    //    private final MutableLiveData<String> time1 = new MutableLiveData<>();
-//    private final MutableLiveData<String> dose1 = new MutableLiveData<>();
     private final ArrayList<MutableLiveData<String>> time = new ArrayList<>();
     private final ArrayList<MutableLiveData<String>> dose = new ArrayList<>();
 
