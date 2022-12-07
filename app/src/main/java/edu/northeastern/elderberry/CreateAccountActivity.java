@@ -94,8 +94,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                                 .setValue(user).addOnCompleteListener(task1 -> showMedicationTrackerActivity());
                     } else {
                         Log.d(TAG, "_____registerUser(failure): " + Objects.requireNonNull(task.getException()).getMessage(), task.getException());
-                        Toast.makeText(CreateAccountActivity.this, "Authentication failed: " + task.getException().getMessage(),
-                                Toast.LENGTH_LONG).show();
+                        Toast.makeText(CreateAccountActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
     }
