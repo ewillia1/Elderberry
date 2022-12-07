@@ -15,22 +15,24 @@ import java.util.Date;
 
 public class MyNotificationPublisher extends BroadcastReceiver {
 
-    public static int NOTIFICATION_ID = 1 ;
-    public static String NOTIFICATION = "notification" ;
-    public static final String NOTIFICATION_CHANNEL_ID = "10001" ;
-    private final static String default_notification_channel_id = "default" ;
+    public static int NOTIFICATION_ID = 1;
+    public static String NOTIFICATION = "notification";
+    public static final String NOTIFICATION_CHANNEL_ID = "10001";
+    private final static String default_notification_channel_id = "default";
 
-    public void onReceive (Context context , Intent intent) {
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context. NOTIFICATION_SERVICE ) ;
-        Notification notification = intent.getParcelableExtra( NOTIFICATION ) ;
-        int importance = NotificationManager.IMPORTANCE_HIGH ;
-        NotificationChannel notificationChannel = new NotificationChannel( NOTIFICATION_CHANNEL_ID , "Elderberry medicine reminder" , importance) ;
+    public void onReceive(Context context, Intent intent) {
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        Notification notification = intent.getParcelableExtra(NOTIFICATION);
+        int importance = NotificationManager.IMPORTANCE_HIGH;
+        NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "Elderberry medicine reminder", importance);
         assert notificationManager != null;
-        notificationManager.createNotificationChannel(notificationChannel) ;
-        notificationManager.notify(getNotificationIdInt() , notification) ;
+        notificationManager.createNotificationChannel(notificationChannel);
+        Date fromDate = (Date) intent.getSerializableExtra("fromTime");
+        if((fromDate.toInstant().toEpochMilli() + 15000)  > System.currentTimeMillis()) {
+            notificationManager.notify(getNotificationIdInt(), notification);
+        }
 
         Date toDate = (Date) intent.getSerializableExtra("toDate");
-        Date fromDate = (Date) intent.getSerializableExtra("fromTime");
         String name = intent.getStringExtra("name");
         int dose = intent.getIntExtra("dose", 0);
 
@@ -53,10 +55,11 @@ public class MyNotificationPublisher extends BroadcastReceiver {
     }
 
     public static void setAlarm(DateTimeDose date, Context context) {
+
         if (date.getToDate().toInstant().toEpochMilli() > System.currentTimeMillis()) {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, default_notification_channel_id);
             builder.setContentTitle("Time to take your medication");
-            builder.setContentText("Take " + date.getDose() + " " +date.getName());
+            builder.setContentText("Take " + date.getDose() + " " + date.getName());
             builder.setSmallIcon(R.drawable.elderberryplant);
             builder.setAutoCancel(true);
             builder.setChannelId(NOTIFICATION_CHANNEL_ID);
@@ -73,6 +76,7 @@ public class MyNotificationPublisher extends BroadcastReceiver {
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, MyNotificationPublisher.getNotificationIdInt(), notificationIntent, PendingIntent.FLAG_IMMUTABLE);
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             assert alarmManager != null;
+
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, date.getFromTime().toInstant().toEpochMilli(), pendingIntent);
         }
     }
