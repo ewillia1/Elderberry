@@ -48,6 +48,7 @@ public class MedicationDayview extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference userDatabase;
     private ArrayList<String> medKey = new ArrayList<>();
+    ParentItemAdapter parentItemAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,14 +124,7 @@ public class MedicationDayview extends AppCompatActivity {
                     }
                     medicineList.add(new ParentItem(medicineDoseTime.getName(), children));
                 }
-
-
-                // MedicineDoseTime med = snapshot.child(editMedKey).getValue(MedicineDoseTime.class);
-
-                // add time to take the medicine to list
-                //medicineList.add(new ParentItem(String.valueOf(d.child("name").getValue()), children));
-
-                // medAdapter.notifyDataSetChanged();
+                parentItemAdapter.notifyDataSetChanged();
             }
 
 
@@ -143,38 +137,19 @@ public class MedicationDayview extends AppCompatActivity {
 
 
         RecyclerView ParentRecyclerViewItem = findViewById(R.id.parent_recyclerview);
-        Log.d(TAG, "onCreate: 1");
         ParentRecyclerViewItem.setHasFixedSize(true);
         ParentRecyclerViewItem.setItemAnimator(new DefaultItemAnimator());
-        Log.d(TAG, "onCreate: 2");
 
-        // Initialise the Linear layout manager
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        Log.d(TAG, "onCreate: 3");
-        ParentItemAdapter parentItemAdapter = new ParentItemAdapter(medicineList);
-        Log.d(TAG, "onCreate: 4");
+        parentItemAdapter = new ParentItemAdapter(medicineList);
         ParentRecyclerViewItem.setAdapter(parentItemAdapter);
-        Log.d(TAG, "onCreate: 5");
         ParentRecyclerViewItem.setLayoutManager(layoutManager);
-        Log.d(TAG, "onCreate: 6");
-        // Pass the arguments
-        // to the parentItemAdapter.
-        // These arguments are passed
-        // using a method ParentItemList()
-//        ParentItemAdapter
-//                parentItemAdapter
-//                = new ParentItemAdapter(
-//                ParentItemList());
-
-
-
-        //findViewById(R.id.parent_item_title);
 
     }
 
     private void startMedicationTrackerActivity() {
         Log.d(TAG, "_____startMedicationTrackerActivity");
-        onResume();
+        finish();
     }
 
     private void startAddMedicationActivity() {
