@@ -91,14 +91,23 @@ public class MedicationDayview extends AppCompatActivity {
             return false;
         });
 
-
-        // Setting up db.
-        //DatabaseReference userDB = FirebaseDatabase.getInstance().getReference();
-
+        // get correct db reference
         this.mAuth = FirebaseAuth.getInstance();
         userDatabase = FirebaseDatabase.getInstance().getReference();
         DatabaseReference medDatabase = this.userDatabase.child(this.mAuth.getCurrentUser().getUid());
         Log.d(TAG, "onCreate: Retrieving user med db with user ID" + this.mAuth.getCurrentUser().getUid());
+
+
+        RecyclerView ParentRecyclerViewItem = findViewById(R.id.parent_recyclerview);
+        ParentRecyclerViewItem.setHasFixedSize(true);
+        ParentRecyclerViewItem.setItemAnimator(new DefaultItemAnimator());
+
+        // Initialise the Linear layout manager
+        LinearLayoutManager layoutManager = new LinearLayoutManager(MedicationDayview.this);
+        ParentItemAdapter parentItemAdapter = new ParentItemAdapter(medicineList);
+        ParentRecyclerViewItem.setAdapter(parentItemAdapter);
+        ParentRecyclerViewItem.setLayoutManager(layoutManager);
+        // what did we initialized late? that we can now move it earlier?
 
         medDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -121,21 +130,12 @@ public class MedicationDayview extends AppCompatActivity {
                             ChildItem fd = new ChildItem(t);
                             children.add(fd);
                         }
-
                         Log.d(TAG, "onDataChange: level 3 retrieve correct medicineDoseTime successfully ");
                     }
+
                     medicineList.add(new ParentItem(medicineDoseTime.getName(), children));
                 }
                 Log.d(TAG, "onDataChange: level 4 retrieve correct medicineDoseTime successfully " + medicineList.toString());
-
-
-
-                // MedicineDoseTime med = snapshot.child(editMedKey).getValue(MedicineDoseTime.class);
-
-                // add time to take the medicine to list
-                //medicineList.add(new ParentItem(String.valueOf(d.child("name").getValue()), children));
-
-                // medAdapter.notifyDataSetChanged();
             }
 
 
@@ -145,16 +145,6 @@ public class MedicationDayview extends AppCompatActivity {
             }
         });
 
-
-        RecyclerView ParentRecyclerViewItem = findViewById(R.id.parent_recyclerview);
-        ParentRecyclerViewItem.setHasFixedSize(true);
-        ParentRecyclerViewItem.setItemAnimator(new DefaultItemAnimator());
-
-        // Initialise the Linear layout manager
-        LinearLayoutManager layoutManager = new LinearLayoutManager(MedicationDayview.this);
-        ParentItemAdapter parentItemAdapter = new ParentItemAdapter(medicineList);
-        ParentRecyclerViewItem.setAdapter(parentItemAdapter);
-        ParentRecyclerViewItem.setLayoutManager(layoutManager);
 
     }
 
