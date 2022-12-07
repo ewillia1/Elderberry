@@ -3,6 +3,8 @@ package edu.northeastern.elderberry;
 import static edu.northeastern.elderberry.util.DatetimeFormat.makeDateString;
 
 import android.annotation.SuppressLint;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -140,7 +142,8 @@ public class MedicationTrackerActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d(TAG, "_____onDataChange: ");
-
+                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.cancelAll();
                 medicineList.clear();
 
                 for (DataSnapshot d : snapshot.getChildren()) {
