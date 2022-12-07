@@ -25,8 +25,8 @@
     <!-- This is the parent RecyclerView-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/parent_recyclerview"
-        android:layout_width="407dp"
-        android:layout_height="512dp"
+        android:layout_width="374dp"
+        android:layout_height="303dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,9 +34,12 @@
 
     <TextView
         android:id="@+id/dayview_textView"
-        android:layout_width="107dp"
-        android:layout_height="36dp"
+        android:layout_width="167dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
