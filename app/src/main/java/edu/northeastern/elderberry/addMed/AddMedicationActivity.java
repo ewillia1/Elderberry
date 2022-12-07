@@ -153,7 +153,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
 
 
-        // 1 Todo properly update the db if we came from your medication activity
+        // 1 Todo properly update the db if we came from your medication activity - Gavin
         db.setValue(new Medicine(this.viewModel.getMedName().getValue(),
                 this.viewModel.getInformation().getValue(),
                 this.viewModel.getFromDate().getValue(),
@@ -254,7 +254,7 @@ public class AddMedicationActivity extends AppCompatActivity {
                 viewModel.setUnit(med.getUnit());
                 viewModel.setInformation(med.getInformation());
 
-                // 2 Todo when we save old data, this is invoked again and triggered an error.
+                // 2 Todo when we save old data, this is invoked again and triggered an error. - Gavin
                 for (Map.Entry<String, List<String>> entry : med.getTime().entrySet()) {
                     // there is only one key in the hashmap
                     viewModel.setTime(entry.getValue());

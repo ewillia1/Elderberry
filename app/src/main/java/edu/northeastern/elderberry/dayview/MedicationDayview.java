@@ -27,8 +27,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import edu.northeastern.elderberry.MedicineDoseTime;
@@ -38,7 +42,6 @@ import edu.northeastern.elderberry.your_medication.MedicineRow;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 // 1 Todo restrict each day view to only show for that particular day selected - Team
-// 1 Todo the UI does not load on first attempt - Christopher
 public class MedicationDayview extends AppCompatActivity {
     private static final String TAG = "MedicationDayViewActivity";
     private final List<ParentItem> medicineList = new ArrayList<>();
@@ -49,6 +52,7 @@ public class MedicationDayview extends AppCompatActivity {
     private DatabaseReference userDatabase;
     private ArrayList<String> medKey = new ArrayList<>();
     ParentItemAdapter parentItemAdapter;
+    private String currentDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +63,13 @@ public class MedicationDayview extends AppCompatActivity {
         // Calling this activity's function to use ActionBar utility methods.
         ActionBar actionBar = getSupportActionBar();
 
+        currentDate = getIntent().getStringExtra("current_date");
+
         // Providing a subtitle for the ActionBar.
         assert actionBar != null;
         actionBar.setSubtitle(getString(R.string.medication_tracker));
 
         TextView medViewDate = findViewById(R.id.dayview_textView);
-        String currentDate = getIntent().getStringExtra("current_date");
         medViewDate.setText(currentDate);
 
         // Adding an icon in the ActionBar.
@@ -112,6 +117,13 @@ public class MedicationDayview extends AppCompatActivity {
                     //for (DataSnapshot td : d.getChildren()) {
                     Log.d(TAG, "onDataChange: level 1 ");
                     MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
+                    //1 Todo: make try-catch proper formatting
+                    try {
+                        if (!isCurrentDate(medicineDoseTime)) continue;
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
                     for (Map.Entry<String, List<String>> entry : medicineDoseTime.getTime().entrySet()) {
                         // there is only one key in the hashmap
                         Log.d(TAG, "onDataChange: level 2 ");
@@ -145,6 +157,18 @@ public class MedicationDayview extends AppCompatActivity {
         ParentRecyclerViewItem.setAdapter(parentItemAdapter);
         ParentRecyclerViewItem.setLayoutManager(layoutManager);
 
+    }
+
+    private boolean isCurrentDate(MedicineDoseTime medicineDoseTime) throws ParseException {
+
+        Date fromDate=new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(medicineDoseTime.getFromDate());
+        Date toDate=new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(medicineDoseTime.getToDate());
+        if (currentDate == null) {
+            currentDate = medicineDoseTime.getFromDate();
+        }
+        Date selectedDate=new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(currentDate);
+        Log.d(TAG, "isCurrentDate: " + fromDate.toString() + toDate.toString() + selectedDate.toString());
+        return fromDate.compareTo(selectedDate) <= 0 && selectedDate.compareTo(toDate) <= 0;
     }
 
     private void startMedicationTrackerActivity() {
