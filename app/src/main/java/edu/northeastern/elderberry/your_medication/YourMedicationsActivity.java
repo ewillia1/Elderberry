@@ -137,6 +137,7 @@ public class YourMedicationsActivity extends AppCompatActivity {
         // Create a method to create item touch helper method for adding swipe to delete functionality.
         // In this we are specifying drag direction and position to right.
         // https://www.geeksforgeeks.org/swipe-to-delete-and-undo-in-android-recyclerview/
+        // Future: will not actually delete medication from database (just tag it as deleted)
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             // This method is called when the item is moved.
             @Override

@@ -9,9 +9,16 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Updated Toast for when new password is not of the right format.">
+    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Updated SetTimesFragment.java">
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/SetTimesFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/SetTimesFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/your_medication/YourMedicationsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/your_medication/YourMedicationsActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,13 +201,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666133441374</updated>
-    </task>
-    <task id="LOCAL-00037" summary="Working on getting the add button to add medication to database. Figured out how to retrieve the user and user Uid.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher">
-      <created>1669739525385</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1669739525385</updated>
     </task>
     <task id="LOCAL-00038" summary="Working on sharing data from fragments to host activity -- still not working correctly.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher">
       <created>1669744109445</created>
@@ -538,7 +538,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670447374867</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="Updated SetTimesFragment.java">
+      <created>1670448346189</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1670448346189</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -554,7 +561,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Updated AddMedicationActivity.java and Medicine.java" />
     <MESSAGE value="Updating AddMedicationActivity.java" />
     <MESSAGE value="Need to update listeners in MedInfoFragment.java and TimeDoseViewHolder.java (see TODOs; hint: addTextChangedListener). Got database functionality to work. Need to work on checking required fields. Other small issues need to be worked out too." />
     <MESSAGE value="Updated listeners in MedInfoFragment.java and TimeDoseViewHolder.java. Updated database functionality. Need to work on checking required fields. Other small issues need to be worked out too." />
@@ -579,6 +585,7 @@
     <MESSAGE value="Fixed font issues (ex. reset size of subtitle in actionbar)" />
     <MESSAGE value="Updated MedicationDayViewActivity.java (removed unused lines)" />
     <MESSAGE value="Updated Toast for when new password is not of the right format." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Toast for when new password is not of the right format." />
+    <MESSAGE value="Updated SetTimesFragment.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated SetTimesFragment.java" />
   </component>
 </project>
