@@ -22,11 +22,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import edu.northeastern.elderberry.Medicine;
 import edu.northeastern.elderberry.MedicineDoseTime;
@@ -34,6 +38,7 @@ import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 //3 Todo to test if the taken field is working when frequency is changed when we edit the medication
+// Todo makign sure does time frequency selectio always works
 public class AddMedicationActivity extends AppCompatActivity {
 
     private static final String TAG = "AddMedicationActivity";
@@ -51,10 +56,8 @@ public class AddMedicationActivity extends AppCompatActivity {
         editMedKey = getIntent().getStringExtra(YourMedicationsActivity.YOUR_MED_TO_EDIT_MED_KEY);
 
         if (editMedKey == null) {
-            Log.d(TAG, "onCreate: editMedKey is null");
             setContentView(R.layout.add_med_main);
         } else {
-            Log.d(TAG, "onCreate: editMedKey is not null");
             setContentView(R.layout.edit_med_main);
         }
 
@@ -90,7 +93,11 @@ public class AddMedicationActivity extends AppCompatActivity {
                 if (filledInRequiredFields()) {
                     // Add fields to database.
                     Log.d(TAG, "_____onCreate: Successful add.");
-                    doAddDataToDb();
+                    if (editMedKey == null) {
+                        doAddDataToDb();
+                    } else {
+                        updateDB();
+                    }
                     int msg = itemId == R.id.add_med ? R.string.successful_add : R.string.successful_saved;
                     Toast.makeText(AddMedicationActivity.this, msg, Toast.LENGTH_SHORT).show();
                     finish();
@@ -137,38 +144,81 @@ public class AddMedicationActivity extends AppCompatActivity {
         retrieveMedData(editMedKey);
     }
 
+
+    private void updateDB() {
+        if (editMedKey == null) {
+            throw new RuntimeException("editMed key is null, doAddDataToDb should be called");
+        }
+
+        FirebaseUser user = this.mAuth.getCurrentUser();
+        assert user != null;
+        Log.d(TAG, "_____updateDB: ");
+        DatabaseReference db = this.userDatabase.child(user.getUid()).child(editMedKey);
+
+        String timeKey = db.child("time").getKey();
+        List<String> timeList = this.viewModel.getTimeStringArray();
+        Map<String, List<String>> timeMap = new HashMap<>();
+        timeMap.put(timeKey, timeList);
+
+        String doseKey = db.child("dose").getKey();
+        List<String> doseList = this.viewModel.getDoseStringArray();
+        Map<String, List<String>> doseMap = new HashMap<>();
+        doseMap.put(doseKey, doseList);
+
+        String takenKey = db.child("taken").getKey();
+        List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
+        Map<String, List<Boolean>> takenMap = new HashMap<>();
+        takenMap.put(takenKey, takenList);
+
+        MedicineDoseTime med = new MedicineDoseTime(
+                doseMap,
+                timeMap,
+                takenMap,
+                viewModel.getMedName().getValue(),
+                viewModel.getInformation().getValue(),
+                viewModel.getFromDate().getValue(),
+                viewModel.getToDate().getValue(),
+                viewModel.getUnit().getValue());
+
+        Log.d(TAG, "_____updateDB med is "+ med);
+        db.setValue(med);
+        db.orderByChild("fromDate");
+    }
+
     private void doAddDataToDb() {
         FirebaseUser user = this.mAuth.getCurrentUser();
         assert user != null;
         Log.d(TAG, "_____doAddDataToDb: user.getUid() = " + user.getUid());
         DatabaseReference databaseReference = this.userDatabase.child(user.getUid());
-        DatabaseReference db;
 
         // If coming from yourMed activity, then don't create new node
-        db = editMedKey != null ? databaseReference.child(editMedKey) : databaseReference.push();
+        //db = editMedKey != null ? databaseReference.child(editMedKey) : databaseReference.push();
+        DatabaseReference db = databaseReference.push();
 
         List<String> timeList = this.viewModel.getTimeStringArray();
         List<String> doseList = this.viewModel.getDoseStringArray();
-        List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
 
-        // 1 Todo properly update the db if we came from your medication activity
         db.setValue(new Medicine(this.viewModel.getMedId().getValue(), this.viewModel.getMedName().getValue(),
                 this.viewModel.getInformation().getValue(),
                 this.viewModel.getFromDate().getValue(),
                 this.viewModel.getToDate().getValue(),
                 this.viewModel.getUnit().getValue()));
-        // 3 Todo add time and taken
 
         Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
-        if (editMedKey != null) {
-            databaseReference.child(editMedKey).child("time").push().setValue(timeList);
-            databaseReference.child(editMedKey).child("dose").push().setValue(doseList);
-            databaseReference.child(editMedKey).child("taken").push().setValue(takenList);
-        } else {
-            databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(timeList);
-            databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").push().setValue(doseList);
-            databaseReference.child(Objects.requireNonNull(db.getKey())).child("taken").push().setValue(takenList);
-        }
+        //if (editMedKey != null) {
+        //    databaseReference.child(editMedKey).child("time").push().setValue(timeList);
+        //    databaseReference.child(editMedKey).child("dose").push().setValue(doseList);
+        //    databaseReference.child(editMedKey).child("taken").push().setValue(takenList);
+        //} else {
+        databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(timeList);
+        databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").push().setValue(doseList);
+
+        // Todo make this private
+        this.viewModel.initializeBooleanArray();
+        List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
+        Log.d(TAG, "_____doAddDataToDb: before setting taken to db taken list is " + takenList);
+        databaseReference.child(Objects.requireNonNull(db.getKey())).child("taken").push().setValue(takenList);
+        databaseReference.orderByChild("fromDate");
     }
 
     private boolean filledInRequiredFields() {
@@ -176,6 +226,11 @@ public class AddMedicationActivity extends AppCompatActivity {
         if (this.viewModel.getMedName().getValue() == null || this.viewModel.getFromDate().getValue() == null
                 || this.viewModel.getToDate().getValue() == null || this.viewModel.getTimeFreq().getValue() == null || this.viewModel.getUnit().getValue() == null) {
             Log.d(TAG, "filledInRequiredFields: (a field is null) false");
+            //Log.d(TAG, "filledInRequiredFields: (getMedName is  null) " + this.viewModel.getMedName().getValue());
+            //Log.d(TAG, "filledInRequiredFields: (getFromDate is  null) " + this.viewModel.getFromDate().getValue());
+            //Log.d(TAG, "filledInRequiredFields: (getToDate is  null) " + this.viewModel.getToDate().getValue());
+            //Log.d(TAG, "filledInRequiredFields: (getTimeFreq is  null) " + this.viewModel.getTimeFreq().getValue());
+            //Log.d(TAG, "filledInRequiredFields: (getUnit is  null) " + this.viewModel.getUnit().getValue());
             return false;
         } else if (this.viewModel.getMedName().getValue().isBlank() || this.viewModel.getMedName().getValue().isEmpty() ||
                 this.viewModel.getFromDate().getValue().isBlank() || this.viewModel.getFromDate().getValue().isEmpty() ||
@@ -206,30 +261,11 @@ public class AddMedicationActivity extends AppCompatActivity {
     }
 
 
-    //for (var d: medDatabase.getRoot().child(editMedKey)) {
-    //
-    //}
-    //medDatabase.addValueEventListener(new ValueEventListener() {
-    //    @Override
-    //    public void onDataChange(@NonNull DataSnapshot snapshot) {
-    //        for (DataSnapshot d: snapshot.getChildren()){
-    //            Log.d(TAG, "______onDataChange: d is " + d.toString());
-    //        }
-
-    //    }
-
-    //    @Override
-    //    public void onCancelled(@NonNull DatabaseError error) {
-
-    //    }
-    //});
-
     /**
      * Based on the user selection from yourMedication, this function retrieve the corresponding
      * data from the database and pass these data to the viewModel so that other fragments
      * can use these data to pre-fill the fields.
      */
-
     private void retrieveMedData(String editMedKey) {
         if (editMedKey == null) return;
 
@@ -239,12 +275,13 @@ public class AddMedicationActivity extends AppCompatActivity {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d(TAG, "onDataChange: snapshot getChildren returns" + snapshot.child(editMedKey));
 
                 MedicineDoseTime med = snapshot.child(editMedKey).getValue(MedicineDoseTime.class);
-                // Todo figure out why med retrieved here does not contain dose and time information
+
+                Log.d(TAG, "_____retrieveMedData_onDataChange: snapshot getChildren returns" + snapshot.child(editMedKey));
+
                 assert med != null;
-                Log.d(TAG, "onDataChange: med retrieved from db is " + med);
+                Log.d(TAG, "_____onDataChange: med retrieved from db is " + med);
                 viewModel.setMedName(med.getName());
                 viewModel.setFromDate(med.getFromDate());
                 viewModel.setToDate(med.getToDate());
@@ -252,16 +289,28 @@ public class AddMedicationActivity extends AppCompatActivity {
                 viewModel.setInformation(med.getInformation());
 
                 // 2 Todo when we save old data, this is invoked again and triggered an error. - Gavin
+                // clear time & dose array
+                viewModel.clear();
+
+                // when first retrieved from the db, the data works fine
+                // in the second instance where it is saved & retrieved it did not work as expected
+                Log.d(TAG, "_____onDataChange: child time of snapshot.child(editMedkey) is " + snapshot.child(editMedKey).child("time"));
                 for (Map.Entry<String, List<String>> entry : med.getTime().entrySet()) {
                     // there is only one key in the hashmap
                     viewModel.setTime(entry.getValue());
-                    Log.d(TAG, "onDataChange: set viewModel time as" + viewModel.getTimeStringArray().toString());
+                    Log.d(TAG, "_____onDataChange: set viewModel time as" + viewModel.getTimeStringArray().toString());
                 }
 
                 for (Map.Entry<String, List<String>> entry : med.getDose().entrySet()) {
                     // there is only one key in the hashmap
                     viewModel.setDose(entry.getValue());
-                    Log.d(TAG, "onDataChange: set viewModel dose as" + viewModel.getDoseStringArray().toString());
+                    Log.d(TAG, "_____onDataChange: set viewModel dose as" + viewModel.getDoseStringArray().toString());
+                }
+
+                for (Map.Entry<String, List<Boolean>> entry : med.getTaken().entrySet()) {
+                    // there is only one key in the hashmap
+                    viewModel.setTaken(entry.getValue());
+                    Log.d(TAG, "_____onDataChange: set viewModel dose as" + viewModel.getTakenBooleanArray().toString());
                 }
 
                 viewModel.setTimeFreq(Integer.toString(viewModel.inferTimeFreq()));
@@ -269,7 +318,7 @@ public class AddMedicationActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.d(TAG, "_____onCancelled");
             }
         });
     }
