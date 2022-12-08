@@ -96,6 +96,9 @@ public class YourMedicationsActivity extends AppCompatActivity {
                 medicines.clear();
 
                 for (DataSnapshot d : snapshot.getChildren()) {
+                    // put all medicine in an arrayList
+                    // sort the array list by from date
+                    // another for loop
                     String id = d.getKey();
                     medKey.add(id);
                     // 2 Todo update this to using medicine class

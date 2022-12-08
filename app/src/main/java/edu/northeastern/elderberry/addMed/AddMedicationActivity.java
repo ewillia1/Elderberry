@@ -174,6 +174,7 @@ public class AddMedicationActivity extends AppCompatActivity {
 
         Log.d(TAG, "_____updateDB med is "+ med);
         db.setValue(med);
+        db.orderByChild("fromDate");
     }
 
     private void doAddDataToDb() {
@@ -205,6 +206,8 @@ public class AddMedicationActivity extends AppCompatActivity {
         //} else {
         databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(timeList);
         databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").push().setValue(doseList);
+
+        databaseReference.orderByChild("fromDate");
         // Todo to activate the following line
         // databaseReference.child(Objects.requireNonNull(db.getKey())).child("taken").push().setValue(takenList);
         //}
@@ -268,7 +271,7 @@ public class AddMedicationActivity extends AppCompatActivity {
                 MedicineDoseTime med = snapshot.child(editMedKey).getValue(MedicineDoseTime.class);
 
                 Log.d(TAG, "_____retrieveMedData_onDataChange: snapshot getChildren returns" + snapshot.child(editMedKey));
-                // Todo figure out why med retrieved here does not contain dose and time information
+
                 assert med != null;
                 Log.d(TAG, "_____onDataChange: med retrieved from db is " + med);
                 viewModel.setMedName(med.getName());
@@ -277,10 +280,10 @@ public class AddMedicationActivity extends AppCompatActivity {
                 viewModel.setUnit(med.getUnit());
                 viewModel.setInformation(med.getInformation());
 
-                // Clear time and dose array.
+                // 2 Todo when we save old data, this is invoked again and triggered an error. - Gavin
+                // clear time & dose array
                 viewModel.clear();
 
-                // 2 Todo when we save old data, this is invoked again and triggered an error. - Gavin
                 // when first retrieved from the db, the data works fine
                 // in the second instance where it is saved & retrieved it did not work as expected
                 Log.d(TAG, "_____onDataChange: child time of snapshot.child(editMedkey) is " + snapshot.child(editMedKey).child("time"));
