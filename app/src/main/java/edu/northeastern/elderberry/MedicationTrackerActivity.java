@@ -3,29 +3,46 @@ package edu.northeastern.elderberry;
 import static edu.northeastern.elderberry.util.DatetimeFormat.makeDateString;
 
 import android.annotation.SuppressLint;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CalendarView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 import edu.northeastern.elderberry.helpAndConfigs.AboutActivity;
 import edu.northeastern.elderberry.helpAndConfigs.SettingsActivity;
 
-import edu.northeastern.elderberry.dayview.MedicationDayview;
+import edu.northeastern.elderberry.dayview.MedicationDayViewActivity;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 public class MedicationTrackerActivity extends AppCompatActivity {
     private static final String TAG = "MedicationTrackerActivity";
+    private FirebaseAuth mAuth;
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -34,12 +51,14 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         Log.d(TAG, "_____onCreate");
         setContentView(R.layout.activity_medication_tracker);
 
+        mAuth = FirebaseAuth.getInstance();
         // Calling this activity's function to use ActionBar utility methods.
         ActionBar actionBar = getSupportActionBar();
 
         // Providing a subtitle for the ActionBar.
         assert actionBar != null;
-        actionBar.setSubtitle(getString(R.string.medication_tracker));
+        actionBar.setSubtitle(Html.fromHtml("<small>" + getString(R.string.medication_tracker) + "</small>", Html.FROM_HTML_MODE_LEGACY));
+
 
         // Adding an icon in the ActionBar.
         actionBar.setIcon(R.mipmap.app_logo);
@@ -50,19 +69,19 @@ public class MedicationTrackerActivity extends AppCompatActivity {
 
         CalendarView calendarView = findViewById(R.id.calendar);
 
-        // Add Listener in calendar
+        // Add Listener in calendar.
         calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
+            Log.d(TAG, "_____onCreate: calendarView.setOnDateChangeListener");
             String date = makeDateString(dayOfMonth, month, year);
-            // date_view.setText(date);
-            // Todo ask user if to navigate to the activity
-            // https://developer.android.com/guide/topics/location/transitions reference this
-            Intent intent = new Intent(this, MedicationDayview.class);
+            Intent intent = new Intent(this, MedicationDayViewActivity.class);
+            intent.putExtra("current_date" , date);
             startActivity(intent);
         });
 
         // BottomNavigationView functionality.
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnItemSelectedListener(item -> {
+            Log.d(TAG, "_____onCreate: bottomNavigationView.setOnItemSelectedListener");
             int itemId = item.getItemId();
             if (itemId == R.id.home) {
                 startMedicationTrackerActivity();
@@ -76,6 +95,8 @@ public class MedicationTrackerActivity extends AppCompatActivity {
             }
             return false;
         });
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationUtil.getMedicationInfo(this, notificationManager);
     }
 
     private void startMedicationTrackerActivity() {
@@ -111,11 +132,6 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         int id = item.getItemId();
         Intent intent;
         switch (id) {
-            case R.id.medicationHistory:
-                Log.d(TAG, "_____onOptionsItemSelected (medicationHistory)");
-                intent = new Intent(this, MedicationHistory.class);
-                startActivity(intent);
-                return true;
             case R.id.settings:
                 Log.d(TAG, "_____onOptionsItemSelected (settings)");
                 intent = new Intent(this, SettingsActivity.class);

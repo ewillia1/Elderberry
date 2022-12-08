@@ -4,7 +4,6 @@
     <string name="settings">Settings</string>
     <string name="about">About</string>
     <string name="about_string">Elderberry is a one-stop shop for all your medication tracker needs. Never forget to take your medication again. Targeted for those wise beyond their years, but is useful to all. Keep your health and wellness a priority, by using Elderberry.</string>
-    <string name="spoken_notification">Spoken Notification</string>
     <string name="medication_tracker">Medication Tracker</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
@@ -13,7 +12,6 @@
     <string name="create_account">Create Account</string>
     <string name="add_medication">Add Medication</string>
     <string name="view_medications">View Medications</string>
-    <string name="medication_history">Medication History</string>
     <string name="information">Information</string>
     <string name="to">To:</string>
     <string name="from">From:</string>
@@ -21,7 +19,7 @@
     <string name="add">Add</string>
     <string name="calendar_icon">calendar icon</string>
     <string name="set_time">%1$d:%2$s %3$s</string>
-    <string name="by_christopher_mccune_nelizabeth_williams_nshriya_hukkeri_nzhengyu_yang_n_npictures_by_virginia_gassman">By: Christopher McCune\nElizabeth Williams\nShriya Hukkeri\nZhengyu Yang\n\nPictures by: Virginia Gassman</string>
+    <string name="by_christopher_mccune_nelizabeth_williams_nshriya_hukkeri_nzhengyu_yang_n_ndrawings_by_virginia_gassman">By: Christopher McCune\nElizabeth Williams\nShriya Hukkeri\nZhengyu Yang\n\nDrawings by: Virginia Gassman</string>
     <string name="log_out">Log Out</string>
     <string name="email">Email</string>
     <string name="forgot_password">Forgot password?</string>
@@ -32,19 +30,13 @@
     <string name="medication_name">Medication Name</string>
     <string name="set_time_frequency">Set Time Frequency Per Day</string>
     <string name="title_activity_medication_dayview">MedicationDayview</string>
-    <string name="cardview_expand">expand down</string>
     <string name="home">Home</string>
     <string name="med_info">Med Info</string>
     <string name="set_dates">Set Dates</string>
     <string name="set_times">Set Times</string>
-    <string name="_1_med_name">1. Med Name</string>
-    <string name="scheduled_time_s">Scheduled Time(s)</string>
-    <string name="time_3">Time 3</string>
-    <string name="time_2">Time 2</string>
-    <string name="time_1">Time 1</string>
     <string name="required">Required*</string>
-    <string name="elderberry_image">Elderberry image</string>
     <string name="successful_add">Successful add!</string>
+    <string name="successful_saved">Successfully saved!</string>
     <string name="click_to_set_dose">Click to set dose</string>
     <string name="click_to_set_time">Click to set time</string>
     <string name="unit">Unit</string>
@@ -60,6 +52,9 @@
     <string name="enable_notifications">Enable Notifications</string>
     <string name="med_name_default">MedNameDefault</string>
     <string name="med_time_default">MedTimeDefault</string>
+    <string name="save">save</string>
+    <string name="yourMedFromField">From</string>
+    <string name="yourMedMedicineField">Medicine</string>
     <string-array name="time_frequencies">
         <item>1 time</item>
         <item>2 times</item>

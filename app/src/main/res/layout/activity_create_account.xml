@@ -25,13 +25,14 @@
             android:id="@+id/ti_firstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/elsie"
+            android:fontFamily="@font/bellota_bold"
             android:hint="@string/first_name"
             android:maxLength="40"
             android:textColor="@color/main"
             android:textColorHint="@color/main"
             android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -53,13 +54,14 @@
             android:id="@+id/ti_lastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/elsie"
+            android:fontFamily="@font/bellota_bold"
             android:hint="@string/last_name"
             android:maxLength="40"
             android:textColor="@color/main"
             android:textColorHint="@color/main"
             android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -81,13 +83,14 @@
             android:id="@+id/ti_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/elsie"
+            android:fontFamily="@font/bellota_bold"
             android:hint="@string/email"
             android:maxLength="40"
             android:textColor="@color/main"
             android:textColorHint="@color/main"
             android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -110,13 +113,14 @@
             android:id="@+id/ti_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/elsie"
+            android:fontFamily="@font/bellota_bold"
             android:hint="@string/password"
             android:maxLength="40"
             android:textColor="@color/main"
             android:textColorHint="@color/main"
             android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -124,7 +128,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/button_elderberryplant"
-        android:fontFamily="@font/elsie"
+        android:fontFamily="@font/bellota_bold"
         android:text="@string/create_account"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"

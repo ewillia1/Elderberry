@@ -14,18 +14,6 @@ public class MedAdapter extends FragmentStateAdapter {
         this.totalTabs = totalTabs;
     }
 
-//    public MedAdapter(@NonNull FragmentActivity fragmentActivity) {
-//        super(fragmentActivity);
-//    }
-//
-//    public MedAdapter(@NonNull Fragment fragment) {
-//        super(fragment);
-//    }
-//
-//    public MedAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
-//        super(fragmentManager, lifecycle);
-//    }
-
     @NonNull
     @Override
     public Fragment createFragment(int position) {

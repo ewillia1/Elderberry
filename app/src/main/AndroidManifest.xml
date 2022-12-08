@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,13 +16,12 @@
         android:theme="@style/Theme.TestApp"
         tools:targetApi="31">
         <activity
-            android:name=".dayview.MedicationDayview"
+            android:name=".dayview.MedicationDayViewActivity"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|keyboard"
             android:exported="false"
             android:label="@string/title_activity_medication_dayview"
-            android:theme="@style/Theme.TestApp.NoActionBar"
             tools:ignore="LockedOrientationActivity">
             <meta-data
                 android:name="android.app.lib_name"
@@ -29,7 +31,7 @@
             android:name=".ForgotPasswordActivity"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|keyboard"
             android:exported="false"
             tools:ignore="LockedOrientationActivity">
             <meta-data
@@ -40,7 +42,7 @@
             android:name=".CreateAccountActivity"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|keyboard"
             android:exported="false"
             tools:ignore="LockedOrientationActivity">
             <meta-data
@@ -51,7 +53,7 @@
             android:name=".addMed.AddMedicationActivity"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|keyboard"
             android:exported="false"
             tools:ignore="LockedOrientationActivity">
             <meta-data
@@ -62,7 +64,7 @@
             android:name=".TodaysMedicationsActivity"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|keyboard"
             android:exported="false"
             tools:ignore="LockedOrientationActivity">
             <meta-data
@@ -73,18 +75,7 @@
             android:name=".your_medication.YourMedicationsActivity"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
-            android:exported="false"
-            tools:ignore="LockedOrientationActivity">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".MedicationHistory"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|keyboard"
             android:exported="false"
             tools:ignore="LockedOrientationActivity">
             <meta-data
@@ -95,7 +86,7 @@
             android:name=".MedicationTrackerActivity"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|keyboard"
             android:exported="false"
             tools:ignore="LockedOrientationActivity">
             <meta-data
@@ -106,7 +97,7 @@
             android:name=".LoginActivity"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|keyboard"
             android:exported="false"
             tools:ignore="LockedOrientationActivity">
             <meta-data
@@ -117,7 +108,7 @@
             android:name=".helpAndConfigs.SettingsActivity"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|keyboard"
             android:exported="false"
             tools:ignore="LockedOrientationActivity">
             <meta-data
@@ -128,7 +119,7 @@
             android:name=".helpAndConfigs.AboutActivity"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|keyboard"
             android:exported="false"
             tools:ignore="LockedOrientationActivity">
             <meta-data
@@ -139,7 +130,7 @@
             android:name=".MainActivity"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|keyboard"
             android:exported="true"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
@@ -152,6 +143,8 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <receiver android:name= ".MyNotificationPublisher" />
 
         <meta-data
             android:name="preloaded_fonts"

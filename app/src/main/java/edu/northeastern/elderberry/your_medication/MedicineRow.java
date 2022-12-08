@@ -1,31 +1,39 @@
 package edu.northeastern.elderberry.your_medication;
 
+import android.util.Log;
+
 import edu.northeastern.elderberry.Medicine;
 
 public class MedicineRow {
+    private final static String TAG = "MedicineRow";
+    private final String id;
     private final String name;
     private final String fromDate;
-    private final String toDate;
 
-    public MedicineRow(String name, String fromDate, String toDate) {
+    public MedicineRow(String id, String name, String fromDate, String toDate) {
+        Log.d(TAG, "_____MedicineRow");
+        this.id = id;
         this.name = name;
         this.fromDate = fromDate;
-        this.toDate = toDate;
+    }
+
+    public String getId() {
+        Log.d(TAG, "_____getId");
+        return this.id;
     }
 
     public String getName() {
-        return name;
+        Log.d(TAG, "_____getName");
+        return this.name;
     }
 
     public String getFromDate() {
-        return fromDate;
-    }
-
-    public String getToDate() {
-        return toDate;
+        Log.d(TAG, "_____getFromDate");
+        return this.fromDate;
     }
 
     public static MedicineRow build(Medicine md) {
-        return new MedicineRow(md.getName(), md.getFromDate(), md.getToDate());
+        Log.d(TAG, "_____build");
+        return new MedicineRow(md.getId(), md.getName(), md.getFromDate(), md.getToDate());
     }
 }

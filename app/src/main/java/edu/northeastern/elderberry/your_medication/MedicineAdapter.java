@@ -36,6 +36,7 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MedicineHolder holder, int position) {
+        Log.d(TAG, "_____onBindViewHolder");
         MedicineRow medRow = this.medicines.get(position);
         holder.fromDate.setText(String.valueOf(medRow.getFromDate()));
         holder.name.setText(String.valueOf(medRow.getName()));
@@ -43,6 +44,7 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineHolder> {
 
     @Override
     public int getItemCount() {
+        Log.d(TAG, "_____getItemCount");
         return this.medicines.size();
     }
 }

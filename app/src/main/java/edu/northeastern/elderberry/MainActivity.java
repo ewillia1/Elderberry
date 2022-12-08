@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Html;
 import android.util.Log;
 
 import androidx.appcompat.app.ActionBar;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setTitle(R.string.app_name);
 
         // Providing a subtitle for the ActionBar.
-        actionBar.setSubtitle(getString(R.string.medication_tracker));
+        actionBar.setSubtitle(Html.fromHtml("<small>" + getString(R.string.medication_tracker) + "</small>", Html.FROM_HTML_MODE_LEGACY));
 
         // Adding an icon in the ActionBar.
         actionBar.setIcon(R.mipmap.app_logo);

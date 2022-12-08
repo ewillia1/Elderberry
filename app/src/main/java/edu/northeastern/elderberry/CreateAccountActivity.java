@@ -2,6 +2,7 @@ package edu.northeastern.elderberry;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
@@ -38,7 +39,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         // Providing a subtitle for the ActionBar.
         assert actionBar != null;
-        actionBar.setSubtitle(getString(R.string.medication_tracker));
+        actionBar.setSubtitle(Html.fromHtml("<small>" + getString(R.string.medication_tracker) + "</small>", Html.FROM_HTML_MODE_LEGACY));
 
         // Adding an icon in the ActionBar.
         actionBar.setIcon(R.mipmap.app_logo);
@@ -93,8 +94,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                                 .setValue(user).addOnCompleteListener(task1 -> showMedicationTrackerActivity());
                     } else {
                         Log.d(TAG, "_____registerUser(failure): " + Objects.requireNonNull(task.getException()).getMessage(), task.getException());
-                        Toast.makeText(CreateAccountActivity.this, "Authentication failed: " + task.getException().getMessage(),
-                                Toast.LENGTH_LONG).show();
+                        Toast.makeText(CreateAccountActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
     }

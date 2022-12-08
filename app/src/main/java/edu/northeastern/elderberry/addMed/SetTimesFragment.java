@@ -8,9 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +31,7 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
     private static final String TAG = "SetTimesFragment";
     private int numOfTimes;
     private TimeDoseAdapter timeDoseAdapter;
+    private ItemViewModel viewModel;
 
     public SetTimesFragment() {
         Log.d(TAG, "_____SetTimesFragment");
@@ -57,17 +60,25 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
         Log.d(TAG, "_____onCreateView");
         View view = inflater.inflate(R.layout.fragment_set_times, container, false);
 
-        // Set dose functionality.
+        // init view model moved from onViewCreate to here
+        this.viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
+
+        // Set unit functionality.
         // Get reference to the string array.
         Resources res = getResources();
         String[] units_array = res.getStringArray(R.array.units_array);
         // Create an array adapter and pass the context, drop down layout, and array.
         ArrayAdapter<String> arrayAdapterForUnits = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, units_array);
         arrayAdapterForUnits.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         // Get reference to the autocomplete text view.
         AutoCompleteTextView autoCompleteUnit = view.findViewById(R.id.setUnit);
         // Set adapter to the autocomplete tv to the arrayAdapter.
-        autoCompleteUnit.setAdapter(arrayAdapterForUnits);
+        autoCompleteUnit.setOnItemClickListener((parent, view12, position, id) -> {
+            String unitSelection = (String) parent.getItemAtPosition(position);
+            Log.d(TAG, "_____onItemClick: position = " + position + ", id = " + id + ", unitSelection = " + unitSelection);
+            this.viewModel.setUnit(unitSelection);
+        });
 
         // Set time frequency functionality.
         // Get reference to the string array.
@@ -77,14 +88,32 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
         arrayAdapterForFreq.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Get reference to the autocomplete text view.
         AutoCompleteTextView autoCompleteTimeFreq = view.findViewById(R.id.setTimeFrequency);
-        // Set adapter to the autocomplete tv to the arrayAdapter.
-        autoCompleteTimeFreq.setAdapter(arrayAdapterForFreq);
 
         // Instantiate the ArrayList.
         ArrayList<TimeDoseItem> timeDoseItemArrayList = new ArrayList<>();
 
         // Instantiate recyclerView adapter. Associate the adapter with the recyclerView.
         this.timeDoseAdapter = new TimeDoseAdapter(timeDoseItemArrayList, getContext(), this);
+
+        // If user comes from your medication, auto fill the frequency
+        AddMedicationActivity addMedicationActivity = (AddMedicationActivity) getActivity();
+        assert addMedicationActivity != null;
+        String editMedKey = addMedicationActivity.getEditMedKey();
+
+        // pre-fill
+        if (editMedKey != null) {
+            int freq = viewModel.getTimeFreq().getValue();
+            int pos = freq - 1;
+            autoCompleteTimeFreq.setText(time_frequencies[pos]);
+            autoCompleteUnit.setText(viewModel.getUnit().getValue());
+            for (int i = 0; i < freq; i++) {
+                timeDoseItemArrayList.add(new TimeDoseItem(pos, viewModel.getTime(i).getValue(), viewModel.getDose(i).getValue(), viewModel.getUnit().getValue()));
+            }
+        }
+
+        // Set adapter to the autocomplete tv to the arrayAdapter.
+        autoCompleteTimeFreq.setAdapter(arrayAdapterForFreq);
+        autoCompleteUnit.setAdapter(arrayAdapterForUnits);
 
         // What happens when an time frequency is clicked on.
         autoCompleteTimeFreq.setOnItemClickListener((parent, view1, position, id) -> {
@@ -95,50 +124,20 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
             // Clear timeDoseAdapter (clearing the RecyclerView).
             timeDoseAdapter.clear();
 
-            switch (position) {
-                case 0:
-                    this.numOfTimes = 1;
-                    break;
-                case 1:
-                    this.numOfTimes = 2;
-                    break;
-                case 2:
-                    this.numOfTimes = 3;
-                    break;
-                case 3:
-                    this.numOfTimes = 4;
-                    break;
-                case 4:
-                    this.numOfTimes = 5;
-                    break;
-                case 5:
-                    this.numOfTimes = 6;
-                    break;
-                case 6:
-                    this.numOfTimes = 7;
-                    break;
-                case 7:
-                    this.numOfTimes = 8;
-                    break;
-                case 8:
-                    this.numOfTimes = 9;
-                    break;
-                case 9:
-                    this.numOfTimes = 10;
-                    break;
-                case 10:
-                    this.numOfTimes = 11;
-                    break;
-                case 11:
-                    this.numOfTimes = 12;
-                    break;
-                default:
-                    Toast.makeText(getContext(), "An error occurred. Somehow you clicked a menu item that does not exist.", Toast.LENGTH_SHORT).show();
-            }
+            // Clear the time and dose array in the view model.
+            this.viewModel.clear();
 
+            this.numOfTimes = position + 1;
+
+            Log.d(TAG, "_____onCreateView: this.numOfTimes = " + this.numOfTimes);
+
+            // Add number of cards in recycler view corresponding to the time frequency the user picked.
             for (int i = 0; i < this.numOfTimes; i++) {
+                Log.d(TAG, "_____onCreateView: for loop iteration: " + i);
+                //timeDoseItemArrayList.add(new TimeDoseItem(position));
                 timeDoseItemArrayList.add(new TimeDoseItem(position));
             }
+            this.viewModel.setTimeFreq(this.numOfTimes);
         });
 
         // Instantiate the recyclerView.
@@ -154,6 +153,25 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
 
     @Override
     public void onTimeDoseItemClick(int position) {
-        Log.d(TAG, "_____onTimeDoseItemClick: clicked item " + position + 1);
+        Log.d(TAG, "_____onTimeDoseItemClick: clicked item " + (position + 1));
+    }
+
+    @Override
+    public void timeWasAdded(int index, String time) {
+        Log.d(TAG, "_____timeWasAdded: time = " + time + ", index = " + index);
+        this.viewModel.setTime(index, time);
+    }
+
+    @Override
+    public void doseWasAdded(int index, String dose) {
+        Log.d(TAG, "_____doseWasAdded: dose = " + dose + ", index = " + index);
+        this.viewModel.setDose(index, dose);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.d(TAG, "_____onViewCreated");
+        this.viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
     }
 }
