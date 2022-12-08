@@ -1,5 +1,7 @@
 package edu.northeastern.elderberry.addMed;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -29,6 +31,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import edu.northeastern.elderberry.Medicine;
+import edu.northeastern.elderberry.NotificationUtil;
 import edu.northeastern.elderberry.MedicineDoseTime;
 import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
@@ -96,11 +99,19 @@ public class AddMedicationActivity extends AppCompatActivity {
                     int msg = itemId == R.id.add_med ? R.string.successful_add : R.string.successful_saved;
                     Toast.makeText(AddMedicationActivity.this, msg, Toast.LENGTH_SHORT).show();
                     finish();
+                    NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    NotificationUtil.getMedicationInfo(this, notificationManager);
                     return true;
                 } else {
                     Log.d(TAG, "_____onCreate: Unsuccessful add. Need to fill in all required fields.");
                     Toast.makeText(this, "Please fill in all required fields before clicking add.", Toast.LENGTH_SHORT).show();
                 }
+
                 return true;
             }
             return false;
@@ -188,8 +199,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         Log.d(TAG, "_____doAddDataToDb: user.getUid() = " + user.getUid());
         DatabaseReference databaseReference = this.userDatabase.child(user.getUid());
 
-        // If coming from yourMed activity, then don't create new node
-        //db = editMedKey != null ? databaseReference.child(editMedKey) : databaseReference.push();
+        // Get reference to medication node. And add the values to it.
         DatabaseReference db = databaseReference.push();
 
         List<String> timeList = this.viewModel.getTimeStringArray();
@@ -203,11 +213,6 @@ public class AddMedicationActivity extends AppCompatActivity {
                 this.viewModel.getTimeFreq().getValue()));
 
         Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
-        //if (editMedKey != null) {
-        //    databaseReference.child(editMedKey).child("time").push().setValue(timeList);
-        //    databaseReference.child(editMedKey).child("dose").push().setValue(doseList);
-        //    databaseReference.child(editMedKey).child("taken").push().setValue(takenList);
-        //} else {
         databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(timeList);
         databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").push().setValue(doseList);
 
