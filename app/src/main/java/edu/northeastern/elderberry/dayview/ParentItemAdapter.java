@@ -5,9 +5,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -58,11 +60,51 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
 
         // Create an instance of the child item view adapter and set its adapter, layout manager and RecyclerViewPool.
         ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), this.context);
+        childItemAdapter.setCallback(this::onCheckboxClicked);
         parentViewHolder.childRecyclerView.setLayoutManager(layoutManager);
         parentViewHolder.childRecyclerView.setAdapter(childItemAdapter);
         parentViewHolder.childRecyclerView.setRecycledViewPool(viewPool);
     }
 
+    private void onCheckboxClicked(CheckBox checkBox, boolean isChecked) {
+        Log.d(TAG, "_____onCheckboxClicked: isChecked = " + isChecked);
+        Log.d(TAG, "_____onCheckboxClicked: checkboxID = checkbox");
+
+        if (isChecked) {
+            setChecked(checkBox, "checkboxstate");
+        } else {
+            setUnchecked(checkBox, "checkboxstate");
+        }
+    }
+
+    private void setChecked(CheckBox checkBox, String checkBoxString) {
+        Log.d(TAG, "_____setComplete");
+        boolean checked = PreferenceManager.getDefaultSharedPreferences(this.context).edit().putBoolean(checkBoxString, true).commit();
+        checkBox.setChecked(checked);
+        // fromDate 1 Dec, 2022
+        // to Date 31 Dec, 222
+        // total of 31 days inclusive of both end
+        // freq = 3
+        // size of the array 31 * 3 = 93
+
+        // pick 7 Dec, 2022, 2nd time you are taking the med
+        // 0 index: retrieving the correct medicine
+        // e.g. 1
+        // 1st index is based off date
+        /// 2nd index is based off position
+        // 6 * 3 + 1 = 19
+
+        // e.g. 2. 1 dec 2022, 1 st first frequency
+        // 0 * 3 + 0 = 0
+        // [false, false, false,  ... ,false] of size 93
+        // 2 Todo the ability to check and uncheck the boolean value in the database
+    }
+
+    private void setUnchecked(CheckBox checkBox, String checkBoxString) {
+        Log.d(TAG, "_____setIncomplete");
+        boolean checked = PreferenceManager.getDefaultSharedPreferences(this.context).edit().putBoolean(checkBoxString, false).commit();
+        checkBox.setChecked(checked);
+    }
 
     // This method returns the number of items we have added in the ParentItemList i.e. the number
     // of instances we have created of the ParentItemList.
