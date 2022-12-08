@@ -120,7 +120,9 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                     assert medicineDoseTime != null;
                     //1 Todo: make try-catch proper formatting
                     try {
-                        if (!isCurrentDate(medicineDoseTime)) continue;
+                        if (!isCurrentDate(medicineDoseTime)) {
+                            continue;
+                        }
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -159,7 +161,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
     }
 
     private boolean isCurrentDate(MedicineDoseTime medicineDoseTime) throws ParseException {
-
+        Log.d(TAG, "_____isCurrentDate");
         Date fromDate=new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(medicineDoseTime.getFromDate());
         Date toDate=new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(medicineDoseTime.getToDate());
         if (currentDate == null) {
@@ -191,6 +193,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
     }
 
     public void onCheckboxClicked(View view) {
+        Log.d(TAG, "_____onCheckboxClicked");
         // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
 
@@ -208,6 +211,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
     }
 
     public void setComplete() {
+        Log.d(TAG, "_____setComplete");
         // 2 Todo the ability to check and uncheck the boolean value in the database
     }
 
