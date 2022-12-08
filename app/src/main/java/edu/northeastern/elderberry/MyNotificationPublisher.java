@@ -46,8 +46,14 @@ public class MyNotificationPublisher extends BroadcastReceiver {
             if (date.getFromTime().toInstant().toEpochMilli() > System.currentTimeMillis()) {
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(context, default_notification_channel_id);
                 // TODO: Change the Title of the notification
-                builder.setContentTitle(date.getName() + " " + date.getDose() + " " + date.getFromTime());
-                builder.setContentText("Take " + date.getDose() + " " + date.getName());
+                builder.setContentTitle("Time to take your medication!");
+                String notificationTitle = "";
+                if(date.getDose() > 1){
+                    notificationTitle = "Please take " +date.getDose() +" doses of " + date.getName();
+                } else{
+                    notificationTitle = "Please take " +date.getDose() +" dose of " + date.getName();
+                }
+                builder.setContentText(notificationTitle);
                 builder.setSmallIcon(R.drawable.elderberryplant);
                 builder.setAutoCancel(true);
                 builder.setChannelId(NOTIFICATION_CHANNEL_ID);
@@ -59,8 +65,8 @@ public class MyNotificationPublisher extends BroadcastReceiver {
                 notificationIntent.putExtra("toDate", date.getToDate());
                 notificationIntent.putExtra("fromTime", date.getFromTime());
                 notificationIntent.putExtra("name", date.getName());
-
                 notificationIntent.putExtra("dose", date.getDose());
+                notificationIntent.putExtra("title",(notificationTitle));
                 int id = MyNotificationPublisher.getNotificationIdInt();
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
                 AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
