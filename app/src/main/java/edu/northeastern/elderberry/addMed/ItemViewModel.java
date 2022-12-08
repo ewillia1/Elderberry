@@ -46,7 +46,8 @@ public class ItemViewModel extends ViewModel {
     public ArrayList<String> getTimeStringArray() {
         Log.d(TAG, "_____getTimeStringArray");
         ArrayList<String> timeStringArray = new ArrayList<>();
-        for (int i = 0; i < MAX_INDEX; i++) {
+        for (int i = 0; i < this.time.size(); i++) {
+            if (this.time.get(i).getValue() == null) break;
             timeStringArray.add(this.time.get(i).getValue());
         }
         return timeStringArray;
@@ -55,7 +56,8 @@ public class ItemViewModel extends ViewModel {
     public ArrayList<Boolean> getTakenBooleanArray() {
         Log.d(TAG, "_____getTimeStringArray");
         ArrayList<Boolean> takenBooleanArray = new ArrayList<>();
-        for (int i = 0; i < MAX_INDEX; i++) {
+        for (int i = 0; i < this.dose.size(); i++) {
+            if (this.dose.get(i).getValue() == null) break;
             takenBooleanArray.add(this.taken.get(i).getValue());
         }
         return takenBooleanArray;
@@ -64,7 +66,7 @@ public class ItemViewModel extends ViewModel {
     public ArrayList<String> getDoseStringArray() {
         Log.d(TAG, "_____getDoseStringArray");
         ArrayList<String> doseStringArray = new ArrayList<>();
-        for (int i = 0; i < MAX_INDEX; i++) {
+        for (int i = 0; i < this.dose.size(); i++) {
             doseStringArray.add(this.dose.get(i).getValue());
         }
         return doseStringArray;
@@ -76,8 +78,14 @@ public class ItemViewModel extends ViewModel {
         Log.d(TAG, "_____setTime: " + this.time.get(index));
     }
 
+    public void setDose(int index, String item) {
+        Log.d(TAG, "_____setDose");
+        this.dose.add(index, new MutableLiveData<>(item));
+    }
+
     public void setTime(List<String> timeList) {
         Log.d(TAG, "_____setTime array version");
+        this.time.clear();
         for (int i=0; i < Math.min(timeList.size(), this.time.size()); i++) {
             this.time.add(i, new MutableLiveData<>(timeList.get(i)));
         }
@@ -85,15 +93,12 @@ public class ItemViewModel extends ViewModel {
 
     public void setDose(List<String> doseList) {
         Log.d(TAG, "_____setDose array version");
-        for (int i=0; i < Math.min(doseList.size(), this.time.size()); i++) {
+        this.dose.clear();
+        for (int i=0; i < Math.min(doseList.size(), this.dose.size()); i++) {
             this.dose.add(i, new MutableLiveData<>(doseList.get(i)));
         }
     }
 
-    public void setDose(int index, String item) {
-        Log.d(TAG, "_____setDose");
-        this.dose.add(index, new MutableLiveData<>(item));
-    }
 
     public void resetTaken() {
         for (int i = 0 ; i < MAX_INDEX ; i++) {
@@ -152,6 +157,9 @@ public class ItemViewModel extends ViewModel {
     }
 
     public MutableLiveData<String> getTimeFreq() {
+        if (this.timeFreq.getValue() == null) {
+            setTimeFreq(Integer.toString(inferTimeFreq()));
+        }
         return this.timeFreq;
     }
 

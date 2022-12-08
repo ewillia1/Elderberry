@@ -40,6 +40,16 @@ public class Medicine {
         return this.fromDate;
     }
 
+    public String getInformation() {
+        Log.d(TAG, "_____getInformation");
+        return this.information;
+    }
+
+    public String getUnit() {
+        Log.d(TAG, "_____getUnit");
+        return this.unit;
+    }
+
     public String getToDate() {
         Log.d(TAG, "_____getToDate");
         return this.toDate;

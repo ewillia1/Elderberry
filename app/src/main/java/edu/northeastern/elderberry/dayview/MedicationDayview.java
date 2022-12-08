@@ -48,7 +48,7 @@ public class MedicationDayview extends AppCompatActivity {
     ImageButton arrow;
     LinearLayout hiddenView;
     CardView cardView;
-//    private final ArrayList<String> medKey = new ArrayList<>();
+    //    private final ArrayList<String> medKey = new ArrayList<>();
     ParentItemAdapter parentItemAdapter;
     private String currentDate;
 
@@ -147,7 +147,6 @@ public class MedicationDayview extends AppCompatActivity {
         });
 
 
-
         RecyclerView ParentRecyclerViewItem = findViewById(R.id.parent_recyclerview);
         ParentRecyclerViewItem.setHasFixedSize(true);
         ParentRecyclerViewItem.setItemAnimator(new DefaultItemAnimator());
@@ -161,13 +160,23 @@ public class MedicationDayview extends AppCompatActivity {
 
     private boolean isCurrentDate(MedicineDoseTime medicineDoseTime) throws ParseException {
 
-        Date fromDate=new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(medicineDoseTime.getFromDate());
-        Date toDate=new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(medicineDoseTime.getToDate());
+        //Log.d(TAG, "_____isCurrentDate: before from date parsed");
+        Date fromDate = new SimpleDateFormat("MMM dd, yyyy", Locale.US).parse(medicineDoseTime.getFromDate());
+        //Log.d(TAG, "_____isCurrentDate: after from date parsed");
+        //Log.d(TAG, "_____isCurrentDate: before to date parsed");
+        Date toDate = new SimpleDateFormat("MMM dd, yyyy", Locale.US).parse(medicineDoseTime.getToDate());
+        //Log.d(TAG, "_____isCurrentDate: after to date parsed");
+        //Log.d(TAG, "_____isCurrentDate: before current date is null");
         if (currentDate == null) {
             currentDate = medicineDoseTime.getFromDate();
         }
-        Date selectedDate=new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(currentDate);
-        Log.d(TAG, "isCurrentDate: " + fromDate.toString() + toDate.toString() + selectedDate.toString());
+        //Log.d(TAG, "_____isCurrentDate: after current date is null");
+        //Log.d(TAG, "_____isCurrentDate: before selected date is parsed");
+        Date selectedDate = new SimpleDateFormat("MMM dd, yyyy", Locale.US).parse(currentDate);
+        //Log.d(TAG, "_____isCurrentDate: after selected date is parsed");
+        //Log.d(TAG, "_____isCurrentDate: fromDate" + fromDate.toString());
+        //Log.d(TAG, "_____isCurrentDate: toDate"  + toDate.toString() );
+        //Log.d(TAG, "_____isCurrentDate: selectedDate" + selectedDate.toString());
         return fromDate.compareTo(selectedDate) <= 0 && selectedDate.compareTo(toDate) <= 0;
     }
 
