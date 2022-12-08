@@ -27,27 +27,33 @@ public class ItemViewModel extends ViewModel {
     private ArrayList<MutableLiveData<String>> initializeArray() {
         ArrayList<MutableLiveData<String>> res = new ArrayList<>();
         Log.d(TAG, "_____initializeTimeArray");
-        for (int i = 0; i < MAX_INDEX; i++) res.add(i, new MutableLiveData<>());
+        for (int i = 0; i < MAX_INDEX; i++) {
+            res.add(i, new MutableLiveData<>());
+        }
         return res;
     }
 
     private ArrayList<MutableLiveData<Boolean>> initializeBooleanArray() {
         ArrayList<MutableLiveData<Boolean>> res = new ArrayList<>();
         Log.d(TAG, "_____initializeTimeArray");
-        for (int i = 0; i < MAX_INDEX; i++) res.add(i, new MutableLiveData<>());
+        for (int i = 0; i < MAX_INDEX; i++) {
+            res.add(i, new MutableLiveData<>());
+        }
         return res;
     }
 
     public void clear() {
-        time = initializeArray();
-        dose = initializeArray();
+        this.time = initializeArray();
+        this.dose = initializeArray();
     }
 
     public ArrayList<String> getTimeStringArray() {
         Log.d(TAG, "_____getTimeStringArray");
         ArrayList<String> timeStringArray = new ArrayList<>();
         for (int i = 0; i < this.time.size(); i++) {
-            if (this.time.get(i).getValue() == null) break;
+            if (this.time.get(i).getValue() == null) {
+                break;
+            }
             timeStringArray.add(this.time.get(i).getValue());
         }
         return timeStringArray;
@@ -57,7 +63,9 @@ public class ItemViewModel extends ViewModel {
         Log.d(TAG, "_____getTimeStringArray");
         ArrayList<Boolean> takenBooleanArray = new ArrayList<>();
         for (int i = 0; i < this.dose.size(); i++) {
-            if (this.dose.get(i).getValue() == null) break;
+            if (this.dose.get(i).getValue() == null) {
+                break;
+            }
             takenBooleanArray.add(this.taken.get(i).getValue());
         }
         return takenBooleanArray;

@@ -172,7 +172,7 @@ public class AddMedicationActivity extends AppCompatActivity {
                 viewModel.getToDate().getValue(),
                 viewModel.getUnit().getValue());
 
-        Log.d(TAG, "_____updateDB med is "+ med.toString());
+        Log.d(TAG, "_____updateDB med is "+ med);
         db.setValue(med);
         db.orderByChild("fromDate");
     }
@@ -191,6 +191,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         List<String> doseList = this.viewModel.getDoseStringArray();
         List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
 
+        // 1 Todo properly update the db if we came from your medication activity
         db.setValue(new Medicine(this.viewModel.getMedId().getValue(), this.viewModel.getMedName().getValue(),
                 this.viewModel.getInformation().getValue(),
                 this.viewModel.getFromDate().getValue(),
@@ -279,6 +280,7 @@ public class AddMedicationActivity extends AppCompatActivity {
                 viewModel.setUnit(med.getUnit());
                 viewModel.setInformation(med.getInformation());
 
+                // 2 Todo when we save old data, this is invoked again and triggered an error. - Gavin
                 // clear time & dose array
                 viewModel.clear();
 
@@ -302,7 +304,7 @@ public class AddMedicationActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.d(TAG, "_____onCancelled");
             }
         });
     }
