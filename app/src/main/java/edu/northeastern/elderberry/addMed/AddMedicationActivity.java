@@ -38,7 +38,6 @@ import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 //3 Todo to test if the taken field is working when frequency is changed when we edit the medication
-// Todo makign sure does time frequency selectio always works
 public class AddMedicationActivity extends AppCompatActivity {
 
     private static final String TAG = "AddMedicationActivity";
@@ -149,26 +148,29 @@ public class AddMedicationActivity extends AppCompatActivity {
         if (editMedKey == null) {
             throw new RuntimeException("editMed key is null, doAddDataToDb should be called");
         }
+        // Todo fix the key value for dose, time and taken
+        // Todo fix the length change issue for those and taken
 
         FirebaseUser user = this.mAuth.getCurrentUser();
         assert user != null;
         Log.d(TAG, "_____updateDB: ");
         DatabaseReference db = this.userDatabase.child(user.getUid()).child(editMedKey);
 
-        String timeKey = db.child("time").getKey();
+        String timeKey = viewModel.getTimeId().getValue();
         List<String> timeList = this.viewModel.getTimeStringArray();
         Map<String, List<String>> timeMap = new HashMap<>();
         timeMap.put(timeKey, timeList);
 
-        String doseKey = db.child("dose").getKey();
+        String doseKey = viewModel.getDoseId().getValue();
         List<String> doseList = this.viewModel.getDoseStringArray();
         Map<String, List<String>> doseMap = new HashMap<>();
         doseMap.put(doseKey, doseList);
 
-        String takenKey = db.child("taken").getKey();
+        String takenKey = viewModel.getTakenId().getValue();
         List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
         Map<String, List<Boolean>> takenMap = new HashMap<>();
         takenMap.put(takenKey, takenList);
+        Log.d(TAG, "updateDB:takenList from viewModel is  size" + takenList.size());
 
         MedicineDoseTime med = new MedicineDoseTime(
                 doseMap,
@@ -178,7 +180,8 @@ public class AddMedicationActivity extends AppCompatActivity {
                 viewModel.getInformation().getValue(),
                 viewModel.getFromDate().getValue(),
                 viewModel.getToDate().getValue(),
-                viewModel.getUnit().getValue());
+                viewModel.getUnit().getValue(),
+                viewModel.getTimeFreq().getValue());
 
         Log.d(TAG, "_____updateDB med is "+ med);
         db.setValue(med);
@@ -202,7 +205,8 @@ public class AddMedicationActivity extends AppCompatActivity {
                 this.viewModel.getInformation().getValue(),
                 this.viewModel.getFromDate().getValue(),
                 this.viewModel.getToDate().getValue(),
-                this.viewModel.getUnit().getValue()));
+                this.viewModel.getUnit().getValue(),
+                this.viewModel.getTimeFreq().getValue()));
 
         Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
         //if (editMedKey != null) {
@@ -213,8 +217,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(timeList);
         databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").push().setValue(doseList);
 
-        // Todo make this private
-        this.viewModel.initializeBooleanArray();
+        this.viewModel.initializeTakenBooleanArray();
         List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
         Log.d(TAG, "_____doAddDataToDb: before setting taken to db taken list is " + takenList);
         databaseReference.child(Objects.requireNonNull(db.getKey())).child("taken").push().setValue(takenList);
@@ -235,7 +238,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         } else if (this.viewModel.getMedName().getValue().isBlank() || this.viewModel.getMedName().getValue().isEmpty() ||
                 this.viewModel.getFromDate().getValue().isBlank() || this.viewModel.getFromDate().getValue().isEmpty() ||
                 this.viewModel.getToDate().getValue().isBlank() || this.viewModel.getToDate().getValue().isEmpty() ||
-                this.viewModel.getTimeFreq().getValue().isBlank() || this.viewModel.getTimeFreq().getValue().isEmpty() ||
+                this.viewModel.getTimeFreq().getValue() == 0 ||
                 this.viewModel.getUnit().getValue().isBlank() || this.viewModel.getUnit().getValue().isEmpty()) {
             Log.d(TAG, "filledInRequiredFields: (a non-time/dose field is blank or empty) false");
             return false;
@@ -246,7 +249,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         Log.d(TAG, "____filledInRequiredFields: timeList = " + timeList + ",\n doseList = " + doseList);
 
         // We know that this.viewModel.getTimeFreq().getValue() is not null, blank, or empty if it gets down to here.
-        int numOfTimesAndDoses = Integer.parseInt(this.viewModel.getTimeFreq().getValue());
+        int numOfTimesAndDoses = this.viewModel.getTimeFreq().getValue();
         Log.d(TAG, "_____filledInRequiredFields: numOfTimesAndDoses = " + numOfTimesAndDoses);
         for (int i = 0; i < numOfTimesAndDoses; i++) {
             if (timeList.get(i) == null || doseList.get(i) == null || timeList.get(i).isBlank() || timeList.get(i).isEmpty() ||
@@ -287,8 +290,8 @@ public class AddMedicationActivity extends AppCompatActivity {
                 viewModel.setToDate(med.getToDate());
                 viewModel.setUnit(med.getUnit());
                 viewModel.setInformation(med.getInformation());
+                viewModel.setTimeFreq(med.getFreq());
 
-                // 2 Todo when we save old data, this is invoked again and triggered an error. - Gavin
                 // clear time & dose array
                 viewModel.clear();
 
@@ -297,23 +300,26 @@ public class AddMedicationActivity extends AppCompatActivity {
                 Log.d(TAG, "_____onDataChange: child time of snapshot.child(editMedkey) is " + snapshot.child(editMedKey).child("time"));
                 for (Map.Entry<String, List<String>> entry : med.getTime().entrySet()) {
                     // there is only one key in the hashmap
+                    viewModel.setTimeId(entry.getKey());
                     viewModel.setTime(entry.getValue());
                     Log.d(TAG, "_____onDataChange: set viewModel time as" + viewModel.getTimeStringArray().toString());
                 }
 
                 for (Map.Entry<String, List<String>> entry : med.getDose().entrySet()) {
                     // there is only one key in the hashmap
+                    viewModel.setDoseId(entry.getKey());
                     viewModel.setDose(entry.getValue());
                     Log.d(TAG, "_____onDataChange: set viewModel dose as" + viewModel.getDoseStringArray().toString());
                 }
 
+                viewModel.initializeTakenBooleanArray();
                 for (Map.Entry<String, List<Boolean>> entry : med.getTaken().entrySet()) {
                     // there is only one key in the hashmap
+                    viewModel.setTakenId(entry.getKey());
                     viewModel.setTaken(entry.getValue());
                     Log.d(TAG, "_____onDataChange: set viewModel dose as" + viewModel.getTakenBooleanArray().toString());
                 }
 
-                viewModel.setTimeFreq(Integer.toString(viewModel.inferTimeFreq()));
             }
 
             @Override
