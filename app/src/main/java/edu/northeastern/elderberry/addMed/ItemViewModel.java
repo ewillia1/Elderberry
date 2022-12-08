@@ -85,7 +85,6 @@ public class ItemViewModel extends ViewModel {
 
     public void setTime(List<String> timeList) {
         Log.d(TAG, "_____setTime array version");
-        this.time.clear();
         for (int i=0; i < Math.min(timeList.size(), this.time.size()); i++) {
             this.time.add(i, new MutableLiveData<>(timeList.get(i)));
         }
@@ -93,7 +92,6 @@ public class ItemViewModel extends ViewModel {
 
     public void setDose(List<String> doseList) {
         Log.d(TAG, "_____setDose array version");
-        this.dose.clear();
         for (int i=0; i < Math.min(doseList.size(), this.dose.size()); i++) {
             this.dose.add(i, new MutableLiveData<>(doseList.get(i)));
         }

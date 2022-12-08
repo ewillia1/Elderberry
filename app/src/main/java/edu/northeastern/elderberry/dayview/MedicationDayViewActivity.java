@@ -39,7 +39,6 @@ import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
-// 1 Todo restrict each day view to only show for that particular day selected - Team
 public class MedicationDayViewActivity extends AppCompatActivity {
     private static final String TAG = "MedicationDayViewActivity";
     private final List<ParentItem> medicineList = new ArrayList<>();
@@ -115,13 +114,13 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                     Log.d(TAG, "_____onDataChange: level 1 ");
                     MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
                     assert medicineDoseTime != null;
-                    //1 Todo: make try-catch proper formatting
                     try {
                         if (!isCurrentDate(medicineDoseTime)) {
                             continue;
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
+                        Log.d(TAG, "onDataChange: parse datetime format is not aligned with the passed datetime");
                     }
 
                     for (Map.Entry<String, List<String>> entry : medicineDoseTime.getTime().entrySet()) {
@@ -217,6 +216,22 @@ public class MedicationDayViewActivity extends AppCompatActivity {
 
     public void setComplete() {
         Log.d(TAG, "_____setComplete");
+        // fromDate 1 Dec, 2022
+        // to Date 31 Dec, 222
+        // total of 31 days inclusive of both end
+        // freq = 3
+        // size of the array 31 * 3 = 93
+
+        // pick 7 Dec, 2022, 2nd time you are taking the med
+        // 0 index: retrieving the correct medicine
+        // e.g. 1
+        // 1st index is based off date
+        /// 2nd index is based off position
+        // 6 * 3 + 1 = 19
+
+        // e.g. 2. 1 dec 2022, 1 st first frequency
+        // 0 * 3 + 0 = 0
+        // [false, false, false,  ... ,false] of size 93
         // 2 Todo the ability to check and uncheck the boolean value in the database
     }
 
