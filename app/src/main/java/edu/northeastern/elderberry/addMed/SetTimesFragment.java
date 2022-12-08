@@ -27,7 +27,6 @@ import edu.northeastern.elderberry.R;
  * create an instance of this fragment.
  */
 
-// Todo frequency populated is not correct after selection from the drop down
 public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener {
     private static final String TAG = "SetTimesFragment";
     private int numOfTimes;

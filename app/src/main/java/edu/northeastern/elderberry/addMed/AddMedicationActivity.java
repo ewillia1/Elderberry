@@ -22,22 +22,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 import edu.northeastern.elderberry.Medicine;
 import edu.northeastern.elderberry.MedicineDoseTime;
 import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
-//3 Todo to test if the taken field is working when frequency is changed when we edit the medication
+// 3 Todo to test if the taken field is working when frequency is changed when we edit the medication
 public class AddMedicationActivity extends AppCompatActivity {
 
     private static final String TAG = "AddMedicationActivity";
@@ -148,8 +144,6 @@ public class AddMedicationActivity extends AppCompatActivity {
         if (editMedKey == null) {
             throw new RuntimeException("editMed key is null, doAddDataToDb should be called");
         }
-        // Todo fix the key value for dose, time and taken
-        // Todo fix the length change issue for those and taken
 
         FirebaseUser user = this.mAuth.getCurrentUser();
         assert user != null;
@@ -183,7 +177,7 @@ public class AddMedicationActivity extends AppCompatActivity {
                 viewModel.getUnit().getValue(),
                 viewModel.getTimeFreq().getValue());
 
-        Log.d(TAG, "_____updateDB med is "+ med);
+        Log.d(TAG, "_____updateDB med is " + med);
         db.setValue(med);
         db.orderByChild("fromDate");
     }

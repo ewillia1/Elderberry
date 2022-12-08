@@ -42,7 +42,7 @@ import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 public class MedicationDayViewActivity extends AppCompatActivity {
     private static final String TAG = "MedicationDayViewActivity";
     private final List<ParentItem> medicineList = new ArrayList<>();
-//    ImageButton arrow;
+    //    ImageButton arrow;
 //    LinearLayout hiddenView;
 //    CardView cardView;
     //    private final ArrayList<String> medKey = new ArrayList<>();
@@ -207,7 +207,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                 setComplete();
                 // update flag to true in db
             } else {
-                // TODO finish this code
+                // Todo update db with not checked box
             }
             // update flag to false in db
             // setIncomplete();
