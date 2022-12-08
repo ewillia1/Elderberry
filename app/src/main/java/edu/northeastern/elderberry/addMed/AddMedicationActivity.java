@@ -151,7 +151,6 @@ public class AddMedicationActivity extends AppCompatActivity {
         List<String> doseList = this.viewModel.getDoseStringArray();
         List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
 
-
         // 1 Todo properly update the db if we came from your medication activity
         db.setValue(new Medicine(this.viewModel.getMedId().getValue(), this.viewModel.getMedName().getValue(),
                 this.viewModel.getInformation().getValue(),

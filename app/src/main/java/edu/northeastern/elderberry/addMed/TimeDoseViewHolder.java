@@ -101,6 +101,10 @@ public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.
                 hourOfDay %= MAX_HOUR;
             }
 
+            if (hourOfDay == 0) {
+                hourOfDay = 12;
+            }
+
             if (minute < TEN_MIN) {
                 st_min = "0" + st_min;
             }
