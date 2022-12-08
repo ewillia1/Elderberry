@@ -8,14 +8,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,10 +43,10 @@ import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 public class MedicationDayViewActivity extends AppCompatActivity {
     private static final String TAG = "MedicationDayViewActivity";
     private final List<ParentItem> medicineList = new ArrayList<>();
-    ImageButton arrow;
-    LinearLayout hiddenView;
-    CardView cardView;
-//    private final ArrayList<String> medKey = new ArrayList<>();
+//    ImageButton arrow;
+//    LinearLayout hiddenView;
+//    CardView cardView;
+    //    private final ArrayList<String> medKey = new ArrayList<>();
     ParentItemAdapter parentItemAdapter;
     private String currentDate;
 
@@ -62,14 +59,14 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         // Calling this activity's function to use ActionBar utility methods.
         ActionBar actionBar = getSupportActionBar();
 
-        currentDate = getIntent().getStringExtra("current_date");
+        this.currentDate = getIntent().getStringExtra("current_date");
 
         // Providing a subtitle for the ActionBar.
         assert actionBar != null;
         actionBar.setSubtitle(Html.fromHtml("<small>" + getString(R.string.medication_tracker) + "</small>", Html.FROM_HTML_MODE_LEGACY));
 
         TextView medViewDate = findViewById(R.id.dayview_textView);
-        medViewDate.setText(currentDate);
+        medViewDate.setText(this.currentDate);
 
         // Adding an icon in the ActionBar.
         actionBar.setIcon(R.mipmap.app_logo);
@@ -115,7 +112,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
 //                    medKey.add(d.getKey());
                     List<ChildItem> children = new ArrayList<>();
                     //for (DataSnapshot td : d.getChildren()) {
-                    Log.d(TAG, "onDataChange: level 1 ");
+                    Log.d(TAG, "_____onDataChange: level 1 ");
                     MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
                     assert medicineDoseTime != null;
                     //1 Todo: make try-catch proper formatting
@@ -129,23 +126,22 @@ public class MedicationDayViewActivity extends AppCompatActivity {
 
                     for (Map.Entry<String, List<String>> entry : medicineDoseTime.getTime().entrySet()) {
                         // there is only one key in the hashmap
-                        Log.d(TAG, "onDataChange: level 2 ");
+                        Log.d(TAG, "_____onDataChange: level 2 ");
                         for (String t : entry.getValue()) {
                             ChildItem fd = new ChildItem(t);
                             children.add(fd);
                         }
 
-                        Log.d(TAG, "onDataChange: level 3 retrieve correct medicineDoseTime successfully ");
+                        Log.d(TAG, "_____onDataChange: level 3 retrieve correct medicineDoseTime successfully ");
                     }
                     medicineList.add(new ParentItem(medicineDoseTime.getName(), children));
                 }
                 parentItemAdapter.notifyDataSetChanged();
             }
 
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.d(TAG, "_____onCancelled");
             }
         });
 
@@ -154,24 +150,29 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         ParentRecyclerViewItem.setItemAnimator(new DefaultItemAnimator());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        parentItemAdapter = new ParentItemAdapter(medicineList);
-        ParentRecyclerViewItem.setAdapter(parentItemAdapter);
+        this.parentItemAdapter = new ParentItemAdapter(this.medicineList);
+        ParentRecyclerViewItem.setAdapter(this.parentItemAdapter);
         ParentRecyclerViewItem.setLayoutManager(layoutManager);
-
     }
 
     private boolean isCurrentDate(MedicineDoseTime medicineDoseTime) throws ParseException {
         Log.d(TAG, "_____isCurrentDate");
-        Date fromDate = new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(medicineDoseTime.getFromDate());
-        Date toDate = new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(medicineDoseTime.getToDate());
-        if (currentDate == null) {
-            currentDate = medicineDoseTime.getFromDate();
+        Log.d(TAG, "_____isCurrentDate: medicineDoseTime.getFromDate() = " + medicineDoseTime.getFromDate());
+        Date fromDate = new SimpleDateFormat("MMM dd, yyyy", Locale.US).parse(medicineDoseTime.getFromDate());
+        Log.d(TAG, "_____isCurrentDate: fromDate = " + fromDate);
+        Log.d(TAG, "_____isCurrentDate: medicineDoseTime.getToDate() = " + medicineDoseTime.getToDate());
+        Date toDate = new SimpleDateFormat("MMM dd, yyyy", Locale.US).parse(medicineDoseTime.getToDate());
+        Log.d(TAG, "_____isCurrentDate: toDate = " + toDate);
+        if (this.currentDate == null) {
+            Log.d(TAG, "_____isCurrentDate: currentDate == null");
+            this.currentDate = medicineDoseTime.getFromDate();
         }
-        Date selectedDate = new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(currentDate);
+        Date selectedDate = new SimpleDateFormat("MMM dd, yyyy", Locale.US).parse(this.currentDate);
+        Log.d(TAG, "_____isCurrentDate: selectedDate = " + selectedDate);
         assert fromDate != null;
         assert toDate != null;
         assert selectedDate != null;
-        Log.d(TAG, "isCurrentDate: " + fromDate + toDate + selectedDate);
+        Log.d(TAG, "_____isCurrentDate: fromDate = " + fromDate + ", toDate = " + toDate + ", selectedDate = " + selectedDate);
         return fromDate.compareTo(selectedDate) <= 0 && selectedDate.compareTo(toDate) <= 0;
     }
 
