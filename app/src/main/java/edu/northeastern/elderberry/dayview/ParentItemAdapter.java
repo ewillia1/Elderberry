@@ -78,7 +78,7 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
     }
 
     private void setChecked(CheckBox checkBox, String checkBoxString) {
-        Log.d(TAG, "_____setComplete");
+        Log.d(TAG, "_____setChecked");
         boolean checked = PreferenceManager.getDefaultSharedPreferences(this.context).edit().putBoolean(checkBoxString, true).commit();
         checkBox.setChecked(checked);
         // fromDate 1 Dec, 2022
@@ -101,7 +101,7 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
     }
 
     private void setUnchecked(CheckBox checkBox, String checkBoxString) {
-        Log.d(TAG, "_____setIncomplete");
+        Log.d(TAG, "_____setUnchecked");
         boolean checked = PreferenceManager.getDefaultSharedPreferences(this.context).edit().putBoolean(checkBoxString, false).commit();
         checkBox.setChecked(checked);
     }

@@ -185,22 +185,22 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // android:onClick in child_item.xml file. For checkbox.
-    public void onCheckboxClicked(View view) {
-        Log.d(TAG, "_____onCheckboxClicked");
-        SharedPreferences Preference = getSharedPreferences("pref", Activity.MODE_PRIVATE);
-        boolean isCheckboxSet = Preference.getBoolean("checkboxstate", false);
-        Log.d(TAG, "_____onCheckboxClicked: isCheckboxSet = " + isCheckboxSet);
-
-        boolean checked = ((CheckBox) view).isChecked();
-        switch(view.getId()) {
-            case R.id.checkbox_child_item:
-                PreferenceManager.getDefaultSharedPreferences(this).edit().putBoolean("checkboxstate", checked).commit();
-                break;
-            default:
-                Log.d(TAG, "_____onCheckboxClicked: Error with onCheckboxClicked");
-        }
-    }
+//    // android:onClick in child_item.xml file. For checkbox.
+//    public void onCheckboxClicked(View view) {
+//        Log.d(TAG, "_____onCheckboxClicked");
+//        SharedPreferences Preference = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+//        boolean isCheckboxSet = Preference.getBoolean("checkboxstate", false);
+//        Log.d(TAG, "_____onCheckboxClicked: isCheckboxSet = " + isCheckboxSet);
+//
+//        boolean checked = ((CheckBox) view).isChecked();
+//        switch(view.getId()) {
+//            case R.id.checkbox_child_item:
+//                PreferenceManager.getDefaultSharedPreferences(this).edit().putBoolean("checkboxstate", checked).commit();
+//                break;
+//            default:
+//                Log.d(TAG, "_____onCheckboxClicked: Error with onCheckboxClicked");
+//        }
+//    }
 
     // Method to inflate the options menu when the user opens the menu for the first time.
     @Override
