@@ -3,18 +3,16 @@ package edu.northeastern.elderberry.dayview;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,12 +40,12 @@ import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 // 1 Todo restrict each day view to only show for that particular day selected - Team
-public class MedicationDayview extends AppCompatActivity {
+public class MedicationDayViewActivity extends AppCompatActivity {
     private static final String TAG = "MedicationDayViewActivity";
     private final List<ParentItem> medicineList = new ArrayList<>();
-    ImageButton arrow;
-    LinearLayout hiddenView;
-    CardView cardView;
+//    ImageButton arrow;
+//    LinearLayout hiddenView;
+//    CardView cardView;
     //    private final ArrayList<String> medKey = new ArrayList<>();
     ParentItemAdapter parentItemAdapter;
     private String currentDate;
@@ -61,14 +59,14 @@ public class MedicationDayview extends AppCompatActivity {
         // Calling this activity's function to use ActionBar utility methods.
         ActionBar actionBar = getSupportActionBar();
 
-        currentDate = getIntent().getStringExtra("current_date");
+        this.currentDate = getIntent().getStringExtra("current_date");
 
         // Providing a subtitle for the ActionBar.
         assert actionBar != null;
-        actionBar.setSubtitle(getString(R.string.medication_tracker));
+        actionBar.setSubtitle(Html.fromHtml("<small>" + getString(R.string.medication_tracker) + "</small>", Html.FROM_HTML_MODE_LEGACY));
 
         TextView medViewDate = findViewById(R.id.dayview_textView);
-        medViewDate.setText(currentDate);
+        medViewDate.setText(this.currentDate);
 
         // Adding an icon in the ActionBar.
         actionBar.setIcon(R.mipmap.app_logo);
@@ -114,48 +112,47 @@ public class MedicationDayview extends AppCompatActivity {
 //                    medKey.add(d.getKey());
                     List<ChildItem> children = new ArrayList<>();
                     //for (DataSnapshot td : d.getChildren()) {
-                    Log.d(TAG, "onDataChange: level 1 ");
+                    Log.d(TAG, "_____onDataChange: level 1 ");
                     MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
                     assert medicineDoseTime != null;
                     //1 Todo: make try-catch proper formatting
                     try {
-                        if (!isCurrentDate(medicineDoseTime)) continue;
+                        if (!isCurrentDate(medicineDoseTime)) {
+                            continue;
+                        }
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
 
                     for (Map.Entry<String, List<String>> entry : medicineDoseTime.getTime().entrySet()) {
                         // there is only one key in the hashmap
-                        Log.d(TAG, "onDataChange: level 2 ");
+                        Log.d(TAG, "_____onDataChange: level 2 ");
                         for (String t : entry.getValue()) {
                             ChildItem fd = new ChildItem(t);
                             children.add(fd);
                         }
 
-                        Log.d(TAG, "onDataChange: level 3 retrieve correct medicineDoseTime successfully ");
+                        Log.d(TAG, "_____onDataChange: level 3 retrieve correct medicineDoseTime successfully ");
                     }
                     medicineList.add(new ParentItem(medicineDoseTime.getName(), children));
                 }
                 parentItemAdapter.notifyDataSetChanged();
             }
 
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.d(TAG, "_____onCancelled");
             }
         });
-
 
         RecyclerView ParentRecyclerViewItem = findViewById(R.id.parent_recyclerview);
         ParentRecyclerViewItem.setHasFixedSize(true);
         ParentRecyclerViewItem.setItemAnimator(new DefaultItemAnimator());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        parentItemAdapter = new ParentItemAdapter(medicineList);
-        ParentRecyclerViewItem.setAdapter(parentItemAdapter);
+        this.parentItemAdapter = new ParentItemAdapter(this.medicineList);
+        ParentRecyclerViewItem.setAdapter(this.parentItemAdapter);
         ParentRecyclerViewItem.setLayoutManager(layoutManager);
-
     }
 
     private boolean isCurrentDate(MedicineDoseTime medicineDoseTime) throws ParseException {
@@ -177,6 +174,9 @@ public class MedicationDayview extends AppCompatActivity {
         //Log.d(TAG, "_____isCurrentDate: fromDate" + fromDate.toString());
         //Log.d(TAG, "_____isCurrentDate: toDate"  + toDate.toString() );
         //Log.d(TAG, "_____isCurrentDate: selectedDate" + selectedDate.toString());
+        assert fromDate != null;
+        assert toDate != null;
+        assert selectedDate != null;
         return fromDate.compareTo(selectedDate) <= 0 && selectedDate.compareTo(toDate) <= 0;
     }
 
@@ -198,6 +198,7 @@ public class MedicationDayview extends AppCompatActivity {
     }
 
     public void onCheckboxClicked(View view) {
+        Log.d(TAG, "_____onCheckboxClicked");
         // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
 
@@ -215,6 +216,7 @@ public class MedicationDayview extends AppCompatActivity {
     }
 
     public void setComplete() {
+        Log.d(TAG, "_____setComplete");
         // 2 Todo the ability to check and uncheck the boolean value in the database
     }
 

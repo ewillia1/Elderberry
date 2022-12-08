@@ -1,6 +1,7 @@
 package edu.northeastern.elderberry.addMed;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -65,7 +66,7 @@ public class AddMedicationActivity extends AppCompatActivity {
 
         // Providing a subtitle for the ActionBar.
         assert actionBar != null;
-        actionBar.setSubtitle(getString(R.string.medication_tracker));
+        actionBar.setSubtitle(Html.fromHtml("<small>" + getString(R.string.medication_tracker) + "</small>", Html.FROM_HTML_MODE_LEGACY));
 
         // Adding an icon in the ActionBar.
         actionBar.setIcon(R.mipmap.app_logo);
@@ -135,7 +136,6 @@ public class AddMedicationActivity extends AppCompatActivity {
         }
 
         // get Intent from your Medication
-        Log.d(TAG, "_____onCreate: before retrieving MedData");
         retrieveMedData(editMedKey);
     }
 
@@ -190,12 +190,8 @@ public class AddMedicationActivity extends AppCompatActivity {
         List<String> doseList = this.viewModel.getDoseStringArray();
         List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
 
-        // 1 Todo taken field not update properly
-        Log.d(TAG, "doAddDataToDb: unit in view model is " + this.viewModel.getUnit().getValue());
-
-        db.setValue(new Medicine(
-                this.viewModel.getMedId().getValue(),
-                this.viewModel.getMedName().getValue(),
+        // 1 Todo properly update the db if we came from your medication activity
+        db.setValue(new Medicine(this.viewModel.getMedId().getValue(), this.viewModel.getMedName().getValue(),
                 this.viewModel.getInformation().getValue(),
                 this.viewModel.getFromDate().getValue(),
                 this.viewModel.getToDate().getValue(),

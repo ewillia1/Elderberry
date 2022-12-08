@@ -16,7 +16,7 @@
         <item name="android:typeface">serif</item>
         <item name="android:fontFamily">@font/bellota_bold</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="textColorAlertDialogListItem">@color/main</item>
         <item name="android:textColorHint">@color/textHintColor</item>
         <item name="colorAccent">@color/main</item>

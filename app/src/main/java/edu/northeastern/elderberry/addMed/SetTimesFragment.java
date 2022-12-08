@@ -147,7 +147,6 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
 
         timeDoseRecyclerView.setAdapter(timeDoseAdapter);
 
-
         return view;
     }
 
