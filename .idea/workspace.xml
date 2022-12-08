@@ -9,9 +9,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Updated AddMedicationActivity.java and ItemViewModel.java&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher">
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/your_medication/YourMedicationsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/your_medication/YourMedicationsActivity.java" afterDir="false" />
-    </list>
+    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Updated AddMedicationActivity.java&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -203,13 +201,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666133441374</updated>
-    </task>
-    <task id="LOCAL-00018" summary="Updated CreateAccountActivity.java, LoginActivity.java">
-      <created>1668820918630</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1668820918630</updated>
     </task>
     <task id="LOCAL-00019" summary="Update">
       <created>1668820935535</created>
@@ -547,7 +538,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670520592585</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="Updated AddMedicationActivity.java&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher">
+      <created>1670521003652</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1670521003652</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -563,7 +561,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Removed not need comments.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
     <MESSAGE value="Got viewModel to work in MedInfoFragment.java and SetDatesFragment.java.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
     <MESSAGE value="Got unit to work when add button is clicked. Updated input types in some xml files for better user interaction." />
     <MESSAGE value="Added all times and doses to Medicine.java" />
@@ -588,6 +585,7 @@
     <MESSAGE value="Updated listeners in MedInfoFragment.java and TimeDoseViewHolder.java. Updated database functionality. Need to work on checking required fields. Other small issues need to be worked out too." />
     <MESSAGE value="Updated YourMedicationsActivity.java to correctly pull and return the selected medication from database.&#10;&#10;Co-authored by: Gavin" />
     <MESSAGE value="Updated AddMedicationActivity.java and ItemViewModel.java&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated AddMedicationActivity.java and ItemViewModel.java&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
+    <MESSAGE value="Updated AddMedicationActivity.java&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated AddMedicationActivity.java&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
   </component>
 </project>
