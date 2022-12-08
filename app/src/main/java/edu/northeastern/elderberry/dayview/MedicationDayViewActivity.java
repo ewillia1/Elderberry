@@ -1,10 +1,7 @@
 package edu.northeastern.elderberry.dayview;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -16,7 +13,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,16 +42,18 @@ import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 public class MedicationDayViewActivity extends AppCompatActivity {
     private static final String TAG = "MedicationDayViewActivity";
     private final List<ParentItem> medicineList = new ArrayList<>();
+//    ImageButton arrow;
+//    LinearLayout hiddenView;
+//    CardView cardView;
+    //    private final ArrayList<String> medKey = new ArrayList<>();
     ParentItemAdapter parentItemAdapter;
     private String currentDate;
-    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "_____onCreate");
         setContentView(R.layout.activity_recycle_med_dayview);
-        this.context = this;
 
         // Calling this activity's function to use ActionBar utility methods.
         ActionBar actionBar = getSupportActionBar();
@@ -110,6 +108,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
 
                 // 2 Todo adapt taken to accommodate all from and to dates
                 for (DataSnapshot d : snapshot.getChildren()) {
+//                    medKey.add(d.getKey());
                     List<ChildItem> children = new ArrayList<>();
                     //for (DataSnapshot td : d.getChildren()) {
                     Log.d(TAG, "_____onDataChange: level 1 ");
@@ -128,7 +127,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                         // there is only one key in the hashmap
                         Log.d(TAG, "_____onDataChange: level 2 ");
                         for (String t : entry.getValue()) {
-                            ChildItem fd = new ChildItem(t, new CheckBox(context));
+                            ChildItem fd = new ChildItem(t);
                             children.add(fd);
                         }
 
@@ -150,18 +149,30 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         ParentRecyclerViewItem.setItemAnimator(new DefaultItemAnimator());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        this.parentItemAdapter = new ParentItemAdapter(this.medicineList, this);
+        this.parentItemAdapter = new ParentItemAdapter(this.medicineList);
         ParentRecyclerViewItem.setAdapter(this.parentItemAdapter);
         ParentRecyclerViewItem.setLayoutManager(layoutManager);
     }
 
     private boolean isCurrentDate(MedicineDoseTime medicineDoseTime) throws ParseException {
+
+        //Log.d(TAG, "_____isCurrentDate: before from date parsed");
         Date fromDate = new SimpleDateFormat("MMM dd, yyyy", Locale.US).parse(medicineDoseTime.getFromDate());
+        //Log.d(TAG, "_____isCurrentDate: after from date parsed");
+        //Log.d(TAG, "_____isCurrentDate: before to date parsed");
         Date toDate = new SimpleDateFormat("MMM dd, yyyy", Locale.US).parse(medicineDoseTime.getToDate());
+        //Log.d(TAG, "_____isCurrentDate: after to date parsed");
+        //Log.d(TAG, "_____isCurrentDate: before current date is null");
         if (currentDate == null) {
             currentDate = medicineDoseTime.getFromDate();
         }
+        //Log.d(TAG, "_____isCurrentDate: after current date is null");
+        //Log.d(TAG, "_____isCurrentDate: before selected date is parsed");
         Date selectedDate = new SimpleDateFormat("MMM dd, yyyy", Locale.US).parse(currentDate);
+        //Log.d(TAG, "_____isCurrentDate: after selected date is parsed");
+        //Log.d(TAG, "_____isCurrentDate: fromDate" + fromDate.toString());
+        //Log.d(TAG, "_____isCurrentDate: toDate"  + toDate.toString() );
+        //Log.d(TAG, "_____isCurrentDate: selectedDate" + selectedDate.toString());
         assert fromDate != null;
         assert toDate != null;
         assert selectedDate != null;
@@ -185,21 +196,43 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // android:onClick in child_item.xml file. For checkbox.
     public void onCheckboxClicked(View view) {
         Log.d(TAG, "_____onCheckboxClicked");
-        SharedPreferences Preference = getSharedPreferences("pref", Activity.MODE_PRIVATE);
-        boolean isCheckboxSet = Preference.getBoolean("checkboxstate", false);
-        Log.d(TAG, "_____onCheckboxClicked: isCheckboxSet = " + isCheckboxSet);
-
+        // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
-        switch(view.getId()) {
-            case R.id.checkbox_child_item:
-                PreferenceManager.getDefaultSharedPreferences(this).edit().putBoolean("checkboxstate", checked).commit();
-                break;
-            default:
-                Log.d(TAG, "_____onCheckboxClicked: Error with onCheckboxClicked");
+
+        // Check which checkbox was clicked
+        if (view.getId() == R.id.checkbox_child_item) {
+            if (checked) {
+                setComplete();
+                // update flag to true in db
+            } else {
+                // TODO finish this code
+            }
+            // update flag to false in db
+            // setIncomplete();
         }
+    }
+
+    public void setComplete() {
+        Log.d(TAG, "_____setComplete");
+        // fromDate 1 Dec, 2022
+        // to Date 31 Dec, 222
+        // total of 31 days inclusive of both end
+        // freq = 3
+        // size of the array 31 * 3 = 93
+
+        // pick 7 Dec, 2022, 2nd time you are taking the med
+        // 0 index: retrieving the correct medicine
+        // e.g. 1
+        // 1st index is based off date
+        /// 2nd index is based off position
+        // 6 * 3 + 1 = 19
+
+        // e.g. 2. 1 dec 2022, 1 st first frequency
+        // 0 * 3 + 0 = 0
+        // [false, false, false,  ... ,false] of size 93
+        // 2 Todo the ability to check and uncheck the boolean value in the database
     }
 
     // Method to inflate the options menu when the user opens the menu for the first time.
