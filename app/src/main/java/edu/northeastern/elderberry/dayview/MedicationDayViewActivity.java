@@ -162,12 +162,12 @@ public class MedicationDayViewActivity extends AppCompatActivity {
 
     private boolean isCurrentDate(MedicineDoseTime medicineDoseTime) throws ParseException {
         Log.d(TAG, "_____isCurrentDate");
-        Date fromDate=new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(medicineDoseTime.getFromDate());
-        Date toDate=new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(medicineDoseTime.getToDate());
+        Date fromDate = new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(medicineDoseTime.getFromDate());
+        Date toDate = new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(medicineDoseTime.getToDate());
         if (currentDate == null) {
             currentDate = medicineDoseTime.getFromDate();
         }
-        Date selectedDate=new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(currentDate);
+        Date selectedDate = new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.US).parse(currentDate);
         assert fromDate != null;
         assert toDate != null;
         assert selectedDate != null;
