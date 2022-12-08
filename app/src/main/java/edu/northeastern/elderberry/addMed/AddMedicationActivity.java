@@ -172,7 +172,7 @@ public class AddMedicationActivity extends AppCompatActivity {
                 viewModel.getToDate().getValue(),
                 viewModel.getUnit().getValue());
 
-        Log.d(TAG, "_____updateDB med is "+ med.toString());
+        Log.d(TAG, "_____updateDB med is "+ med);
         db.setValue(med);
     }
 
@@ -277,6 +277,9 @@ public class AddMedicationActivity extends AppCompatActivity {
                 viewModel.setUnit(med.getUnit());
                 viewModel.setInformation(med.getInformation());
 
+                // Clear time and dose array.
+                viewModel.clear();
+
                 // 2 Todo when we save old data, this is invoked again and triggered an error. - Gavin
                 // when first retrieved from the db, the data works fine
                 // in the second instance where it is saved & retrieved it did not work as expected
@@ -298,7 +301,7 @@ public class AddMedicationActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.d(TAG, "_____onCancelled");
             }
         });
     }
