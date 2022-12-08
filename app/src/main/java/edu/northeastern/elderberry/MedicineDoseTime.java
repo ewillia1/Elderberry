@@ -9,13 +9,14 @@ public class MedicineDoseTime {
 
     private Map<String, List<String>> dose;
     private Map<String, List<String>> time;
+    private Map<String, List<Boolean>> taken;
     private String name;
     private String information;
     private String fromDate;
     private String toDate;
     private String unit;
 
-    public MedicineDoseTime(Map<String, List<String>> dose, Map<String, List<String>> time, String name, String information, String fromDate, String toDate, String unit) {
+    public MedicineDoseTime(Map<String, List<String>> dose, Map<String, List<String>> time, Map<String, List<Boolean>> taken, String name, String information, String fromDate, String toDate, String unit) {
         this.dose = dose;
         this.time = time;
         this.name = name;
@@ -42,6 +43,10 @@ public class MedicineDoseTime {
 
     public void setTime(Map<String, List<String>> time) {
         this.time = time;
+    }
+
+    public Map<String, List<Boolean>> getTaken() {
+        return this.taken;
     }
 
     public String getName() {

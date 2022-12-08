@@ -6,9 +6,14 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class ItemViewModel extends ViewModel {
     private static final String TAG = "ItemViewModel";
@@ -22,7 +27,7 @@ public class ItemViewModel extends ViewModel {
     private final MutableLiveData<String> unit = new MutableLiveData<>();
     private ArrayList<MutableLiveData<String>> time = initializeArray();
     private ArrayList<MutableLiveData<String>> dose = initializeArray();
-    private final ArrayList<MutableLiveData<Boolean>> taken = initializeBooleanArray();
+    private ArrayList<MutableLiveData<Boolean>> taken;
 
     private ArrayList<MutableLiveData<String>> initializeArray() {
         ArrayList<MutableLiveData<String>> res = new ArrayList<>();
@@ -33,18 +38,21 @@ public class ItemViewModel extends ViewModel {
         return res;
     }
 
-    private ArrayList<MutableLiveData<Boolean>> initializeBooleanArray() {
+    public void initializeBooleanArray() {
         ArrayList<MutableLiveData<Boolean>> res = new ArrayList<>();
-        Log.d(TAG, "_____initializeTimeArray");
-        for (int i = 0; i < MAX_INDEX; i++) {
-            res.add(i, new MutableLiveData<>());
+        // Todo remove this dependency
+        long arraySize = inferTimeFreq() * computeNumDays();
+        Log.d(TAG, "_____initializeTimeArray with size " + arraySize);
+        for (int i = 0; i < arraySize; i++) {
+            res.add(i, new MutableLiveData<>(false));
         }
-        return res;
+        this.taken = res;
     }
 
     public void clear() {
         this.time = initializeArray();
         this.dose = initializeArray();
+        initializeBooleanArray();
     }
 
     public ArrayList<String> getTimeStringArray() {
@@ -60,10 +68,10 @@ public class ItemViewModel extends ViewModel {
     }
 
     public ArrayList<Boolean> getTakenBooleanArray() {
-        Log.d(TAG, "_____getTimeStringArray");
+        Log.d(TAG, "_____getTakenBooleanArray"+this.taken);
         ArrayList<Boolean> takenBooleanArray = new ArrayList<>();
-        for (int i = 0; i < this.dose.size(); i++) {
-            if (this.dose.get(i).getValue() == null) {
+        for (int i = 0; i < this.taken.size(); i++) {
+            if (this.taken.get(i).getValue() == null) {
                 break;
             }
             takenBooleanArray.add(this.taken.get(i).getValue());
@@ -92,6 +100,7 @@ public class ItemViewModel extends ViewModel {
     }
 
     public void setTime(List<String> timeList) {
+        this.time = initializeArray();
         Log.d(TAG, "_____setTime array version");
         for (int i=0; i < Math.min(timeList.size(), this.time.size()); i++) {
             this.time.add(i, new MutableLiveData<>(timeList.get(i)));
@@ -99,6 +108,7 @@ public class ItemViewModel extends ViewModel {
     }
 
     public void setDose(List<String> doseList) {
+        this.dose = initializeArray();
         Log.d(TAG, "_____setDose array version");
         for (int i=0; i < Math.min(doseList.size(), this.dose.size()); i++) {
             this.dose.add(i, new MutableLiveData<>(doseList.get(i)));
@@ -114,6 +124,14 @@ public class ItemViewModel extends ViewModel {
             else {
                 this.taken.add(i, new MutableLiveData<>());
             }
+        }
+    }
+
+    public void setTaken(List<Boolean> takenList) {
+        initializeBooleanArray();
+        Log.d(TAG, "_____setTaken");
+        for (int i=0; i < Math.min(takenList.size(), this.taken.size()); i++) {
+            this.taken.add(i, new MutableLiveData<>(takenList.get(i)));
         }
     }
 
@@ -200,6 +218,24 @@ public class ItemViewModel extends ViewModel {
     public MutableLiveData<String> getDose(int index) {
         Log.d(TAG, "_____getDose: " + this.dose.get(index));
         return this.dose.get(index);
+    }
+
+    private long computeNumDays() {
+        Log.d(TAG, "_____computeNumDays: ");
+        try {
+            Date fromDate = new SimpleDateFormat("MMM dd, yyyy", Locale.US).parse(Objects.requireNonNull(getFromDate().getValue()));
+            //Log.d(TAG, "_____isCurrentDate: after from date parsed");
+            //Log.d(TAG, "_____isCurrentDate: before to date parsed");
+            Date toDate = new SimpleDateFormat("MMM dd, yyyy", Locale.US).parse(Objects.requireNonNull(getToDate().getValue()));
+
+            long diffInMillies = Math.abs(toDate.getTime() - fromDate.getTime());
+            long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+            Log.d(TAG, "_____computeNumDays successful, num days btw from & to is " + diff);
+            return diff + 1;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 1;
     }
 
     @NonNull

@@ -22,11 +22,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import edu.northeastern.elderberry.Medicine;
 import edu.northeastern.elderberry.MedicineDoseTime;
@@ -34,6 +38,7 @@ import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 //3 Todo to test if the taken field is working when frequency is changed when we edit the medication
+// Todo makign sure does time frequency selectio always works
 public class AddMedicationActivity extends AppCompatActivity {
 
     private static final String TAG = "AddMedicationActivity";
@@ -160,12 +165,15 @@ public class AddMedicationActivity extends AppCompatActivity {
         Map<String, List<String>> doseMap = new HashMap<>();
         doseMap.put(doseKey, doseList);
 
-        // Todo activate this
-        //List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
+        String takenKey = db.child("taken").getKey();
+        List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
+        Map<String, List<Boolean>> takenMap = new HashMap<>();
+        takenMap.put(takenKey, takenList);
 
         MedicineDoseTime med = new MedicineDoseTime(
                 doseMap,
                 timeMap,
+                takenMap,
                 viewModel.getMedName().getValue(),
                 viewModel.getInformation().getValue(),
                 viewModel.getFromDate().getValue(),
@@ -189,9 +197,7 @@ public class AddMedicationActivity extends AppCompatActivity {
 
         List<String> timeList = this.viewModel.getTimeStringArray();
         List<String> doseList = this.viewModel.getDoseStringArray();
-        List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
 
-        // 1 Todo properly update the db if we came from your medication activity
         db.setValue(new Medicine(this.viewModel.getMedId().getValue(), this.viewModel.getMedName().getValue(),
                 this.viewModel.getInformation().getValue(),
                 this.viewModel.getFromDate().getValue(),
@@ -207,10 +213,12 @@ public class AddMedicationActivity extends AppCompatActivity {
         databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(timeList);
         databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").push().setValue(doseList);
 
+        // Todo make this private
+        this.viewModel.initializeBooleanArray();
+        List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
+        Log.d(TAG, "_____doAddDataToDb: before setting taken to db taken list is " + takenList);
+        databaseReference.child(Objects.requireNonNull(db.getKey())).child("taken").push().setValue(takenList);
         databaseReference.orderByChild("fromDate");
-        // Todo to activate the following line
-        // databaseReference.child(Objects.requireNonNull(db.getKey())).child("taken").push().setValue(takenList);
-        //}
     }
 
     private boolean filledInRequiredFields() {
@@ -297,6 +305,12 @@ public class AddMedicationActivity extends AppCompatActivity {
                     // there is only one key in the hashmap
                     viewModel.setDose(entry.getValue());
                     Log.d(TAG, "_____onDataChange: set viewModel dose as" + viewModel.getDoseStringArray().toString());
+                }
+
+                for (Map.Entry<String, List<Boolean>> entry : med.getTaken().entrySet()) {
+                    // there is only one key in the hashmap
+                    viewModel.setTaken(entry.getValue());
+                    Log.d(TAG, "_____onDataChange: set viewModel dose as" + viewModel.getTakenBooleanArray().toString());
                 }
 
                 viewModel.setTimeFreq(Integer.toString(viewModel.inferTimeFreq()));

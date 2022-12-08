@@ -27,6 +27,7 @@ import edu.northeastern.elderberry.R;
  * create an instance of this fragment.
  */
 
+// Todo frequency populated is not correct after selection from the drop down
 public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener {
     private static final String TAG = "SetTimesFragment";
     private int numOfTimes;
@@ -128,15 +129,17 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
             this.viewModel.clear();
 
             this.numOfTimes = position + 1;
+
             Log.d(TAG, "_____onCreateView: this.numOfTimes = " + this.numOfTimes);
 
             // Add number of cards in recycler view corresponding to the time frequency the user picked.
             for (int i = 0; i < this.numOfTimes; i++) {
                 Log.d(TAG, "_____onCreateView: for loop iteration: " + i);
+                //timeDoseItemArrayList.add(new TimeDoseItem(position));
                 timeDoseItemArrayList.add(new TimeDoseItem(position));
             }
             this.viewModel.setTimeFreq(Integer.toString(this.numOfTimes));
-            this.viewModel.resetTaken();
+            //this.viewModel.resetTaken();
         });
 
         // Instantiate the recyclerView.
