@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -150,7 +151,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         ParentRecyclerViewItem.setItemAnimator(new DefaultItemAnimator());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        this.parentItemAdapter = new ParentItemAdapter(this.medicineList);
+        this.parentItemAdapter = new ParentItemAdapter(this.medicineList, this);
         ParentRecyclerViewItem.setAdapter(this.parentItemAdapter);
         ParentRecyclerViewItem.setLayoutManager(layoutManager);
     }
@@ -205,16 +206,17 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         // Check which checkbox was clicked
         if (view.getId() == R.id.checkbox_child_item) {
             if (checked) {
-                setChecked();
+                setChecked(checked);
             } else {
-                // TODO finish this code
-                setUnhecked();
+                setUnchecked(checked);
             }
         }
     }
 
-    private void setChecked() {
+    private void setChecked(boolean checked) {
         Log.d(TAG, "_____setComplete");
+        PreferenceManager.getDefaultSharedPreferences(this).edit() .putBoolean("checkboxState", checked).apply();
+
         // fromDate 1 Dec, 2022
         // to Date 31 Dec, 222
         // total of 31 days inclusive of both end
@@ -234,8 +236,9 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         // 2 Todo the ability to check and uncheck the boolean value in the database
     }
 
-    private void setUnhecked() {
-        Log.d(TAG, "_____setUnhecked");
+    private void setUnchecked(boolean checked) {
+        Log.d(TAG, "_____setUnchecked");
+        PreferenceManager.getDefaultSharedPreferences(this).edit() .putBoolean("checkboxState", checked).apply();
     }
 
     // Method to inflate the options menu when the user opens the menu for the first time.
