@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.BlockingDeque;
 
 import edu.northeastern.elderberry.MedicineDoseTime;
 import edu.northeastern.elderberry.R;
@@ -204,17 +205,15 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         // Check which checkbox was clicked
         if (view.getId() == R.id.checkbox_child_item) {
             if (checked) {
-                setComplete();
-                // update flag to true in db
+                setChecked();
             } else {
                 // TODO finish this code
+                setUnhecked();
             }
-            // update flag to false in db
-            // setIncomplete();
         }
     }
 
-    public void setComplete() {
+    private void setChecked() {
         Log.d(TAG, "_____setComplete");
         // fromDate 1 Dec, 2022
         // to Date 31 Dec, 222
@@ -233,6 +232,10 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         // 0 * 3 + 0 = 0
         // [false, false, false,  ... ,false] of size 93
         // 2 Todo the ability to check and uncheck the boolean value in the database
+    }
+
+    private void setUnhecked() {
+        Log.d(TAG, "_____setUnhecked");
     }
 
     // Method to inflate the options menu when the user opens the menu for the first time.
