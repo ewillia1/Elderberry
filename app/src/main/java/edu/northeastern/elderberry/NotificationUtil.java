@@ -38,7 +38,7 @@ public class NotificationUtil {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d(TAG, "_____onDataChange: ");
-                notificationManager.cancelAll();
+                notificationManager.deleteNotificationChannel(MyNotificationPublisher.NOTIFICATION_CHANNEL_ID);
                 medicineList.clear();
 
                 for (DataSnapshot d : snapshot.getChildren()) {
@@ -83,6 +83,7 @@ public class NotificationUtil {
                 }
             }
         }
+        MyNotificationPublisher.resetNotificationId();
         for (DateTimeDose date : dates) {
             MyNotificationPublisher.setAlarm(date, context);
         }

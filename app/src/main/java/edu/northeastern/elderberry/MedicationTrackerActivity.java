@@ -2,12 +2,15 @@ package edu.northeastern.elderberry;
 
 import static edu.northeastern.elderberry.util.DatetimeFormat.makeDateString;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
@@ -16,6 +19,7 @@ import android.widget.CalendarView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,6 +42,10 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_medication_tracker);
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        if(!checkPermission()){
+            getPermissions();
+        }
+
         // Calling this activity's function to use ActionBar utility methods.
         ActionBar actionBar = getSupportActionBar();
 
@@ -82,8 +90,22 @@ public class MedicationTrackerActivity extends AppCompatActivity {
             return false;
         });
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        NotificationUtil.getMedicationInfo(this, notificationManager);
+        NotificationUtil.getMedicationInfo(getApplicationContext(), notificationManager);
     }
+
+    private boolean checkPermission()
+    {
+        return ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void getPermissions()
+    {
+        int REQUEST_CODE = 9882;
+        ActivityCompat.requestPermissions(this,
+                new String[] {Manifest.permission.POST_NOTIFICATIONS}, REQUEST_CODE);
+    }
+
 
     private void startMedicationTrackerActivity() {
         Log.d(TAG, "_____startMedicationTrackerActivity");
