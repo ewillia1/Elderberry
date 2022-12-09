@@ -207,6 +207,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
 
         // TODO: ELIZABETH
         // * Access time array (get time ID key) -- figure out length of that array, set the length to be int timeFreq
+        // * Access the time frequency node in the database and set that value to timeFreq.
         // * Figure out what day number in the range the user clicked on (ex. Range = Dec 1 - 10. User clicked on Dec 5, day = 4) (index starting at 0)
         // * Figure out what ChildItem checkbox the usr clicked on for particular medicine -- set that to be checkBoxNum (index starting at 0)
 
