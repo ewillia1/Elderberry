@@ -1,11 +1,14 @@
 package edu.northeastern.elderberry;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import java.util.List;
 import java.util.Map;
 
 public class MedicineDoseTime {
+    private static final String TAG = "MedicineDoseTime";
     private Map<String, List<String>> dose;
     private Map<String, List<String>> time;
     private Map<String, List<Boolean>> taken;
@@ -17,6 +20,7 @@ public class MedicineDoseTime {
     private int freq;
 
     public MedicineDoseTime(Map<String, List<String>> dose, Map<String, List<String>> time, Map<String, List<Boolean>> taken, String name, String information, String fromDate, String toDate, String unit, int freq) {
+        Log.d(TAG, "_____MedicineDoseTime");
         this.dose = dose;
         this.time = time;
         this.taken = taken;
@@ -29,69 +33,86 @@ public class MedicineDoseTime {
     }
 
     public MedicineDoseTime() {
+        Log.d(TAG, "_____MedicineDoseTime");
     }
 
     public Map<String, List<String>> getDose() {
+        Log.d(TAG, "_____getDose");
         return dose;
     }
 
     public void setDose(Map<String, List<String>> dose) {
+        Log.d(TAG, "_____setDose");
         this.dose = dose;
     }
 
     public Map<String, List<String>> getTime() {
+        Log.d(TAG, "_____getTime");
         return time;
     }
 
     public void setTime(Map<String, List<String>> time) {
+        Log.d(TAG, "_____setTime");
         this.time = time;
     }
 
     public Map<String, List<Boolean>> getTaken() {
+        Log.d(TAG, "_____getTaken");
         return this.taken;
     }
 
     public String getName() {
-        return name;
+        Log.d(TAG, "_____getName");
+        return this.name;
     }
 
     public void setName(String name) {
+        Log.d(TAG, "_____setName");
         this.name = name;
     }
 
     public String getInformation() {
-        return information;
+        Log.d(TAG, "getInformation: ");
+        return this.information;
     }
 
     public void setInformation(String information) {
+        Log.d(TAG, "____setInformation");
         this.information = information;
     }
 
     public String getFromDate() {
-        return fromDate;
+        Log.d(TAG, "_____getFromDate");
+        return this.fromDate;
     }
 
     public void setFromDate(String fromDate) {
+        Log.d(TAG, "_____setFromDate");
         this.fromDate = fromDate;
     }
 
     public String getToDate() {
+        Log.d(TAG, "_____getToDate");
         return toDate;
     }
 
     public void setToDate(String toDate) {
+        Log.d(TAG, "_____setToDate");
         this.toDate = toDate;
     }
 
     public String getUnit() {
-        return unit;
+        Log.d(TAG, "_____getUnit");
+        return this.unit;
     }
 
     public void setUnit(String unit) {
+        Log.d(TAG, "_____setUnit");
         this.unit = unit;
     }
 
     public int getFreq() {
+        Log.d(TAG, "_____getFreq");
         return freq;
     }
 
@@ -99,15 +120,15 @@ public class MedicineDoseTime {
     @Override
     public String toString() {
         return "MedicineDoseTime{" +
-                "dose=" + dose +
-                ", time=" + time +
-                ", taken=" + taken +
-                ", name='" + name + '\'' +
-                ", information='" + information + '\'' +
-                ", fromDate='" + fromDate + '\'' +
-                ", toDate='" + toDate + '\'' +
-                ", unit='" + unit + '\'' +
-                ", freq=" + freq +
+                "dose=" + this.dose +
+                ", time=" + this.time +
+                ", taken=" + this.taken +
+                ", name='" + this.name + '\'' +
+                ", information='" + this.information + '\'' +
+                ", fromDate='" + this.fromDate + '\'' +
+                ", toDate='" + this.toDate + '\'' +
+                ", unit='" + this.unit + '\'' +
+                ", freq=" + this.freq +
                 '}';
     }
 }
