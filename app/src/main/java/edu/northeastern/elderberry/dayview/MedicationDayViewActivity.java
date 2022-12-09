@@ -99,7 +99,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         // get correct db reference
         this.mAuth = FirebaseAuth.getInstance();
         this.userDatabase = FirebaseDatabase.getInstance().getReference();
-        this.medDatabase = userDatabase.child(Objects.requireNonNull(this.mAuth.getCurrentUser()).getUid());
+        this.medDatabase = this.userDatabase.child(Objects.requireNonNull(this.mAuth.getCurrentUser()).getUid());
         Log.d(TAG, "onCreate: Retrieving user med db with user ID" + this.mAuth.getCurrentUser().getUid());
 
         medDatabase.addValueEventListener(new ValueEventListener() {
@@ -207,7 +207,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         // Set the index in the taken array in the database to false.
 
         // TODO: ELIZABETH
-        // * Access time array (get time ID key) -- figure out length of that array, set the length to be int timeFreq
+        // * Access the time frequency node in the database and set that value to timeFreq
         // * Figure out what day number in the range the user clicked on (ex. Range = Dec 1 - 10. User clicked on Dec 5, day = 4) (index starting at 0)
         // * Figure out what ChildItem checkbox the usr clicked on for particular medicine -- set that to be checkBoxNum (index starting at 0)
 

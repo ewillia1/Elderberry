@@ -47,7 +47,7 @@
                 android:layout_width="83dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="5dp"
-                android:onClick="onCheckboxClicked"/>
+                android:onClick="onCheckboxClicked" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
