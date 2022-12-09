@@ -39,15 +39,19 @@ import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
+// TODO: ELIZABETH
+// When opening a particular day the checkboxes have to be repopulated based on the saved taken data values (ex. true = checked, false = not checked).
+// For each medicine (ParentItem) and each time for said medicine (ChildItem) this has to be the case.
+// Not 100% sure how I will do that yet -- depends on what data structures I have access to and what data structures I need to create.
 public class MedicationDayViewActivity extends AppCompatActivity {
     private static final String TAG = "MedicationDayViewActivity";
     private final List<ParentItem> medicineList = new ArrayList<>();
-    //    ImageButton arrow;
-//    LinearLayout hiddenView;
-//    CardView cardView;
-    //    private final ArrayList<String> medKey = new ArrayList<>();
+    private ArrayList<Boolean> takenList = new ArrayList<Boolean>();
     ParentItemAdapter parentItemAdapter;
     private String currentDate;
+    private DatabaseReference userDatabase;
+    private DatabaseReference medDatabase;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,10 +97,10 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         });
 
         // get correct db reference
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        DatabaseReference userDatabase = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference medDatabase = userDatabase.child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
-        Log.d(TAG, "onCreate: Retrieving user med db with user ID" + mAuth.getCurrentUser().getUid());
+        this.mAuth = FirebaseAuth.getInstance();
+        this.userDatabase = FirebaseDatabase.getInstance().getReference();
+        this.medDatabase = userDatabase.child(Objects.requireNonNull(this.mAuth.getCurrentUser()).getUid());
+        Log.d(TAG, "onCreate: Retrieving user med db with user ID" + this.mAuth.getCurrentUser().getUid());
 
         medDatabase.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
@@ -131,10 +135,8 @@ public class MedicationDayViewActivity extends AppCompatActivity {
 
                         Log.d(TAG, "_____onDataChange: level 3 retrieve correct medicineDoseTime successfully ");
                     }
-
                     medicineList.add(new ParentItem(medicineDoseTime.getName(), children));
                 }
-
                 parentItemAdapter.notifyDataSetChanged();
             }
 
@@ -149,30 +151,20 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         ParentRecyclerViewItem.setItemAnimator(new DefaultItemAnimator());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        this.parentItemAdapter = new ParentItemAdapter(this.medicineList);
+        this.parentItemAdapter = new ParentItemAdapter(this.medicineList, this);
         ParentRecyclerViewItem.setAdapter(this.parentItemAdapter);
         ParentRecyclerViewItem.setLayoutManager(layoutManager);
     }
 
     private boolean isCurrentDate(MedicineDoseTime medicineDoseTime) throws ParseException {
-
-        //Log.d(TAG, "_____isCurrentDate: before from date parsed");
+        Log.d(TAG, "_____isCurrentDate");
         Date fromDate = new SimpleDateFormat("MMM dd, yyyy", Locale.US).parse(medicineDoseTime.getFromDate());
-        //Log.d(TAG, "_____isCurrentDate: after from date parsed");
-        //Log.d(TAG, "_____isCurrentDate: before to date parsed");
         Date toDate = new SimpleDateFormat("MMM dd, yyyy", Locale.US).parse(medicineDoseTime.getToDate());
-        //Log.d(TAG, "_____isCurrentDate: after to date parsed");
-        //Log.d(TAG, "_____isCurrentDate: before current date is null");
         if (currentDate == null) {
             currentDate = medicineDoseTime.getFromDate();
         }
-        //Log.d(TAG, "_____isCurrentDate: after current date is null");
-        //Log.d(TAG, "_____isCurrentDate: before selected date is parsed");
+
         Date selectedDate = new SimpleDateFormat("MMM dd, yyyy", Locale.US).parse(currentDate);
-        //Log.d(TAG, "_____isCurrentDate: after selected date is parsed");
-        //Log.d(TAG, "_____isCurrentDate: fromDate" + fromDate.toString());
-        //Log.d(TAG, "_____isCurrentDate: toDate"  + toDate.toString() );
-        //Log.d(TAG, "_____isCurrentDate: selectedDate" + selectedDate.toString());
         assert fromDate != null;
         assert toDate != null;
         assert selectedDate != null;
@@ -196,43 +188,47 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // child_item.xml android:onClick for checkbox. Called when the checkbox is clicked (or unclicked).
+    // Need to set database according to which one the user did.
     public void onCheckboxClicked(View view) {
-        Log.d(TAG, "_____onCheckboxClicked");
         // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
+        Log.d(TAG, "_____onCheckboxClicked: checked = " + checked);
 
-        // Check which checkbox was clicked
         if (view.getId() == R.id.checkbox_child_item) {
-            if (checked) {
-                setComplete();
-                // update flag to true in db
-            } else {
-                // Todo update db with not checked box
-            }
-            // update flag to false in db
-            // setIncomplete();
+            checkboxConfig(checked);
         }
     }
 
-    public void setComplete() {
-        Log.d(TAG, "_____setComplete");
-        // fromDate 1 Dec, 2022
-        // to Date 31 Dec, 222
-        // total of 31 days inclusive of both end
-        // freq = 3
-        // size of the array 31 * 3 = 93
+    // Helper method. Figures out the index the checkbox corresponds to in the taken array in the database.
+    private void checkboxConfig(boolean checked) {
+        Log.d(TAG, "_____checkboxConfig");
+        // Set the index in the taken array in the database to false.
 
-        // pick 7 Dec, 2022, 2nd time you are taking the med
-        // 0 index: retrieving the correct medicine
-        // e.g. 1
-        // 1st index is based off date
-        /// 2nd index is based off position
-        // 6 * 3 + 1 = 19
+        // TODO: ELIZABETH
+        // * Access time array (get time ID key) -- figure out length of that array, set the length to be int timeFreq
+        // * Figure out what day number in the range the user clicked on (ex. Range = Dec 1 - 10. User clicked on Dec 5, day = 4) (index starting at 0)
+        // * Figure out what ChildItem checkbox the usr clicked on for particular medicine -- set that to be checkBoxNum (index starting at 0)
 
-        // e.g. 2. 1 dec 2022, 1 st first frequency
-        // 0 * 3 + 0 = 0
-        // [false, false, false,  ... ,false] of size 93
-        // 2 Todo the ability to check and uncheck the boolean value in the database
+        // Variables set to 0 need to be set to the above notes accordingly.
+        int timeFreq = 0;
+        int day = 0;
+        int firstIndexForDay = timeFreq * day;
+        int checkBoxNum = 0;
+        int index = firstIndexForDay + checkBoxNum;
+
+        setCheckbox(checked, index);
+    }
+
+    // Helper method. Set the index of the taken array to be the value of checked.
+    // Meaning -- If the checkbox was checked, set the index in the taken array in the database to true.
+    // Else, set the index in the taken array in the database to false.
+    private void setCheckbox(boolean checked, int index) {
+        Log.d(TAG, "_____setCheckbox");
+        // TODO: ELIZABETH
+        // * Access particular medication
+        // * Access taken array (get taken ID key)
+        // * Set the index of that taken array to be the value of checked
     }
 
     // Method to inflate the options menu when the user opens the menu for the first time.

@@ -9,6 +9,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
+    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Updated workspace.xml">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_1_22__11_19__Changes_1.xml" beforeDir="false" />
+    </list>
     <list default="true" id="9620958a-8b8d-421b-9159-69e2698687a6" name="Changes" comment="Updated YourMedicationsActivity.java to correctly pull and return the selected medication from database.&#10;&#10;Co-authored by: Gavin">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
@@ -372,6 +375,8 @@
       <option name="project" value="LOCAL" />
       <updated>1669747025250</updated>
     </task>
+=======
+>>>>>>> Stashed changes
     <task id="LOCAL-00043" summary="Added all times and doses to Medicine.java">
       <created>1669747552757</created>
       <option name="number" value="00043" />
