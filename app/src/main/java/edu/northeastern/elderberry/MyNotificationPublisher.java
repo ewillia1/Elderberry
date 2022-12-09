@@ -60,12 +60,9 @@ public class MyNotificationPublisher extends BroadcastReceiver {
     }
 
     public static void setAlarm(DateTimeDose date, Context context) {
-        //TODO: Remove the i variable used for testing
-        int i = 0;
         do {
             if (date.getFromTime().toInstant().toEpochMilli() > System.currentTimeMillis()) {
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(context, default_notification_channel_id);
-                // TODO: Change the Title of the notification
                 builder.setContentTitle("Time to take your medication!");
                 String notificationTitle;
                 if(date.getDose() > 1){
@@ -93,9 +90,8 @@ public class MyNotificationPublisher extends BroadcastReceiver {
                 assert alarmManager != null;
                 System.out.println(date.getName() + " " + date.getDose() + " " + date.getFromTime() + " with requestId: "+ id);
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, date.getFromTime().toInstant().toEpochMilli(), pendingIntent);
-                i++;
             }
-            date.getFromTime().setTime(date.getFromTime().getTime() + 300000);
-        } while (i <= 5 &&(date.getToDate().toInstant().toEpochMilli()) > (date.getFromTime().toInstant().toEpochMilli()));
+            date.getFromTime().setTime(date.getFromTime().getTime() + 86400000);
+        } while ((date.getToDate().toInstant().toEpochMilli()) > (date.getFromTime().toInstant().toEpochMilli()));
     }
 }
