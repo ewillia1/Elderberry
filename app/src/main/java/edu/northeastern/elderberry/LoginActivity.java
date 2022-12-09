@@ -1,26 +1,17 @@
 package edu.northeastern.elderberry;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.speech.RecognizerIntent;
 import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,8 +19,6 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Objects;
 
 import edu.northeastern.elderberry.helpAndConfigs.AboutActivity;
@@ -38,8 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     public static final String PREFS_NAME = "MyPrefsFile";
     private FirebaseAuth mAuth;
-    private TextInputEditText email;
-    private TextInputEditText password;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,67 +67,9 @@ public class LoginActivity extends AppCompatActivity {
             Log.d(TAG, "_____onClick (forgotPassword)");
             resetPassword();
         });
-
-        this.email = findViewById(R.id.loginEmail);
-        this.password = findViewById(R.id.loginPassword);
-
-        ImageButton emailMic = findViewById(R.id.emailMic);
-        emailMic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                speak(true);
-            }
-        });
-
-        ImageButton passwordMic = findViewById(R.id.passwordMic);
-        passwordMic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                speak(false);
-            }
-        });
-    }
-
-    private void speak(boolean isForEmail) {
-        Log.d(TAG, "_____speak");
-
-        // Intent to show speech to text dialog.
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-
-        if (isForEmail) {
-            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Please speak you email");
-        } else {
-            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Please speak you password");
-        }
-
-        // Start intent.
-        try {
-            ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        Intent data = result.getData();
-                        ArrayList<String> answer = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-
-                        if (isForEmail) {
-                            email.setText(answer.get(0));
-                        } else {
-                            password.setText(answer.get(0));
-                        }
-                    }
-                }
-            });
-        } catch (Exception e) {
-            // If there is some error post a message of the error for the user to see.
-            Log.d(TAG, "_____speak: " + e.getMessage());
-            Toast.makeText(this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void resetPassword() {
-        Log.d(TAG, "_____resetPassword");
         Intent intent = new Intent(this, ForgotPasswordActivity.class);
         startActivity(intent);
     }
