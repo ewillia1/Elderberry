@@ -1,7 +1,6 @@
 package edu.northeastern.elderberry.dayview;
 
 import androidx.annotation.NonNull;
-import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -9,23 +8,28 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.List;
 
+import edu.northeastern.elderberry.OnListItemClick;
 import edu.northeastern.elderberry.R;
 
 public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.ChildViewHolder> {
     private static final String TAG = "ChildItemAdapter";
     private final List<ChildItem> childItemTitle;
     private final Context context;
+    private OnListItemClick childListener;
+;
 
     // Constructor
     ChildItemAdapter(List<ChildItem> childItemList, Context context) {
         Log.d(TAG, "_____ChildItemAdapter");
         this.childItemTitle = childItemList;
         this.context = context;
+    }
+    public void setClickListener(OnListItemClick listener) {
+        this.childListener = listener;
     }
 
     @NonNull
@@ -36,7 +40,7 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.Chil
         // layout of the child item
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.child_item,viewGroup, false);
 
-        return new ChildViewHolder(view, this.context);
+        return new ChildViewHolder(view, this.context, childListener);
     }
 
     @Override
@@ -66,10 +70,21 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.Chil
         private static final String TAG = "ChildViewHolder";
         private final TextView childItemTitle;
 
-        ChildViewHolder(View itemView, Context context) {
+        ChildViewHolder(View itemView, Context context, final OnListItemClick childListener) {
             super(itemView);
             Log.d(TAG, "_____ChildViewHolder");
             childItemTitle = itemView.findViewById(R.id.child_item_title);
+
+            itemView.setOnClickListener(v -> {
+                Log.d(TAG, "_____MedicineHolder: ");
+                if (childListener != null) {
+                    int position = getLayoutPosition();
+
+                    if (position != RecyclerView.NO_POSITION) {
+                        childListener.onClick(position);
+                    }
+                }
+            });
         }
     }
 }

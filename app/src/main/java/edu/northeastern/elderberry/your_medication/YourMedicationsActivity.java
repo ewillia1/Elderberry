@@ -125,14 +125,28 @@ public class YourMedicationsActivity extends AppCompatActivity {
         // Test data
         this.medAdapter = new MedicineAdapter(this.medicines);
 
-        OnListItemClick onListItemClick = position -> {
-            Log.d(TAG, "_____onClick: ");
-            Intent intent = new Intent(YourMedicationsActivity.this, AddMedicationActivity.class);
-            Log.d(TAG, "_____onCreate, OnListItemClick, prior to medKey " + medKey.get(position));
-            intent.putExtra(YOUR_MED_TO_EDIT_MED_KEY, medKey.get(position));
-            Log.d(TAG, "_____onCreate, OnListItemClick, post medKey");
-            startActivity(intent);
+        // Todo to reference this in the MedicationdayView
+        OnListItemClick onListItemClick = new OnListItemClick() {
+            @Override
+            public void onClick(int position) {
+                Log.d(TAG, "_____onClick: ");
+                Intent intent = new Intent(YourMedicationsActivity.this, AddMedicationActivity.class);
+                Log.d(TAG, "_____onCreate, OnListItemClick, prior to medKey " + medKey.get(position));
+                intent.putExtra(YOUR_MED_TO_EDIT_MED_KEY, medKey.get(position));
+                Log.d(TAG, "_____onCreate, OnListItemClick, post medKey");
+                startActivity(intent);
+            }
         };
+
+        //OnListItemClick onListItemClick = position -> {
+        //    Log.d(TAG, "_____onClick: ");
+        //    Intent intent = new Intent(YourMedicationsActivity.this, AddMedicationActivity.class);
+        //    Log.d(TAG, "_____onCreate, OnListItemClick, prior to medKey " + medKey.get(position));
+        //    intent.putExtra(YOUR_MED_TO_EDIT_MED_KEY, medKey.get(position));
+        //    Log.d(TAG, "_____onCreate, OnListItemClick, post medKey");
+        //    startActivity(intent);
+        //};
+
         this.medAdapter.setClickListener(onListItemClick);
         recyclerView.setAdapter(this.medAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

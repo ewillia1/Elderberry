@@ -36,6 +36,7 @@ import java.util.Objects;
 
 import edu.northeastern.elderberry.MedicineDoseTime;
 import edu.northeastern.elderberry.R;
+import edu.northeastern.elderberry.ParentItemClickListener;
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
@@ -52,6 +53,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
     private DatabaseReference userDatabase;
     private DatabaseReference medDatabase;
     private FirebaseAuth mAuth;
+    ParentItemClickListener rvItemClickListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +112,9 @@ public class MedicationDayViewActivity extends AppCompatActivity {
 
                 medicineList.clear();
 
+                // Todo reference https://www.folkstalk.com/tech/nested-recyclerview-onclicklistener-with-examples/
+                // To figure out which position has been clicked?
+
                 for (DataSnapshot d : snapshot.getChildren()) {
                     List<ChildItem> children = new ArrayList<>();
                     Log.d(TAG, "_____onDataChange: level 1 ");
@@ -146,15 +151,32 @@ public class MedicationDayViewActivity extends AppCompatActivity {
             }
         });
 
+        // Recycler View
         RecyclerView ParentRecyclerViewItem = findViewById(R.id.parent_recyclerview);
         ParentRecyclerViewItem.setHasFixedSize(true);
         ParentRecyclerViewItem.setItemAnimator(new DefaultItemAnimator());
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         this.parentItemAdapter = new ParentItemAdapter(this.medicineList, this);
+
+
+        // Todo set onitemclick listener
         ParentRecyclerViewItem.setAdapter(this.parentItemAdapter);
+
+        //this.parentItemAdapter.setParentItemClickListener(new ParentItemClickListener() {
+        //    @Override
+        //    public void onChildItemClick(int parentPosition, int childPosition, String item) {
+        //        Log.d(TAG, "_____onChildItemClick: parentPosition is "+ parentPosition);
+        //        Log.d(TAG, "_____onChildItemClick: childPosition is "+ childPosition);
+        //        Log.d(TAG, "_____onChildItemClick: item is "+ item);
+        //    }
+        //});
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         ParentRecyclerViewItem.setLayoutManager(layoutManager);
     }
+
+
+
 
     private boolean isCurrentDate(MedicineDoseTime medicineDoseTime) throws ParseException {
         Log.d(TAG, "_____isCurrentDate");

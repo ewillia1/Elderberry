@@ -13,20 +13,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import edu.northeastern.elderberry.OnListItemClick;
 import edu.northeastern.elderberry.R;
+import edu.northeastern.elderberry.ParentItemClickListener;
 
+/**
+ * Accommodate long medicine names
+ */
 public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.ParentViewHolder> {
     private static final String TAG = "ParentItemAdapter";
     // An object of RecyclerView.RecycledViewPool is created to share the Views between the child and the parent RecyclerViews.
     private final RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
     private final List<ParentItem> itemList;
     private final Context context;
+    ParentItemClickListener parentItemClickListener;
 
     ParentItemAdapter(List<ParentItem> itemList, Context context) {
         Log.d(TAG, "_____ParentItemAdapter");
         this.itemList = itemList;
         this.context = context;
     }
+
 
     @NonNull
     @Override
@@ -35,7 +42,7 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
         // Here we inflate the corresponding layout of the parent item.
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.parent_item, viewGroup, false);
 
-        return new ParentViewHolder(view);
+        return new ParentViewHolder(view, this.parentItemClickListener);
     }
 
     @Override
@@ -61,8 +68,21 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
         parentViewHolder.childRecyclerView.setLayoutManager(layoutManager);
         parentViewHolder.childRecyclerView.setAdapter(childItemAdapter);
         parentViewHolder.childRecyclerView.setRecycledViewPool(viewPool);
+
+        childItemAdapter.setClickListener(new OnListItemClick() {
+            @Override
+            public void onClick(int childPos) {
+                Log.d(TAG, "_____onClick: with position "+childPos);
+                //String item = String.valueOf(itemList.get(position));
+                parentItemClickListener.onChildItemClick(parentViewHolder.getLayoutPosition(), childPos, "placeholder");
+            }
+        });
     }
 
+    public void setParentItemClickListener(ParentItemClickListener parentItemClickListener) {
+        Log.d(TAG, "_____setRvItemClickListener");
+        this.parentItemClickListener = parentItemClickListener;
+    }
 
     // This method returns the number of items we have added in the ParentItemList i.e. the number
     // of instances we have created of the ParentItemList.
@@ -78,11 +98,23 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
         private final TextView parentItemTitle;
         private final RecyclerView childRecyclerView;
 
-        ParentViewHolder(final View itemView) {
+        ParentViewHolder(final View itemView, final ParentItemClickListener parentListener) {
             super(itemView);
             Log.d(TAG, "_____ParentViewHolder");
             this.parentItemTitle = itemView.findViewById(R.id.parent_item_title);
             this.childRecyclerView = itemView.findViewById(R.id.child_recyclerview);
+
+            itemView.setOnClickListener(v -> {
+                Log.d(TAG, "_____MedicineHolder: ");
+                if (parentListener != null) {
+                    int parentPos = getLayoutPosition();
+
+                    if (parentPos != RecyclerView.NO_POSITION) {
+                        //this.childRecyclerView;
+                        //parentListener.onChildItemClick(parentPos, this.childRecyclerView, "placeholder");
+                    }
+                }
+            });
         }
     }
 }

@@ -37,6 +37,10 @@ import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 // 3 Todo to test if the taken field is working when frequency is changed when we edit the medication
+// Todo retrieving med change med crushes with med test 1 and med test 2
+// Todo warning of time frequency
+// Todo adding 2nd db to database causing
+// Todo handle null ptr exception for taken;
 public class AddMedicationActivity extends AppCompatActivity {
 
     private static final String TAG = "AddMedicationActivity";
