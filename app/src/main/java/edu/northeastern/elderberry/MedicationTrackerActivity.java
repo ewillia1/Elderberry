@@ -55,7 +55,6 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         assert actionBar != null;
         actionBar.setSubtitle(Html.fromHtml("<small>" + getString(R.string.medication_tracker) + "</small>", Html.FROM_HTML_MODE_LEGACY));
 
-
         // Adding an icon in the ActionBar.
         actionBar.setIcon(R.mipmap.app_logo);
 
@@ -97,10 +96,12 @@ public class MedicationTrackerActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     private boolean checkPermission() {
+        Log.d(TAG, "_____checkPermission");
         return ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED;
     }
 
     private void getPermissions() {
+        Log.d(TAG, "_____getPermissions");
         int REQUEST_CODE = 9882;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.POST_NOTIFICATIONS}, REQUEST_CODE);
