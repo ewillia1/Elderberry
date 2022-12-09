@@ -19,14 +19,6 @@ public class ChildItem {
         return this.childItemTitle;
     }
 
-//    public boolean isTaken() {
-//        return this.taken;
-//    }
-//
-//    public void setTaken(boolean taken) {
-//        this.taken = taken;
-//    }
-
     public void setChildItemTitle(String childItemTitle) {
         Log.d(TAG, "_____setChildItemTitle");
         this.childItemTitle = childItemTitle;

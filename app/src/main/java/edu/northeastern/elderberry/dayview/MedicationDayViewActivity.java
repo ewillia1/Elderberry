@@ -46,12 +46,9 @@ import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 public class MedicationDayViewActivity extends AppCompatActivity {
     private static final String TAG = "MedicationDayViewActivity";
     private final List<ParentItem> medicineList = new ArrayList<>();
-    private ArrayList<Boolean> takenList = new ArrayList<Boolean>();
+    private final ArrayList<Boolean> takenList = new ArrayList<>();
     ParentItemAdapter parentItemAdapter;
     private String currentDate;
-    private DatabaseReference userDatabase;
-    private DatabaseReference medDatabase;
-    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,10 +94,10 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         });
 
         // get correct db reference
-        this.mAuth = FirebaseAuth.getInstance();
-        this.userDatabase = FirebaseDatabase.getInstance().getReference();
-        this.medDatabase = this.userDatabase.child(Objects.requireNonNull(this.mAuth.getCurrentUser()).getUid());
-        Log.d(TAG, "onCreate: Retrieving user med db with user ID" + this.mAuth.getCurrentUser().getUid());
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        DatabaseReference userDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference medDatabase = userDatabase.child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
+        Log.d(TAG, "onCreate: Retrieving user med db with user ID" + mAuth.getCurrentUser().getUid());
 
         medDatabase.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")

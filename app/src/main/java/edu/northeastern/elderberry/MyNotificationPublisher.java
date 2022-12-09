@@ -11,12 +11,10 @@ import android.content.Intent;
 
 import androidx.core.app.NotificationCompat;
 
-import java.util.Date;
-
 public class MyNotificationPublisher extends BroadcastReceiver {
 
     public static int NOTIFICATION_ID = 1;
-    public static String NOTIFICATION = "notification";
+    public static final String NOTIFICATION = "notification";
     public static final String NOTIFICATION_CHANNEL_ID = "10001";
     private final static String default_notification_channel_id = "default";
 
