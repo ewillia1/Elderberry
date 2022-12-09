@@ -32,16 +32,13 @@ public class MyNotificationPublisher extends BroadcastReceiver {
         notificationManager.createNotificationChannel(notificationChannel);
         notificationManager.notify(getNotificationIdInt(), notification);
         String message = intent.getStringExtra("title");
-        textToSpeech = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int i) {
-                if (i == TextToSpeech.SUCCESS) {
-                    textToSpeech.setLanguage(Locale.UK);
-                    textToSpeech.speak(message, TextToSpeech.QUEUE_FLUSH, null, "");
-                }
-                else {
-                    Toast.makeText(context, "Text to speech is not available", Toast.LENGTH_SHORT).show();
-                }
+        textToSpeech = new TextToSpeech(context, i -> {
+            if (i == TextToSpeech.SUCCESS) {
+                textToSpeech.setLanguage(Locale.UK);
+                textToSpeech.speak(message, TextToSpeech.QUEUE_FLUSH, null, "");
+            }
+            else {
+                Toast.makeText(context, "Text to speech is not available", Toast.LENGTH_SHORT).show();
             }
         });
     }
