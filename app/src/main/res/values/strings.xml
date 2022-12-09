@@ -29,7 +29,6 @@
     <string name="send_email">Send Email</string>
     <string name="medication_name">Medication Name</string>
     <string name="set_time_frequency">Set Time Frequency Per Day</string>
-    <string name="title_activity_medication_dayview">MedicationDayview</string>
     <string name="home">Home</string>
     <string name="med_info">Med Info</string>
     <string name="set_dates">Set Dates</string>
@@ -45,11 +44,6 @@
     <string name="uppercase_about">About</string>
     <string name="version">version</string>
     <string name="build_version">Build Version</string>
-    <string name="notifications_cat">notification_cat</string>
-    <string name="notifications">Notifications</string>
-    <string name="voice_notifications">voice_notifications</string>
-    <string name="enable_voice_notifications">Enable Voice Notifications</string>
-    <string name="enable_notifications">Enable Notifications</string>
     <string name="med_name_default">MedNameDefault</string>
     <string name="med_time_default">MedTimeDefault</string>
     <string name="save">save</string>
