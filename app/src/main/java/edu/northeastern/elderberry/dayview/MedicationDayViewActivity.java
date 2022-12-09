@@ -110,13 +110,12 @@ public class MedicationDayViewActivity extends AppCompatActivity {
 
                 medicineList.clear();
 
-                // 2 Todo adapt taken to accommodate all from and to dates
                 for (DataSnapshot d : snapshot.getChildren()) {
                     List<ChildItem> children = new ArrayList<>();
-                    //for (DataSnapshot td : d.getChildren()) {
                     Log.d(TAG, "_____onDataChange: level 1 ");
                     MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
                     assert medicineDoseTime != null;
+
                     try {
                         if (!isCurrentDate(medicineDoseTime)) {
                             continue;
@@ -136,8 +135,10 @@ public class MedicationDayViewActivity extends AppCompatActivity {
 
                         Log.d(TAG, "_____onDataChange: level 3 retrieve correct medicineDoseTime successfully ");
                     }
+
                     medicineList.add(new ParentItem(medicineDoseTime.getName(), children));
                 }
+
                 parentItemAdapter.notifyDataSetChanged();
             }
 

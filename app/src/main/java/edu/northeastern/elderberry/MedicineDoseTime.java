@@ -15,15 +15,18 @@ public class MedicineDoseTime {
     private String fromDate;
     private String toDate;
     private String unit;
+    private int freq;
 
-    public MedicineDoseTime(Map<String, List<String>> dose, Map<String, List<String>> time, Map<String, List<Boolean>> taken, String name, String information, String fromDate, String toDate, String unit) {
+    public MedicineDoseTime(Map<String, List<String>> dose, Map<String, List<String>> time, Map<String, List<Boolean>> taken, String name, String information, String fromDate, String toDate, String unit, int freq) {
         this.dose = dose;
         this.time = time;
+        this.taken = taken;
         this.name = name;
         this.information = information;
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.unit = unit;
+        this.freq = freq;
     }
 
     public MedicineDoseTime() {
@@ -87,6 +90,10 @@ public class MedicineDoseTime {
 
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    public int getFreq() {
+        return freq;
     }
 
     @NonNull

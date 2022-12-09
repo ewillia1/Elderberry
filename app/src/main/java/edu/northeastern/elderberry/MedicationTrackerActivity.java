@@ -3,6 +3,8 @@ package edu.northeastern.elderberry;
 import static edu.northeastern.elderberry.util.DatetimeFormat.makeDateString;
 
 import android.annotation.SuppressLint;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,11 +14,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CalendarView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 import edu.northeastern.elderberry.helpAndConfigs.AboutActivity;
@@ -27,6 +42,7 @@ import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 public class MedicationTrackerActivity extends AppCompatActivity {
     private static final String TAG = "MedicationTrackerActivity";
+    private FirebaseAuth mAuth;
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -35,6 +51,7 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         Log.d(TAG, "_____onCreate");
         setContentView(R.layout.activity_medication_tracker);
 
+        mAuth = FirebaseAuth.getInstance();
         // Calling this activity's function to use ActionBar utility methods.
         ActionBar actionBar = getSupportActionBar();
 
@@ -78,6 +95,8 @@ public class MedicationTrackerActivity extends AppCompatActivity {
             }
             return false;
         });
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationUtil.getMedicationInfo(this, notificationManager);
     }
 
     private void startMedicationTrackerActivity() {

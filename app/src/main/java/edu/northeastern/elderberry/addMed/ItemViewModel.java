@@ -19,11 +19,14 @@ public class ItemViewModel extends ViewModel {
     private static final String TAG = "ItemViewModel";
     private static final int MAX_INDEX = 12;
     private final MutableLiveData<String> medId = new MutableLiveData<>();
+    private final MutableLiveData<String> timeId = new MutableLiveData<>();
+    private final MutableLiveData<String> doseId = new MutableLiveData<>();
+    private final MutableLiveData<String> takenId = new MutableLiveData<>();
     private final MutableLiveData<String> medName = new MutableLiveData<>();
     private final MutableLiveData<String> information = new MutableLiveData<>();
     private final MutableLiveData<String> fromDate = new MutableLiveData<>();
     private final MutableLiveData<String> toDate = new MutableLiveData<>();
-    private final MutableLiveData<String> timeFreq = new MutableLiveData<>();
+    private final MutableLiveData<Integer> timeFreq = new MutableLiveData<>();
     private final MutableLiveData<String> unit = new MutableLiveData<>();
     private ArrayList<MutableLiveData<String>> time = initializeArray();
     private ArrayList<MutableLiveData<String>> dose = initializeArray();
@@ -31,17 +34,16 @@ public class ItemViewModel extends ViewModel {
 
     private ArrayList<MutableLiveData<String>> initializeArray() {
         ArrayList<MutableLiveData<String>> res = new ArrayList<>();
-        Log.d(TAG, "_____initializeTimeArray");
+        Log.d(TAG, "_____initializeArray");
         for (int i = 0; i < MAX_INDEX; i++) {
             res.add(i, new MutableLiveData<>());
         }
         return res;
     }
 
-    public void initializeBooleanArray() {
+    public void initializeTakenBooleanArray() {
         ArrayList<MutableLiveData<Boolean>> res = new ArrayList<>();
-        // Todo remove this dependency
-        long arraySize = inferTimeFreq() * computeNumDays();
+        long arraySize = getTimeFreq().getValue() * computeNumDays();
         Log.d(TAG, "_____initializeTimeArray with size " + arraySize);
         for (int i = 0; i < arraySize; i++) {
             res.add(i, new MutableLiveData<>(false));
@@ -52,13 +54,13 @@ public class ItemViewModel extends ViewModel {
     public void clear() {
         this.time = initializeArray();
         this.dose = initializeArray();
-        initializeBooleanArray();
     }
 
     public ArrayList<String> getTimeStringArray() {
         Log.d(TAG, "_____getTimeStringArray");
         ArrayList<String> timeStringArray = new ArrayList<>();
-        for (int i = 0; i < this.time.size(); i++) {
+        int upperBound = this.time.size();
+        for (int i = 0; i < upperBound; i++) {
             if (this.time.get(i).getValue() == null) {
                 break;
             }
@@ -67,10 +69,15 @@ public class ItemViewModel extends ViewModel {
         return timeStringArray;
     }
 
-    public ArrayList<Boolean> getTakenBooleanArray() {
-        Log.d(TAG, "_____getTakenBooleanArray"+this.taken);
+    public ArrayList<Boolean> getTakenBooleanArray() throws NullPointerException {
+        Log.d(TAG, "_____getTakenBooleanArray" + this.taken);
+        if (this.taken == null) {
+            throw new NullPointerException("field taken is not initialized. Call set From To date and call InitializeBoolean Array");
+        }
+
         ArrayList<Boolean> takenBooleanArray = new ArrayList<>();
-        for (int i = 0; i < this.taken.size(); i++) {
+        int upperBound = this.taken.size();
+        for (int i = 0; i < upperBound; i++) {
             if (this.taken.get(i).getValue() == null) {
                 break;
             }
@@ -82,7 +89,8 @@ public class ItemViewModel extends ViewModel {
     public ArrayList<String> getDoseStringArray() {
         Log.d(TAG, "_____getDoseStringArray");
         ArrayList<String> doseStringArray = new ArrayList<>();
-        for (int i = 0; i < this.dose.size(); i++) {
+        int upperBound = this.dose.size();
+        for (int i = 0; i < upperBound; i++) {
             doseStringArray.add(this.dose.get(i).getValue());
         }
         return doseStringArray;
@@ -96,42 +104,33 @@ public class ItemViewModel extends ViewModel {
 
     public void setDose(int index, String item) {
         Log.d(TAG, "_____setDose");
-        this.dose.add(index, new MutableLiveData<>(item));
+        this.dose.set(index, new MutableLiveData<>(item));
     }
 
     public void setTime(List<String> timeList) {
         this.time = initializeArray();
         Log.d(TAG, "_____setTime array version");
-        for (int i=0; i < Math.min(timeList.size(), this.time.size()); i++) {
-            this.time.add(i, new MutableLiveData<>(timeList.get(i)));
+        int upperBound = Math.min(timeList.size(), this.time.size());
+        for (int i = 0; i < upperBound; i++) {
+            this.time.set(i, new MutableLiveData<>(timeList.get(i)));
         }
     }
 
     public void setDose(List<String> doseList) {
         this.dose = initializeArray();
         Log.d(TAG, "_____setDose array version");
-        for (int i=0; i < Math.min(doseList.size(), this.dose.size()); i++) {
-            this.dose.add(i, new MutableLiveData<>(doseList.get(i)));
-        }
-    }
-
-
-    public void resetTaken() {
-        for (int i = 0 ; i < MAX_INDEX ; i++) {
-            if (i < Integer.parseInt(Objects.requireNonNull(this.timeFreq.getValue()))) {
-                this.taken.add(i, new MutableLiveData<>(Boolean.FALSE));
-            }
-            else {
-                this.taken.add(i, new MutableLiveData<>());
-            }
+        int upperBound = Math.min(doseList.size(), this.dose.size());
+        for (int i = 0; i < upperBound; i++) {
+            this.dose.set(i, new MutableLiveData<>(doseList.get(i)));
         }
     }
 
     public void setTaken(List<Boolean> takenList) {
-        initializeBooleanArray();
         Log.d(TAG, "_____setTaken");
-        for (int i=0; i < Math.min(takenList.size(), this.taken.size()); i++) {
-            this.taken.add(i, new MutableLiveData<>(takenList.get(i)));
+        initializeTakenBooleanArray();
+        int upperBound = Math.min(takenList.size(), this.taken.size());
+        for (int i = 0; i < upperBound; i++) {
+            this.taken.set(i, new MutableLiveData<>(takenList.get(i)));
         }
     }
 
@@ -180,21 +179,34 @@ public class ItemViewModel extends ViewModel {
         this.toDate.setValue(item);
     }
 
-    public MutableLiveData<String> getTimeFreq() {
-        if (this.timeFreq.getValue() == null) {
-            setTimeFreq(Integer.toString(inferTimeFreq()));
-        }
+    public void setTimeId(String item) {
+        Log.d(TAG, "_____setToDate");
+        this.timeId.setValue(item);
+    }
+
+    public void setDoseId(String item) {
+        Log.d(TAG, "_____setToDate");
+        this.doseId.setValue(item);
+    }
+
+    public void setTakenId(String item) {
+        Log.d(TAG, "_____setToDate");
+        this.takenId.setValue(item);
+    }
+
+    public MutableLiveData<Integer> getTimeFreq() {
         return this.timeFreq;
     }
 
-    public void setTimeFreq(String item) {
+    public void setTimeFreq(int item) {
         Log.d(TAG, "_____setTimeFreq");
         this.timeFreq.setValue(item);
     }
 
     public int inferTimeFreq() {
         int count = 0;
-        for (int i=0; i< time.size(); i++) {
+        int upperBound = time.size();
+        for (int i = 0; i < upperBound; i++) {
             if (time.get(i).getValue() != null) count++;
         }
         return count;
@@ -220,9 +232,25 @@ public class ItemViewModel extends ViewModel {
         return this.dose.get(index);
     }
 
+    public MutableLiveData<String> getTimeId() {
+        return this.timeId;
+    }
+
+    public MutableLiveData<String> getDoseId() {
+        return this.doseId;
+    }
+
+    public MutableLiveData<String> getTakenId() {
+        return this.takenId;
+    }
+
     private long computeNumDays() {
         Log.d(TAG, "_____computeNumDays: ");
         try {
+            if (getFromDate().getValue() == null || getToDate().getValue() == null) {
+                return 1;
+            }
+
             Date fromDate = new SimpleDateFormat("MMM dd, yyyy", Locale.US).parse(Objects.requireNonNull(getFromDate().getValue()));
             //Log.d(TAG, "_____isCurrentDate: after from date parsed");
             //Log.d(TAG, "_____isCurrentDate: before to date parsed");
@@ -237,6 +265,7 @@ public class ItemViewModel extends ViewModel {
         }
         return 1;
     }
+
 
     @NonNull
     @Override
