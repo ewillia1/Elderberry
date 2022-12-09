@@ -141,7 +141,7 @@ public class YourMedicationsActivity extends AppCompatActivity {
         // In this we are specifying drag direction and position to right.
         // https://www.geeksforgeeks.org/swipe-to-delete-and-undo-in-android-recyclerview/
         // Future: will not actually delete medication from database (just tag it as deleted)
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             // This method is called when the item is moved.
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -149,7 +149,7 @@ public class YourMedicationsActivity extends AppCompatActivity {
                 return false;
             }
 
-            // This method is called when we swipe our item to right direction.
+            // This method is called when we swipe our item to left direction.
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 Log.d(TAG, "_____onSwiped");
