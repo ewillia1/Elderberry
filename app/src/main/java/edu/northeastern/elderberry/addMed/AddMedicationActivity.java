@@ -83,7 +83,7 @@ public class AddMedicationActivity extends AppCompatActivity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    NotificationUtil.getMedicationInfo(this, notificationManager);
+                    NotificationUtil.getMedicationInfo(getApplicationContext(), notificationManager);
                     return true;
                 } else {
                     Log.d(TAG, "_____onCreate: Unsuccessful add. Need to fill in all required fields.");

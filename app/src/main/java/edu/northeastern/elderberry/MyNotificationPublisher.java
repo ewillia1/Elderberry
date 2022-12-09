@@ -8,10 +8,12 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.speech.tts.TextToSpeech;
+import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
-import java.util.Date;
+import java.util.Locale;
 
 public class MyNotificationPublisher extends BroadcastReceiver {
 
@@ -19,6 +21,7 @@ public class MyNotificationPublisher extends BroadcastReceiver {
     public static String NOTIFICATION = "notification";
     public static final String NOTIFICATION_CHANNEL_ID = "10001";
     private final static String default_notification_channel_id = "default";
+    private TextToSpeech textToSpeech;
 
     public void onReceive(Context context, Intent intent) {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -27,12 +30,29 @@ public class MyNotificationPublisher extends BroadcastReceiver {
         NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "Elderberry medicine reminder", importance);
         assert notificationManager != null;
         notificationManager.createNotificationChannel(notificationChannel);
-            notificationManager.notify(getNotificationIdInt(), notification);
+        notificationManager.notify(getNotificationIdInt(), notification);
+        String message = intent.getStringExtra("title");
+        textToSpeech = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+                if (i == TextToSpeech.SUCCESS) {
+                    textToSpeech.setLanguage(Locale.UK);
+                    textToSpeech.speak(message, TextToSpeech.QUEUE_FLUSH, null, "");
+                }
+                else {
+                    Toast.makeText(context, "Text to speech is not available", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     public static String getNotificationId() {
         NOTIFICATION_ID++;
         return String.valueOf(NOTIFICATION_ID);
+    }
+
+    public static void resetNotificationId() {
+        NOTIFICATION_ID = 1;
     }
 
     public static int getNotificationIdInt() {
@@ -47,7 +67,7 @@ public class MyNotificationPublisher extends BroadcastReceiver {
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(context, default_notification_channel_id);
                 // TODO: Change the Title of the notification
                 builder.setContentTitle("Time to take your medication!");
-                String notificationTitle = "";
+                String notificationTitle;
                 if(date.getDose() > 1){
                     notificationTitle = "Please take " +date.getDose() +" doses of " + date.getName();
                 } else{
@@ -68,7 +88,7 @@ public class MyNotificationPublisher extends BroadcastReceiver {
                 notificationIntent.putExtra("dose", date.getDose());
                 notificationIntent.putExtra("title",(notificationTitle));
                 int id = MyNotificationPublisher.getNotificationIdInt();
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, notificationIntent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
                 AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
                 assert alarmManager != null;
                 System.out.println(date.getName() + " " + date.getDose() + " " + date.getFromTime() + " with requestId: "+ id);

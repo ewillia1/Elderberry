@@ -2,36 +2,26 @@ package edu.northeastern.elderberry;
 
 import static edu.northeastern.elderberry.util.DatetimeFormat.makeDateString;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CalendarView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 import edu.northeastern.elderberry.helpAndConfigs.AboutActivity;
 import edu.northeastern.elderberry.helpAndConfigs.SettingsActivity;
@@ -51,6 +41,9 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_medication_tracker);
 
         mAuth = FirebaseAuth.getInstance();
+        if(!checkPermission()){
+            getPermissions();
+        }
         // Calling this activity's function to use ActionBar utility methods.
         ActionBar actionBar = getSupportActionBar();
 
@@ -95,8 +88,22 @@ public class MedicationTrackerActivity extends AppCompatActivity {
             return false;
         });
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        NotificationUtil.getMedicationInfo(this, notificationManager);
+        NotificationUtil.getMedicationInfo(getApplicationContext(), notificationManager);
     }
+
+    private boolean checkPermission()
+    {
+        return ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void getPermissions()
+    {
+        int REQUEST_CODE = 9882;
+        ActivityCompat.requestPermissions(this,
+                new String[] {Manifest.permission.POST_NOTIFICATIONS}, REQUEST_CODE);
+    }
+
 
     private void startMedicationTrackerActivity() {
         Log.d(TAG, "_____startMedicationTrackerActivity");
