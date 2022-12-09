@@ -9,13 +9,15 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Updated workspace.xml." />
+    <list default="true" id="9620958a-8b8d-421b-9159-69e2698687a6" name="Changes" comment="Updated YourMedicationsActivity.java to correctly pull and return the selected medication from database.&#10;&#10;Co-authored by: Gavin">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[8B2X12EH8]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[adb-88UX02WDN-7X21xW._adb-tls-connect._tcp.]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -24,11 +26,12 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="resourceFile" />
         <option value="Enum" />
         <option value="layoutResourceFile" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="resourceFile" />
+        <option value="valueResourceFile" />
       </list>
     </option>
   </component>
@@ -39,9 +42,14 @@
     <option name="BUILD_TARGET_KEY" value="apk" />
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="origin/main" />
+    <option name="BRANCH" value="origin/elizabeth" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="elizabeth" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -53,22 +61,22 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/app/proguard-rules.pro" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/build 2.gradle" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/build.gradle" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/build.gradle" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/src/main/res/values/themes.xml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/app/src/main/res/values-night/themes.xml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/proguard-rules.pro" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/build 2.gradle" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/build.gradle" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/local.properties" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/gradle.properties" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/src/main/res/values/themes.xml" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2GKNiBEHPYaUulIo5hdoDXVODgy" />
   <component name="ProjectLevelVcsManager">
@@ -89,12 +97,12 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/layout" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.toDoOptions" />
+    <property name="settings.editor.selected.configurable" value="preferences.externalResources" />
   </component>
   <component name="PsdUISettings">
     <option name="MODULE_TAB" value="Default Config" />
@@ -107,6 +115,7 @@
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
+      <recent name="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/editMed" />
       <recent name="$PROJECT_DIR$/app/src/main/res/menu" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -120,6 +129,9 @@
     </key>
     <key name="android.template.424079550">
       <recent name="edu.northeastern.elderberry" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="edu.northeastern.elderberry.editMed" />
     </key>
   </component>
   <component name="RunManager">
@@ -191,6 +203,90 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666133441374</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Update">
+      <created>1668820935535</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1668820935535</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Update workspace.xml">
+      <created>1668821187786</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1668821187786</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Update activity_create_account.xml, activity_login.xml, strings.xml, workspace.xml">
+      <created>1668821574805</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1668821574805</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Updated LoginActivity.java">
+      <created>1668821879213</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1668821879213</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Updated LoginActivity.java, added ForgotEmailActivity and ForgotPasswordActivity">
+      <created>1668822472634</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1668822472634</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Updated login/create user functionality">
+      <created>1668828021880</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1668828021880</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Updated login/create user functionality again, cleaned code">
+      <created>1668828824718</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1668828824718</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Updated deploymentTargetDropDown.xml">
+      <created>1668868087752</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1668868087752</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Skip LoginActivity, if already successfully logged in, got logo screen to show up and then go away">
+      <created>1668872842971</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1668872842971</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Updated workspace.xml">
+      <created>1668872874064</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1668872874064</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Made textStyle bold and added Remember Me Checkbox to activity_login.xml">
+      <created>1668873506812</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1668873506812</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Updated strings.xml">
+      <created>1668873520951</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1668873520951</updated>
     </task>
     <task id="LOCAL-00031" summary="Made mode MODE_PRIVATE for shared preferences">
       <created>1668873804312</created>
@@ -430,112 +526,28 @@
       <option name="project" value="LOCAL" />
       <updated>1669906373050</updated>
     </task>
-    <task id="LOCAL-00065" summary="Working on database functionality. Added DoseTracker and TimeTracker (but will probably delete those files).">
-      <created>1669907986390</created>
+    <task id="LOCAL-00065" summary="Updated YourMedicationsActivity.java to correctly pull and return the selected medication from database.&#10;&#10;Co-authored by: Gavin">
+      <created>1669915254109</created>
       <option name="number" value="00065" />
       <option name="presentableId" value="LOCAL-00065" />
       <option name="project" value="LOCAL" />
-      <updated>1669907986390</updated>
+      <updated>1669915254109</updated>
     </task>
-    <task id="LOCAL-00066" summary="Add TODO to TimeDoseViewHolder.java. Need to fix the doseWasAdded -- it is being called when it is not supposed to/the TextChangedListener is being triggered when it is not supposed to be.">
-      <created>1669916138661</created>
+    <task id="LOCAL-00066" summary="Updated AddMedicationActivity.java and ItemViewModel.java&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher">
+      <created>1670520592585</created>
       <option name="number" value="00066" />
       <option name="presentableId" value="LOCAL-00066" />
       <option name="project" value="LOCAL" />
-      <updated>1669916138662</updated>
+      <updated>1670520592585</updated>
     </task>
-    <task id="LOCAL-00067" summary="Trying to work on listeners to get the focus of items to be as expected.">
-      <created>1669919774030</created>
+    <task id="LOCAL-00067" summary="Updated AddMedicationActivity.java&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher">
+      <created>1670521003652</created>
       <option name="number" value="00067" />
       <option name="presentableId" value="LOCAL-00067" />
       <option name="project" value="LOCAL" />
-      <updated>1669919774030</updated>
+      <updated>1670521003652</updated>
     </task>
-    <task id="LOCAL-00068" summary="workspace.xml">
-      <created>1669923212174</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1669923212174</updated>
-    </task>
-    <task id="LOCAL-00069" summary="Removed unused import statements from TimeDoseViewHolder.java.">
-      <created>1669923519026</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1669923519026</updated>
-    </task>
-    <task id="LOCAL-00070" summary="Updated database input for time and dose to just say the index.">
-      <created>1669924841765</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1669924841765</updated>
-    </task>
-    <task id="LOCAL-00071" summary="Made time array for database.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher">
-      <created>1669929625976</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1669929625976</updated>
-    </task>
-    <task id="LOCAL-00072" summary="Cleaned up code. Added doseList to AddMedicationActivity.java.">
-      <created>1669932012966</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1669932012966</updated>
-    </task>
-    <task id="LOCAL-00073" summary="Fixed doseList in AddMedicationActivity.java.">
-      <created>1669932703506</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1669932703506</updated>
-    </task>
-    <task id="LOCAL-00074" summary="Working on checking the required fields.">
-      <created>1669933947033</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1669933947033</updated>
-    </task>
-    <task id="LOCAL-00075" summary="Go the check for required fields to work! Cleaned up other code and added final constants.">
-      <created>1669936348542</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1669936348542</updated>
-    </task>
-    <task id="LOCAL-00076" summary="Updated Elderberry.app.unitTest.iml, lint.xml, and workspace.xml.">
-      <created>1669936832670</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1669936832670</updated>
-    </task>
-    <task id="LOCAL-00077" summary="Fixed an AM/PM space bug. Fixed required field check bug. Still an issue with the times, doses, the ViewModel, and the database.">
-      <created>1669952207001</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1669952207002</updated>
-    </task>
-    <task id="LOCAL-00078" summary="Fixed the issue with the times, doses, the ViewModel, and the database. Reinitialized time and dose array in View Model when a new time frequency is clicked.">
-      <created>1669954937662</created>
-      <option name="number" value="00078" />
-      <option name="presentableId" value="LOCAL-00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1669954937662</updated>
-    </task>
-    <task id="LOCAL-00079" summary="Updated workspace.xml.">
-      <created>1669955207719</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1669955207720</updated>
-    </task>
-    <option name="localTasksCounter" value="80" />
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -551,6 +563,18 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Got viewModel to work in MedInfoFragment.java and SetDatesFragment.java.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
+    <MESSAGE value="Got unit to work when add button is clicked. Updated input types in some xml files for better user interaction." />
+    <MESSAGE value="Added all times and doses to Medicine.java" />
+    <MESSAGE value="Changed getAdapterPosition to getAbsoluteAdapterPosition in TimeDoseViewHolder" />
+    <MESSAGE value="Interim save&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
+    <MESSAGE value="Added a TODO to MedInfoFragment.java&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
+    <MESSAGE value="Need to figure out a way to lose focus when keyboard closed. Working version of adding one time and one dose to database.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
+    <MESSAGE value="Need to figure out a way to lose focus when keyboard closed. Time 1 and dose 1 are added to database.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
+    <MESSAGE value="Updated workspace.xml" />
+    <MESSAGE value="Got med information to be added to the database, still working of changing the focus when collapsing the keyboard. Added setOnEditorActionListeners for the infoEditText in MedInfoFragment.java and this.doseEditText in TimeDoseViewHolder.java." />
+    <MESSAGE value="Reformatted code and added a TODO to AddMedicationActivity.java" />
+    <MESSAGE value="Cleaned up warnings" />
     <MESSAGE value="Added onConfigurationChanged to MedInfoFragment.java (it is commented out since I did not do anything)." />
     <MESSAGE value="Tried !hasFocus in MedInfoFragment.java with no luck (it is commented out)." />
     <MESSAGE value="Updated AddMedicationActivity.java &amp; ItemViewModel.java to properly work with correct time and dose to display.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Elizabeth" />
@@ -561,21 +585,9 @@
     <MESSAGE value="Updating AddMedicationActivity.java" />
     <MESSAGE value="Need to update listeners in MedInfoFragment.java and TimeDoseViewHolder.java (see TODOs; hint: addTextChangedListener). Got database functionality to work. Need to work on checking required fields. Other small issues need to be worked out too." />
     <MESSAGE value="Updated listeners in MedInfoFragment.java and TimeDoseViewHolder.java. Updated database functionality. Need to work on checking required fields. Other small issues need to be worked out too." />
-    <MESSAGE value="Working on database functionality. Added DoseTracker and TimeTracker (but will probably delete those files)." />
-    <MESSAGE value="Add TODO to TimeDoseViewHolder.java. Need to fix the doseWasAdded -- it is being called when it is not supposed to/the TextChangedListener is being triggered when it is not supposed to be." />
-    <MESSAGE value="Trying to work on listeners to get the focus of items to be as expected." />
-    <MESSAGE value="workspace.xml" />
-    <MESSAGE value="Removed unused import statements from TimeDoseViewHolder.java." />
-    <MESSAGE value="Updated database input for time and dose to just say the index." />
-    <MESSAGE value="Made time array for database.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
-    <MESSAGE value="Cleaned up code. Added doseList to AddMedicationActivity.java." />
-    <MESSAGE value="Fixed doseList in AddMedicationActivity.java." />
-    <MESSAGE value="Working on checking the required fields." />
-    <MESSAGE value="Go the check for required fields to work! Cleaned up other code and added final constants." />
-    <MESSAGE value="Updated Elderberry.app.unitTest.iml, lint.xml, and workspace.xml." />
-    <MESSAGE value="Fixed an AM/PM space bug. Fixed required field check bug. Still an issue with the times, doses, the ViewModel, and the database." />
-    <MESSAGE value="Fixed the issue with the times, doses, the ViewModel, and the database. Reinitialized time and dose array in View Model when a new time frequency is clicked." />
-    <MESSAGE value="Updated workspace.xml." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated workspace.xml." />
+    <MESSAGE value="Updated YourMedicationsActivity.java to correctly pull and return the selected medication from database.&#10;&#10;Co-authored by: Gavin" />
+    <MESSAGE value="Updated AddMedicationActivity.java and ItemViewModel.java&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
+    <MESSAGE value="Updated AddMedicationActivity.java&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated AddMedicationActivity.java&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
   </component>
 </project>

@@ -7,13 +7,13 @@ plugins {
 android {
     signingConfigs {
         debug {
-            storeFile file('D:\\final_project_key\\final_project.jks')
+            storeFile file('/Users/Gavin/AndroidStudioProjects/Team5_Keystore')
             keyAlias 'team5signkey'
             storePassword 'team5password'
             keyPassword 'team5password'
         }
         release {
-            storeFile file('D:\\final_project_key\\final_project.jks')
+            storeFile file('/Users/Gavin/AndroidStudioProjects/Team5_Keystore')
             keyAlias 'team5signkey'
             storePassword 'team5password'
             keyPassword 'team5password'

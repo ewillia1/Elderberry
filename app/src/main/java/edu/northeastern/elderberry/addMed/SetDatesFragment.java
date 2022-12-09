@@ -87,7 +87,8 @@ public class SetDatesFragment extends Fragment {
             Log.d(TAG, "_____onClick (to_image)");
             this.to_datePickerDialog.show();
         });
-
+        
+        this.viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
         initDatePicker();
 
         return view;
@@ -102,6 +103,17 @@ public class SetDatesFragment extends Fragment {
 
     private void initDatePicker() {
         Log.d(TAG, "_____initDatePicker");
+        // If we calling from your Med, then we should pre-fill the from & to TextView
+        // retrieve medKey selected from the yourMedication activity
+        AddMedicationActivity addMedicationActivity = (AddMedicationActivity) getActivity();
+        assert addMedicationActivity != null;
+        String editMedKey = addMedicationActivity.getEditMedKey();
+        if (editMedKey != null) {
+            Log.d(TAG, "initDatePicker: non null editMedKey");
+            set_from.setText(this.viewModel.getFromDate().getValue());
+            set_to.setText(this.viewModel.getToDate().getValue());
+        }
+        
         // From date.
         DatePickerDialog.OnDateSetListener from_dateSetListener = (view, year, month, day) -> {
             Log.d(TAG, "_____initDatePicker");
@@ -110,7 +122,7 @@ public class SetDatesFragment extends Fragment {
             this.set_from.setText(date);
             this.set_from.setTextSize(FONT_SIZE);
             Log.d(TAG, "_____initDatePicker fromDate -- this.fromDate = " + this.fromDate);
-            this.fromDate.set(year, month, day);
+            this.fromDate.set(year, month, day); // Check with Elizabeth on if this is a duplication
             this.fromDate_db = makeDateString(day, month, year);
             this.viewModel.setFromDate(this.fromDate_db);
             Log.d(TAG, "_____initDatePicker: this.fromDate_db = " + this.fromDate_db);

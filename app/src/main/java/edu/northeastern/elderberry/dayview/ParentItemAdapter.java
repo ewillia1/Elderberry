@@ -42,7 +42,6 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
         ParentItem parentItem = itemList.get(position);
 
         // For the created instance, get the title and set it as the text for the TextView.
-        // Todo to set the title to reflect the data selection
         parentViewHolder.ParentItemTitle.setText(parentItem.getParentItemTitle());
 
         // Create a layout manager to assign a layout to the RecyclerView.
@@ -60,6 +59,7 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
         parentViewHolder.ChildRecyclerView.setAdapter(childItemAdapter);
         parentViewHolder.ChildRecyclerView.setRecycledViewPool(viewPool);
     }
+
 
     // This method returns the number of items we have added in the ParentItemList i.e. the number
     // of instances we have created of the ParentItemList.

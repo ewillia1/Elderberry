@@ -6,19 +6,30 @@ import androidx.annotation.NonNull;
 
 public class Medicine {
     private static final String TAG = "Medicine";
-    private final String name;
-    private final String information;
-    private final String fromDate;
-    private final String toDate;
-    private final String unit;
+    private String id;
+    private String name;
+    private String information;
+    private String fromDate;
+    private String toDate;
+    private String unit;
+    private int freq;
 
-    public Medicine(String name, String information, String fromDate, String toDate, String unit) {
+    Medicine() {}
+
+    public Medicine(String id, String name, String information, String fromDate, String toDate, String unit, int freq) {
         Log.d(TAG, "_____Medicine");
+        this.id = id;
         this.name = name;
         this.information = information;
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.unit = unit;
+        this.freq = freq;
+    }
+
+    public String getId() {
+        Log.d(TAG, "_____getId");
+        return this.id;
     }
 
     public String getName() {
@@ -26,19 +37,14 @@ public class Medicine {
         return this.name;
     }
 
-    public String getInformation() {
-        Log.d(TAG, "_____getInformation");
-        return this.information;
-    }
-
     public String getFromDate() {
         Log.d(TAG, "_____getFromDate");
         return this.fromDate;
     }
 
-    public String getToDate() {
-        Log.d(TAG, "_____getToDate");
-        return this.toDate;
+    public String getInformation() {
+        Log.d(TAG, "_____getInformation");
+        return this.information;
     }
 
     public String getUnit() {
@@ -46,15 +52,26 @@ public class Medicine {
         return this.unit;
     }
 
+    public String getToDate() {
+        Log.d(TAG, "_____getToDate");
+        return this.toDate;
+    }
+
+    public int getFreq() {
+        Log.d(TAG, "_____getFreq");
+        return this.freq;
+    }
+
     @NonNull
     @Override
     public String toString() {
         return "Medicine{" +
-                "name='" + this.name + '\'' +
-                ", information='" + this.information + '\'' +
-                ", fromDate='" + this.fromDate + '\'' +
-                ", toDate='" + this.toDate + '\'' +
-                ", unit='" + this.unit + '\'' +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", information='" + information + '\'' +
+                ", fromDate='" + fromDate + '\'' +
+                ", toDate='" + toDate + '\'' +
+                ", unit='" + unit + '\'' +
                 '}';
     }
 }

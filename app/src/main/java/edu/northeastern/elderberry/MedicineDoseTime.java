@@ -1,5 +1,7 @@
 package edu.northeastern.elderberry;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 import java.util.Map;
 
@@ -7,20 +9,24 @@ public class MedicineDoseTime {
 
     private Map<String, List<String>> dose;
     private Map<String, List<String>> time;
+    private Map<String, List<Boolean>> taken;
     private String name;
     private String information;
     private String fromDate;
     private String toDate;
     private String unit;
+    private int freq;
 
-    public MedicineDoseTime(Map<String, List<String>> dose, Map<String, List<String>> time, String name, String information, String fromDate, String toDate, String unit) {
+    public MedicineDoseTime(Map<String, List<String>> dose, Map<String, List<String>> time, Map<String, List<Boolean>> taken, String name, String information, String fromDate, String toDate, String unit, int freq) {
         this.dose = dose;
         this.time = time;
+        this.taken = taken;
         this.name = name;
         this.information = information;
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.unit = unit;
+        this.freq = freq;
     }
 
     public MedicineDoseTime() {
@@ -40,6 +46,10 @@ public class MedicineDoseTime {
 
     public void setTime(Map<String, List<String>> time) {
         this.time = time;
+    }
+
+    public Map<String, List<Boolean>> getTaken() {
+        return this.taken;
     }
 
     public String getName() {
@@ -80,5 +90,23 @@ public class MedicineDoseTime {
 
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    public int getFreq() {
+        return freq;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "MedicineDoseTime{" +
+                "dose=" + dose +
+                ", time=" + time +
+                ", name='" + name + '\'' +
+                ", information='" + information + '\'' +
+                ", fromDate='" + fromDate + '\'' +
+                ", toDate='" + toDate + '\'' +
+                ", unit='" + unit + '\'' +
+                '}';
     }
 }
