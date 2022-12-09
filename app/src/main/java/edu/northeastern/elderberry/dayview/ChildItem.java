@@ -1,38 +1,27 @@
 package edu.northeastern.elderberry.dayview;
 
 import android.util.Log;
-import android.widget.CheckBox;
 
 public class ChildItem {
     private static final String TAG = "ChildItem";
 
     // Declaration of the variable
-    private String childItemTitle;
-    private CheckBox checkBox;
+    private String ChildItemTitle;
 
     // Constructor of the class to initialize the variable*
-    public ChildItem(String childItemTitle,CheckBox checkBox) {
+    public ChildItem(String childItemTitle) {
         Log.d(TAG, "_____ChildItem");
-        this.childItemTitle = childItemTitle;
-        this.checkBox = checkBox;
+        this.ChildItemTitle = childItemTitle;
     }
 
     // Getter and Setter method for the parameter
     public String getChildItemTitle() {
         Log.d(TAG, "_____getChildItemTitle");
-        return childItemTitle;
-    }
-
-    public CheckBox getCheckBox() {
-        return this.checkBox;
+        return ChildItemTitle;
     }
 
     public void setChildItemTitle(String childItemTitle) {
         Log.d(TAG, "_____setChildItemTitle");
-        this.childItemTitle = childItemTitle;
-    }
-
-    public void setCheckBox(CheckBox checkBox) {
-        this.checkBox = checkBox;
+        ChildItemTitle = childItemTitle;
     }
 }
