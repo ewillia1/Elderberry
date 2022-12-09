@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -77,12 +77,12 @@ public class SetDatesFragment extends Fragment {
         this.fromDateSet = false;
         this.set_from = view.findViewById(R.id.fromTextView);
         this.set_to = view.findViewById(R.id.toTextView);
-        ImageView from_image = view.findViewById(R.id.from_image);
+        ImageButton from_image = view.findViewById(R.id.from_image);
         from_image.setOnClickListener(v -> {
             Log.d(TAG, "_____onClick (from_image)");
             this.from_datePickerDialog.show();
         });
-        ImageView to_image = view.findViewById(R.id.to_image);
+        ImageButton to_image = view.findViewById(R.id.to_image);
         to_image.setOnClickListener(v -> {
             Log.d(TAG, "_____onClick (to_image)");
             this.to_datePickerDialog.show();

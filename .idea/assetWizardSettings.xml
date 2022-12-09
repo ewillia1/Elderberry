@@ -342,7 +342,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialicons/expand_less/baseline_expand_less_24.xml" />
+                                      <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialicons/mic/baseline_mic_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -352,7 +352,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_baseline_expand_less_24" />
+                            <entry key="color" value="4a2d77" />
+                            <entry key="outputName" value="ic_baseline_mic_24" />
                           </map>
                         </option>
                       </PersistentState>
