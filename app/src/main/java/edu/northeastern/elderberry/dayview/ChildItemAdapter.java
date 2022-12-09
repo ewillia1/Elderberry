@@ -70,9 +70,6 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.Chil
             super(itemView);
             Log.d(TAG, "_____ChildViewHolder");
             childItemTitle = itemView.findViewById(R.id.child_item_title);
-            CheckBox checkBox = itemView.findViewById(R.id.checkbox_child_item);
-            boolean checked = PreferenceManager.getDefaultSharedPreferences(context).getBoolean("checkboxState", false);
-            checkBox.setChecked(checked);
         }
     }
 }

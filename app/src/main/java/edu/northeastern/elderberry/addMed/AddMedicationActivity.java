@@ -275,7 +275,6 @@ public class AddMedicationActivity extends AppCompatActivity {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 MedicineDoseTime med = snapshot.child(editMedKey).getValue(MedicineDoseTime.class);
 
                 Log.d(TAG, "_____retrieveMedData_onDataChange: snapshot getChildren returns" + snapshot.child(editMedKey));
