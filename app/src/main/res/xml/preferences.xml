@@ -9,15 +9,4 @@
             app:summary="1.0" />
     </PreferenceCategory>
 
-    <PreferenceCategory
-        app:key="@string/notifications_cat"
-        app:title="@string/notifications" >
-        <SwitchPreferenceCompat
-            app:key="@string/notifications"
-            app:title="@string/enable_notifications" />
-        <SwitchPreferenceCompat
-            app:key="@string/voice_notifications"
-            app:title="@string/enable_voice_notifications" />
-    </PreferenceCategory>
-
 </PreferenceScreen>

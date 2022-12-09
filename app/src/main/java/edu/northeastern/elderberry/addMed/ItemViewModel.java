@@ -252,10 +252,10 @@ public class ItemViewModel extends ViewModel {
             }
 
             Date fromDate = new SimpleDateFormat("MMM dd, yyyy", Locale.US).parse(Objects.requireNonNull(getFromDate().getValue()));
-            //Log.d(TAG, "_____isCurrentDate: after from date parsed");
-            //Log.d(TAG, "_____isCurrentDate: before to date parsed");
             Date toDate = new SimpleDateFormat("MMM dd, yyyy", Locale.US).parse(Objects.requireNonNull(getToDate().getValue()));
 
+            assert toDate != null;
+            assert fromDate != null;
             long diffInMillies = Math.abs(toDate.getTime() - fromDate.getTime());
             long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
             Log.d(TAG, "_____computeNumDays successful, num days btw from & to is " + diff);

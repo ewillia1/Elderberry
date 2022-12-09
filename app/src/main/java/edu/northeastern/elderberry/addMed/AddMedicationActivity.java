@@ -105,7 +105,7 @@ public class AddMedicationActivity extends AppCompatActivity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    NotificationUtil.getMedicationInfo(this, notificationManager);
+                    NotificationUtil.getMedicationInfo(getApplicationContext(), notificationManager);
                     return true;
                 } else {
                     Log.d(TAG, "_____onCreate: Unsuccessful add. Need to fill in all required fields.");
@@ -139,6 +139,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         this.viewModel.getToDate().observe(this, s -> Log.d(TAG, "_____onChanged: to date entered = " + s));
         this.viewModel.getTimeFreq().observe(this, s -> Log.d(TAG, "_____onChanged: time frequency entered = " + s));
         this.viewModel.getUnit().observe(this, s -> Log.d(TAG, "_____onChanged: unit entered = " + s));
+        this.viewModel.getTimeFreq().observe(this, s -> Log.d(TAG, "onCreate: time frequency entered = " + s));
 
         for (int i = 0; i < MAX_INT; i++) {
             int finalI = i;
@@ -228,11 +229,6 @@ public class AddMedicationActivity extends AppCompatActivity {
         if (this.viewModel.getMedName().getValue() == null || this.viewModel.getFromDate().getValue() == null
                 || this.viewModel.getToDate().getValue() == null || this.viewModel.getTimeFreq().getValue() == null || this.viewModel.getUnit().getValue() == null) {
             Log.d(TAG, "filledInRequiredFields: (a field is null) false");
-            //Log.d(TAG, "filledInRequiredFields: (getMedName is  null) " + this.viewModel.getMedName().getValue());
-            //Log.d(TAG, "filledInRequiredFields: (getFromDate is  null) " + this.viewModel.getFromDate().getValue());
-            //Log.d(TAG, "filledInRequiredFields: (getToDate is  null) " + this.viewModel.getToDate().getValue());
-            //Log.d(TAG, "filledInRequiredFields: (getTimeFreq is  null) " + this.viewModel.getTimeFreq().getValue());
-            //Log.d(TAG, "filledInRequiredFields: (getUnit is  null) " + this.viewModel.getUnit().getValue());
             return false;
         } else if (this.viewModel.getMedName().getValue().isBlank() || this.viewModel.getMedName().getValue().isEmpty() ||
                 this.viewModel.getFromDate().getValue().isBlank() || this.viewModel.getFromDate().getValue().isEmpty() ||
@@ -277,7 +273,6 @@ public class AddMedicationActivity extends AppCompatActivity {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 MedicineDoseTime med = snapshot.child(editMedKey).getValue(MedicineDoseTime.class);
 
                 Log.d(TAG, "_____retrieveMedData_onDataChange: snapshot getChildren returns" + snapshot.child(editMedKey));

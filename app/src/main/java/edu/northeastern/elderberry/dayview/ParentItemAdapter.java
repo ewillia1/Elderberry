@@ -1,5 +1,6 @@
 package edu.northeastern.elderberry.dayview;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +20,12 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
     // An object of RecyclerView.RecycledViewPool is created to share the Views between the child and the parent RecyclerViews.
     private final RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
     private final List<ParentItem> itemList;
+    private final Context context;
 
-    ParentItemAdapter(List<ParentItem> itemList) {
+    ParentItemAdapter(List<ParentItem> itemList, Context context) {
         Log.d(TAG, "_____ParentItemAdapter");
         this.itemList = itemList;
+        this.context = context;
     }
 
     @NonNull
@@ -42,22 +45,22 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
         ParentItem parentItem = itemList.get(position);
 
         // For the created instance, get the title and set it as the text for the TextView.
-        parentViewHolder.ParentItemTitle.setText(parentItem.getParentItemTitle());
+        parentViewHolder.parentItemTitle.setText(parentItem.getParentItemTitle());
 
         // Create a layout manager to assign a layout to the RecyclerView.
 
         // Here we have assigned the layout as LinearLayout with vertical orientation.
-        LinearLayoutManager layoutManager = new LinearLayoutManager(parentViewHolder.ChildRecyclerView.getContext(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(parentViewHolder.childRecyclerView.getContext(), LinearLayoutManager.HORIZONTAL, false);
 
         // Since this is a nested layout, so to define how many child items should be prefetched when the
         // child RecyclerView is nested inside the parent RecyclerView, we use the following method.
         layoutManager.setInitialPrefetchItemCount(parentItem.getChildItemList().size());
 
         // Create an instance of the child item view adapter and set its adapter, layout manager and RecyclerViewPool.
-        ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList());
-        parentViewHolder.ChildRecyclerView.setLayoutManager(layoutManager);
-        parentViewHolder.ChildRecyclerView.setAdapter(childItemAdapter);
-        parentViewHolder.ChildRecyclerView.setRecycledViewPool(viewPool);
+        ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), this.context);
+        parentViewHolder.childRecyclerView.setLayoutManager(layoutManager);
+        parentViewHolder.childRecyclerView.setAdapter(childItemAdapter);
+        parentViewHolder.childRecyclerView.setRecycledViewPool(viewPool);
     }
 
 
@@ -72,14 +75,14 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
     // This class is to initialize the Views present in the parent RecyclerView.
     static class ParentViewHolder extends RecyclerView.ViewHolder {
         private static final String TAG = "ParentViewHolder";
-        private final TextView ParentItemTitle;
-        private final RecyclerView ChildRecyclerView;
+        private final TextView parentItemTitle;
+        private final RecyclerView childRecyclerView;
 
         ParentViewHolder(final View itemView) {
             super(itemView);
             Log.d(TAG, "_____ParentViewHolder");
-            ParentItemTitle = itemView.findViewById(R.id.parent_item_title);
-            ChildRecyclerView = itemView.findViewById(R.id.child_recyclerview);
+            this.parentItemTitle = itemView.findViewById(R.id.parent_item_title);
+            this.childRecyclerView = itemView.findViewById(R.id.child_recyclerview);
         }
     }
 }
