@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 public class MedicineDoseTime {
-
     private Map<String, List<String>> dose;
     private Map<String, List<String>> time;
     private Map<String, List<Boolean>> taken;
@@ -102,11 +101,13 @@ public class MedicineDoseTime {
         return "MedicineDoseTime{" +
                 "dose=" + dose +
                 ", time=" + time +
+                ", taken=" + taken +
                 ", name='" + name + '\'' +
                 ", information='" + information + '\'' +
                 ", fromDate='" + fromDate + '\'' +
                 ", toDate='" + toDate + '\'' +
                 ", unit='" + unit + '\'' +
+                ", freq=" + freq +
                 '}';
     }
 }
