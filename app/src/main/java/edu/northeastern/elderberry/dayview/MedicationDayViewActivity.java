@@ -2,6 +2,7 @@ package edu.northeastern.elderberry.dayview;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -46,28 +47,36 @@ import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 public class MedicationDayViewActivity extends AppCompatActivity {
     private static final String TAG = "MedicationDayViewActivity";
     public static final String MED_DAY_VIEW_KEY = "medDayViewKey";
+    public static final String DATE_KEY = "dateKey";
     private final List<ParentItem> medicineList = new ArrayList<>();
     private final ArrayList<Boolean> takenList = new ArrayList<>();
     ParentItemAdapter parentItemAdapter;
     private String currentDate;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "_____IN ONCREATE!!!!");
+        Log.d(TAG, "_____IN ON CREATE!!!!");
         setContentView(R.layout.activity_recycle_med_dayview);
 
         // Calling this activity's function to use ActionBar utility methods.
         ActionBar actionBar = getSupportActionBar();
 
         this.currentDate = getIntent().getStringExtra("current_date");
+        Log.d(TAG, "_____onCreate: this.currentDate = " +  this.currentDate);
+        String currentDateFromAdd = getIntent().getStringExtra(DATE_KEY);
+        Log.d(TAG, "_____onCreate: this.currentDateFromAdd = " + currentDateFromAdd);
 
         // Providing a subtitle for the ActionBar.
         assert actionBar != null;
         actionBar.setSubtitle(Html.fromHtml("<small>" + getString(R.string.medication_tracker) + "</small>", Html.FROM_HTML_MODE_LEGACY));
 
         TextView medViewDate = findViewById(R.id.dayview_textView);
-        medViewDate.setText(this.currentDate);
+        
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            medViewDate.setText(Objects.requireNonNullElseGet(this.currentDate, () -> Objects.requireNonNullElse(currentDateFromAdd, "Error Getting Current Date")));
+        }
 
         // Adding an icon in the ActionBar.
         actionBar.setIcon(R.mipmap.app_logo);
@@ -94,7 +103,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
             return false;
         });
 
-        // get correct db reference
+        // Get correct db reference.
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         DatabaseReference userDatabase = FirebaseDatabase.getInstance().getReference();
         DatabaseReference medDatabase = userDatabase.child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
@@ -110,13 +119,12 @@ public class MedicationDayViewActivity extends AppCompatActivity {
 
                 for (DataSnapshot d : snapshot.getChildren()) {
                     List<ChildItem> children = new ArrayList<>();
-//                    Log.d(TAG, "_____onDataChange: level 1 ");
                     MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
 
                     if ((medicineDoseTime != null ? medicineDoseTime.getTime() : null) == null) {
                         Log.d(TAG, "_____onDataChange: medicineDoseTime.getTime() == null");
                         if (Objects.requireNonNull(medicineDoseTime).getName() != null) {
-                            Log.d(TAG, "onDataChange: the medicien with the null time is: " + medicineDoseTime.getName());
+                            Log.d(TAG, "onDataChange: the medicine with the null time is: " + medicineDoseTime.getName());
                         }
                         continue;
                     }
@@ -132,15 +140,12 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                         Log.d(TAG, "_____onDataChange: parse datetime format is not aligned with the passed datetime");
                     }
 
-//                    Log.d(TAG, "_____onDataChange: medicineDoseTime.getTime().entrySet() = " + medicineDoseTime.getTime().entrySet());
                     for (Map.Entry<String, List<String>> entry : medicineDoseTime.getTime().entrySet()) {
                         // there is only one key in the hashmap
-//                        Log.d(TAG, "_____onDataChange: level 2 ");
                         for (String t : entry.getValue()) {
                             ChildItem fd = new ChildItem(t);
                             children.add(fd);
                         }
-//                        Log.d(TAG, "_____onDataChange: level 3 retrieve correct medicineDoseTime successfully ");
                     }
 
                     medicineList.add(new ParentItem(medicineDoseTime.getName(), children));
@@ -189,6 +194,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         Log.d(TAG, "_____startAddMedicationActivity: about to start the add medication activity");
         Intent intent = new Intent(this, AddMedicationActivity.class);
         intent.putExtra(MED_DAY_VIEW_KEY, true);
+        intent.putExtra(DATE_KEY, this.currentDate);
         startActivity(intent);
 
         // Want to finish this activity so that when add or edit is pressed onCreate for this activity is called again.
