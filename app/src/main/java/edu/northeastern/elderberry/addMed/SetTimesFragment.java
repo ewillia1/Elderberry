@@ -102,7 +102,7 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
 
         // Pre-fill.
         if (editMedKey != null && this.viewModel.getTimeFreq().getValue() != null) {
-            int freq = Integer.parseInt(this.viewModel.getTimeFreq().getValue());
+            int freq = this.viewModel.getTimeFreq().getValue();
             int pos = freq - 1;
             autoCompleteTimeFreq.setText(time_frequencies[pos]);
             autoCompleteUnit.setText(this.viewModel.getUnit().getValue());
@@ -136,7 +136,7 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
                 Log.d(TAG, "_____onCreateView: for loop iteration: " + i);
                 timeDoseItemArrayList.add(new TimeDoseItem(position));
             }
-            this.viewModel.setTimeFreq(Integer.toString(this.numOfTimes));
+            this.viewModel.setTimeFreq(this.numOfTimes);
         });
 
         // Instantiate the recyclerView.

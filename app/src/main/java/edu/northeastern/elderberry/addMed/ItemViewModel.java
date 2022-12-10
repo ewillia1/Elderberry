@@ -26,7 +26,7 @@ public class ItemViewModel extends ViewModel {
     private final MutableLiveData<String> information = new MutableLiveData<>();
     private final MutableLiveData<String> fromDate = new MutableLiveData<>();
     private final MutableLiveData<String> toDate = new MutableLiveData<>();
-    private final MutableLiveData<String> timeFreq = new MutableLiveData<>();
+    private final MutableLiveData<Integer> timeFreq = new MutableLiveData<>();
     private final MutableLiveData<String> unit = new MutableLiveData<>();
     private ArrayList<MutableLiveData<String>> time = initializeArray();
     private ArrayList<MutableLiveData<String>> dose = initializeArray();
@@ -44,7 +44,7 @@ public class ItemViewModel extends ViewModel {
     public void initializeTakenBooleanArray() {
         if (getTimeFreq().getValue() != null) {
             ArrayList<MutableLiveData<Boolean>> res = new ArrayList<>();
-            long arraySize = Integer.parseInt(getTimeFreq().getValue()) * computeNumDays();
+            long arraySize = getTimeFreq().getValue() * computeNumDays();
             Log.d(TAG, "_____initializeTimeArray with size " + arraySize);
             for (int i = 0; i < arraySize; i++) {
                 res.add(i, new MutableLiveData<>(false));
@@ -101,7 +101,7 @@ public class ItemViewModel extends ViewModel {
 
     public void setTime(int index, String item) {
         Log.d(TAG, "_____setTime");
-        this.time.add(index, new MutableLiveData<>(item));
+        this.time.set(index, new MutableLiveData<>(item));
         Log.d(TAG, "_____setTime: " + this.time.get(index));
     }
 
@@ -137,7 +137,7 @@ public class ItemViewModel extends ViewModel {
         }
     }
 
-    public void setTimeFreq(String item) {
+    public void setTimeFreq(Integer item) {
         Log.d(TAG, "_____setTimeFreq");
         this.timeFreq.setValue(item);
     }
@@ -187,7 +187,7 @@ public class ItemViewModel extends ViewModel {
         this.toDate.setValue(item);
     }
 
-    public MutableLiveData<String> getTimeFreq() {
+    public MutableLiveData<Integer> getTimeFreq() {
         Log.d(TAG, "_____getTimeFreq");
         return this.timeFreq;
     }

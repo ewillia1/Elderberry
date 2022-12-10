@@ -224,7 +224,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
     // Else, set the index in the taken array in the database to false.
     private void setCheckbox(boolean checked, int index) {
         Log.d(TAG, "_____setCheckbox");
-        // TODO: ELIZABETH functionality #1
+        // TODO: CHECKBOX functionality #1
         // * Access particular medication
         // * Access taken array (get taken ID key)
         // * Set the index of that taken array to be the value of checked

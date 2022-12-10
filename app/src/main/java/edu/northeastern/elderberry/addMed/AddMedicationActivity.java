@@ -232,7 +232,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         } else if (this.viewModel.getMedName().getValue().isBlank() || this.viewModel.getMedName().getValue().isEmpty() ||
                 this.viewModel.getFromDate().getValue().isBlank() || this.viewModel.getFromDate().getValue().isEmpty() ||
                 this.viewModel.getToDate().getValue().isBlank() || this.viewModel.getToDate().getValue().isEmpty() ||
-                Integer.parseInt(this.viewModel.getTimeFreq().getValue()) == 0 ||
+                this.viewModel.getTimeFreq().getValue() == 0 ||
                 this.viewModel.getUnit().getValue().isBlank() || this.viewModel.getUnit().getValue().isEmpty()) {
             Log.d(TAG, "filledInRequiredFields: (a non-time/dose field is blank or empty) false");
             return false;
@@ -243,7 +243,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         Log.d(TAG, "____filledInRequiredFields: timeList = " + timeList + ",\n doseList = " + doseList);
 
         // We know that this.viewModel.getTimeFreq().getValue() is not null, blank, or empty if it gets down to here.
-        int numOfTimesAndDoses = Integer.parseInt(this.viewModel.getTimeFreq().getValue());
+        int numOfTimesAndDoses = this.viewModel.getTimeFreq().getValue();
         Log.d(TAG, "_____filledInRequiredFields: numOfTimesAndDoses = " + numOfTimesAndDoses);
         for (int i = 0; i < numOfTimesAndDoses; i++) {
             if (timeList.get(i) == null || doseList.get(i) == null || timeList.get(i).isBlank() || timeList.get(i).isEmpty() ||

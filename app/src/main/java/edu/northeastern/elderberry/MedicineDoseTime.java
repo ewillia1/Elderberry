@@ -17,10 +17,10 @@ public class MedicineDoseTime {
     private String fromDate;
     private String toDate;
     private String unit;
-    private String freq;
+    private Integer freq;
 
     public MedicineDoseTime(Map<String, List<String>> dose, Map<String, List<String>> time, Map<String, List<Boolean>> taken,
-                            String name, String information, String fromDate, String toDate, String unit, String freq) {
+                            String name, String information, String fromDate, String toDate, String unit, Integer freq) {
         Log.d(TAG, "_____MedicineDoseTime");
         this.dose = dose;
         this.time = time;
@@ -57,7 +57,7 @@ public class MedicineDoseTime {
         this.time = time;
     }
 
-    public void setFreq(String freq) {
+    public void setFreq(Integer freq) {
         Log.d(TAG, "_____setFreq");
         this.freq = freq;
     }
@@ -117,7 +117,7 @@ public class MedicineDoseTime {
         this.unit = unit;
     }
 
-    public String getFreq() {
+    public Integer getFreq() {
         Log.d(TAG, "_____getFreq");
         return this.freq;
     }
