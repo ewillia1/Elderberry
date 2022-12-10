@@ -255,6 +255,9 @@ public class AddMedicationActivity extends AppCompatActivity {
         int numOfTimesAndDoses = this.viewModel.getTimeFreq().getValue();
         Log.d(TAG, "_____filledInRequiredFields: numOfTimesAndDoses = " + numOfTimesAndDoses);
         for (int i = 0; i < numOfTimesAndDoses; i++) {
+            Log.d(TAG, "_____filledInRequiredFields: i is "+i);
+            Log.d(TAG, "_____filledInRequiredFields: timeList is "+timeList.toString());
+            Log.d(TAG, "_____filledInRequiredFields: doseList is "+doseList.toString());
             if (timeList.get(i) == null || doseList.get(i) == null || timeList.get(i).isBlank() || timeList.get(i).isEmpty() ||
                     doseList.get(i).isBlank() || doseList.get(i).isEmpty()) {
                 Log.d(TAG, "_____filledInRequiredFields: (a field is null or blank or empty) false");

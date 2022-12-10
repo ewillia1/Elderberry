@@ -61,9 +61,9 @@ public class ItemViewModel extends ViewModel {
         ArrayList<String> timeStringArray = new ArrayList<>();
         int upperBound = this.time.size();
         for (int i = 0; i < upperBound; i++) {
-            if (this.time.get(i).getValue() == null) {
-                break;
-            }
+            //if (this.time.get(i).getValue() == null) {
+            //    break;
+            //}
             timeStringArray.add(this.time.get(i).getValue());
         }
         return timeStringArray;
@@ -98,7 +98,7 @@ public class ItemViewModel extends ViewModel {
 
     public void setTime(int index, String item) {
         Log.d(TAG, "_____setTime");
-        this.time.add(index, new MutableLiveData<>(item));
+        this.time.set(index, new MutableLiveData<>(item));
         Log.d(TAG, "_____setTime: " + this.time.get(index));
     }
 
