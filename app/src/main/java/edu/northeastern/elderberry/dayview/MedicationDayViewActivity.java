@@ -48,6 +48,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
     private static final String TAG = "MedicationDayViewActivity";
     public static final String MED_DAY_VIEW_KEY = "medDayViewKey";
     public static final String DATE_KEY = "dateKey";
+    public static final String CURRENT_DATE = "current_date";
     private final List<ParentItem> medicineList = new ArrayList<>();
     private final ArrayList<Boolean> takenList = new ArrayList<>();
     ParentItemAdapter parentItemAdapter;
@@ -60,23 +61,31 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         Log.d(TAG, "_____IN ON CREATE!!!!");
         setContentView(R.layout.activity_recycle_med_dayview);
 
+        boolean cameFromAdd = getIntent().getBooleanExtra("add_med_key", false);
+        boolean cameFromMedTracker = getIntent().getBooleanExtra("medTrackerKey", false);
+
         // Calling this activity's function to use ActionBar utility methods.
         ActionBar actionBar = getSupportActionBar();
 
-        this.currentDate = getIntent().getStringExtra("current_date");
+        if (cameFromAdd) {
+            Log.d(TAG, "_____onCreate: this.cameFromAdd");
+            this.currentDate = getIntent().getStringExtra(DATE_KEY);
+        } else if (cameFromMedTracker) {
+            Log.d(TAG, "_____onCreate: this.cameFromMedTracker");
+            this.currentDate = getIntent().getStringExtra(CURRENT_DATE);
+        } else {
+            this.currentDate = "ERROR setting current date";
+            Log.d(TAG, "onCreate: ERROR with setting current date this should never occur");
+        }
+
         Log.d(TAG, "_____onCreate: this.currentDate = " +  this.currentDate);
-        String currentDateFromAdd = getIntent().getStringExtra(DATE_KEY);
-        Log.d(TAG, "_____onCreate: this.currentDateFromAdd = " + currentDateFromAdd);
 
         // Providing a subtitle for the ActionBar.
         assert actionBar != null;
         actionBar.setSubtitle(Html.fromHtml("<small>" + getString(R.string.medication_tracker) + "</small>", Html.FROM_HTML_MODE_LEGACY));
 
         TextView medViewDate = findViewById(R.id.dayview_textView);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            medViewDate.setText(Objects.requireNonNullElseGet(this.currentDate, () -> Objects.requireNonNullElse(currentDateFromAdd, "Error Getting Current Date")));
-        }
+        medViewDate.setText(this.currentDate);
 
         // Adding an icon in the ActionBar.
         actionBar.setIcon(R.mipmap.app_logo);
@@ -114,9 +123,9 @@ public class MedicationDayViewActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d(TAG, "_____onDataChange: ");
-
                 medicineList.clear();
 
+                // Loop through snapshot to get medicines to put in the array list medicineList.
                 for (DataSnapshot d : snapshot.getChildren()) {
                     List<ChildItem> children = new ArrayList<>();
                     MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
@@ -132,7 +141,8 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                     Log.d(TAG, "_____onDataChange: NO NULL POINTER EXCEPTION! YAY! medicineDoseTime name " + medicineDoseTime.getName());
 
                     try {
-                        if (!isCurrentDate(medicineDoseTime)) {
+                        if (!isDateInRange(medicineDoseTime)) {
+                            Log.d(TAG, "_____onDataChange: !isCurrentDate(medicineDoseTime)");
                             continue;
                         }
                     } catch (ParseException e) {
@@ -151,6 +161,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                     medicineList.add(new ParentItem(medicineDoseTime.getName(), children));
                 }
 
+                // Notify the adapter. The Parent adapter sets the child adapter.
                 parentItemAdapter.notifyDataSetChanged();
             }
 
@@ -170,15 +181,17 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         ParentRecyclerViewItem.setLayoutManager(layoutManager);
     }
 
-    private boolean isCurrentDate(MedicineDoseTime medicineDoseTime) throws ParseException {
+    // Returns true if the date is within the scheduled date range for the medication, otherwise returns false.
+    private boolean isDateInRange(MedicineDoseTime medicineDoseTime) throws ParseException {
         Log.d(TAG, "_____isCurrentDate");
         Date fromDate = new SimpleDateFormat("MMM dd, yyyy", Locale.US).parse(medicineDoseTime.getFromDate());
         Date toDate = new SimpleDateFormat("MMM dd, yyyy", Locale.US).parse(medicineDoseTime.getToDate());
-        if (currentDate == null) {
-            currentDate = medicineDoseTime.getFromDate();
+        if (this.currentDate == null) {
+            Log.d(TAG, "______isDateInRange currentDate == null");
+            this.currentDate = medicineDoseTime.getFromDate();
         }
 
-        Date selectedDate = new SimpleDateFormat("MMM dd, yyyy", Locale.US).parse(currentDate);
+        Date selectedDate = new SimpleDateFormat("MMM dd, yyyy", Locale.US).parse(this.currentDate);
         assert fromDate != null;
         assert toDate != null;
         assert selectedDate != null;

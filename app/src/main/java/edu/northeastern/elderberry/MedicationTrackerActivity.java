@@ -34,6 +34,7 @@ import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 public class MedicationTrackerActivity extends AppCompatActivity {
     private static final String TAG = "MedicationTrackerActivity";
     public static final String MED_TRACKER_KEY = "medTrackerKey";
+    public static final String CURRENT_DATE = "current_date";
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -69,7 +70,10 @@ public class MedicationTrackerActivity extends AppCompatActivity {
             Log.d(TAG, "_____onCreate: calendarView.setOnDateChangeListener");
             String date = makeDateString(dayOfMonth, month, year);
             Intent intent = new Intent(this, MedicationDayViewActivity.class);
-            intent.putExtra("current_date", date);
+            Log.d(TAG, "_____onCreate: about to pass the current date to MedicationDayViewActivity -- date = " + date);
+            intent.putExtra(CURRENT_DATE, date);
+            // Tell the new activity where you came from.
+            intent.putExtra(MED_TRACKER_KEY, true);
             startActivity(intent);
         });
 
@@ -117,6 +121,7 @@ public class MedicationTrackerActivity extends AppCompatActivity {
     private void startAddMedicationActivity() {
         Log.d(TAG, "_____startAddMedicationActivity");
         Intent intent = new Intent(this, AddMedicationActivity.class);
+        // Tell the new activity where you came from.
         intent.putExtra(MED_TRACKER_KEY, true);
         startActivity(intent);
 

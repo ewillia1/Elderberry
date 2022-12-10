@@ -90,10 +90,10 @@ public class YourMedicationsActivity extends AppCompatActivity {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d(TAG, "_____onDataChange: starting");
+                Log.d(TAG, "_____onDataChange");
                 medicinesArrayList.clear();
 
-                // Loop through snapshot to get the medicines to put in the ArrayList medicines.
+                // Loop through snapshot to get the medicines to put in the ArrayList medicinesArrayList.
                 for (DataSnapshot d : snapshot.getChildren()) {
                     MedicineRow medRow = new MedicineRow(d.getKey(), String.valueOf(d.child("name").getValue()), String.valueOf(d.child("fromDate").getValue()), String.valueOf(d.child("toDate").getValue()));
                     medicinesArrayList.add(medRow);
@@ -111,8 +111,8 @@ public class YourMedicationsActivity extends AppCompatActivity {
                     medKeyArrayList.add(medicineId);
                 }
 
+                // Notify the adapter.
                 medAdapter.notifyDataSetChanged();
-                Log.d(TAG, "_____onDataChange: finished");
             }
 
             @Override

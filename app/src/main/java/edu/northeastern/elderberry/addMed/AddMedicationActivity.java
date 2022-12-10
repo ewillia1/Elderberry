@@ -42,6 +42,7 @@ import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 // 3 Todo to test if the taken field is working when frequency is changed when we edit the medication
 public class AddMedicationActivity extends AppCompatActivity {
     private static final String TAG = "AddMedicationActivity";
+    public static final String ADD_MED_KEY = "add_med_key";
     public static final String DATE_KEY = "dateKey";
     private static final int MAX_INT = 12;
     private DatabaseReference userDatabase;
@@ -106,6 +107,8 @@ public class AddMedicationActivity extends AppCompatActivity {
                     Log.d(TAG, "_____onCreate: came from Medication Day View, so I need to go back there.");
                     Intent intent = new Intent(this, MedicationDayViewActivity.class);
                     intent.putExtra(DATE_KEY, this.currentDate);
+                    // Tell the new activity where you came from.
+                    intent.putExtra(ADD_MED_KEY, true);
                     startActivity(intent);
                 } else if
                     // Restart MedicationTrackerActivity if you are coming from there.
@@ -144,6 +147,8 @@ public class AddMedicationActivity extends AppCompatActivity {
                         Log.d(TAG, "_____onCreate: came from Medication Day View, so I need to go back there.");
                         Intent intent = new Intent(this, MedicationDayViewActivity.class);
                         intent.putExtra(DATE_KEY, this.currentDate);
+                        // Tell the new activity where you came from.
+                        intent.putExtra(ADD_MED_KEY, true);
                         startActivity(intent);
                     } else if
                         // Restart MedicationTrackerActivity if you are coming from there.
