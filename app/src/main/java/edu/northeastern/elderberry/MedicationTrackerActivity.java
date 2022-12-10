@@ -33,6 +33,7 @@ import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 public class MedicationTrackerActivity extends AppCompatActivity {
     private static final String TAG = "MedicationTrackerActivity";
+    public static final String MED_TRACKER_KEY = "medTrackerKey";
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -116,7 +117,11 @@ public class MedicationTrackerActivity extends AppCompatActivity {
     private void startAddMedicationActivity() {
         Log.d(TAG, "_____startAddMedicationActivity");
         Intent intent = new Intent(this, AddMedicationActivity.class);
+        intent.putExtra(MED_TRACKER_KEY, true);
         startActivity(intent);
+
+        // Want to finish this activity so that when add or edit is pressed onCreate for this activity is called again.
+        finish();
     }
 
     private void startYourMedicationsActivity() {

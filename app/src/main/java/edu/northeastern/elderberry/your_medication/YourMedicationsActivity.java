@@ -37,6 +37,7 @@ import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 
 public class YourMedicationsActivity extends AppCompatActivity {
     public static final String YOUR_MED_TO_EDIT_MED_KEY = "medKey";
+    public static final String YOUR_MED_KEY = "yourMedKey";
     private static final String TAG = "YourMedicationsActivity";
     private final ArrayList<MedicineRow> medicinesArrayList = new ArrayList<>();
     private final ArrayList<String> medKeyArrayList = new ArrayList<>();
@@ -89,7 +90,7 @@ public class YourMedicationsActivity extends AppCompatActivity {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d(TAG, "_____onDataChange: ");
+                Log.d(TAG, "_____onDataChange: starting");
                 medicinesArrayList.clear();
 
                 // Loop through snapshot to get the medicines to put in the ArrayList medicines.
@@ -111,6 +112,7 @@ public class YourMedicationsActivity extends AppCompatActivity {
                 }
 
                 medAdapter.notifyDataSetChanged();
+                Log.d(TAG, "_____onDataChange: finished");
             }
 
             @Override
@@ -135,6 +137,7 @@ public class YourMedicationsActivity extends AppCompatActivity {
             Log.d(TAG, "_____onCreate, OnListItemClick, post medKey");
             startActivity(intent);
         };
+
         this.medAdapter.setClickListener(onListItemClick);
         recyclerView.setAdapter(this.medAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -164,6 +167,9 @@ public class YourMedicationsActivity extends AppCompatActivity {
                 // Remove item from our array list.
                 medicinesArrayList.remove(viewHolder.getAbsoluteAdapterPosition());
 
+                // Remove item id from our other array list.
+                medKeyArrayList.remove(deletedMed.getId());
+
                 // Notify that the item is removed from adapter.
                 medAdapter.notifyItemRemoved(viewHolder.getAbsoluteAdapterPosition());
 
@@ -190,8 +196,11 @@ public class YourMedicationsActivity extends AppCompatActivity {
                 alertDialog.setNegativeButton("No", (dialogInterface, i) -> {
                     Log.d(TAG, "_____onSwiped: no");
 
-                    // Adding on click listener to our action of snack bar. Add our item to array list with a position.
+                    // Add our item to array list with a position.
                     medicinesArrayList.add(position, deletedMed);
+
+                    // Add our item id to other array list with a position.
+                    medKeyArrayList.add(position, deletedMed.getId());
 
                     // Notify item is added to our adapter class.
                     medAdapter.notifyItemInserted(position);
@@ -213,7 +222,12 @@ public class YourMedicationsActivity extends AppCompatActivity {
     private void startAddMedicationActivity() {
         Log.d(TAG, "_____startAddMedicationActivity");
         Intent intent = new Intent(this, AddMedicationActivity.class);
+        intent.putExtra(YOUR_MED_KEY, true);
         startActivity(intent);
+
+        // Want to finish this activity so that when add or edit is pressed onCreate for this activity is called again.
+        // So the array lists are sorted correctly.
+        finish();
     }
 
     private void startYourMedicationsActivity() {

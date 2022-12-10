@@ -2,6 +2,7 @@ package edu.northeastern.elderberry.addMed;
 
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -30,10 +31,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import edu.northeastern.elderberry.MedicationTrackerActivity;
 import edu.northeastern.elderberry.Medicine;
 import edu.northeastern.elderberry.MedicineDoseTime;
 import edu.northeastern.elderberry.NotificationUtil;
 import edu.northeastern.elderberry.R;
+import edu.northeastern.elderberry.dayview.MedicationDayViewActivity;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 // 3 Todo to test if the taken field is working when frequency is changed when we edit the medication
@@ -44,6 +47,9 @@ public class AddMedicationActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ItemViewModel viewModel;
     private String editMedKey;
+    private boolean medicationDayViewKey;
+    private boolean yourMedicationKey;
+    private boolean medicationTrackerKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +57,9 @@ public class AddMedicationActivity extends AppCompatActivity {
         Log.d(TAG, "_____onCreate");
 
         this.editMedKey = getIntent().getStringExtra(YourMedicationsActivity.YOUR_MED_TO_EDIT_MED_KEY);
+        this.medicationDayViewKey = getIntent().getBooleanExtra(MedicationDayViewActivity.MED_DAY_VIEW_KEY, false);
+        this.yourMedicationKey = getIntent().getBooleanExtra(YourMedicationsActivity.YOUR_MED_KEY, false);
+        this.medicationTrackerKey = getIntent().getBooleanExtra(MedicationTrackerActivity.MED_TRACKER_KEY, false);
 
         if (this.editMedKey == null) {
             setContentView(R.layout.add_med_main);
@@ -97,7 +106,30 @@ public class AddMedicationActivity extends AppCompatActivity {
                     }
                     int msg = itemId == R.id.add_med ? R.string.successful_add : R.string.successful_saved;
                     Toast.makeText(AddMedicationActivity.this, msg, Toast.LENGTH_SHORT).show();
+
+                    // Finish add (edit) activity and go back to where you came from.
+                    // Restart YourMedicationsActivity if coming from there.
+                    if (editMedKey != null || yourMedicationKey) {
+                        Log.d(TAG, "_____onCreate: came from Your Medications, so I need to go back there. yourMedicationKey = " + yourMedicationKey);
+                        Intent intent = new Intent(this, YourMedicationsActivity.class);
+                        startActivity(intent);
+                    } else if
+                        // Restart MedicationDayViewActivity if coming from there.
+                     (medicationDayViewKey) {
+                        Log.d(TAG, "_____onCreate: came from Medication Day View, so I need to go back there.");
+                        Intent intent = new Intent(this, MedicationDayViewActivity.class);
+                        startActivity(intent);
+                    } else if
+                        // Restart MedicationTrackerActivity if you are coming from there.
+                    (medicationTrackerKey) {
+                        Log.d(TAG, "onCreate: came from Medication Tracker Home Page, so I need to go back there.");
+                        Intent intent = new Intent(this, MedicationTrackerActivity.class);
+                        startActivity(intent);
+                    }
+
+                    // Finish AddMedicationActivity.
                     finish();
+
                     NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                     try {
                         Thread.sleep(500);
@@ -273,9 +305,13 @@ public class AddMedicationActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 MedicineDoseTime med = snapshot.child(editMedKey).getValue(MedicineDoseTime.class);
 
+                if (med == null) {
+                    Log.d(TAG, "_____onDataChange: med == null");
+                    return;
+                }
+
                 Log.d(TAG, "_____retrieveMedData_onDataChange: snapshot getChildren returns" + snapshot.child(editMedKey));
 
-                assert med != null;
                 Log.d(TAG, "_____onDataChange: med retrieved from db is " + med);
                 viewModel.setMedName(med.getName());
                 viewModel.setFromDate(med.getFromDate());

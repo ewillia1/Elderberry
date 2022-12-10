@@ -45,6 +45,7 @@ import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 // Not 100% sure how I will do that yet -- depends on what data structures I have access to and what data structures I need to create.
 public class MedicationDayViewActivity extends AppCompatActivity {
     private static final String TAG = "MedicationDayViewActivity";
+    public static final String MED_DAY_VIEW_KEY = "medDayViewKey";
     private final List<ParentItem> medicineList = new ArrayList<>();
     private final ArrayList<Boolean> takenList = new ArrayList<>();
     ParentItemAdapter parentItemAdapter;
@@ -111,7 +112,13 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                     List<ChildItem> children = new ArrayList<>();
                     Log.d(TAG, "_____onDataChange: level 1 ");
                     MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
-                    assert medicineDoseTime != null;
+
+                    if ((medicineDoseTime != null ? medicineDoseTime.getTime() : null) == null) {
+                        Log.d(TAG, "_____onDataChange: medicineDoseTime.getTime() == null");
+                        continue;
+                    }
+
+                    Log.d(TAG, "_____onDataChange: medicineDoseTime name " + medicineDoseTime.getName());
 
                     try {
                         if (!isCurrentDate(medicineDoseTime)) {
@@ -119,9 +126,10 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
-                        Log.d(TAG, "onDataChange: parse datetime format is not aligned with the passed datetime");
+                        Log.d(TAG, "_____onDataChange: parse datetime format is not aligned with the passed datetime");
                     }
 
+                    Log.d(TAG, "_____onDataChange: medicineDoseTime.getTime().entrySet() = " + medicineDoseTime.getTime().entrySet());
                     for (Map.Entry<String, List<String>> entry : medicineDoseTime.getTime().entrySet()) {
                         // there is only one key in the hashmap
                         Log.d(TAG, "_____onDataChange: level 2 ");
@@ -129,7 +137,6 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                             ChildItem fd = new ChildItem(t);
                             children.add(fd);
                         }
-
                         Log.d(TAG, "_____onDataChange: level 3 retrieve correct medicineDoseTime successfully ");
                     }
 
@@ -178,7 +185,12 @@ public class MedicationDayViewActivity extends AppCompatActivity {
     private void startAddMedicationActivity() {
         Log.d(TAG, "_____startAddMedicationActivity");
         Intent intent = new Intent(this, AddMedicationActivity.class);
+        intent.putExtra(MED_DAY_VIEW_KEY, true);
         startActivity(intent);
+
+        // Want to finish this activity so that when add or edit is pressed onCreate for this activity is called again.
+        // So nothing is null.
+        finish();
     }
 
     private void startYourMedicationsActivity() {
