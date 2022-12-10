@@ -14,7 +14,9 @@ public class Medicine {
     private String unit;
     private int freq;
 
-    Medicine() {}
+    Medicine() {
+        Log.d(TAG, "_____Medicine");
+    }
 
     public Medicine(String id, String name, String information, String fromDate, String toDate, String unit, int freq) {
         Log.d(TAG, "_____Medicine");
@@ -72,6 +74,7 @@ public class Medicine {
                 ", fromDate='" + fromDate + '\'' +
                 ", toDate='" + toDate + '\'' +
                 ", unit='" + unit + '\'' +
+                ", freq=" + freq +
                 '}';
     }
 }

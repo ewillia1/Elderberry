@@ -60,6 +60,5 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             }
             finish();
         });
-
     }
 }

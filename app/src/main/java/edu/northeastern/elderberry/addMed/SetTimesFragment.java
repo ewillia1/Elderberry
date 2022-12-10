@@ -125,7 +125,7 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
             timeDoseAdapter.clear();
 
             // Clear the time and dose array in the view model.
-            this.viewModel.clear();
+            this.viewModel.reinitializeTimeAndDoseArray();
 
             this.numOfTimes = position + 1;
 

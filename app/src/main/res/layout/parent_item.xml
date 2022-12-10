@@ -4,8 +4,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <!--Title-->
-
     <TextView
         android:id="@+id/parent_item_title"
         android:layout_width="match_parent"
@@ -17,6 +15,4 @@
         android:id="@+id/child_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-
 </LinearLayout>

@@ -17,6 +17,11 @@ public class MedicineRow {
         this.fromDate = fromDate;
     }
 
+    public static MedicineRow build(Medicine md) {
+        Log.d(TAG, "_____build");
+        return new MedicineRow(md.getId(), md.getName(), md.getFromDate(), md.getToDate());
+    }
+
     public String getId() {
         Log.d(TAG, "_____getId");
         return this.id;
@@ -30,10 +35,5 @@ public class MedicineRow {
     public String getFromDate() {
         Log.d(TAG, "_____getFromDate");
         return this.fromDate;
-    }
-
-    public static MedicineRow build(Medicine md) {
-        Log.d(TAG, "_____build");
-        return new MedicineRow(md.getId(), md.getName(), md.getFromDate(), md.getToDate());
     }
 }

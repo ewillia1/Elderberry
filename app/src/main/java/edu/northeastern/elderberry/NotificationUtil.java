@@ -21,11 +21,10 @@ import java.util.Locale;
 import java.util.Objects;
 
 public class NotificationUtil {
-
     private static final String TAG = "NotificationUtil";
 
-
     public static void getMedicationInfo(Context context, NotificationManager notificationManager) {
+        Log.d(TAG, "_____getMedicationInfo");
         DatabaseReference userDB;
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         List<MedicineDoseTime> medicineList = new ArrayList<>();
@@ -50,13 +49,13 @@ public class NotificationUtil {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.d(TAG, "_____onCancelled");
             }
         });
-
     }
 
     private static void scheduleMedicationNotifications(List<MedicineDoseTime> medicines, Context context) {
+        Log.d(TAG, "_____scheduleMedicationNotifications");
         List<DateTimeDose> dates = new ArrayList<>();
         for (MedicineDoseTime doseTime : medicines) {
             String fromDate = doseTime.getFromDate();

@@ -26,10 +26,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
+import edu.northeastern.elderberry.dayview.MedicationDayViewActivity;
 import edu.northeastern.elderberry.helpAndConfigs.AboutActivity;
 import edu.northeastern.elderberry.helpAndConfigs.SettingsActivity;
-
-import edu.northeastern.elderberry.dayview.MedicationDayViewActivity;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 public class MedicationTrackerActivity extends AppCompatActivity {
@@ -43,7 +42,7 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_medication_tracker);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if(!checkPermission()){
+            if (!checkPermission()) {
                 getPermissions();
             }
         }
@@ -69,7 +68,7 @@ public class MedicationTrackerActivity extends AppCompatActivity {
             Log.d(TAG, "_____onCreate: calendarView.setOnDateChangeListener");
             String date = makeDateString(dayOfMonth, month, year);
             Intent intent = new Intent(this, MedicationDayViewActivity.class);
-            intent.putExtra("current_date" , date);
+            intent.putExtra("current_date", date);
             startActivity(intent);
         });
 
@@ -104,7 +103,7 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         Log.d(TAG, "_____getPermissions");
         int REQUEST_CODE = 9882;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.POST_NOTIFICATIONS}, REQUEST_CODE);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, REQUEST_CODE);
         }
     }
 

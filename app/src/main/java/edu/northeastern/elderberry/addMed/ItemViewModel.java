@@ -51,7 +51,8 @@ public class ItemViewModel extends ViewModel {
         this.taken = res;
     }
 
-    public void clear() {
+    public void reinitializeTimeAndDoseArray() {
+        Log.d(TAG, "_____reinitializeTimeAndDoseArray");
         this.time = initializeArray();
         this.dose = initializeArray();
     }
@@ -179,21 +180,6 @@ public class ItemViewModel extends ViewModel {
         this.toDate.setValue(item);
     }
 
-    public void setTimeId(String item) {
-        Log.d(TAG, "_____setToDate");
-        this.timeId.setValue(item);
-    }
-
-    public void setDoseId(String item) {
-        Log.d(TAG, "_____setToDate");
-        this.doseId.setValue(item);
-    }
-
-    public void setTakenId(String item) {
-        Log.d(TAG, "_____setToDate");
-        this.takenId.setValue(item);
-    }
-
     public MutableLiveData<Integer> getTimeFreq() {
         return this.timeFreq;
     }
@@ -236,12 +222,27 @@ public class ItemViewModel extends ViewModel {
         return this.timeId;
     }
 
+    public void setTimeId(String item) {
+        Log.d(TAG, "_____setToDate");
+        this.timeId.setValue(item);
+    }
+
     public MutableLiveData<String> getDoseId() {
         return this.doseId;
     }
 
+    public void setDoseId(String item) {
+        Log.d(TAG, "_____setToDate");
+        this.doseId.setValue(item);
+    }
+
     public MutableLiveData<String> getTakenId() {
         return this.takenId;
+    }
+
+    public void setTakenId(String item) {
+        Log.d(TAG, "_____setToDate");
+        this.takenId.setValue(item);
     }
 
     private long computeNumDays() {

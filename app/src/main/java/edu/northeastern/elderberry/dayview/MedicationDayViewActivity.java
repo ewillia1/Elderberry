@@ -39,7 +39,7 @@ import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
-// TODO: ELIZABETH
+// TODO: CHECKBOX functionality #2
 // When opening a particular day the checkboxes have to be repopulated based on the saved taken data values (ex. true = checked, false = not checked).
 // For each medicine (ParentItem) and each time for said medicine (ChildItem) this has to be the case.
 // Not 100% sure how I will do that yet -- depends on what data structures I have access to and what data structures I need to create.
@@ -187,7 +187,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // child_item.xml android:onClick for checkbox. Called when the checkbox is clicked (or unclicked).
+    // child_item.xml android:onClick for checkbox. Called when the checkbox is clicked (or un-clicked).
     // Need to set database according to which one the user did.
     public void onCheckboxClicked(View view) {
         // Is the view now checked?
@@ -204,7 +204,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         Log.d(TAG, "_____checkboxConfig");
         // Set the index in the taken array in the database to false.
 
-        // TODO: ELIZABETH
+        // TODO: CHECKBOX functionality #1
         // * Access the time frequency node in the database and set that value to timeFreq
         // * Figure out what day number in the range the user clicked on (ex. Range = Dec 1 - 10. User clicked on Dec 5, day = 4) (index starting at 0)
         // * Figure out what ChildItem checkbox the usr clicked on for particular medicine -- set that to be checkBoxNum (index starting at 0)
@@ -224,7 +224,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
     // Else, set the index in the taken array in the database to false.
     private void setCheckbox(boolean checked, int index) {
         Log.d(TAG, "_____setCheckbox");
-        // TODO: ELIZABETH
+        // TODO: ELIZABETH functionality #1
         // * Access particular medication
         // * Access taken array (get taken ID key)
         // * Set the index of that taken array to be the value of checked

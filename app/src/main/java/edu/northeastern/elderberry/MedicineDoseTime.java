@@ -38,7 +38,7 @@ public class MedicineDoseTime {
 
     public Map<String, List<String>> getDose() {
         Log.d(TAG, "_____getDose");
-        return dose;
+        return this.dose;
     }
 
     public void setDose(Map<String, List<String>> dose) {
@@ -48,7 +48,7 @@ public class MedicineDoseTime {
 
     public Map<String, List<String>> getTime() {
         Log.d(TAG, "_____getTime");
-        return time;
+        return this.time;
     }
 
     public void setTime(Map<String, List<String>> time) {
@@ -93,7 +93,7 @@ public class MedicineDoseTime {
 
     public String getToDate() {
         Log.d(TAG, "_____getToDate");
-        return toDate;
+        return this.toDate;
     }
 
     public void setToDate(String toDate) {
@@ -113,7 +113,7 @@ public class MedicineDoseTime {
 
     public int getFreq() {
         Log.d(TAG, "_____getFreq");
-        return freq;
+        return this.freq;
     }
 
     @NonNull

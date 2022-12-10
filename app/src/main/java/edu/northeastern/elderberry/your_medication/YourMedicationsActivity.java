@@ -36,12 +36,11 @@ import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 
 public class YourMedicationsActivity extends AppCompatActivity {
-    private static final String TAG = "YourMedicationsActivity";
-    private MedicineAdapter medAdapter;
-    private final ArrayList<MedicineRow> medicines = new ArrayList<>();
-    private final ArrayList<String> medKey = new ArrayList<>();
     public static final String YOUR_MED_TO_EDIT_MED_KEY = "medKey";
-
+    private static final String TAG = "YourMedicationsActivity";
+    private final ArrayList<MedicineRow> medicinesArrayList = new ArrayList<>();
+    private final ArrayList<String> medKeyArrayList = new ArrayList<>();
+    private MedicineAdapter medAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,26 +85,30 @@ public class YourMedicationsActivity extends AppCompatActivity {
         DatabaseReference userDatabase = FirebaseDatabase.getInstance().getReference();
         DatabaseReference medDatabase = userDatabase.child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
         Log.d(TAG, "onCreate: Retrieving user med db with user ID" + mAuth.getCurrentUser().getUid());
-        //DatabaseReference medicineDB = FirebaseDatabase.getInstance().getReference();
-        //medicineDB.child(user).addValueEventListener(new ValueEventListener() {
         medDatabase.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d(TAG, "_____onDataChange: ");
-                medicines.clear();
+                medicinesArrayList.clear();
 
+                // Loop through snapshot to get the medicines to put in the ArrayList medicines.
                 for (DataSnapshot d : snapshot.getChildren()) {
-                    // put all medicine in an arrayList
-                    // sort the array list by from date
-                    // another for loop
-                    String id = d.getKey();
-                    medKey.add(id);
-                    // 2 Todo update this to using medicine class
-                    MedicineRow medRow = new MedicineRow(id, String.valueOf(d.child("name").getValue()), String.valueOf(d.child("fromDate").getValue()), String.valueOf(d.child("toDate").getValue()));
-                    medicines.add(medRow);
+                    MedicineRow medRow = new MedicineRow(d.getKey(), String.valueOf(d.child("name").getValue()), String.valueOf(d.child("fromDate").getValue()), String.valueOf(d.child("toDate").getValue()));
+                    medicinesArrayList.add(medRow);
                 }
-                // 2 Todo We can sort the medicine before we show it, maybe sorting in db is better
+
+                // Sort medicines by from date for the RecyclerView.
+                medicinesArrayList.sort(new SortMedicineRow());
+
+                // Loop through the sorted medicines to add their IDs to the ArrayList medKey.
+                // We need this loop here instead of in the above for each loop so that the indices align with the RecyclerView.
+                String medicineId;
+                for (MedicineRow medicineRow : medicinesArrayList) {
+                    // medKeyArrayList is an ArrayList of medicine keys (Strings).
+                    medicineId = medicineRow.getId();
+                    medKeyArrayList.add(medicineId);
+                }
 
                 medAdapter.notifyDataSetChanged();
             }
@@ -113,23 +116,22 @@ public class YourMedicationsActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.d(TAG, "_____onCancelled: ");
-                //Toast.makeText(YourMedicationsActivity.this, "Error: Unable to get access to Database", Toast.LENGTH_SHORT).show();
             }
         });
 
-        // Set RecyclerView
+        // Set RecyclerView.
         RecyclerView recyclerView = findViewById(R.id.yourMedRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        // passing an array into the recyclerview adapter
-        // Test data
-        this.medAdapter = new MedicineAdapter(this.medicines);
+        // Passing an array into the recyclerview adapter.
+        this.medAdapter = new MedicineAdapter(this.medicinesArrayList);
 
+        // What happens when you click a medication in the recycler view.
         OnListItemClick onListItemClick = position -> {
-            Log.d(TAG, "_____onClick: ");
+            Log.d(TAG, "_____onClick: position = " + position + ", medKey = " + medKeyArrayList);
             Intent intent = new Intent(YourMedicationsActivity.this, AddMedicationActivity.class);
-            Log.d(TAG, "_____onCreate, OnListItemClick, prior to medKey " + medKey.get(position));
-            intent.putExtra(YOUR_MED_TO_EDIT_MED_KEY, medKey.get(position));
+            Log.d(TAG, "_____onCreate, OnListItemClick, prior to medKey " + medKeyArrayList.get(position));
+            intent.putExtra(YOUR_MED_TO_EDIT_MED_KEY, medKeyArrayList.get(position));
             Log.d(TAG, "_____onCreate, OnListItemClick, post medKey");
             startActivity(intent);
         };
@@ -140,7 +142,7 @@ public class YourMedicationsActivity extends AppCompatActivity {
         // Create a method to create item touch helper method for adding swipe to delete functionality.
         // In this we are specifying drag direction and position to right.
         // https://www.geeksforgeeks.org/swipe-to-delete-and-undo-in-android-recyclerview/
-        // Future: will not actually delete medication from database (just tag it as deleted)
+        // Future application: will not actually delete medication from database (just tag it as deleted).
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             // This method is called when the item is moved.
             @Override
@@ -154,13 +156,13 @@ public class YourMedicationsActivity extends AppCompatActivity {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 Log.d(TAG, "_____onSwiped");
                 // Here we are getting the item at a particular position.
-                MedicineRow deletedMed = medicines.get(viewHolder.getAbsoluteAdapterPosition());
+                MedicineRow deletedMed = medicinesArrayList.get(viewHolder.getAbsoluteAdapterPosition());
 
                 // Get the position of the item.
                 int position = viewHolder.getAbsoluteAdapterPosition();
 
                 // Remove item from our array list.
-                medicines.remove(viewHolder.getAbsoluteAdapterPosition());
+                medicinesArrayList.remove(viewHolder.getAbsoluteAdapterPosition());
 
                 // Notify that the item is removed from adapter.
                 medAdapter.notifyItemRemoved(viewHolder.getAbsoluteAdapterPosition());
@@ -189,7 +191,7 @@ public class YourMedicationsActivity extends AppCompatActivity {
                     Log.d(TAG, "_____onSwiped: no");
 
                     // Adding on click listener to our action of snack bar. Add our item to array list with a position.
-                    medicines.add(position, deletedMed);
+                    medicinesArrayList.add(position, deletedMed);
 
                     // Notify item is added to our adapter class.
                     medAdapter.notifyItemInserted(position);
