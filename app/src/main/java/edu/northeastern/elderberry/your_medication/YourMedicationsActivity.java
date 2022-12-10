@@ -135,6 +135,11 @@ public class YourMedicationsActivity extends AppCompatActivity {
           */
         OnListItemClick onListItemClick = new OnListItemClick() {
             @Override
+            public int getPos() {
+                return 0;
+            }
+
+            @Override
             public void onClick(int position, CheckBox cb) {
 
             }
@@ -149,10 +154,6 @@ public class YourMedicationsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
 
-            @Override
-            public int getPos() {
-                return pos;
-            }
         };
 
         this.medAdapter.setClickListener(onListItemClick);

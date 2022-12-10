@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import edu.northeastern.elderberry.MedicationTrackerActivity;
 import edu.northeastern.elderberry.Medicine;
 import edu.northeastern.elderberry.MedicineDoseTime;
 import edu.northeastern.elderberry.NotificationUtil;
@@ -264,15 +265,16 @@ public class AddMedicationActivity extends AppCompatActivity {
                 this.viewModel.getUnit().getValue(),
                 this.viewModel.getTimeFreq().getValue()));
 
-        Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
-        databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(timeList);
-        databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").push().setValue(doseList);
 
         this.viewModel.initializeTakenBooleanArray();
         List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
         Log.d(TAG, "_____doAddDataToDb: before setting taken to db taken list is " + takenList);
         databaseReference.child(Objects.requireNonNull(db.getKey())).child("taken").push().setValue(takenList);
         databaseReference.orderByChild("fromDate");
+
+        Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
+        databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").push().setValue(doseList);
+        databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(timeList);
     }
 
     private boolean filledInRequiredFields() {

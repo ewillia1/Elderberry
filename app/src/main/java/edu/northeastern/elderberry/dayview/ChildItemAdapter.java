@@ -20,22 +20,16 @@ import edu.northeastern.elderberry.R;
 public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.ChildViewHolder> {
     private static final String TAG = "ChildItemAdapter";
     private final List<ChildItem> childItemTitle;
-    private final Context context;
     private OnListItemClick childListener;
-    private int childPos;
 
     // Constructor.
-    ChildItemAdapter(List<ChildItem> childItemList, Context context) {
+    ChildItemAdapter(List<ChildItem> childItemList) {
         Log.d(TAG, "_____ChildItemAdapter");
         this.childItemTitle = childItemList;
     }
 
     public void setClickListener(OnListItemClick listener) {
         this.childListener = listener;
-    }
-
-    public void setChildPos(int childPos) {
-        this.childPos = childPos;
     }
 
     @NonNull
@@ -46,7 +40,7 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.Chil
         // layout of the child item
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.child_item, viewGroup, false);
 
-        return new ChildViewHolder(view, this.context, childListener);
+        return new ChildViewHolder(view, childListener);
     }
 
     @Override
@@ -74,7 +68,7 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.Chil
         private final TextView childItemTitle;
         private final CheckBox takenCheckBox;
 
-        ChildViewHolder(View itemView, Context context, final OnListItemClick childListener) {
+        ChildViewHolder(View itemView, final OnListItemClick childListener) {
             super(itemView);
             Log.d(TAG, "_____ChildViewHolder");
             takenCheckBox = itemView.findViewById(R.id.checkbox_child_item);

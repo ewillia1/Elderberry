@@ -1,12 +1,13 @@
 package edu.northeastern.elderberry.dayview;
 
+import static edu.northeastern.elderberry.util.DatetimeFormat.makeStringDate;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -29,15 +30,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
 import edu.northeastern.elderberry.MedicineDoseTime;
-import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.ParentItemClickListener;
+import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
+import edu.northeastern.elderberry.util.DatetimeFormat;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 // TODO: CHECKBOX functionality #2
@@ -48,8 +51,10 @@ public class MedicationDayViewActivity extends AppCompatActivity {
     private static final String TAG = "MedicationDayViewActivity";
     public static final String MED_DAY_VIEW_KEY = "medDayViewKey";
     private final List<ParentItem> medicineList = new ArrayList<>();
-    private ArrayList<Boolean> takenList = new ArrayList<Boolean>();
-    private final ArrayList<Boolean> takenList = new ArrayList<>();
+    private ArrayList<MedicineDoseTime> medDoseTimeList = new ArrayList<>();
+    private ArrayList<String> medKeyList = new ArrayList<>();
+    //private final ArrayList<Boolean> takenList = new ArrayList<Boolean>();
+    //private final ArrayList<Boolean> takenList = new ArrayList<>();
     ParentItemAdapter parentItemAdapter;
     private String currentDate;
     private DatabaseReference userDatabase;
@@ -105,7 +110,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         // get correct db reference
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         DatabaseReference userDatabase = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference medDatabase = userDatabase.child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
+        medDatabase = userDatabase.child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
         Log.d(TAG, "onCreate: Retrieving user med db with user ID" + mAuth.getCurrentUser().getUid());
 
         medDatabase.addValueEventListener(new ValueEventListener() {
@@ -115,6 +120,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                 Log.d(TAG, "_____onDataChange: ");
 
                 medicineList.clear();
+                medDoseTimeList.clear();
 
                 // Todo reference https://www.folkstalk.com/tech/nested-recyclerview-onclicklistener-with-examples/
                 // To figure out which position has been clicked?
@@ -125,9 +131,10 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                     MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
 
                     if ((medicineDoseTime != null ? medicineDoseTime.getTime() : null) == null) {
+                        // Todo check dose & taken are not null
                         Log.d(TAG, "_____onDataChange: medicineDoseTime.getTime() == null");
                         if (Objects.requireNonNull(medicineDoseTime).getName() != null) {
-                            Log.d(TAG, "onDataChange: the medicien with the null time is: " + medicineDoseTime.getName());
+                            Log.d(TAG, "onDataChange: the medicine with the null time is: " + medicineDoseTime.getName());
                         }
                         continue;
                     }
@@ -146,14 +153,15 @@ public class MedicationDayViewActivity extends AppCompatActivity {
 //                    Log.d(TAG, "_____onDataChange: medicineDoseTime.getTime().entrySet() = " + medicineDoseTime.getTime().entrySet());
                     for (Map.Entry<String, List<String>> entry : medicineDoseTime.getTime().entrySet()) {
                         // there is only one key in the hashmap
-//                        Log.d(TAG, "_____onDataChange: level 2 ");
                         for (String t : entry.getValue()) {
                             ChildItem fd = new ChildItem(t);
                             children.add(fd);
                         }
-//                        Log.d(TAG, "_____onDataChange: level 3 retrieve correct medicineDoseTime successfully ");
                     }
                     medicineList.add(new ParentItem(medicineDoseTime.getName(), children));
+                    medKeyList.add(d.getKey());
+                    medDoseTimeList.add(medicineDoseTime);
+                    // New arrayList with
                 }
 
                 parentItemAdapter.notifyDataSetChanged();
@@ -188,8 +196,8 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                 //if (view.getId() == R.id.checkbox_child_item) {
                 //    checkboxConfig(checked);
                 //}
-                Log.d(TAG, "_____onChildItemClick: parentPosition is "+ parentPosition);
-                Log.d(TAG, "_____onChildItemClick: childPosition is "+ childPosition);
+                Log.d(TAG, "_____onChildItemClick: parentPosition is " + parentPosition);
+                Log.d(TAG, "_____onChildItemClick: childPosition is " + childPosition);
             }
         });
 
@@ -236,33 +244,26 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // child_item.xml android:onClick for checkbox. Called when the checkbox is clicked (or un-clicked).
-    // Need to set database according to which one the user did.
-    public void onCheckboxClicked(View view) {
-        // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
-        Log.d(TAG, "_____onCheckboxClicked: checked = " + checked);
-
-        if (view.getId() == R.id.checkbox_child_item) {
-            checkboxConfig(checked);
-        }
-    }
-
     // Helper method. Figures out the index the checkbox corresponds to in the taken array in the database.
     private void checkboxConfig(boolean checked) {
         Log.d(TAG, "_____checkboxConfig");
         // Set the index in the taken array in the database to false.
 
         // TODO: CHECKBOX functionality #1
-        // * Access the time frequency node in the database and set that value to timeFreq
+        // * Access the fromDate, time frequency node in the database and set that value to timeFreq
         // * Figure out what day number in the range the user clicked on (ex. Range = Dec 1 - 10. User clicked on Dec 5, day = 4) (index starting at 0)
         // * Figure out what ChildItem checkbox the usr clicked on for particular medicine -- set that to be checkBoxNum (index starting at 0)
 
         // Variables set to 0 need to be set to the above notes accordingly.
-        int timeFreq = 0;
-        int day = 0;
-        int firstIndexForDay = timeFreq * day;
-        int checkBoxNum = 0;
+        MedicineDoseTime med = this.medDoseTimeList.get(this.parentPos);
+        int timeFreq = med.getFreq();
+        int dayOffset = DatetimeFormat.dateDiff(
+                makeStringDate(med.getFromDate()),
+                makeStringDate(currentDate));
+        Log.d(TAG, "_____checkboxConfig num of days from " + med.getFromDate() + " is " + dayOffset);
+
+        int firstIndexForDay = timeFreq * dayOffset;
+        int checkBoxNum = childPos;
         int index = firstIndexForDay + checkBoxNum;
 
         setCheckbox(checked, index);
@@ -274,6 +275,31 @@ public class MedicationDayViewActivity extends AppCompatActivity {
     private void setCheckbox(boolean checked, int index) {
         Log.d(TAG, "_____setCheckbox");
         // TODO: CHECKBOX functionality #1
+        MedicineDoseTime med = this.medDoseTimeList.get(this.parentPos);
+        med.getTaken();
+        String takenKey = "";
+        List<Boolean> takenVal = new ArrayList<>();
+        String medKey = medKeyList.get(parentPos);
+        for (Map.Entry<String, List<Boolean>> entry : med.getTaken().entrySet()) {
+            // There is only one key in the hashmap.
+            takenKey = entry.getKey(); // what we want
+            takenVal = entry.getValue();
+            Log.d(TAG, "_____setCheckbox: takenKey is " + takenKey + "medkey at parentPos is " + medKey);
+            //setTaken(entry.getValue());
+            //Log.d(TAG, "_____onDataChange: set viewModel dose as" + viewModel.getTakenBooleanArray().toString());
+        }
+
+        takenVal.set(index, checked);
+
+        if (!takenKey.equals("")) {
+            Log.d(TAG, "_____setCheckbox: takenKey is not empty and takenVal was updated to " + takenVal);
+            Map<String, Object> taken = new HashMap<>();
+            taken.put(takenKey, takenVal);
+            medDatabase.child(medKey).child("taken").updateChildren(taken);
+        }
+
+
+
         // * Access particular medication
         // * Access taken array (get taken ID key)
         // * Set the index of that taken array to be the value of checked
