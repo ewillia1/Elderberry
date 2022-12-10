@@ -31,6 +31,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import edu.northeastern.elderberry.Medicine;
+import edu.northeastern.elderberry.MyNotificationPublisher;
 import edu.northeastern.elderberry.NotificationUtil;
 import edu.northeastern.elderberry.MedicineDoseTime;
 import edu.northeastern.elderberry.R;
@@ -99,12 +100,8 @@ public class AddMedicationActivity extends AppCompatActivity {
                     int msg = itemId == R.id.add_med ? R.string.successful_add : R.string.successful_saved;
                     Toast.makeText(AddMedicationActivity.this, msg, Toast.LENGTH_SHORT).show();
                     finish();
+                    MyNotificationPublisher.deletePendingIntents();
                     NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                     NotificationUtil.getMedicationInfo(getApplicationContext(), notificationManager);
                     return true;
                 } else {

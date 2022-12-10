@@ -1,6 +1,7 @@
 package edu.northeastern.elderberry;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.util.Log;
 
@@ -40,11 +41,10 @@ public class NotificationUtil {
                 Log.d(TAG, "_____onDataChange: ");
                 notificationManager.deleteNotificationChannel(MyNotificationPublisher.NOTIFICATION_CHANNEL_ID);
                 medicineList.clear();
-
-                for (DataSnapshot d : snapshot.getChildren()) {
-                    MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
-                    medicineList.add(medicineDoseTime);
-                }
+                    for (DataSnapshot d : snapshot.getChildren()) {
+                        MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
+                        medicineList.add(medicineDoseTime);
+                    }
                 scheduleMedicationNotifications(medicineList, context);
             }
 
@@ -88,5 +88,7 @@ public class NotificationUtil {
         for (DateTimeDose date : dates) {
             MyNotificationPublisher.setAlarm(date, context);
         }
+        List<PendingIntent> intents = MyNotificationPublisher.getPendingIntents();
+        System.out.println("hello");
     }
 }
