@@ -19,20 +19,20 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class NotificationUtil {
 
     private static final String TAG = "NotificationUtil";
-    private static FirebaseAuth mAuth;
 
 
-    public static List<MedicineDoseTime> getMedicationInfo(Context context, NotificationManager notificationManager) {
+    public static void getMedicationInfo(Context context, NotificationManager notificationManager) {
         DatabaseReference userDB;
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         List<MedicineDoseTime> medicineList = new ArrayList<>();
 
         userDB = FirebaseDatabase.getInstance().getReference();
-        String userId = mAuth.getCurrentUser().getUid();
+        String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
         // Todo to provide the correct username based on log-in info
         userDB.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -54,7 +54,6 @@ public class NotificationUtil {
             }
         });
 
-        return null;
     }
 
     private static void scheduleMedicationNotifications(List<MedicineDoseTime> medicines, Context context) {

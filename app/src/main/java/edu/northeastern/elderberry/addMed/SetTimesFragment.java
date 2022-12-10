@@ -102,12 +102,12 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
 
         // pre-fill
         if (editMedKey != null) {
-            int freq = viewModel.getTimeFreq().getValue();
+            int freq = this.viewModel.getTimeFreq().getValue();
             int pos = freq - 1;
             autoCompleteTimeFreq.setText(time_frequencies[pos]);
-            autoCompleteUnit.setText(viewModel.getUnit().getValue());
+            autoCompleteUnit.setText(this.viewModel.getUnit().getValue());
             for (int i = 0; i < freq; i++) {
-                timeDoseItemArrayList.add(new TimeDoseItem(pos, viewModel.getTime(i).getValue(), viewModel.getDose(i).getValue(), viewModel.getUnit().getValue()));
+                timeDoseItemArrayList.add(new TimeDoseItem(pos, this.viewModel.getTime(i).getValue(), this.viewModel.getDose(i).getValue(), this.viewModel.getUnit().getValue()));
             }
         }
 

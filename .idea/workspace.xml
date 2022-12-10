@@ -9,15 +9,15 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9620958a-8b8d-421b-9159-69e2698687a6" name="Changes" comment="Updated YourMedicationsActivity.java to correctly pull and return the selected medication from database.&#10;&#10;Co-authored by: Gavin">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="f9b114c1-798a-4b63-9bc3-330e407ddde8" name="Changes" comment="Updated workspace.xml">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_1_22__11_19__Changes_1.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[adb-88UX02WDN-7X21xW._adb-tls-connect._tcp.]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/elizabethwilliams/.android/avd/Pixel_3_API_30.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -61,16 +61,16 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/app/proguard-rules.pro" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/build 2.gradle" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/build.gradle" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/build.gradle" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/src/main/res/values/themes.xml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/app/src/main/res/values-night/themes.xml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/proguard-rules.pro" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/build 2.gradle" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/build.gradle" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/local.properties" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/gradle.properties" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/src/main/res/values/themes.xml" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -204,6 +204,7 @@
       <option name="presentableId" value="Default" />
       <updated>1666133441374</updated>
     </task>
+<<<<<<< Updated upstream
     <task id="LOCAL-00019" summary="Update">
       <created>1668820935535</created>
       <option name="number" value="00019" />
@@ -372,6 +373,8 @@
       <option name="project" value="LOCAL" />
       <updated>1669747025250</updated>
     </task>
+=======
+>>>>>>> Stashed changes
     <task id="LOCAL-00043" summary="Added all times and doses to Medicine.java">
       <created>1669747552757</created>
       <option name="number" value="00043" />
@@ -547,7 +550,18 @@
       <option name="project" value="LOCAL" />
       <updated>1670521003652</updated>
     </task>
+<<<<<<< Updated upstream
     <option name="localTasksCounter" value="68" />
+=======
+    <task id="LOCAL-00091" summary="Updated workspace.xml">
+      <created>1670534307807</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1670534307807</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
+>>>>>>> Stashed changes
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -563,6 +577,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+<<<<<<< Updated upstream
     <MESSAGE value="Got viewModel to work in MedInfoFragment.java and SetDatesFragment.java.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
     <MESSAGE value="Got unit to work when add button is clicked. Updated input types in some xml files for better user interaction." />
     <MESSAGE value="Added all times and doses to Medicine.java" />
@@ -589,5 +604,33 @@
     <MESSAGE value="Updated AddMedicationActivity.java and ItemViewModel.java&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
     <MESSAGE value="Updated AddMedicationActivity.java&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
     <option name="LAST_COMMIT_MESSAGE" value="Updated AddMedicationActivity.java&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
+=======
+    <MESSAGE value="Trying to work on listeners to get the focus of items to be as expected." />
+    <MESSAGE value="workspace.xml" />
+    <MESSAGE value="Removed unused import statements from TimeDoseViewHolder.java." />
+    <MESSAGE value="Updated database input for time and dose to just say the index." />
+    <MESSAGE value="Made time array for database.&#10;&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
+    <MESSAGE value="Cleaned up code. Added doseList to AddMedicationActivity.java." />
+    <MESSAGE value="Fixed doseList in AddMedicationActivity.java." />
+    <MESSAGE value="Working on checking the required fields." />
+    <MESSAGE value="Go the check for required fields to work! Cleaned up other code and added final constants." />
+    <MESSAGE value="Updated Elderberry.app.unitTest.iml, lint.xml, and workspace.xml." />
+    <MESSAGE value="Fixed an AM/PM space bug. Fixed required field check bug. Still an issue with the times, doses, the ViewModel, and the database." />
+    <MESSAGE value="Fixed the issue with the times, doses, the ViewModel, and the database. Reinitialized time and dose array in View Model when a new time frequency is clicked." />
+    <MESSAGE value="Updated workspace.xml." />
+    <MESSAGE value="Removed Medication History functionality from project" />
+    <MESSAGE value="Update" />
+    <MESSAGE value="Removed unneeded hints from fragment_med_info.xml, edited font size in themes.xml" />
+    <MESSAGE value="Fixed font issues (ex. reset size of subtitle in actionbar)" />
+    <MESSAGE value="Updated MedicationDayViewActivity.java (removed unused lines)" />
+    <MESSAGE value="Updated Toast for when new password is not of the right format." />
+    <MESSAGE value="Updated SetTimesFragment.java" />
+    <MESSAGE value="Added comment to YourMedicationsActivity.java" />
+    <MESSAGE value="Added logcats to MedicationDayViewActivity.java" />
+    <MESSAGE value="Added spaces in MedicationDayViewActivity.java" />
+    <MESSAGE value="Made it so medication only shows up in its date range.&#10;Co-authored by: Gavin&#10;Co-authored by: Christopher" />
+    <MESSAGE value="Updated workspace.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated workspace.xml" />
+>>>>>>> Stashed changes
   </component>
 </project>

@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CalendarView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -32,7 +34,6 @@ import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 public class MedicationTrackerActivity extends AppCompatActivity {
     private static final String TAG = "MedicationTrackerActivity";
-    private FirebaseAuth mAuth;
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -41,17 +42,18 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         Log.d(TAG, "_____onCreate");
         setContentView(R.layout.activity_medication_tracker);
 
-        mAuth = FirebaseAuth.getInstance();
-        if(!checkPermission()){
-            getPermissions();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if(!checkPermission()){
+                getPermissions();
+            }
         }
+
         // Calling this activity's function to use ActionBar utility methods.
         ActionBar actionBar = getSupportActionBar();
 
         // Providing a subtitle for the ActionBar.
         assert actionBar != null;
         actionBar.setSubtitle(Html.fromHtml("<small>" + getString(R.string.medication_tracker) + "</small>", Html.FROM_HTML_MODE_LEGACY));
-
 
         // Adding an icon in the ActionBar.
         actionBar.setIcon(R.mipmap.app_logo);
@@ -92,17 +94,18 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         NotificationUtil.getMedicationInfo(getApplicationContext(), notificationManager);
     }
 
-    private boolean checkPermission()
-    {
-        return ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
-                == PackageManager.PERMISSION_GRANTED;
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+    private boolean checkPermission() {
+        Log.d(TAG, "_____checkPermission");
+        return ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED;
     }
 
-    private void getPermissions()
-    {
+    private void getPermissions() {
+        Log.d(TAG, "_____getPermissions");
         int REQUEST_CODE = 9882;
-        ActivityCompat.requestPermissions(this,
-                new String[] {Manifest.permission.POST_NOTIFICATIONS}, REQUEST_CODE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.POST_NOTIFICATIONS}, REQUEST_CODE);
+        }
     }
 
 

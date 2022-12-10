@@ -20,7 +20,7 @@ import java.util.Locale;
 public class MyNotificationPublisher extends BroadcastReceiver {
 
     public static int NOTIFICATION_ID = 1;
-    public static String NOTIFICATION = "notification";
+    public static final String NOTIFICATION = "notification";
     public static final String NOTIFICATION_CHANNEL_ID = "10001";
     private final static String default_notification_channel_id = "default";
     private TextToSpeech textToSpeech;
@@ -36,6 +36,13 @@ public class MyNotificationPublisher extends BroadcastReceiver {
         notificationManager.createNotificationChannel(notificationChannel);
         notificationManager.notify(getNotificationIdInt(), notification);
         String message = intent.getStringExtra("title");
+        textToSpeech = new TextToSpeech(context, i -> {
+            if (i == TextToSpeech.SUCCESS) {
+                textToSpeech.setLanguage(Locale.UK);
+                textToSpeech.speak(message, TextToSpeech.QUEUE_FLUSH, null, "");
+            }
+            else {
+                Toast.makeText(context, "Text to speech is not available", Toast.LENGTH_SHORT).show();
         textToSpeech = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int i) {
