@@ -40,19 +40,10 @@ public class MyNotificationPublisher extends BroadcastReceiver {
             if (i == TextToSpeech.SUCCESS) {
                 textToSpeech.setLanguage(Locale.UK);
                 textToSpeech.speak(message, TextToSpeech.QUEUE_FLUSH, null, "");
-            }
-            else {
+            } else {
                 Toast.makeText(context, "Text to speech is not available", Toast.LENGTH_SHORT).show();
-        textToSpeech = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int i) {
-                if (i == TextToSpeech.SUCCESS) {
-                    textToSpeech.setLanguage(Locale.UK);
-                    textToSpeech.speak(message, TextToSpeech.QUEUE_FLUSH, null, "");
-                } else {
-                    Toast.makeText(context, "Text to speech is not available", Toast.LENGTH_SHORT).show();
-                }
             }
+
         });
     }
 
@@ -109,10 +100,12 @@ public class MyNotificationPublisher extends BroadcastReceiver {
 
     }
 
-    public static List<PendingIntent> getPendingIntents(){return pendingIntents;}
+    public static List<PendingIntent> getPendingIntents() {
+        return pendingIntents;
+    }
 
-    public static void deletePendingIntents(){
-        for(int currentIntent=0; currentIntent<pendingIntents.size(); currentIntent++){
+    public static void deletePendingIntents() {
+        for (int currentIntent = 0; currentIntent < pendingIntents.size(); currentIntent++) {
             alarmManager.cancel(pendingIntents.get(currentIntent));
         }
         pendingIntents.clear();
