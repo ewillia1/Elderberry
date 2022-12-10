@@ -73,7 +73,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         actionBar.setSubtitle(Html.fromHtml("<small>" + getString(R.string.medication_tracker) + "</small>", Html.FROM_HTML_MODE_LEGACY));
 
         TextView medViewDate = findViewById(R.id.dayview_textView);
-        
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             medViewDate.setText(Objects.requireNonNullElseGet(this.currentDate, () -> Objects.requireNonNullElse(currentDateFromAdd, "Error Getting Current Date")));
         }
