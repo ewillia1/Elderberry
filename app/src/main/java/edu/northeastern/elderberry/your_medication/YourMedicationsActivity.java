@@ -226,6 +226,7 @@ public class YourMedicationsActivity extends AppCompatActivity {
         Log.d(TAG, "_____startAddMedicationActivity");
         Intent intent = new Intent(this, AddMedicationActivity.class);
         startActivity(intent);
+        finish();
     }
 
     private void startYourMedicationsActivity() {

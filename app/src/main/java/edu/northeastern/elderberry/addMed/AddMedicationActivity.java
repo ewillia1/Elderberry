@@ -2,6 +2,7 @@ package edu.northeastern.elderberry.addMed;
 
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -102,6 +103,12 @@ public class AddMedicationActivity extends AppCompatActivity {
                     }
                     int msg = itemId == R.id.add_med ? R.string.successful_add : R.string.successful_saved;
                     Toast.makeText(AddMedicationActivity.this, msg, Toast.LENGTH_SHORT).show();
+
+                    if (editMedKey != null) {
+                        Intent intent = new Intent(this, YourMedicationsActivity.class);
+                        startActivity(intent);
+                    }
+
                     finish();
                     NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                     try {
