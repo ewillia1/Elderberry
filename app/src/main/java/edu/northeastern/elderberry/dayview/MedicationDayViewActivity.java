@@ -54,7 +54,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "_____onCreate");
+        Log.d(TAG, "_____IN ONCREATE!!!!");
         setContentView(R.layout.activity_recycle_med_dayview);
 
         // Calling this activity's function to use ActionBar utility methods.
@@ -110,15 +110,18 @@ public class MedicationDayViewActivity extends AppCompatActivity {
 
                 for (DataSnapshot d : snapshot.getChildren()) {
                     List<ChildItem> children = new ArrayList<>();
-                    Log.d(TAG, "_____onDataChange: level 1 ");
+//                    Log.d(TAG, "_____onDataChange: level 1 ");
                     MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
 
                     if ((medicineDoseTime != null ? medicineDoseTime.getTime() : null) == null) {
                         Log.d(TAG, "_____onDataChange: medicineDoseTime.getTime() == null");
+                        if (Objects.requireNonNull(medicineDoseTime).getName() != null) {
+                            Log.d(TAG, "onDataChange: the medicien with the null time is: " + medicineDoseTime.getName());
+                        }
                         continue;
                     }
 
-                    Log.d(TAG, "_____onDataChange: medicineDoseTime name " + medicineDoseTime.getName());
+                    Log.d(TAG, "_____onDataChange: NO NULL POINTER EXCEPTION! YAY! medicineDoseTime name " + medicineDoseTime.getName());
 
                     try {
                         if (!isCurrentDate(medicineDoseTime)) {
@@ -129,15 +132,15 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                         Log.d(TAG, "_____onDataChange: parse datetime format is not aligned with the passed datetime");
                     }
 
-                    Log.d(TAG, "_____onDataChange: medicineDoseTime.getTime().entrySet() = " + medicineDoseTime.getTime().entrySet());
+//                    Log.d(TAG, "_____onDataChange: medicineDoseTime.getTime().entrySet() = " + medicineDoseTime.getTime().entrySet());
                     for (Map.Entry<String, List<String>> entry : medicineDoseTime.getTime().entrySet()) {
                         // there is only one key in the hashmap
-                        Log.d(TAG, "_____onDataChange: level 2 ");
+//                        Log.d(TAG, "_____onDataChange: level 2 ");
                         for (String t : entry.getValue()) {
                             ChildItem fd = new ChildItem(t);
                             children.add(fd);
                         }
-                        Log.d(TAG, "_____onDataChange: level 3 retrieve correct medicineDoseTime successfully ");
+//                        Log.d(TAG, "_____onDataChange: level 3 retrieve correct medicineDoseTime successfully ");
                     }
 
                     medicineList.add(new ParentItem(medicineDoseTime.getName(), children));
@@ -183,13 +186,14 @@ public class MedicationDayViewActivity extends AppCompatActivity {
     }
 
     private void startAddMedicationActivity() {
-        Log.d(TAG, "_____startAddMedicationActivity");
+        Log.d(TAG, "_____startAddMedicationActivity: about to start the add medication activity");
         Intent intent = new Intent(this, AddMedicationActivity.class);
         intent.putExtra(MED_DAY_VIEW_KEY, true);
         startActivity(intent);
 
         // Want to finish this activity so that when add or edit is pressed onCreate for this activity is called again.
         // So nothing is null.
+        Log.d(TAG, "_____startAddMedicationActivity: about to finish this activity");
         finish();
     }
 

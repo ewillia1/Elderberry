@@ -91,6 +91,27 @@ public class AddMedicationActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.cancel_add || itemId == R.id.cancel_edit) {
+                // Finish add (edit) activity and go back to where you came from.
+                // Restart YourMedicationsActivity if coming from there.
+                if (editMedKey != null || yourMedicationKey) {
+                    Log.d(TAG, "_____onCreate: came from Your Medications, so I need to go back there. yourMedicationKey = " + yourMedicationKey);
+                    Intent intent = new Intent(this, YourMedicationsActivity.class);
+                    startActivity(intent);
+                } else if
+                    // Restart MedicationDayViewActivity if coming from there.
+                (medicationDayViewKey) {
+                    Log.d(TAG, "_____onCreate: came from Medication Day View, so I need to go back there.");
+                    Intent intent = new Intent(this, MedicationDayViewActivity.class);
+                    startActivity(intent);
+                } else if
+                    // Restart MedicationTrackerActivity if you are coming from there.
+                (medicationTrackerKey) {
+                    Log.d(TAG, "onCreate: came from Medication Tracker Home Page, so I need to go back there.");
+                    Intent intent = new Intent(this, MedicationTrackerActivity.class);
+                    startActivity(intent);
+                }
+
+                // Finish AddMedicationActivity.
                 finish();
                 return true;
             } else if (itemId == R.id.add_med || itemId == R.id.edit_med) {
