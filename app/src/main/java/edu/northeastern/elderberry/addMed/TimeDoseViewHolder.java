@@ -18,15 +18,15 @@ import java.util.Calendar;
 import edu.northeastern.elderberry.R;
 
 public class TimeDoseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-    private final String TAG = "TimeDoseViewHolder";
-    private final int MAX_HOUR = 12;
-    private final int TEN_MIN = 10;
     public final TextView itemNumber;
     public final TextView timeTextView;
     public final EditText doseEditText;
     public final OnTimeDoseItemListener onTimeDoseItemListener;
-    private TimePickerDialog timePickerDialog;
+    private final String TAG = "TimeDoseViewHolder";
+    private final int MAX_HOUR = 12;
+    private final int TEN_MIN = 10;
     private final Context context;
+    private TimePickerDialog timePickerDialog;
     private String time;
     private String dose;
 

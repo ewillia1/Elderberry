@@ -20,11 +20,11 @@
             android:id="@+id/itemNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/bellota_bold"
             android:textAlignment="center"
             android:textColor="@color/main"
-            android:fontFamily="@font/bellota_bold"
-            android:textStyle="bold"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/time_recyclerView"
@@ -43,18 +43,18 @@
             android:id="@+id/dose_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:fontFamily="@font/bellota_bold"
             android:hint="@string/click_to_set_dose"
+            android:imeOptions="actionDone"
             android:importantForAutofill="no"
             android:inputType="numberDecimal"
-            android:imeOptions="actionDone"
             android:textAlignment="center"
             android:textColor="@color/textHintColor"
             android:textColorHint="@color/textHintColor"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:focusable="true"
-            android:focusableInTouchMode="true" />
+            android:textStyle="bold" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

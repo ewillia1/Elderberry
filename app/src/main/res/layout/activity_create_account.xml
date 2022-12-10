@@ -27,12 +27,12 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/bellota_bold"
             android:hint="@string/first_name"
+            android:inputType="textPersonName"
             android:maxLength="40"
             android:textColor="@color/main"
             android:textColorHint="@color/main"
             android:textSize="30sp"
-            android:textStyle="bold"
-            android:inputType="textPersonName" />
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -56,12 +56,12 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/bellota_bold"
             android:hint="@string/last_name"
+            android:inputType="textPersonName"
             android:maxLength="40"
             android:textColor="@color/main"
             android:textColorHint="@color/main"
             android:textSize="30sp"
-            android:textStyle="bold"
-            android:inputType="textPersonName" />
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -85,12 +85,12 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/bellota_bold"
             android:hint="@string/email"
+            android:inputType="textEmailAddress"
             android:maxLength="40"
             android:textColor="@color/main"
             android:textColorHint="@color/main"
             android:textSize="30sp"
-            android:textStyle="bold"
-            android:inputType="textEmailAddress" />
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -115,12 +115,12 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/bellota_bold"
             android:hint="@string/password"
+            android:inputType="textPassword"
             android:maxLength="40"
             android:textColor="@color/main"
             android:textColorHint="@color/main"
             android:textSize="30sp"
-            android:textStyle="bold"
-            android:inputType="textPassword" />
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -131,6 +131,7 @@
         android:fontFamily="@font/bellota_bold"
         android:text="@string/create_account"
         android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

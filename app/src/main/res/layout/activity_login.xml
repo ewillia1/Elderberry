@@ -47,12 +47,12 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/bellota_bold"
             android:hint="@string/email"
+            android:inputType="textEmailAddress"
             android:maxLength="40"
             android:textColor="@color/main"
             android:textColorHint="@color/main"
             android:textSize="30sp"
-            android:textStyle="bold"
-            android:inputType="textEmailAddress" />
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -62,14 +62,14 @@
         android:layout_height="wrap_content"
         app:counterEnabled="true"
         app:counterMaxLength="40"
-        app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@color/main"
         app:helperText="Required*"
         app:helperTextTextColor="@color/textHintColor"
         app:layout_constraintBottom_toTopOf="@+id/loginButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout8">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout8"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/main">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/loginPassword"
@@ -77,12 +77,12 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/bellota_bold"
             android:hint="@string/password"
+            android:inputType="textPassword"
             android:maxLength="40"
             android:textColor="@color/main"
             android:textColorHint="@color/main"
             android:textSize="30sp"
-            android:textStyle="bold"
-            android:inputType="textPassword" />
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -93,6 +93,7 @@
         android:fontFamily="@font/bellota_bold"
         android:text="@string/login"
         android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/forgotPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -107,6 +108,7 @@
         android:text="@string/forgot_password"
         android:textAlignment="center"
         android:textColor="@color/main"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/createAccount"
         app:layout_constraintEnd_toEndOf="parent"
@@ -121,6 +123,7 @@
         android:text="@string/no_account_yet_create_an_account"
         android:textAlignment="center"
         android:textColor="@color/main"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

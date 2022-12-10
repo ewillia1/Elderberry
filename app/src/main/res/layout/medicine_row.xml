@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="3dp"
             android:text="@string/med_name_default"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/yourMedTimeTextView"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,11 +30,11 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="7dp"
             android:text="@string/med_time_default"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/yourMedNameTextView"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.513" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.cardview.widget.CardView>

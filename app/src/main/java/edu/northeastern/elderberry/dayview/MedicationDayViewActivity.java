@@ -40,14 +40,16 @@ import edu.northeastern.elderberry.ParentItemClickListener;
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
-// TODO: ELIZABETH
+// TODO: CHECKBOX functionality #2
 // When opening a particular day the checkboxes have to be repopulated based on the saved taken data values (ex. true = checked, false = not checked).
 // For each medicine (ParentItem) and each time for said medicine (ChildItem) this has to be the case.
 // Not 100% sure how I will do that yet -- depends on what data structures I have access to and what data structures I need to create.
 public class MedicationDayViewActivity extends AppCompatActivity {
     private static final String TAG = "MedicationDayViewActivity";
+    public static final String MED_DAY_VIEW_KEY = "medDayViewKey";
     private final List<ParentItem> medicineList = new ArrayList<>();
     private ArrayList<Boolean> takenList = new ArrayList<Boolean>();
+    private final ArrayList<Boolean> takenList = new ArrayList<>();
     ParentItemAdapter parentItemAdapter;
     private String currentDate;
     private DatabaseReference userDatabase;
@@ -60,7 +62,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "_____onCreate");
+        Log.d(TAG, "_____IN ONCREATE!!!!");
         setContentView(R.layout.activity_recycle_med_dayview);
 
         // Calling this activity's function to use ActionBar utility methods.
@@ -101,10 +103,10 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         });
 
         // get correct db reference
-        this.mAuth = FirebaseAuth.getInstance();
-        this.userDatabase = FirebaseDatabase.getInstance().getReference();
-        this.medDatabase = userDatabase.child(Objects.requireNonNull(this.mAuth.getCurrentUser()).getUid());
-        Log.d(TAG, "onCreate: Retrieving user med db with user ID" + this.mAuth.getCurrentUser().getUid());
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        DatabaseReference userDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference medDatabase = userDatabase.child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
+        Log.d(TAG, "onCreate: Retrieving user med db with user ID" + mAuth.getCurrentUser().getUid());
 
         medDatabase.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
@@ -119,9 +121,18 @@ public class MedicationDayViewActivity extends AppCompatActivity {
 
                 for (DataSnapshot d : snapshot.getChildren()) {
                     List<ChildItem> children = new ArrayList<>();
-                    Log.d(TAG, "_____onDataChange: level 1 ");
+//                    Log.d(TAG, "_____onDataChange: level 1 ");
                     MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
-                    assert medicineDoseTime != null;
+
+                    if ((medicineDoseTime != null ? medicineDoseTime.getTime() : null) == null) {
+                        Log.d(TAG, "_____onDataChange: medicineDoseTime.getTime() == null");
+                        if (Objects.requireNonNull(medicineDoseTime).getName() != null) {
+                            Log.d(TAG, "onDataChange: the medicien with the null time is: " + medicineDoseTime.getName());
+                        }
+                        continue;
+                    }
+
+                    Log.d(TAG, "_____onDataChange: NO NULL POINTER EXCEPTION! YAY! medicineDoseTime name " + medicineDoseTime.getName());
 
                     try {
                         if (!isCurrentDate(medicineDoseTime)) {
@@ -129,21 +140,22 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
-                        Log.d(TAG, "onDataChange: parse datetime format is not aligned with the passed datetime");
+                        Log.d(TAG, "_____onDataChange: parse datetime format is not aligned with the passed datetime");
                     }
 
+//                    Log.d(TAG, "_____onDataChange: medicineDoseTime.getTime().entrySet() = " + medicineDoseTime.getTime().entrySet());
                     for (Map.Entry<String, List<String>> entry : medicineDoseTime.getTime().entrySet()) {
                         // there is only one key in the hashmap
-                        Log.d(TAG, "_____onDataChange: level 2 ");
+//                        Log.d(TAG, "_____onDataChange: level 2 ");
                         for (String t : entry.getValue()) {
                             ChildItem fd = new ChildItem(t);
                             children.add(fd);
                         }
-
-                        Log.d(TAG, "_____onDataChange: level 3 retrieve correct medicineDoseTime successfully ");
+//                        Log.d(TAG, "_____onDataChange: level 3 retrieve correct medicineDoseTime successfully ");
                     }
                     medicineList.add(new ParentItem(medicineDoseTime.getName(), children));
                 }
+
                 parentItemAdapter.notifyDataSetChanged();
             }
 
@@ -207,9 +219,15 @@ public class MedicationDayViewActivity extends AppCompatActivity {
     }
 
     private void startAddMedicationActivity() {
-        Log.d(TAG, "_____startAddMedicationActivity");
+        Log.d(TAG, "_____startAddMedicationActivity: about to start the add medication activity");
         Intent intent = new Intent(this, AddMedicationActivity.class);
+        intent.putExtra(MED_DAY_VIEW_KEY, true);
         startActivity(intent);
+
+        // Want to finish this activity so that when add or edit is pressed onCreate for this activity is called again.
+        // So nothing is null.
+        Log.d(TAG, "_____startAddMedicationActivity: about to finish this activity");
+        finish();
     }
 
     private void startYourMedicationsActivity() {
@@ -218,26 +236,25 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // child_item.xml android:onClick for checkbox. Called when the checkbox is clicked (or unclicked).
+    // child_item.xml android:onClick for checkbox. Called when the checkbox is clicked (or un-clicked).
     // Need to set database according to which one the user did.
-    //public void onCheckboxClicked(View view) {
-    //    // Is the view now checked?
-    //    boolean checked = ((CheckBox) view).isChecked();
-    //    Log.d(TAG, "_____onCheckboxClicked: checked = " + checked);
+    public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+        Log.d(TAG, "_____onCheckboxClicked: checked = " + checked);
 
-    //    if (view.getId() == R.id.checkbox_child_item) {
-    //        checkboxConfig(checked);
-    //    }
-    //}
+        if (view.getId() == R.id.checkbox_child_item) {
+            checkboxConfig(checked);
+        }
+    }
 
     // Helper method. Figures out the index the checkbox corresponds to in the taken array in the database.
     private void checkboxConfig(boolean checked) {
         Log.d(TAG, "_____checkboxConfig");
         // Set the index in the taken array in the database to false.
 
-        // TODO: ELIZABETH
-        // * Access time array (get time ID key) -- figure out length of that array, set the length to be int timeFreq
-        // * Access the time frequency node in the database and set that value to timeFreq.
+        // TODO: CHECKBOX functionality #1
+        // * Access the time frequency node in the database and set that value to timeFreq
         // * Figure out what day number in the range the user clicked on (ex. Range = Dec 1 - 10. User clicked on Dec 5, day = 4) (index starting at 0)
         // * Figure out what ChildItem checkbox the usr clicked on for particular medicine -- set that to be checkBoxNum (index starting at 0)
 
@@ -256,7 +273,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
     // Else, set the index in the taken array in the database to false.
     private void setCheckbox(boolean checked, int index) {
         Log.d(TAG, "_____setCheckbox");
-        // TODO: ELIZABETH
+        // TODO: CHECKBOX functionality #1
         // * Access particular medication
         // * Access taken array (get taken ID key)
         // * Set the index of that taken array to be the value of checked

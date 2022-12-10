@@ -24,10 +24,9 @@ import java.util.Objects;
 import edu.northeastern.elderberry.helpAndConfigs.AboutActivity;
 
 public class LoginActivity extends AppCompatActivity {
-    private static final String TAG = "LoginActivity";
     public static final String PREFS_NAME = "MyPrefsFile";
+    private static final String TAG = "LoginActivity";
     private FirebaseAuth mAuth;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void resetPassword() {
+        Log.d(TAG, "_____resetPassword");
         Intent intent = new Intent(this, ForgotPasswordActivity.class);
         startActivity(intent);
     }

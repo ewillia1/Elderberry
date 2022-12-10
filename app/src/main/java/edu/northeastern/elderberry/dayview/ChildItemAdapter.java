@@ -24,11 +24,10 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.Chil
     private OnListItemClick childListener;
     private int childPos;
 
-    // Constructor
+    // Constructor.
     ChildItemAdapter(List<ChildItem> childItemList, Context context) {
         Log.d(TAG, "_____ChildItemAdapter");
         this.childItemTitle = childItemList;
-        this.context = context;
     }
 
     public void setClickListener(OnListItemClick listener) {
@@ -56,19 +55,16 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.Chil
         // Create an instance of the ChildItem class for the given position.
         ChildItem childItem = childItemTitle.get(position);
 
-        // For the created instance, set title.
-        // No need to set the image for
-        // the ImageViews because we have
-        // provided the source for the images
-        // in the layout file itself
+        // For the created instance, set title. No need to set the image for the ImageViews because
+        // we have provided the source for the images in the layout file itself.
         childViewHolder.childItemTitle.setText(childItem.getChildItemTitle());
     }
 
     @Override
     public int getItemCount() {
         Log.d(TAG, "_____getItemCount");
-        // This method returns the number of items we have added in the ChildItemList
-        // i.e. the number of instances of the ChildItemList that have been created
+        // This method returns the number of items we have added in the ChildItemList.
+        // i.e. the number of instances of the ChildItemList that have been created.
         return this.childItemTitle.size();
     }
 
