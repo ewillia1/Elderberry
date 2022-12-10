@@ -24,6 +24,11 @@ public class CreateAccountActivity extends AppCompatActivity {
     private String lastName;
     private String registeredEmail;
 
+    private static boolean isInvalid(String s) {
+        Log.d(TAG, "_____isValid");
+        return s == null || s.isBlank() || s.isEmpty();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +65,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+        Log.d(TAG, "_____onStart");
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
@@ -106,14 +112,10 @@ public class CreateAccountActivity extends AppCompatActivity {
         finish();
     }
 
-    private static boolean isInvalid(String s) {
-        Log.d(TAG, "_____isValid");
-        return s == null || s.isBlank() || s.isEmpty();
-    }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        Log.d(TAG, "_____onBackPressed");
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();

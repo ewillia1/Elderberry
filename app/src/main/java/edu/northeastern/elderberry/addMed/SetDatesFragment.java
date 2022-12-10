@@ -87,7 +87,7 @@ public class SetDatesFragment extends Fragment {
             Log.d(TAG, "_____onClick (to_image)");
             this.to_datePickerDialog.show();
         });
-        
+
         this.viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
         initDatePicker();
 
@@ -113,7 +113,7 @@ public class SetDatesFragment extends Fragment {
             set_from.setText(this.viewModel.getFromDate().getValue());
             set_to.setText(this.viewModel.getToDate().getValue());
         }
-        
+
         // From date.
         DatePickerDialog.OnDateSetListener from_dateSetListener = (view, year, month, day) -> {
             Log.d(TAG, "_____initDatePicker");

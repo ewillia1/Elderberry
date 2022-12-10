@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/home"
-        android:title="@string/home"
-        android:icon="@drawable/home_icon"/>
+        android:icon="@drawable/home_icon"
+        android:title="@string/home" />
     <item
         android:id="@+id/add_med"
-        android:title="@string/add_medication"
-        android:icon="@drawable/add_icon"/>
+        android:icon="@drawable/add_icon"
+        android:title="@string/add_medication" />
     <item
         android:id="@+id/view_med"
-        android:title="@string/view_medications"
-        android:icon="@drawable/view_med_icon"/>
+        android:icon="@drawable/view_med_icon"
+        android:title="@string/view_medications" />
 </menu>

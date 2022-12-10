@@ -33,9 +33,6 @@ public class SettingsActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
 
         // https://developer.android.com/develop/ui/views/components/settings
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(android.R.id.content, new MySettingsFragment())
-                .commit();
+        getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new MySettingsFragment()).commit();
     }
 }

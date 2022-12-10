@@ -17,9 +17,10 @@ public class MedicineDoseTime {
     private String fromDate;
     private String toDate;
     private String unit;
-    private int freq;
+    private Integer freq;
 
-    public MedicineDoseTime(Map<String, List<String>> dose, Map<String, List<String>> time, Map<String, List<Boolean>> taken, String name, String information, String fromDate, String toDate, String unit, int freq) {
+    public MedicineDoseTime(Map<String, List<String>> dose, Map<String, List<String>> time, Map<String, List<Boolean>> taken,
+                            String name, String information, String fromDate, String toDate, String unit, Integer freq) {
         Log.d(TAG, "_____MedicineDoseTime");
         this.dose = dose;
         this.time = time;
@@ -38,7 +39,7 @@ public class MedicineDoseTime {
 
     public Map<String, List<String>> getDose() {
         Log.d(TAG, "_____getDose");
-        return dose;
+        return this.dose;
     }
 
     public void setDose(Map<String, List<String>> dose) {
@@ -48,12 +49,17 @@ public class MedicineDoseTime {
 
     public Map<String, List<String>> getTime() {
         Log.d(TAG, "_____getTime");
-        return time;
+        return this.time;
     }
 
     public void setTime(Map<String, List<String>> time) {
         Log.d(TAG, "_____setTime");
         this.time = time;
+    }
+
+    public void setFreq(Integer freq) {
+        Log.d(TAG, "_____setFreq");
+        this.freq = freq;
     }
 
     public Map<String, List<Boolean>> getTaken() {
@@ -93,7 +99,7 @@ public class MedicineDoseTime {
 
     public String getToDate() {
         Log.d(TAG, "_____getToDate");
-        return toDate;
+        return this.toDate;
     }
 
     public void setToDate(String toDate) {
@@ -111,9 +117,9 @@ public class MedicineDoseTime {
         this.unit = unit;
     }
 
-    public int getFreq() {
+    public Integer getFreq() {
         Log.d(TAG, "_____getFreq");
-        return freq;
+        return this.freq;
     }
 
     @NonNull

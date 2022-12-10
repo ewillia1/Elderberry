@@ -6,19 +6,17 @@ import java.util.List;
 
 public class ParentItem {
     private static final String TAG = "ParentItem";
-    // Declaration of the variables
     private String parentItemTitle;
     private List<ChildItem> childItemList;
 
-    // Constructor of the class to initialize the variables
+    // Constructor of the class to initialize the variables.
     public ParentItem(String ParentItemTitle, List<ChildItem> ChildItemList) {
         Log.d(TAG, "_____ParentItem");
         this.parentItemTitle = ParentItemTitle;
         this.childItemList = ChildItemList;
     }
 
-
-    // Getter and Setter methods for each parameter
+    // Getter and Setter methods for each parameter.
     public String getParentItemTitle() {
         Log.d(TAG, "_____getParentItemTitle");
         return this.parentItemTitle;

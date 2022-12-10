@@ -26,14 +26,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
+import edu.northeastern.elderberry.dayview.MedicationDayViewActivity;
 import edu.northeastern.elderberry.helpAndConfigs.AboutActivity;
 import edu.northeastern.elderberry.helpAndConfigs.SettingsActivity;
-
-import edu.northeastern.elderberry.dayview.MedicationDayViewActivity;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 public class MedicationTrackerActivity extends AppCompatActivity {
     private static final String TAG = "MedicationTrackerActivity";
+    public static final String MED_TRACKER_KEY = "medTrackerKey";
+    public static final String CURRENT_DATE = "current_date";
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -43,7 +44,7 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_medication_tracker);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if(!checkPermission()){
+            if (!checkPermission()) {
                 getPermissions();
             }
         }
@@ -69,7 +70,10 @@ public class MedicationTrackerActivity extends AppCompatActivity {
             Log.d(TAG, "_____onCreate: calendarView.setOnDateChangeListener");
             String date = makeDateString(dayOfMonth, month, year);
             Intent intent = new Intent(this, MedicationDayViewActivity.class);
-            intent.putExtra("current_date" , date);
+            Log.d(TAG, "_____onCreate: about to pass the current date to MedicationDayViewActivity -- date = " + date);
+            intent.putExtra(CURRENT_DATE, date);
+            // Tell the new activity where you came from.
+            intent.putExtra(MED_TRACKER_KEY, true);
             startActivity(intent);
         });
 
@@ -104,7 +108,7 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         Log.d(TAG, "_____getPermissions");
         int REQUEST_CODE = 9882;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.POST_NOTIFICATIONS}, REQUEST_CODE);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, REQUEST_CODE);
         }
     }
 
@@ -117,7 +121,12 @@ public class MedicationTrackerActivity extends AppCompatActivity {
     private void startAddMedicationActivity() {
         Log.d(TAG, "_____startAddMedicationActivity");
         Intent intent = new Intent(this, AddMedicationActivity.class);
+        // Tell the new activity where you came from.
+        intent.putExtra(MED_TRACKER_KEY, true);
         startActivity(intent);
+
+        // Want to finish this activity so that when add or edit is pressed onCreate for this activity is called again.
+        finish();
     }
 
     private void startYourMedicationsActivity() {

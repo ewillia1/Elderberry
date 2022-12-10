@@ -9,6 +9,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
@@ -18,11 +19,11 @@ import java.util.List;
 import java.util.Locale;
 
 public class MyNotificationPublisher extends BroadcastReceiver {
-
-    public static int NOTIFICATION_ID = 1;
+    private static final String TAG = "MyNotificationPublisher";
     public static final String NOTIFICATION = "notification";
     public static final String NOTIFICATION_CHANNEL_ID = "10001";
     private final static String default_notification_channel_id = "default";
+    public static int NOTIFICATION_ID = 1;
     private TextToSpeech textToSpeech;
     private static List<PendingIntent> pendingIntents = new ArrayList<>();
     private static AlarmManager alarmManager;
@@ -48,19 +49,23 @@ public class MyNotificationPublisher extends BroadcastReceiver {
     }
 
     public static String getNotificationId() {
+        Log.d(TAG, "_____getNotificationId");
         NOTIFICATION_ID++;
         return String.valueOf(NOTIFICATION_ID);
     }
 
     public static void resetNotificationId() {
+        Log.d(TAG, "_____resetNotificationId");
         NOTIFICATION_ID = 1;
     }
 
     public static int getNotificationIdInt() {
+        Log.d(TAG, "_____getNotificationIdInt");
         return NOTIFICATION_ID++;
     }
 
     public static void setAlarm(DateTimeDose date, Context context) {
+        Log.d(TAG, "_____setAlarm");
         int i = 0;
         do {
             if (date.getFromTime().toInstant().toEpochMilli() > System.currentTimeMillis()) {
