@@ -9,6 +9,7 @@ import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -125,16 +126,31 @@ public class YourMedicationsActivity extends AppCompatActivity {
         // Test data
         this.medAdapter = new MedicineAdapter(this.medicines);
 
-        // Todo to reference this in the MedicationdayView
+        /**
+         * init a class which grab the position arg from child
+         * and use the key to grab the correct position of the medicine key
+          */
         OnListItemClick onListItemClick = new OnListItemClick() {
             @Override
+            public void onClick(int position, CheckBox cb) {
+
+            }
+
+            private int pos;
+            @Override
             public void onClick(int position) {
+                pos = position;
                 Log.d(TAG, "_____onClick: ");
                 Intent intent = new Intent(YourMedicationsActivity.this, AddMedicationActivity.class);
                 Log.d(TAG, "_____onCreate, OnListItemClick, prior to medKey " + medKey.get(position));
                 intent.putExtra(YOUR_MED_TO_EDIT_MED_KEY, medKey.get(position));
                 Log.d(TAG, "_____onCreate, OnListItemClick, post medKey");
                 startActivity(intent);
+            }
+
+            @Override
+            public int getPos() {
+                return pos;
             }
         };
 
@@ -147,7 +163,7 @@ public class YourMedicationsActivity extends AppCompatActivity {
         //    startActivity(intent);
         //};
 
-        this.medAdapter.setClickListener(onListItemClick);
+        this.medAdapter.setClickListener(onListItemClick); // pass the listener to the adapter class
         recyclerView.setAdapter(this.medAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

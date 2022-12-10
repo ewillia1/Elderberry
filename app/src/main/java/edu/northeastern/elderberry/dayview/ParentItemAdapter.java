@@ -5,8 +5,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
+import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,8 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import edu.northeastern.elderberry.OnListItemClick;
-import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.ParentItemClickListener;
+import edu.northeastern.elderberry.R;
 
 /**
  * Accommodate long medicine names
@@ -26,7 +28,11 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
     private final RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
     private final List<ParentItem> itemList;
     private final Context context;
-    ParentItemClickListener parentItemClickListener;
+    ParentItemClickListener rvClickListener;
+    OnListItemClick childListener;
+    private int childPos;
+    private int parentPos;
+    private CheckBox takenCheckBox;
 
     ParentItemAdapter(List<ParentItem> itemList, Context context) {
         Log.d(TAG, "_____ParentItemAdapter");
@@ -42,7 +48,7 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
         // Here we inflate the corresponding layout of the parent item.
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.parent_item, viewGroup, false);
 
-        return new ParentViewHolder(view, this.parentItemClickListener);
+        return new ParentViewHolder(view, this.rvClickListener, this.childPos, this.takenCheckBox);
     }
 
     @Override
@@ -69,19 +75,37 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
         parentViewHolder.childRecyclerView.setAdapter(childItemAdapter);
         parentViewHolder.childRecyclerView.setRecycledViewPool(viewPool);
 
-        childItemAdapter.setClickListener(new OnListItemClick() {
+        // Todo enable this onClickListener
+        OnListItemClick onListItemClick = new OnListItemClick() {
             @Override
-            public void onClick(int childPos) {
-                Log.d(TAG, "_____onClick: with position "+childPos);
-                //String item = String.valueOf(itemList.get(position));
-                parentItemClickListener.onChildItemClick(parentViewHolder.getLayoutPosition(), childPos, "placeholder");
+            public void onClick(int position) {
+
             }
-        });
+
+            @Override
+            public void onClick(int childPosition, CheckBox cb) {
+                childPos = childPosition;
+                takenCheckBox = cb;
+                rvClickListener.onChildItemClick(parentViewHolder.getAbsoluteAdapterPosition(), childPosition, cb);
+                //Log.d(TAG, "_____onChildItemClick: parentPos is " + position);
+                //Log.d(TAG, "_____onChildItemClick: childPosition is " + childPosition);
+                // this.childPos = childPosition;
+            }
+
+            @Override
+            public int getPos() {
+                return childPos;
+            }
+        };
+
+        this.childListener = onListItemClick;
+        this.childPos = onListItemClick.getPos();
+        childItemAdapter.setClickListener(onListItemClick);
     }
 
-    public void setParentItemClickListener(ParentItemClickListener parentItemClickListener) {
+    public void setParentItemClickListener(ParentItemClickListener rvClickListener) {
         Log.d(TAG, "_____setRvItemClickListener");
-        this.parentItemClickListener = parentItemClickListener;
+        this.rvClickListener = rvClickListener;
     }
 
     // This method returns the number of items we have added in the ParentItemList i.e. the number
@@ -96,13 +120,16 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
     static class ParentViewHolder extends RecyclerView.ViewHolder {
         private static final String TAG = "ParentViewHolder";
         private final TextView parentItemTitle;
+        private final CheckBox takenCheckBox;
         private final RecyclerView childRecyclerView;
 
-        ParentViewHolder(final View itemView, final ParentItemClickListener parentListener) {
+        ParentViewHolder(final View itemView, final ParentItemClickListener parentListener, int childPos, CheckBox cb) {
             super(itemView);
             Log.d(TAG, "_____ParentViewHolder");
             this.parentItemTitle = itemView.findViewById(R.id.parent_item_title);
             this.childRecyclerView = itemView.findViewById(R.id.child_recyclerview);
+            this.takenCheckBox = cb;
+
 
             itemView.setOnClickListener(v -> {
                 Log.d(TAG, "_____MedicineHolder: ");
@@ -110,12 +137,13 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
                     int parentPos = getLayoutPosition();
 
                     if (parentPos != RecyclerView.NO_POSITION) {
-                        //this.childRecyclerView;
-                        //parentListener.onChildItemClick(parentPos, this.childRecyclerView, "placeholder");
+                        parentPos = getLayoutPosition();
+                        parentListener.onChildItemClick(parentPos, childPos, this.takenCheckBox);
                     }
                 }
             });
         }
+
     }
 }
 

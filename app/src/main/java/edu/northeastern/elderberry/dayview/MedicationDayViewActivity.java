@@ -53,6 +53,8 @@ public class MedicationDayViewActivity extends AppCompatActivity {
     private DatabaseReference userDatabase;
     private DatabaseReference medDatabase;
     private FirebaseAuth mAuth;
+    private int parentPos;
+    private int childPos;
     ParentItemClickListener rvItemClickListener;
 
     @Override
@@ -159,23 +161,29 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         this.parentItemAdapter = new ParentItemAdapter(this.medicineList, this);
 
 
-        // Todo set onitemclick listener
+        // Todo set onItemClick listener
         ParentRecyclerViewItem.setAdapter(this.parentItemAdapter);
 
-        //this.parentItemAdapter.setParentItemClickListener(new ParentItemClickListener() {
-        //    @Override
-        //    public void onChildItemClick(int parentPosition, int childPosition, String item) {
-        //        Log.d(TAG, "_____onChildItemClick: parentPosition is "+ parentPosition);
-        //        Log.d(TAG, "_____onChildItemClick: childPosition is "+ childPosition);
-        //        Log.d(TAG, "_____onChildItemClick: item is "+ item);
-        //    }
-        //});
+        this.parentItemAdapter.setParentItemClickListener(new ParentItemClickListener() {
+            @Override
+            public void onChildItemClick(int parentPosition, int childPosition, CheckBox cb) {
+                parentPos = parentPosition;
+                childPos = childPosition;
+                boolean checked = cb.isChecked();
+                Log.d(TAG, "_____onCheckboxClicked: checked = " + checked);
+
+                checkboxConfig(checked);
+                //if (view.getId() == R.id.checkbox_child_item) {
+                //    checkboxConfig(checked);
+                //}
+                Log.d(TAG, "_____onChildItemClick: parentPosition is "+ parentPosition);
+                Log.d(TAG, "_____onChildItemClick: childPosition is "+ childPosition);
+            }
+        });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         ParentRecyclerViewItem.setLayoutManager(layoutManager);
     }
-
-
 
 
     private boolean isCurrentDate(MedicineDoseTime medicineDoseTime) throws ParseException {
@@ -212,15 +220,15 @@ public class MedicationDayViewActivity extends AppCompatActivity {
 
     // child_item.xml android:onClick for checkbox. Called when the checkbox is clicked (or unclicked).
     // Need to set database according to which one the user did.
-    public void onCheckboxClicked(View view) {
-        // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
-        Log.d(TAG, "_____onCheckboxClicked: checked = " + checked);
+    //public void onCheckboxClicked(View view) {
+    //    // Is the view now checked?
+    //    boolean checked = ((CheckBox) view).isChecked();
+    //    Log.d(TAG, "_____onCheckboxClicked: checked = " + checked);
 
-        if (view.getId() == R.id.checkbox_child_item) {
-            checkboxConfig(checked);
-        }
-    }
+    //    if (view.getId() == R.id.checkbox_child_item) {
+    //        checkboxConfig(checked);
+    //    }
+    //}
 
     // Helper method. Figures out the index the checkbox corresponds to in the taken array in the database.
     private void checkboxConfig(boolean checked) {
