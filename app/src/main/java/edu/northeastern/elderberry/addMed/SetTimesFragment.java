@@ -100,9 +100,9 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
         assert addMedicationActivity != null;
         String editMedKey = addMedicationActivity.getEditMedKey();
 
-        // pre-fill
-        if (editMedKey != null) {
-            int freq = this.viewModel.getTimeFreq().getValue();
+        // Pre-fill.
+        if (editMedKey != null && this.viewModel.getTimeFreq().getValue() != null) {
+            int freq = Integer.parseInt(this.viewModel.getTimeFreq().getValue());
             int pos = freq - 1;
             autoCompleteTimeFreq.setText(time_frequencies[pos]);
             autoCompleteUnit.setText(this.viewModel.getUnit().getValue());
@@ -134,10 +134,9 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
             // Add number of cards in recycler view corresponding to the time frequency the user picked.
             for (int i = 0; i < this.numOfTimes; i++) {
                 Log.d(TAG, "_____onCreateView: for loop iteration: " + i);
-                //timeDoseItemArrayList.add(new TimeDoseItem(position));
                 timeDoseItemArrayList.add(new TimeDoseItem(position));
             }
-            this.viewModel.setTimeFreq(this.numOfTimes);
+            this.viewModel.setTimeFreq(Integer.toString(this.numOfTimes));
         });
 
         // Instantiate the recyclerView.

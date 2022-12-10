@@ -12,13 +12,13 @@ public class Medicine {
     private String fromDate;
     private String toDate;
     private String unit;
-    private int freq;
+    private String freq;
 
     Medicine() {
         Log.d(TAG, "_____Medicine");
     }
 
-    public Medicine(String id, String name, String information, String fromDate, String toDate, String unit, int freq) {
+    public Medicine(String id, String name, String information, String fromDate, String toDate, String unit, String freq) {
         Log.d(TAG, "_____Medicine");
         this.id = id;
         this.name = name;
@@ -59,7 +59,7 @@ public class Medicine {
         return this.toDate;
     }
 
-    public int getFreq() {
+    public String getFreq() {
         Log.d(TAG, "_____getFreq");
         return this.freq;
     }

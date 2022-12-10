@@ -26,7 +26,7 @@ public class ItemViewModel extends ViewModel {
     private final MutableLiveData<String> information = new MutableLiveData<>();
     private final MutableLiveData<String> fromDate = new MutableLiveData<>();
     private final MutableLiveData<String> toDate = new MutableLiveData<>();
-    private final MutableLiveData<Integer> timeFreq = new MutableLiveData<>();
+    private final MutableLiveData<String> timeFreq = new MutableLiveData<>();
     private final MutableLiveData<String> unit = new MutableLiveData<>();
     private ArrayList<MutableLiveData<String>> time = initializeArray();
     private ArrayList<MutableLiveData<String>> dose = initializeArray();
@@ -42,13 +42,15 @@ public class ItemViewModel extends ViewModel {
     }
 
     public void initializeTakenBooleanArray() {
-        ArrayList<MutableLiveData<Boolean>> res = new ArrayList<>();
-        long arraySize = getTimeFreq().getValue() * computeNumDays();
-        Log.d(TAG, "_____initializeTimeArray with size " + arraySize);
-        for (int i = 0; i < arraySize; i++) {
-            res.add(i, new MutableLiveData<>(false));
+        if (getTimeFreq().getValue() != null) {
+            ArrayList<MutableLiveData<Boolean>> res = new ArrayList<>();
+            long arraySize = Integer.parseInt(getTimeFreq().getValue()) * computeNumDays();
+            Log.d(TAG, "_____initializeTimeArray with size " + arraySize);
+            for (int i = 0; i < arraySize; i++) {
+                res.add(i, new MutableLiveData<>(false));
+            }
+            this.taken = res;
         }
-        this.taken = res;
     }
 
     public void reinitializeTimeAndDoseArray() {
@@ -135,6 +137,11 @@ public class ItemViewModel extends ViewModel {
         }
     }
 
+    public void setTimeFreq(String item) {
+        Log.d(TAG, "_____setTimeFreq");
+        this.timeFreq.setValue(item);
+    }
+
     public MutableLiveData<String> getMedId() {
         Log.d(TAG, "_____getMedId");
         return this.medId;
@@ -180,13 +187,9 @@ public class ItemViewModel extends ViewModel {
         this.toDate.setValue(item);
     }
 
-    public MutableLiveData<Integer> getTimeFreq() {
+    public MutableLiveData<String> getTimeFreq() {
+        Log.d(TAG, "_____getTimeFreq");
         return this.timeFreq;
-    }
-
-    public void setTimeFreq(int item) {
-        Log.d(TAG, "_____setTimeFreq");
-        this.timeFreq.setValue(item);
     }
 
     public int inferTimeFreq() {

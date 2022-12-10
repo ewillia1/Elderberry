@@ -180,12 +180,12 @@ public class AddMedicationActivity extends AppCompatActivity {
                 doseMap,
                 timeMap,
                 takenMap,
-                viewModel.getMedName().getValue(),
-                viewModel.getInformation().getValue(),
-                viewModel.getFromDate().getValue(),
-                viewModel.getToDate().getValue(),
-                viewModel.getUnit().getValue(),
-                viewModel.getTimeFreq().getValue());
+                this.viewModel.getMedName().getValue(),
+                this.viewModel.getInformation().getValue(),
+                this.viewModel.getFromDate().getValue(),
+                this.viewModel.getToDate().getValue(),
+                this.viewModel.getUnit().getValue(),
+                this.viewModel.getTimeFreq().getValue());
 
         Log.d(TAG, "_____updateDB med is " + med);
         db.setValue(med);
@@ -204,7 +204,8 @@ public class AddMedicationActivity extends AppCompatActivity {
         List<String> timeList = this.viewModel.getTimeStringArray();
         List<String> doseList = this.viewModel.getDoseStringArray();
 
-        db.setValue(new Medicine(this.viewModel.getMedId().getValue(), this.viewModel.getMedName().getValue(),
+        db.setValue(new Medicine(this.viewModel.getMedId().getValue(),
+                this.viewModel.getMedName().getValue(),
                 this.viewModel.getInformation().getValue(),
                 this.viewModel.getFromDate().getValue(),
                 this.viewModel.getToDate().getValue(),
@@ -231,7 +232,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         } else if (this.viewModel.getMedName().getValue().isBlank() || this.viewModel.getMedName().getValue().isEmpty() ||
                 this.viewModel.getFromDate().getValue().isBlank() || this.viewModel.getFromDate().getValue().isEmpty() ||
                 this.viewModel.getToDate().getValue().isBlank() || this.viewModel.getToDate().getValue().isEmpty() ||
-                this.viewModel.getTimeFreq().getValue() == 0 ||
+                Integer.parseInt(this.viewModel.getTimeFreq().getValue()) == 0 ||
                 this.viewModel.getUnit().getValue().isBlank() || this.viewModel.getUnit().getValue().isEmpty()) {
             Log.d(TAG, "filledInRequiredFields: (a non-time/dose field is blank or empty) false");
             return false;
@@ -242,7 +243,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         Log.d(TAG, "____filledInRequiredFields: timeList = " + timeList + ",\n doseList = " + doseList);
 
         // We know that this.viewModel.getTimeFreq().getValue() is not null, blank, or empty if it gets down to here.
-        int numOfTimesAndDoses = this.viewModel.getTimeFreq().getValue();
+        int numOfTimesAndDoses = Integer.parseInt(this.viewModel.getTimeFreq().getValue());
         Log.d(TAG, "_____filledInRequiredFields: numOfTimesAndDoses = " + numOfTimesAndDoses);
         for (int i = 0; i < numOfTimesAndDoses; i++) {
             if (timeList.get(i) == null || doseList.get(i) == null || timeList.get(i).isBlank() || timeList.get(i).isEmpty() ||
@@ -287,7 +288,7 @@ public class AddMedicationActivity extends AppCompatActivity {
                 viewModel.reinitializeTimeAndDoseArray();
 
                 // When first retrieved from the db, the data works fine
-                // in the second instance where it is saved & retrieved it did not work as expected
+                // in the second instance where it is saved & retrieved it did not work as expected.
                 Log.d(TAG, "_____onDataChange: child time of snapshot.child(editMedkey) is " + snapshot.child(editMedKey).child("time"));
                 for (Map.Entry<String, List<String>> entry : med.getTime().entrySet()) {
                     // There is only one key in the hashmap.
