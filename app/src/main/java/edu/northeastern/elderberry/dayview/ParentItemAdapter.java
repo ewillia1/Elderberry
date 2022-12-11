@@ -1,23 +1,18 @@
 package edu.northeastern.elderberry.dayview;
 
 import android.content.Context;
-import android.text.BoringLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
-import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import edu.northeastern.elderberry.OnListItemClick;
-import edu.northeastern.elderberry.ParentItemClickListener;
 import edu.northeastern.elderberry.R;
 
 /**
@@ -28,19 +23,14 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
     // An object of RecyclerView.RecycledViewPool is created to share the Views between the child and the parent RecyclerViews.
     private final RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
     private final List<ParentItem> itemList;
-    private List<List<Boolean>> takenTodayList;
-    ParentItemClickListener rvClickListener;
-    OnListItemClick childListener;
-    private int childPos;
-    private int parentPos;
-    private CheckBox takenCheckBox;
+    private final SetParentItemClickListener listener;
+    SetParentItemClickListener rvClickListener;
 
-    ParentItemAdapter(List<ParentItem> itemList, List<List<Boolean>> taken) {
+    ParentItemAdapter(List<ParentItem> itemList, SetParentItemClickListener listener) {
         Log.d(TAG, "_____ParentItemAdapter");
         this.itemList = itemList;
-        this.takenTodayList = taken;
+        this.listener = listener;
     }
-
 
     @NonNull
     @Override
@@ -49,7 +39,7 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
         // Here we inflate the corresponding layout of the parent item.
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.parent_item, viewGroup, false);
 
-        return new ParentViewHolder(view, this.rvClickListener, this.childPos, this.takenCheckBox);
+        return new ParentViewHolder(view);
     }
 
     @Override
@@ -71,46 +61,19 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
         layoutManager.setInitialPrefetchItemCount(parentItem.getChildItemList().size());
 
         // Create an instance of the child item view adapter and set its adapter, layout manager and RecyclerViewPool.
-        // Todo elt childItemAdapter to accept the takenList
-        ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList());
+        // Set listener for childItemAdapter.
+        ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), (checked, childPosition) -> listener.parentItemClicked(parentViewHolder.getAbsoluteAdapterPosition(), childPosition, checked));
         parentViewHolder.childRecyclerView.setLayoutManager(layoutManager);
         parentViewHolder.childRecyclerView.setAdapter(childItemAdapter);
         parentViewHolder.childRecyclerView.setRecycledViewPool(viewPool);
-
-        OnListItemClick onListItemClick = new OnListItemClick() {
-            @Override
-            public void onClick(int position) {
-
-            }
-
-            @Override
-            public void onClick(int childPosition, CheckBox cb) {
-                childPos = childPosition;
-                takenCheckBox = cb;
-                rvClickListener.onChildItemClick(parentViewHolder.getAbsoluteAdapterPosition(), childPosition, cb);
-                //Log.d(TAG, "_____onChildItemClick: parentPos is " + position);
-                //Log.d(TAG, "_____onChildItemClick: childPosition is " + childPosition);
-                // this.childPos = childPosition;
-            }
-
-            @Override
-            public int getPos() {
-                return childPos;
-            }
-        };
-
-        this.childListener = onListItemClick;
-        this.childPos = onListItemClick.getPos();
-        childItemAdapter.setClickListener(onListItemClick);
     }
 
-    public void setParentItemClickListener(ParentItemClickListener rvClickListener) {
+    public void setParentItemClickListener(SetParentItemClickListener rvClickListener) {
         Log.d(TAG, "_____setRvItemClickListener");
         this.rvClickListener = rvClickListener;
     }
 
-    // This method returns the number of items we have added in the ParentItemList i.e. the number
-    // of instances we have created of the ParentItemList.
+    // This method returns the number of items we have added in the ParentItemList i.e. the number of instances we have created of the ParentItemList.
     @Override
     public int getItemCount() {
         Log.d(TAG, "_____getItemCount");
@@ -121,30 +84,14 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
     static class ParentViewHolder extends RecyclerView.ViewHolder {
         private static final String TAG = "ParentViewHolder";
         private final TextView parentItemTitle;
-        private final CheckBox takenCheckBox;
         private final RecyclerView childRecyclerView;
 
-        ParentViewHolder(final View itemView, final ParentItemClickListener parentListener, int childPos, CheckBox cb) {
+        ParentViewHolder(final View itemView) {
             super(itemView);
             Log.d(TAG, "_____ParentViewHolder");
             this.parentItemTitle = itemView.findViewById(R.id.parent_item_title);
             this.childRecyclerView = itemView.findViewById(R.id.child_recyclerview);
-            this.takenCheckBox = cb;
-
-
-            itemView.setOnClickListener(v -> {
-                Log.d(TAG, "_____MedicineHolder: ");
-                if (parentListener != null) {
-                    int parentPos = getLayoutPosition();
-
-                    if (parentPos != RecyclerView.NO_POSITION) {
-                        parentPos = getLayoutPosition();
-                        parentListener.onChildItemClick(parentPos, childPos, this.takenCheckBox);
-                    }
-                }
-            });
         }
-
     }
 }
 

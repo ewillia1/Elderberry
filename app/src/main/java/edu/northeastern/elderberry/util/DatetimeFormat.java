@@ -84,8 +84,8 @@ public class DatetimeFormat {
     }
 
     public static int dateDiff(Calendar o1, Calendar o2) {
+        Log.d(TAG, "_____dateDiff");
         long diffInMillies = Math.abs(o1.getTimeInMillis() - o2.getTimeInMillis());
-        int diff = (int) TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-        return diff;
+        return (int) TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
     }
 }

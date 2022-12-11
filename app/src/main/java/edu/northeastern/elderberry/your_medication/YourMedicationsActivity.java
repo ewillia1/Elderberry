@@ -9,7 +9,6 @@ import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -32,7 +31,6 @@ import java.util.Objects;
 
 import edu.northeastern.elderberry.LoginActivity;
 import edu.northeastern.elderberry.MedicationTrackerActivity;
-import edu.northeastern.elderberry.OnListItemClick;
 import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 
@@ -129,31 +127,15 @@ public class YourMedicationsActivity extends AppCompatActivity {
         // Passing an array into the recyclerview adapter.
         this.medAdapter = new MedicineAdapter(this.medicinesArrayList);
 
-        /**
-         * init a class which grab the position arg from child
-         * and use the key to grab the correct position of the medicine key
-          */
-        OnListItemClick onListItemClick = new OnListItemClick() {
-            @Override
-            public int getPos() {
-                return 0;
-            }
-
-            @Override
-            public void onClick(int position, CheckBox cb) {
-
-            }
-
-            @Override
-            public void onClick(int position) {
-                Log.d(TAG, "_____onClick: position = " + position + ", medKey = " + medKeyArrayList);
-                Intent intent = new Intent(YourMedicationsActivity.this, AddMedicationActivity.class);
-                Log.d(TAG, "_____onCreate, OnListItemClick, prior to medKey " + medKeyArrayList.get(position));
-                intent.putExtra(YOUR_MED_TO_EDIT_MED_KEY, medKeyArrayList.get(position));
-                Log.d(TAG, "_____onCreate, OnListItemClick, post medKey");
-                startActivity(intent);
-            }
-
+        // init a class which grab the position arg from child
+        // and use the key to grab the correct position of the medicine key
+        OnListItemClick onListItemClick = position -> {
+            Log.d(TAG, "_____onClick: position = " + position + ", medKey = " + medKeyArrayList);
+            Intent intent = new Intent(YourMedicationsActivity.this, AddMedicationActivity.class);
+            Log.d(TAG, "_____onCreate, OnListItemClick, prior to medKey " + medKeyArrayList.get(position));
+            intent.putExtra(YOUR_MED_TO_EDIT_MED_KEY, medKeyArrayList.get(position));
+            Log.d(TAG, "_____onCreate, OnListItemClick, post medKey");
+            startActivity(intent);
         };
 
         this.medAdapter.setClickListener(onListItemClick);

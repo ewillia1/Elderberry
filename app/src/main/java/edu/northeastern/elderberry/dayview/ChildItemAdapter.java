@@ -1,6 +1,5 @@
 package edu.northeastern.elderberry.dayview;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,27 +19,27 @@ import edu.northeastern.elderberry.R;
 public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.ChildViewHolder> {
     private static final String TAG = "ChildItemAdapter";
     private final List<ChildItem> childItemTitle;
-    private OnListItemClick childListener;
+    private static SetChildItemClickListener listener;
 
     // Constructor.
-    ChildItemAdapter(List<ChildItem> childItemList) {
+    ChildItemAdapter(List<ChildItem> childItemList, SetChildItemClickListener listener) {
         Log.d(TAG, "_____ChildItemAdapter");
         this.childItemTitle = childItemList;
+        ChildItemAdapter.listener = listener;
     }
 
-    public void setClickListener(OnListItemClick listener) {
-        this.childListener = listener;
-    }
+    //public void setClickListener(OnListItemClick listener) {
+    //    this.childListener = listener;
+    //}
 
     @NonNull
     @Override
     public ChildViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         Log.d(TAG, "_____onCreateViewHolder");
-        // Here we inflate the corresponding
-        // layout of the child item
+        // Here we inflate the corresponding layout of the child item.
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.child_item, viewGroup, false);
 
-        return new ChildViewHolder(view, childListener);
+        return new ChildViewHolder(view);
     }
 
     @Override
@@ -68,24 +67,12 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.Chil
         private final TextView childItemTitle;
         private final CheckBox takenCheckBox;
 
-        ChildViewHolder(View itemView, final OnListItemClick childListener) {
+        ChildViewHolder(View itemView) {
             super(itemView);
+            this.takenCheckBox = itemView.findViewById(R.id.checkbox_child_item);
+            this.childItemTitle = itemView.findViewById(R.id.child_item_title);
             Log.d(TAG, "_____ChildViewHolder");
-            takenCheckBox = itemView.findViewById(R.id.checkbox_child_item);
-            childItemTitle = itemView.findViewById(R.id.child_item_title);
-
-            //takenCheckBox.setChecked(true);
-            takenCheckBox.setOnClickListener(v -> {
-                Log.d(TAG, "_____MedicineHolder: ");
-                if (childListener != null) {
-                    int position = getLayoutPosition();
-
-                    if (position != RecyclerView.NO_POSITION) {
-                        // where child position is passed to listener
-                        childListener.onClick(position, takenCheckBox);
-                    }
-                }
-            });
+            this.takenCheckBox.setOnClickListener(v -> listener.childItemClicked(takenCheckBox.isChecked(), getLayoutPosition()));
         }
     }
 }

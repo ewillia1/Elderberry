@@ -42,6 +42,8 @@ import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 // 3 Todo to test if the taken field is working when frequency is changed when we edit the medication
 public class AddMedicationActivity extends AppCompatActivity {
     private static final String TAG = "AddMedicationActivity";
+    public static final String ADD_MED_KEY = "add_med_key";
+    public static final String DATE_KEY = "dateKey";
     private static final int MAX_INT = 12;
     private DatabaseReference userDatabase;
     private FirebaseAuth mAuth;
@@ -50,6 +52,7 @@ public class AddMedicationActivity extends AppCompatActivity {
     private boolean medicationDayViewKey;
     private boolean yourMedicationKey;
     private boolean medicationTrackerKey;
+    private String currentDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         this.medicationDayViewKey = getIntent().getBooleanExtra(MedicationDayViewActivity.MED_DAY_VIEW_KEY, false);
         this.yourMedicationKey = getIntent().getBooleanExtra(YourMedicationsActivity.YOUR_MED_KEY, false);
         this.medicationTrackerKey = getIntent().getBooleanExtra(MedicationTrackerActivity.MED_TRACKER_KEY, false);
+        this.currentDate = getIntent().getStringExtra(MedicationDayViewActivity.DATE_KEY);
 
         if (this.editMedKey == null) {
             setContentView(R.layout.add_med_main);
@@ -102,11 +106,14 @@ public class AddMedicationActivity extends AppCompatActivity {
                 (medicationDayViewKey) {
                     Log.d(TAG, "_____onCreate: came from Medication Day View, so I need to go back there.");
                     Intent intent = new Intent(this, MedicationDayViewActivity.class);
+                    intent.putExtra(DATE_KEY, this.currentDate);
+                    // Tell the new activity where you came from.
+                    intent.putExtra(ADD_MED_KEY, true);
                     startActivity(intent);
                 } else if
                     // Restart MedicationTrackerActivity if you are coming from there.
                 (medicationTrackerKey) {
-                    Log.d(TAG, "onCreate: came from Medication Tracker Home Page, so I need to go back there.");
+                    Log.d(TAG, "_____onCreate: came from Medication Tracker Home Page, so I need to go back there.");
                     Intent intent = new Intent(this, MedicationTrackerActivity.class);
                     startActivity(intent);
                 }
@@ -139,11 +146,14 @@ public class AddMedicationActivity extends AppCompatActivity {
                      (medicationDayViewKey) {
                         Log.d(TAG, "_____onCreate: came from Medication Day View, so I need to go back there.");
                         Intent intent = new Intent(this, MedicationDayViewActivity.class);
+                        intent.putExtra(DATE_KEY, this.currentDate);
+                        // Tell the new activity where you came from.
+                        intent.putExtra(ADD_MED_KEY, true);
                         startActivity(intent);
                     } else if
                         // Restart MedicationTrackerActivity if you are coming from there.
                     (medicationTrackerKey) {
-                        Log.d(TAG, "onCreate: came from Medication Tracker Home Page, so I need to go back there.");
+                        Log.d(TAG, "_____onCreate: came from Medication Tracker Home Page, so I need to go back there.");
                         Intent intent = new Intent(this, MedicationTrackerActivity.class);
                         startActivity(intent);
                     }
@@ -227,7 +237,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
         Map<String, List<Boolean>> takenMap = new HashMap<>();
         takenMap.put(takenKey, takenList);
-        Log.d(TAG, "updateDB:takenList from viewModel is  size" + takenList.size());
+        Log.d(TAG, "_____updateDB: takenList from viewModel is  size" + takenList.size());
 
         MedicineDoseTime med = new MedicineDoseTime(
                 doseMap,
@@ -281,14 +291,14 @@ public class AddMedicationActivity extends AppCompatActivity {
         Log.d(TAG, "_____filledInRequiredFields");
         if (this.viewModel.getMedName().getValue() == null || this.viewModel.getFromDate().getValue() == null
                 || this.viewModel.getToDate().getValue() == null || this.viewModel.getTimeFreq().getValue() == null || this.viewModel.getUnit().getValue() == null) {
-            Log.d(TAG, "filledInRequiredFields: (a field is null) false");
+            Log.d(TAG, "_____filledInRequiredFields: (a field is null) false");
             return false;
         } else if (this.viewModel.getMedName().getValue().isBlank() || this.viewModel.getMedName().getValue().isEmpty() ||
                 this.viewModel.getFromDate().getValue().isBlank() || this.viewModel.getFromDate().getValue().isEmpty() ||
                 this.viewModel.getToDate().getValue().isBlank() || this.viewModel.getToDate().getValue().isEmpty() ||
                 this.viewModel.getTimeFreq().getValue() == 0 ||
                 this.viewModel.getUnit().getValue().isBlank() || this.viewModel.getUnit().getValue().isEmpty()) {
-            Log.d(TAG, "filledInRequiredFields: (a non-time/dose field is blank or empty) false");
+            Log.d(TAG, "_____filledInRequiredFields: (a non-time/dose field is blank or empty) false");
             return false;
         }
         ArrayList<String> timeList = this.viewModel.getTimeStringArray();
@@ -388,5 +398,31 @@ public class AddMedicationActivity extends AppCompatActivity {
     public String getEditMedKey() {
         Log.d(TAG, "_____getEditMedKey");
         return this.editMedKey;
+    }
+
+    // Since we finish the activities if we did not override this method the back button would always
+    // bring the user back to the home page. We want the back button to bring the user back to where they came from.
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Log.d(TAG, "_____onBackPressed");
+        if (editMedKey != null || yourMedicationKey) {
+            Log.d(TAG, "_____onBackPressed: came from Your Medications, so I need to go back there. yourMedicationKey = " + yourMedicationKey);
+            Intent intent = new Intent(this, YourMedicationsActivity.class);
+            startActivity(intent);
+        } else if
+            // Restart MedicationDayViewActivity if coming from there.
+        (medicationDayViewKey) {
+            Log.d(TAG, "_____onBackPressed: came from Medication Day View, so I need to go back there.");
+            Intent intent = new Intent(this, MedicationDayViewActivity.class);
+            intent.putExtra(DATE_KEY, this.currentDate);
+            startActivity(intent);
+        } else if
+            // Restart MedicationTrackerActivity if you are coming from there.
+        (medicationTrackerKey) {
+            Log.d(TAG, "_____onBackPressed: came from Medication Tracker Home Page, so I need to go back there.");
+            Intent intent = new Intent(this, MedicationTrackerActivity.class);
+            startActivity(intent);
+        }
     }
 }
