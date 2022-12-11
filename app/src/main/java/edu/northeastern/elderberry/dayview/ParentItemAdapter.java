@@ -1,6 +1,5 @@
 package edu.northeastern.elderberry.dayview;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,8 +22,8 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
     // An object of RecyclerView.RecycledViewPool is created to share the Views between the child and the parent RecyclerViews.
     private final RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
     private final List<ParentItem> itemList;
-    private SetParentItemClickListener listener;
     SetParentItemClickListener rvClickListener;
+    private final SetParentItemClickListener listener;
 
     ParentItemAdapter(List<ParentItem> itemList, SetParentItemClickListener listener) {
         Log.d(TAG, "_____ParentItemAdapter");
@@ -68,7 +67,7 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
         SetChildItemClickListener childListener = new SetChildItemClickListener() {
             @Override
             public void childItemClicked(boolean checked, int childPosition) {
-                Log.d(TAG, "_____childItemClicked: parent position is "+ parentViewHolder.getLayoutPosition());
+                Log.d(TAG, "_____childItemClicked: parent position is " + parentViewHolder.getLayoutPosition());
                 listener.parentItemClicked(parentViewHolder.getLayoutPosition(), childPosition, checked);
             }
         };
