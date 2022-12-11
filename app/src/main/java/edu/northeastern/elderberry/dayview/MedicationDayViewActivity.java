@@ -165,11 +165,10 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         // Set a listener for the parentItemAdapter.
         this.parentItemAdapter = new ParentItemAdapter(this.medicineList, (parentPosition, childPosition, isChecked) -> {
             Log.d(TAG, "_____parentItemClicked: parentPosition = " + parentPosition + ", childPosition = " + childPosition + ", isChecked = " + isChecked);
-//            parentPos = parentPosition;
-//            childPos = childPosition;
-//            checkboxConfig(isChecked);
+            parentPos = parentPosition;
+            childPos = childPosition;
+            checkboxConfig(isChecked);
         });
-
 
         ParentRecyclerViewItem.setAdapter(this.parentItemAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
