@@ -1,5 +1,6 @@
 package edu.northeastern.elderberry.addMed;
 
+import static edu.northeastern.elderberry.util.DatetimeFormat.getDateCompoFromString;
 import static edu.northeastern.elderberry.util.DatetimeFormat.makeDateString;
 
 import android.app.DatePickerDialog;
@@ -27,6 +28,7 @@ import edu.northeastern.elderberry.R;
  * create an instance of this fragment.
  */
 
+// Todo set the calendar date picker to pre-sets
 public class SetDatesFragment extends Fragment {
     private static final String TAG = "SetDatesFragment";
     private static final int FONT_SIZE = 25;
@@ -108,11 +110,6 @@ public class SetDatesFragment extends Fragment {
         AddMedicationActivity addMedicationActivity = (AddMedicationActivity) getActivity();
         assert addMedicationActivity != null;
         String editMedKey = addMedicationActivity.getEditMedKey();
-        if (editMedKey != null) {
-            Log.d(TAG, "initDatePicker: non null editMedKey");
-            set_from.setText(this.viewModel.getFromDate().getValue());
-            set_to.setText(this.viewModel.getToDate().getValue());
-        }
 
         // From date.
         DatePickerDialog.OnDateSetListener from_dateSetListener = (view, year, month, day) -> {
@@ -138,6 +135,7 @@ public class SetDatesFragment extends Fragment {
         };
 
         Calendar calendar = Calendar.getInstance();
+
         int year1 = calendar.get(Calendar.YEAR);
         int month1 = calendar.get(Calendar.MONTH);
         int day1 = calendar.get(Calendar.DAY_OF_MONTH);
@@ -172,5 +170,20 @@ public class SetDatesFragment extends Fragment {
         };
 
         this.to_datePickerDialog = new DatePickerDialog(getContext(), style, to_dateSetListener, year1, month1, day1);
+
+        if (editMedKey != null) {
+            Log.d(TAG, "_____initDatePicker: non null editMedKey");
+            String fromDate = this.viewModel.getFromDate().getValue();
+            String toDate = this.viewModel.getToDate().getValue();
+
+            set_from.setText(fromDate);
+            from_datePickerDialog.updateDate(getDateCompoFromString(fromDate, "year"), getDateCompoFromString(fromDate, "month") - 1, getDateCompoFromString(fromDate, "dayOfMonth"));
+
+            set_to.setText(toDate);
+            to_datePickerDialog.updateDate(getDateCompoFromString(toDate, "year"), getDateCompoFromString(toDate, "month") - 1, getDateCompoFromString(toDate, "dayOfMonth"));
+            Log.d(TAG, "_____initDatePicker form date year " + getDateCompoFromString(fromDate, "year"));
+            Log.d(TAG, "_____initDatePicker form date month " + getDateCompoFromString(fromDate, "month"));
+            Log.d(TAG, "_____initDatePicker form date dayOfMonth " + getDateCompoFromString(fromDate, "dayOfMonth"));
+        }
     }
 }

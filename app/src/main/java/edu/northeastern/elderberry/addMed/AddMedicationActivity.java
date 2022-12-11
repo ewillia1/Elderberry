@@ -231,6 +231,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         doseMap.put(doseKey, doseList);
 
         String takenKey = viewModel.getTakenId().getValue();
+        viewModel.initializeTakenBooleanArray();
         List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
         Map<String, List<Boolean>> takenMap = new HashMap<>();
         takenMap.put(takenKey, takenList);
@@ -272,15 +273,16 @@ public class AddMedicationActivity extends AppCompatActivity {
                 this.viewModel.getUnit().getValue(),
                 this.viewModel.getTimeFreq().getValue()));
 
-        Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
-        databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(timeList);
-        databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").push().setValue(doseList);
 
         this.viewModel.initializeTakenBooleanArray();
         List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
         Log.d(TAG, "_____doAddDataToDb: before setting taken to db taken list is " + takenList);
         databaseReference.child(Objects.requireNonNull(db.getKey())).child("taken").push().setValue(takenList);
         databaseReference.orderByChild("fromDate");
+
+        Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
+        databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").push().setValue(doseList);
+        databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(timeList);
     }
 
     private boolean filledInRequiredFields() {
@@ -375,6 +377,7 @@ public class AddMedicationActivity extends AppCompatActivity {
                     viewModel.setTaken(entry.getValue());
                     Log.d(TAG, "_____onDataChange: set viewModel dose as" + viewModel.getTakenBooleanArray().toString());
                 }
+
             }
 
             @Override

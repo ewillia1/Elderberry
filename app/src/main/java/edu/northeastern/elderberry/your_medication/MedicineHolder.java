@@ -7,7 +7,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import edu.northeastern.elderberry.OnListItemClick;
 import edu.northeastern.elderberry.R;
 
 public class MedicineHolder extends RecyclerView.ViewHolder {

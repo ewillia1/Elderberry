@@ -15,17 +15,22 @@ import java.util.List;
 
 import edu.northeastern.elderberry.R;
 
+/**
+ * Accommodate long medicine names
+ */
 public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.ParentViewHolder> {
     private static final String TAG = "ParentItemAdapter";
     // An object of RecyclerView.RecycledViewPool is created to share the Views between the child and the parent RecyclerViews.
     private final RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
     private final List<ParentItem> itemList;
-    private final Context context;
+    //private final SetParentItemClickListener listener;
+    private SetParentItemClickListener listener;
+    SetParentItemClickListener rvClickListener;
 
-    ParentItemAdapter(List<ParentItem> itemList, Context context) {
+    ParentItemAdapter(List<ParentItem> itemList, SetParentItemClickListener listener) {
         Log.d(TAG, "_____ParentItemAdapter");
         this.itemList = itemList;
-        this.context = context;
+        this.listener = listener;
     }
 
     @NonNull
@@ -40,7 +45,7 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
 
     @Override
     public void onBindViewHolder(@NonNull ParentViewHolder parentViewHolder, int position) {
-        Log.d(TAG, "_____onBindViewHolder");
+        Log.d(TAG, "_____onBindViewHolder position is " + position);
         // Create an instance of the ParentItem class for the given position.
         ParentItem parentItem = itemList.get(position);
 
@@ -57,15 +62,31 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
         layoutManager.setInitialPrefetchItemCount(parentItem.getChildItemList().size());
 
         // Create an instance of the child item view adapter and set its adapter, layout manager and RecyclerViewPool.
-        ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), this.context);
+        // Set listener for childItemAdapter.
+        //ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), (checked, childPosition) -> listener.parentItemClicked(position, childPosition, checked));
+        //ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), );
+        SetChildItemClickListener childListener = new SetChildItemClickListener() {
+            @Override
+            public void childItemClicked(boolean checked, int childPosition) {
+                Log.d(TAG, "_____childItemClicked: parent position is "+ parentViewHolder.getLayoutPosition());
+                listener.parentItemClicked(parentViewHolder.getLayoutPosition(), childPosition, checked);
+            }
+        };
+        ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), childListener);
+        //childItemAdapter.setListener(childListener);
+        // Here we did not set listener for child adapter
+
         parentViewHolder.childRecyclerView.setLayoutManager(layoutManager);
         parentViewHolder.childRecyclerView.setAdapter(childItemAdapter);
         parentViewHolder.childRecyclerView.setRecycledViewPool(viewPool);
     }
 
+    public void setParentItemClickListener(SetParentItemClickListener rvClickListener) {
+        Log.d(TAG, "_____setRvItemClickListener");
+        this.rvClickListener = rvClickListener;
+    }
 
-    // This method returns the number of items we have added in the ParentItemList i.e. the number
-    // of instances we have created of the ParentItemList.
+    // This method returns the number of items we have added in the ParentItemList i.e. the number of instances we have created of the ParentItemList.
     @Override
     public int getItemCount() {
         Log.d(TAG, "_____getItemCount");

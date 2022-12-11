@@ -33,6 +33,7 @@ import java.util.Objects;
 
 import edu.northeastern.elderberry.LoginActivity;
 import edu.northeastern.elderberry.MedicationTrackerActivity;
+
 import edu.northeastern.elderberry.MyNotificationPublisher;
 import edu.northeastern.elderberry.NotificationUtil;
 import edu.northeastern.elderberry.OnListItemClick;
@@ -94,10 +95,10 @@ public class YourMedicationsActivity extends AppCompatActivity {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d(TAG, "_____onDataChange");
+                Log.d(TAG, "_____onDataChange: starting");
                 medicinesArrayList.clear();
 
-                // Loop through snapshot to get the medicines to put in the ArrayList medicinesArrayList.
+                // Loop through snapshot to get the medicines to put in the ArrayList medicines.
                 for (DataSnapshot d : snapshot.getChildren()) {
                     MedicineRow medRow = new MedicineRow(d.getKey(), String.valueOf(d.child("name").getValue()), String.valueOf(d.child("fromDate").getValue()), String.valueOf(d.child("toDate").getValue()));
                     medicinesArrayList.add(medRow);
@@ -115,8 +116,8 @@ public class YourMedicationsActivity extends AppCompatActivity {
                     medKeyArrayList.add(medicineId);
                 }
 
-                // Notify the adapter.
                 medAdapter.notifyDataSetChanged();
+                Log.d(TAG, "_____onDataChange: finished");
             }
 
             @Override
@@ -132,7 +133,8 @@ public class YourMedicationsActivity extends AppCompatActivity {
         // Passing an array into the recyclerview adapter.
         this.medAdapter = new MedicineAdapter(this.medicinesArrayList);
 
-        // What happens when you click a medication in the recycler view.
+        // init a class which grab the position arg from child
+        // and use the key to grab the correct position of the medicine key
         OnListItemClick onListItemClick = position -> {
             Log.d(TAG, "_____onClick: position = " + position + ", medKey = " + medKeyArrayList);
             Intent intent = new Intent(YourMedicationsActivity.this, AddMedicationActivity.class);

@@ -1,8 +1,10 @@
 package edu.northeastern.elderberry.util;
 
 import android.util.Log;
+import android.widget.Switch;
 
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 public class DatetimeFormat {
     private static final String TAG = "util.DatetimeFormat";
@@ -10,6 +12,21 @@ public class DatetimeFormat {
     public static String makeDateString(int day, int month, int year) {
         Log.d(TAG, "_____makeDateString");
         return getMonthFormat(month) + " " + day + ", " + year;
+    }
+
+
+    public static int getDateCompoFromString(String date, String compoType) {
+        String[] words = splitDateByWords(date);
+        int i = 0;
+        for (String word : words) {
+            Log.d(TAG, "makeStringDate: word " + i + " = " + word);
+            i++;
+        }
+
+        if (compoType == "year") return  Integer.parseInt(words[2]);
+        else if (compoType == "month") return  getMonthNumber(words[0]);
+        else if (compoType == "dayOfMonth") return  Integer.parseInt(words[1]);
+        else return 0;
     }
 
     public static Calendar makeStringDate(String date) {
@@ -80,5 +97,11 @@ public class DatetimeFormat {
 
         // Default should never happen.
         return 1;
+    }
+
+    public static int dateDiff(Calendar o1, Calendar o2) {
+        Log.d(TAG, "_____dateDiff");
+        long diffInMillies = Math.abs(o1.getTimeInMillis() - o2.getTimeInMillis());
+        return (int) TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
     }
 }

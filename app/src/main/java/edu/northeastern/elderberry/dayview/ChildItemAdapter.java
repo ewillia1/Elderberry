@@ -1,10 +1,11 @@
 package edu.northeastern.elderberry.dayview;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.Checkable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,12 +18,18 @@ import edu.northeastern.elderberry.R;
 public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.ChildViewHolder> {
     private static final String TAG = "ChildItemAdapter";
     private final List<ChildItem> childItemTitle;
+    private SetChildItemClickListener listener;
 
     // Constructor.
-    ChildItemAdapter(List<ChildItem> childItemList, Context context) {
+    ChildItemAdapter(List<ChildItem> childItemList, SetChildItemClickListener listener) {
         Log.d(TAG, "_____ChildItemAdapter");
         this.childItemTitle = childItemList;
+        this.listener = listener;
     }
+
+    //public void setClickListener(OnListItemClick listener) {
+    //    this.childListener = listener;
+    //}
 
     @NonNull
     @Override
@@ -43,6 +50,7 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.Chil
         // For the created instance, set title. No need to set the image for the ImageViews because
         // we have provided the source for the images in the layout file itself.
         childViewHolder.childItemTitle.setText(childItem.getChildItemTitle());
+        childViewHolder.takenCheckBox.setChecked(childItem.getTakenStatus());
     }
 
     @Override
@@ -54,14 +62,24 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.Chil
     }
 
     // This class is to initialize the Views present in the child RecyclerView.
-    static class ChildViewHolder extends RecyclerView.ViewHolder {
+    class ChildViewHolder extends RecyclerView.ViewHolder {
         private static final String TAG = "ChildViewHolder";
         private final TextView childItemTitle;
+        private final CheckBox takenCheckBox;
 
         ChildViewHolder(View itemView) {
             super(itemView);
+            this.takenCheckBox = itemView.findViewById(R.id.checkbox_child_item);
+            this.childItemTitle = itemView.findViewById(R.id.child_item_title);
+            //this.takenCheckBox.setChecked(true);
             Log.d(TAG, "_____ChildViewHolder");
-            childItemTitle = itemView.findViewById(R.id.child_item_title);
+            // this.takenCheckBox.setOnClickListener(v -> listener.childItemClicked(takenCheckBox.isChecked(), getLayoutPosition()));
+            takenCheckBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.childItemClicked(takenCheckBox.isChecked(), getLayoutPosition());
+                }
+            });
         }
     }
 }
