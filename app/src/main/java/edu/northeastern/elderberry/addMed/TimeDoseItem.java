@@ -6,11 +6,6 @@ import android.util.Log;
 
 public class TimeDoseItem implements Parcelable {
     private static final String TAG = "TimeDoseItem";
-    private int itemNumber;
-    private final String time;
-    private final String dose;
-    private final String unit;
-
     public static final Creator<TimeDoseItem> CREATOR = new Creator<>() {
         @Override
         public TimeDoseItem createFromParcel(Parcel in) {
@@ -24,6 +19,10 @@ public class TimeDoseItem implements Parcelable {
             return new TimeDoseItem[size];
         }
     };
+    private final String time;
+    private final String dose;
+    private final String unit;
+    private int itemNumber;
 
     // Used specifically in SetTimesFragment.java.
     public TimeDoseItem(int itemNumber) {
@@ -46,13 +45,14 @@ public class TimeDoseItem implements Parcelable {
         this.unit = in.readString();
     }
 
-    public void setItemNumber(int itemNumber) {
-        this.itemNumber = itemNumber;
-    }
-
     public int getItemNumber() {
         Log.d(TAG, "_____getItemNumber");
         return this.itemNumber;
+    }
+
+    public void setItemNumber(int itemNumber) {
+        Log.d(TAG, "_____setItemNumber");
+        this.itemNumber = itemNumber;
     }
 
     public String getTime() {

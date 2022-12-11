@@ -16,7 +16,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
-
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 public class TodaysMedicationsActivity extends AppCompatActivity {
@@ -101,7 +100,7 @@ public class TodaysMedicationsActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("hasLoggedIn", false);
             editor.apply();
-
+            MyNotificationPublisher.deletePendingIntents();
             FirebaseAuth.getInstance().signOut();
             intent = new Intent(this, LoginActivity.class);
             startActivity(intent);

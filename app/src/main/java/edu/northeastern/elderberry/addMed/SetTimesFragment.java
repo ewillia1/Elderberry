@@ -27,6 +27,7 @@ import edu.northeastern.elderberry.R;
  * create an instance of this fragment.
  */
 
+// Set time picker to pre-set
 public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener {
     private static final String TAG = "SetTimesFragment";
     private int numOfTimes;
@@ -100,8 +101,8 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
         assert addMedicationActivity != null;
         String editMedKey = addMedicationActivity.getEditMedKey();
 
-        // pre-fill
-        if (editMedKey != null) {
+        // Pre-fill.
+        if (editMedKey != null && this.viewModel.getTimeFreq().getValue() != null) {
             int freq = this.viewModel.getTimeFreq().getValue();
             int pos = freq - 1;
             autoCompleteTimeFreq.setText(time_frequencies[pos]);
@@ -124,20 +125,19 @@ public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener
             // Clear timeDoseAdapter (clearing the RecyclerView).
             timeDoseAdapter.clear();
 
-            // Clear the time and dose array in the view model.
-            this.viewModel.clear();
-
             this.numOfTimes = position + 1;
+            this.viewModel.setTimeFreq(this.numOfTimes);
 
+            // Clear the time and dose array in the view model.
+            this.viewModel.reinitializeTimeAndDoseArray();
+            this.viewModel.initializeTakenBooleanArray();
             Log.d(TAG, "_____onCreateView: this.numOfTimes = " + this.numOfTimes);
 
             // Add number of cards in recycler view corresponding to the time frequency the user picked.
             for (int i = 0; i < this.numOfTimes; i++) {
                 Log.d(TAG, "_____onCreateView: for loop iteration: " + i);
-                //timeDoseItemArrayList.add(new TimeDoseItem(position));
                 timeDoseItemArrayList.add(new TimeDoseItem(position));
             }
-            this.viewModel.setTimeFreq(this.numOfTimes);
         });
 
         // Instantiate the recyclerView.

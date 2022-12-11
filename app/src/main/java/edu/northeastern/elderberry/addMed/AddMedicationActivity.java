@@ -2,6 +2,7 @@ package edu.northeastern.elderberry.addMed;
 
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -30,30 +31,42 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import edu.northeastern.elderberry.MedicationTrackerActivity;
 import edu.northeastern.elderberry.Medicine;
+import edu.northeastern.elderberry.MyNotificationPublisher;
 import edu.northeastern.elderberry.NotificationUtil;
 import edu.northeastern.elderberry.MedicineDoseTime;
 import edu.northeastern.elderberry.R;
+import edu.northeastern.elderberry.dayview.MedicationDayViewActivity;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 // 3 Todo to test if the taken field is working when frequency is changed when we edit the medication
 public class AddMedicationActivity extends AppCompatActivity {
-
     private static final String TAG = "AddMedicationActivity";
+    public static final String ADD_MED_KEY = "add_med_key";
+    public static final String DATE_KEY = "dateKey";
     private static final int MAX_INT = 12;
     private DatabaseReference userDatabase;
     private FirebaseAuth mAuth;
     private ItemViewModel viewModel;
     private String editMedKey;
+    private boolean medicationDayViewKey;
+    private boolean yourMedicationKey;
+    private boolean medicationTrackerKey;
+    private String currentDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "_____onCreate");
 
-        editMedKey = getIntent().getStringExtra(YourMedicationsActivity.YOUR_MED_TO_EDIT_MED_KEY);
+        this.editMedKey = getIntent().getStringExtra(YourMedicationsActivity.YOUR_MED_TO_EDIT_MED_KEY);
+        this.medicationDayViewKey = getIntent().getBooleanExtra(MedicationDayViewActivity.MED_DAY_VIEW_KEY, false);
+        this.yourMedicationKey = getIntent().getBooleanExtra(YourMedicationsActivity.YOUR_MED_KEY, false);
+        this.medicationTrackerKey = getIntent().getBooleanExtra(MedicationTrackerActivity.MED_TRACKER_KEY, false);
+        this.currentDate = getIntent().getStringExtra(MedicationDayViewActivity.DATE_KEY);
 
-        if (editMedKey == null) {
+        if (this.editMedKey == null) {
             setContentView(R.layout.add_med_main);
         } else {
             setContentView(R.layout.edit_med_main);
@@ -83,6 +96,30 @@ public class AddMedicationActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.cancel_add || itemId == R.id.cancel_edit) {
+                // Finish add (edit) activity and go back to where you came from.
+                // Restart YourMedicationsActivity if coming from there.
+                if (editMedKey != null || yourMedicationKey) {
+                    Log.d(TAG, "_____onCreate: came from Your Medications, so I need to go back there. yourMedicationKey = " + yourMedicationKey);
+                    Intent intent = new Intent(this, YourMedicationsActivity.class);
+                    startActivity(intent);
+                } else if
+                    // Restart MedicationDayViewActivity if coming from there.
+                (medicationDayViewKey) {
+                    Log.d(TAG, "_____onCreate: came from Medication Day View, so I need to go back there.");
+                    Intent intent = new Intent(this, MedicationDayViewActivity.class);
+                    intent.putExtra(DATE_KEY, this.currentDate);
+                    // Tell the new activity where you came from.
+                    intent.putExtra(ADD_MED_KEY, true);
+                    startActivity(intent);
+                } else if
+                    // Restart MedicationTrackerActivity if you are coming from there.
+                (medicationTrackerKey) {
+                    Log.d(TAG, "_____onCreate: came from Medication Tracker Home Page, so I need to go back there.");
+                    Intent intent = new Intent(this, MedicationTrackerActivity.class);
+                    startActivity(intent);
+                }
+
+                // Finish AddMedicationActivity.
                 finish();
                 return true;
             } else if (itemId == R.id.add_med || itemId == R.id.edit_med) {
@@ -98,13 +135,35 @@ public class AddMedicationActivity extends AppCompatActivity {
                     }
                     int msg = itemId == R.id.add_med ? R.string.successful_add : R.string.successful_saved;
                     Toast.makeText(AddMedicationActivity.this, msg, Toast.LENGTH_SHORT).show();
-                    finish();
-                    NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+
+                    // Finish add (edit) activity and go back to where you came from.
+                    // Restart YourMedicationsActivity if coming from there.
+                    if (editMedKey != null || yourMedicationKey) {
+                        Log.d(TAG, "_____onCreate: came from Your Medications, so I need to go back there. yourMedicationKey = " + yourMedicationKey);
+                        Intent intent = new Intent(this, YourMedicationsActivity.class);
+                        startActivity(intent);
+                    } else if
+                        // Restart MedicationDayViewActivity if coming from there.
+                     (medicationDayViewKey) {
+                        Log.d(TAG, "_____onCreate: came from Medication Day View, so I need to go back there.");
+                        Intent intent = new Intent(this, MedicationDayViewActivity.class);
+                        intent.putExtra(DATE_KEY, this.currentDate);
+                        // Tell the new activity where you came from.
+                        intent.putExtra(ADD_MED_KEY, true);
+                        startActivity(intent);
+                    } else if
+                        // Restart MedicationTrackerActivity if you are coming from there.
+                    (medicationTrackerKey) {
+                        Log.d(TAG, "_____onCreate: came from Medication Tracker Home Page, so I need to go back there.");
+                        Intent intent = new Intent(this, MedicationTrackerActivity.class);
+                        startActivity(intent);
                     }
+
+                    // Finish AddMedicationActivity.
+                    finish();
+
+                    MyNotificationPublisher.deletePendingIntents();
+                    NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                     NotificationUtil.getMedicationInfo(getApplicationContext(), notificationManager);
                     return true;
                 } else {
@@ -147,19 +206,18 @@ public class AddMedicationActivity extends AppCompatActivity {
             this.viewModel.getDose(i).observe(this, s -> Log.d(TAG, "_____onChanged: dose " + (finalI + 1) + " entered = " + s));
         }
 
-        // get Intent from your Medication
+        // Get intent from your Medication.
         retrieveMedData(editMedKey);
     }
 
-
     private void updateDB() {
+        Log.d(TAG, "_____updateDB: ");
         if (editMedKey == null) {
             throw new RuntimeException("editMed key is null, doAddDataToDb should be called");
         }
 
         FirebaseUser user = this.mAuth.getCurrentUser();
         assert user != null;
-        Log.d(TAG, "_____updateDB: ");
         DatabaseReference db = this.userDatabase.child(user.getUid()).child(editMedKey);
 
         String timeKey = viewModel.getTimeId().getValue();
@@ -173,21 +231,22 @@ public class AddMedicationActivity extends AppCompatActivity {
         doseMap.put(doseKey, doseList);
 
         String takenKey = viewModel.getTakenId().getValue();
+        viewModel.initializeTakenBooleanArray();
         List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
         Map<String, List<Boolean>> takenMap = new HashMap<>();
         takenMap.put(takenKey, takenList);
-        Log.d(TAG, "updateDB:takenList from viewModel is  size" + takenList.size());
+        Log.d(TAG, "_____updateDB: takenList from viewModel is  size" + takenList.size());
 
         MedicineDoseTime med = new MedicineDoseTime(
                 doseMap,
                 timeMap,
                 takenMap,
-                viewModel.getMedName().getValue(),
-                viewModel.getInformation().getValue(),
-                viewModel.getFromDate().getValue(),
-                viewModel.getToDate().getValue(),
-                viewModel.getUnit().getValue(),
-                viewModel.getTimeFreq().getValue());
+                this.viewModel.getMedName().getValue(),
+                this.viewModel.getInformation().getValue(),
+                this.viewModel.getFromDate().getValue(),
+                this.viewModel.getToDate().getValue(),
+                this.viewModel.getUnit().getValue(),
+                this.viewModel.getTimeFreq().getValue());
 
         Log.d(TAG, "_____updateDB med is " + med);
         db.setValue(med);
@@ -206,36 +265,38 @@ public class AddMedicationActivity extends AppCompatActivity {
         List<String> timeList = this.viewModel.getTimeStringArray();
         List<String> doseList = this.viewModel.getDoseStringArray();
 
-        db.setValue(new Medicine(this.viewModel.getMedId().getValue(), this.viewModel.getMedName().getValue(),
+        db.setValue(new Medicine(this.viewModel.getMedId().getValue(),
+                this.viewModel.getMedName().getValue(),
                 this.viewModel.getInformation().getValue(),
                 this.viewModel.getFromDate().getValue(),
                 this.viewModel.getToDate().getValue(),
                 this.viewModel.getUnit().getValue(),
                 this.viewModel.getTimeFreq().getValue()));
 
-        Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
-        databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(timeList);
-        databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").push().setValue(doseList);
 
         this.viewModel.initializeTakenBooleanArray();
         List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
         Log.d(TAG, "_____doAddDataToDb: before setting taken to db taken list is " + takenList);
         databaseReference.child(Objects.requireNonNull(db.getKey())).child("taken").push().setValue(takenList);
         databaseReference.orderByChild("fromDate");
+
+        Log.d(TAG, "_____doAddDataToDb: db.getKey() = " + db.getKey());
+        databaseReference.child(Objects.requireNonNull(db.getKey())).child("dose").push().setValue(doseList);
+        databaseReference.child(Objects.requireNonNull(db.getKey())).child("time").push().setValue(timeList);
     }
 
     private boolean filledInRequiredFields() {
         Log.d(TAG, "_____filledInRequiredFields");
         if (this.viewModel.getMedName().getValue() == null || this.viewModel.getFromDate().getValue() == null
                 || this.viewModel.getToDate().getValue() == null || this.viewModel.getTimeFreq().getValue() == null || this.viewModel.getUnit().getValue() == null) {
-            Log.d(TAG, "filledInRequiredFields: (a field is null) false");
+            Log.d(TAG, "_____filledInRequiredFields: (a field is null) false");
             return false;
         } else if (this.viewModel.getMedName().getValue().isBlank() || this.viewModel.getMedName().getValue().isEmpty() ||
                 this.viewModel.getFromDate().getValue().isBlank() || this.viewModel.getFromDate().getValue().isEmpty() ||
                 this.viewModel.getToDate().getValue().isBlank() || this.viewModel.getToDate().getValue().isEmpty() ||
                 this.viewModel.getTimeFreq().getValue() == 0 ||
                 this.viewModel.getUnit().getValue().isBlank() || this.viewModel.getUnit().getValue().isEmpty()) {
-            Log.d(TAG, "filledInRequiredFields: (a non-time/dose field is blank or empty) false");
+            Log.d(TAG, "_____filledInRequiredFields: (a non-time/dose field is blank or empty) false");
             return false;
         }
         ArrayList<String> timeList = this.viewModel.getTimeStringArray();
@@ -258,26 +319,29 @@ public class AddMedicationActivity extends AppCompatActivity {
         return true;
     }
 
-
     /**
      * Based on the user selection from yourMedication, this function retrieve the corresponding
      * data from the database and pass these data to the viewModel so that other fragments
      * can use these data to pre-fill the fields.
      */
     private void retrieveMedData(String editMedKey) {
+        Log.d(TAG, "_____retrieveMedData");
         if (editMedKey == null) return;
 
         DatabaseReference medDatabase = this.userDatabase.child(Objects.requireNonNull(this.mAuth.getCurrentUser()).getUid());
 
         medDatabase.addValueEventListener(new ValueEventListener() {
-
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 MedicineDoseTime med = snapshot.child(editMedKey).getValue(MedicineDoseTime.class);
 
+                if (med == null) {
+                    Log.d(TAG, "_____onDataChange: med == null");
+                    return;
+                }
+
                 Log.d(TAG, "_____retrieveMedData_onDataChange: snapshot getChildren returns" + snapshot.child(editMedKey));
 
-                assert med != null;
                 Log.d(TAG, "_____onDataChange: med retrieved from db is " + med);
                 viewModel.setMedName(med.getName());
                 viewModel.setFromDate(med.getFromDate());
@@ -286,21 +350,21 @@ public class AddMedicationActivity extends AppCompatActivity {
                 viewModel.setInformation(med.getInformation());
                 viewModel.setTimeFreq(med.getFreq());
 
-                // clear time & dose array
-                viewModel.clear();
+                // Clear time & dose array.
+                viewModel.reinitializeTimeAndDoseArray();
 
-                // when first retrieved from the db, the data works fine
-                // in the second instance where it is saved & retrieved it did not work as expected
+                // When first retrieved from the db, the data works fine
+                // in the second instance where it is saved & retrieved it did not work as expected.
                 Log.d(TAG, "_____onDataChange: child time of snapshot.child(editMedkey) is " + snapshot.child(editMedKey).child("time"));
                 for (Map.Entry<String, List<String>> entry : med.getTime().entrySet()) {
-                    // there is only one key in the hashmap
+                    // There is only one key in the hashmap.
                     viewModel.setTimeId(entry.getKey());
                     viewModel.setTime(entry.getValue());
                     Log.d(TAG, "_____onDataChange: set viewModel time as" + viewModel.getTimeStringArray().toString());
                 }
 
                 for (Map.Entry<String, List<String>> entry : med.getDose().entrySet()) {
-                    // there is only one key in the hashmap
+                    // There is only one key in the hashmap.
                     viewModel.setDoseId(entry.getKey());
                     viewModel.setDose(entry.getValue());
                     Log.d(TAG, "_____onDataChange: set viewModel dose as" + viewModel.getDoseStringArray().toString());
@@ -308,7 +372,7 @@ public class AddMedicationActivity extends AppCompatActivity {
 
                 viewModel.initializeTakenBooleanArray();
                 for (Map.Entry<String, List<Boolean>> entry : med.getTaken().entrySet()) {
-                    // there is only one key in the hashmap
+                    // There is only one key in the hashmap.
                     viewModel.setTakenId(entry.getKey());
                     viewModel.setTaken(entry.getValue());
                     Log.d(TAG, "_____onDataChange: set viewModel dose as" + viewModel.getTakenBooleanArray().toString());
@@ -330,6 +394,33 @@ public class AddMedicationActivity extends AppCompatActivity {
      * @return the hashed key of the medication selected in the database
      */
     public String getEditMedKey() {
+        Log.d(TAG, "_____getEditMedKey");
         return this.editMedKey;
+    }
+
+    // Since we finish the activities if we did not override this method the back button would always
+    // bring the user back to the home page. We want the back button to bring the user back to where they came from.
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Log.d(TAG, "_____onBackPressed");
+        if (editMedKey != null || yourMedicationKey) {
+            Log.d(TAG, "_____onBackPressed: came from Your Medications, so I need to go back there. yourMedicationKey = " + yourMedicationKey);
+            Intent intent = new Intent(this, YourMedicationsActivity.class);
+            startActivity(intent);
+        } else if
+            // Restart MedicationDayViewActivity if coming from there.
+        (medicationDayViewKey) {
+            Log.d(TAG, "_____onBackPressed: came from Medication Day View, so I need to go back there.");
+            Intent intent = new Intent(this, MedicationDayViewActivity.class);
+            intent.putExtra(DATE_KEY, this.currentDate);
+            startActivity(intent);
+        } else if
+            // Restart MedicationTrackerActivity if you are coming from there.
+        (medicationTrackerKey) {
+            Log.d(TAG, "_____onBackPressed: came from Medication Tracker Home Page, so I need to go back there.");
+            Intent intent = new Intent(this, MedicationTrackerActivity.class);
+            startActivity(intent);
+        }
     }
 }

@@ -1,6 +1,7 @@
 package edu.northeastern.elderberry;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.util.Log;
 
@@ -21,11 +22,10 @@ import java.util.Locale;
 import java.util.Objects;
 
 public class NotificationUtil {
-
     private static final String TAG = "NotificationUtil";
 
-
     public static void getMedicationInfo(Context context, NotificationManager notificationManager) {
+        Log.d(TAG, "_____getMedicationInfo");
         DatabaseReference userDB;
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         List<MedicineDoseTime> medicineList = new ArrayList<>();
@@ -33,30 +33,28 @@ public class NotificationUtil {
         userDB = FirebaseDatabase.getInstance().getReference();
         String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
-        // Todo to provide the correct username based on log-in info
         userDB.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d(TAG, "_____onDataChange: ");
                 notificationManager.deleteNotificationChannel(MyNotificationPublisher.NOTIFICATION_CHANNEL_ID);
                 medicineList.clear();
-
-                for (DataSnapshot d : snapshot.getChildren()) {
-                    MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
-                    medicineList.add(medicineDoseTime);
-                }
+                    for (DataSnapshot d : snapshot.getChildren()) {
+                        MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
+                        medicineList.add(medicineDoseTime);
+                    }
                 scheduleMedicationNotifications(medicineList, context);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.d(TAG, "_____onCancelled");
             }
         });
-
     }
 
     private static void scheduleMedicationNotifications(List<MedicineDoseTime> medicines, Context context) {
+        Log.d(TAG, "_____scheduleMedicationNotifications");
         List<DateTimeDose> dates = new ArrayList<>();
         for (MedicineDoseTime doseTime : medicines) {
             String fromDate = doseTime.getFromDate();

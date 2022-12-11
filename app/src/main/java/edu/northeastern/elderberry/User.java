@@ -2,7 +2,7 @@ package edu.northeastern.elderberry;
 
 import android.util.Log;
 
-@SuppressWarnings("unused")
+// Class used in CreateAccountActivity.java.
 public class User {
     private static final String TAG = "User";
     public String firstName;
