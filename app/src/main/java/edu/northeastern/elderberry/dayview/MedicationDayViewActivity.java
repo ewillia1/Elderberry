@@ -43,6 +43,7 @@ import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 import edu.northeastern.elderberry.util.DatetimeFormat;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
+// Todo handle the case where taken, time, dose array size added not properly
 public class MedicationDayViewActivity extends AppCompatActivity {
     public static final String MED_DAY_VIEW_KEY = "medDayViewKey";
     public static final String DATE_KEY = "date_key";
@@ -273,6 +274,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         int dayOffset = DatetimeFormat.dateDiff(
                 makeStringDate(med.getFromDate()),
                 makeStringDate(currentDate));
+
         Log.d(TAG, "_____checkboxConfig num of days from " + med.getFromDate() + " is " + dayOffset);
 
         int firstIndexForDay = timeFreq * dayOffset;

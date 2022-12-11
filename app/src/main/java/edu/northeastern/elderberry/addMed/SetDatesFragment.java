@@ -27,6 +27,7 @@ import edu.northeastern.elderberry.R;
  * create an instance of this fragment.
  */
 
+// Todo set the calendar date picker to pre-sets
 public class SetDatesFragment extends Fragment {
     private static final String TAG = "SetDatesFragment";
     private static final int FONT_SIZE = 25;
