@@ -156,14 +156,13 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                     // Slice the correct subset of booleans
                     List<Boolean> takenToday = getTakenToday(medicineDoseTime);
 
-                    // initialize the childItme & add it to child
+                    // initialize the childItem & add it to child
                     for (int i = 0; i < scheduledTime.size(); i++) {
                         ChildItem fd = new ChildItem(scheduledTime.get(i), takenToday.get(i));
                         Log.d(TAG, "_____onDataChange: childItem " + fd.toString());
                         children.add(fd);
                     }
 
-                    // Done
                     medicineList.add(new ParentItem(medicineDoseTime.getName(), children));
                     medKeyList.add(d.getKey());
                     //takenTodayList.add(getTakenToday(medicineDoseTime));
@@ -209,6 +208,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         int dayOffset = DatetimeFormat.dateDiff(
                 makeStringDate(med.getFromDate()),
                 makeStringDate(currentDate));
+
         int freq = med.getFreq();
         int startIndex = dayOffset * freq;
         int endIndex = startIndex + freq;

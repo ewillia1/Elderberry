@@ -234,6 +234,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         doseMap.put(doseKey, doseList);
 
         String takenKey = viewModel.getTakenId().getValue();
+        viewModel.initializeTakenBooleanArray();
         List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
         Map<String, List<Boolean>> takenMap = new HashMap<>();
         takenMap.put(takenKey, takenList);
