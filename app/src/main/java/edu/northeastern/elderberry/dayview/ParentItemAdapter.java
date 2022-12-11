@@ -62,7 +62,15 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
 
         // Create an instance of the child item view adapter and set its adapter, layout manager and RecyclerViewPool.
         // Set listener for childItemAdapter.
-        ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), (checked, childPosition) -> listener.parentItemClicked(parentViewHolder.getAbsoluteAdapterPosition(), childPosition, checked));
+        //ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), (checked, childPosition) -> listener.parentItemClicked(position, childPosition, checked));
+        //ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), );
+        ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), new SetChildItemClickListener() {
+            @Override
+            public void childItemClicked(boolean checked, int childPosition) {
+                listener.parentItemClicked(parentViewHolder.getAbsoluteAdapterPosition(), childPosition, checked);
+            }
+        });
+
         parentViewHolder.childRecyclerView.setLayoutManager(layoutManager);
         parentViewHolder.childRecyclerView.setAdapter(childItemAdapter);
         parentViewHolder.childRecyclerView.setRecycledViewPool(viewPool);
