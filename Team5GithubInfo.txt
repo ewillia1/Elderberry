@@ -1,7 +1,9 @@
 REMARK: 
-The following credentials are provided for testing purpose. However, feel free to create your own account and password too!
+a. The following credentials are provided for testing purpose. However, feel free to create your own account and password too!
   Account: team5groupassignment@gmail.com
   Password: password
+b. If running the App on emulator, use API 29 and above. Some notification functionality is only campatable with API 29 and newer.
+  
 
 SUBMISSION REQUIREMENTS:
 a. Real names: Christopher McCune, Elizabeth Williams, Shriya Hukkeri, and Zhengyu Yang
