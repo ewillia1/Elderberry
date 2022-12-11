@@ -22,8 +22,8 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
     // An object of RecyclerView.RecycledViewPool is created to share the Views between the child and the parent RecyclerViews.
     private final RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
     private final List<ParentItem> itemList;
-    SetParentItemClickListener rvClickListener;
-    private final SetParentItemClickListener listener;
+//    SetParentItemClickListener rvClickListener;
+    private SetParentItemClickListener listener;
 
     ParentItemAdapter(List<ParentItem> itemList, SetParentItemClickListener listener) {
         Log.d(TAG, "_____ParentItemAdapter");
