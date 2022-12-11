@@ -74,6 +74,7 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.Chil
             takenCheckBox = itemView.findViewById(R.id.checkbox_child_item);
             childItemTitle = itemView.findViewById(R.id.child_item_title);
 
+            //takenCheckBox.setChecked(true);
             takenCheckBox.setOnClickListener(v -> {
                 Log.d(TAG, "_____MedicineHolder: ");
                 if (childListener != null) {

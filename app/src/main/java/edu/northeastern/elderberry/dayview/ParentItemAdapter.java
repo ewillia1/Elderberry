@@ -1,6 +1,7 @@
 package edu.northeastern.elderberry.dayview;
 
 import android.content.Context;
+import android.text.BoringLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,17 +28,17 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
     // An object of RecyclerView.RecycledViewPool is created to share the Views between the child and the parent RecyclerViews.
     private final RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
     private final List<ParentItem> itemList;
-    private final Context context;
+    private List<List<Boolean>> takenTodayList;
     ParentItemClickListener rvClickListener;
     OnListItemClick childListener;
     private int childPos;
     private int parentPos;
     private CheckBox takenCheckBox;
 
-    ParentItemAdapter(List<ParentItem> itemList, Context context) {
+    ParentItemAdapter(List<ParentItem> itemList, List<List<Boolean>> taken) {
         Log.d(TAG, "_____ParentItemAdapter");
         this.itemList = itemList;
-        this.context = context;
+        this.takenTodayList = taken;
     }
 
 
@@ -70,12 +71,12 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
         layoutManager.setInitialPrefetchItemCount(parentItem.getChildItemList().size());
 
         // Create an instance of the child item view adapter and set its adapter, layout manager and RecyclerViewPool.
+        // Todo elt childItemAdapter to accept the takenList
         ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList());
         parentViewHolder.childRecyclerView.setLayoutManager(layoutManager);
         parentViewHolder.childRecyclerView.setAdapter(childItemAdapter);
         parentViewHolder.childRecyclerView.setRecycledViewPool(viewPool);
 
-        // Todo enable this onClickListener
         OnListItemClick onListItemClick = new OnListItemClick() {
             @Override
             public void onClick(int position) {

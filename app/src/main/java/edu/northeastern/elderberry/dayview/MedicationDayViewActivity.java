@@ -51,6 +51,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
     private static final String TAG = "MedicationDayViewActivity";
     public static final String MED_DAY_VIEW_KEY = "medDayViewKey";
     private final List<ParentItem> medicineList = new ArrayList<>();
+    private final List<List<Boolean>> takenTodayList = new ArrayList<>();
     private ArrayList<MedicineDoseTime> medDoseTimeList = new ArrayList<>();
     private ArrayList<String> medKeyList = new ArrayList<>();
     //private final ArrayList<Boolean> takenList = new ArrayList<Boolean>();
@@ -62,6 +63,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private int parentPos;
     private int childPos;
+    //private boolean reloadDb = true;
     ParentItemClickListener rvItemClickListener;
 
     @Override
@@ -125,6 +127,8 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                 // Todo reference https://www.folkstalk.com/tech/nested-recyclerview-onclicklistener-with-examples/
                 // To figure out which position has been clicked?
 
+                // if (!reloadDb) return;
+
                 for (DataSnapshot d : snapshot.getChildren()) {
                     List<ChildItem> children = new ArrayList<>();
 //                    Log.d(TAG, "_____onDataChange: level 1 ");
@@ -160,6 +164,8 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                     }
                     medicineList.add(new ParentItem(medicineDoseTime.getName(), children));
                     medKeyList.add(d.getKey());
+                    takenTodayList.add(getTakenToday(medicineDoseTime));
+                    // Todo: filter the taken array for rendering. subset of taken
                     medDoseTimeList.add(medicineDoseTime);
                     // New arrayList with
                 }
@@ -178,7 +184,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         ParentRecyclerViewItem.setHasFixedSize(true);
         ParentRecyclerViewItem.setItemAnimator(new DefaultItemAnimator());
 
-        this.parentItemAdapter = new ParentItemAdapter(this.medicineList, this);
+        this.parentItemAdapter = new ParentItemAdapter(this.medicineList, this.takenTodayList);
 
 
         // Todo set onItemClick listener
@@ -192,10 +198,8 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                 boolean checked = cb.isChecked();
                 Log.d(TAG, "_____onCheckboxClicked: checked = " + checked);
 
+
                 checkboxConfig(checked);
-                //if (view.getId() == R.id.checkbox_child_item) {
-                //    checkboxConfig(checked);
-                //}
                 Log.d(TAG, "_____onChildItemClick: parentPosition is " + parentPosition);
                 Log.d(TAG, "_____onChildItemClick: childPosition is " + childPosition);
             }
@@ -205,6 +209,27 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         ParentRecyclerViewItem.setLayoutManager(layoutManager);
     }
 
+    private List<Boolean> getTakenToday(MedicineDoseTime med) {
+
+        int dayOffset = DatetimeFormat.dateDiff(
+                makeStringDate(med.getFromDate()),
+                makeStringDate(currentDate));
+        int freq = med.getFreq();
+        int startIndex = dayOffset;
+        int endIndex = startIndex + freq;
+        List<Boolean> takenVal = new ArrayList<>();
+        for (Map.Entry<String, List<Boolean>> entry : med.getTaken().entrySet()) {
+            takenVal = entry.getValue(); //
+        }
+
+        Log.d(TAG, "_____getTakenToday med name is " + med.getName());
+        Log.d(TAG, "_____getTakenToday med fromDate is " + med.getFromDate());
+        Log.d(TAG, "_____getTakenToday start index is " + startIndex + " endIndex is " + endIndex);
+        Log.d(TAG, "_____getTakenToday taken array is  " + takenVal.toString());
+        Log.d(TAG, "_____getTakenToday takensubset is  " + takenVal.subList(startIndex, endIndex));
+
+        return takenVal.subList(startIndex, endIndex);
+    }
 
     private boolean isCurrentDate(MedicineDoseTime medicineDoseTime) throws ParseException {
         Log.d(TAG, "_____isCurrentDate");
@@ -278,27 +303,33 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         MedicineDoseTime med = this.medDoseTimeList.get(this.parentPos);
         med.getTaken();
         String takenKey = "";
-        List<Boolean> takenVal = new ArrayList<>();
+
         String medKey = medKeyList.get(parentPos);
+        List<Boolean> takenVal = new ArrayList<>(); // ???
+
         for (Map.Entry<String, List<Boolean>> entry : med.getTaken().entrySet()) {
             // There is only one key in the hashmap.
             takenKey = entry.getKey(); // what we want
-            takenVal = entry.getValue();
+            takenVal = entry.getValue(); //
             Log.d(TAG, "_____setCheckbox: takenKey is " + takenKey + "medkey at parentPos is " + medKey);
             //setTaken(entry.getValue());
             //Log.d(TAG, "_____onDataChange: set viewModel dose as" + viewModel.getTakenBooleanArray().toString());
         }
+        // good upto here
+        /////////////////////
 
-        takenVal.set(index, checked);
+        // Check if the checkbox status is aligned with the db taken status
+        //if (checked != takenVal.get(index)) {
+        //    takenVal.set(index, checked);
+        //} ;
 
         if (!takenKey.equals("")) {
             Log.d(TAG, "_____setCheckbox: takenKey is not empty and takenVal was updated to " + takenVal);
             Map<String, Object> taken = new HashMap<>();
             taken.put(takenKey, takenVal);
-            medDatabase.child(medKey).child("taken").updateChildren(taken);
+            // reloadDb = false;
+            medDatabase.child(medKey).child("taken").updateChildren(taken);// a database action is triggered
         }
-
-
 
         // * Access particular medication
         // * Access taken array (get taken ID key)

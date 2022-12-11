@@ -17,13 +17,9 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/OnListItemClick.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/OnListItemClick.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/AddMedicationActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/addMed/AddMedicationActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/dayview/ChildItemAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/dayview/ChildItemAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/dayview/MedicationDayViewActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/dayview/MedicationDayViewActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/dayview/ParentItemAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/dayview/ParentItemAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/util/DatetimeFormat.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/util/DatetimeFormat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/your_medication/YourMedicationsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/northeastern/elderberry/your_medication/YourMedicationsActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
