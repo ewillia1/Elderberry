@@ -35,8 +35,7 @@
                 android:layout_below="@+id/medScheduleTextView"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="5dp"
-                android:layout_toEndOf="@id/medScheduleTextView"
-                android:onClick="onCheckboxClicked" />
+                android:layout_toEndOf="@id/medScheduleTextView" />
 
 
         </RelativeLayout>

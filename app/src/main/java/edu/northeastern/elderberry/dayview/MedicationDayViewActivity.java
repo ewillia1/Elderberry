@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,7 +36,6 @@ import java.util.Map;
 import java.util.Objects;
 
 import edu.northeastern.elderberry.MedicineDoseTime;
-import edu.northeastern.elderberry.ParentItemClickListener;
 import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 import edu.northeastern.elderberry.util.DatetimeFormat;
@@ -48,11 +46,8 @@ public class MedicationDayViewActivity extends AppCompatActivity {
     public static final String DATE_KEY = "date_key";
     private static final String TAG = "MedicationDayViewActivity";
     private final List<ParentItem> medicineList = new ArrayList<>();
-    //private final List<List<Boolean>> takenTodayList = new ArrayList<>();
-    private ArrayList<MedicineDoseTime> medDoseTimeList = new ArrayList<>();
-    private ArrayList<String> medKeyList = new ArrayList<>();
-    //private final ArrayList<Boolean> takenList = new ArrayList<Boolean>();
-    //private final ArrayList<Boolean> takenList = new ArrayList<>();
+    private final ArrayList<MedicineDoseTime> medDoseTimeList = new ArrayList<>();
+    private final ArrayList<String> medKeyList = new ArrayList<>();
     private ParentItemAdapter parentItemAdapter;
     private String currentDate;
     private DatabaseReference medDatabase;
@@ -117,11 +112,6 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                 medicineList.clear();
                 medDoseTimeList.clear();
 
-                // Todo reference https://www.folkstalk.com/tech/nested-recyclerview-onclicklistener-with-examples/
-                // To figure out which position has been clicked?
-
-                // if (!reloadDb) return;
-
                 for (DataSnapshot d : snapshot.getChildren()) {
                     List<ChildItem> children = new ArrayList<>();
                     MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
@@ -150,9 +140,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                     // To retrieve all the time headers
                     for (Map.Entry<String, List<String>> entry : medicineDoseTime.getTime().entrySet()) {
                         // there is only one key in the hashmap
-                        for (String t : entry.getValue()) {
-                            scheduledTime.add(t);
-                        }
+                        scheduledTime.addAll(entry.getValue());
                     }
 
                     // Slice the correct subset of booleans
@@ -161,17 +149,14 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                     // initialize the childItme & add it to child
                     for (int i = 0; i < scheduledTime.size(); i++) {
                         ChildItem fd = new ChildItem(scheduledTime.get(i), takenToday.get(i));
-                        Log.d(TAG, "_____onDataChange: childItem " + fd.toString());
+                        Log.d(TAG, "_____onDataChange: childItem " + fd);
                         children.add(fd);
                     }
-
-                    // Done
                     medicineList.add(new ParentItem(medicineDoseTime.getName(), children));
                     medKeyList.add(d.getKey());
                     //takenTodayList.add(getTakenToday(medicineDoseTime));
                     // Todo: filter the taken array for rendering. subset of taken
                     medDoseTimeList.add(medicineDoseTime);
-                    // New arrayList with
                 }
 
                 parentItemAdapter.notifyDataSetChanged();
@@ -204,7 +189,6 @@ public class MedicationDayViewActivity extends AppCompatActivity {
     }
 
     private List<Boolean> getTakenToday(MedicineDoseTime med) {
-
         // Todo check bugs
         int dayOffset = DatetimeFormat.dateDiff(
                 makeStringDate(med.getFromDate()),

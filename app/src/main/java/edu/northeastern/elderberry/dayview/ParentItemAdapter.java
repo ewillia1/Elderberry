@@ -24,7 +24,7 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
     private final RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
     private final List<ParentItem> itemList;
     private final SetParentItemClickListener listener;
-    SetParentItemClickListener rvClickListener;
+    private SetParentItemClickListener rvClickListener;
 
     ParentItemAdapter(List<ParentItem> itemList, SetParentItemClickListener listener) {
         Log.d(TAG, "_____ParentItemAdapter");
@@ -62,23 +62,11 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
 
         // Create an instance of the child item view adapter and set its adapter, layout manager and RecyclerViewPool.
         // Set listener for childItemAdapter.
-        //ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), (checked, childPosition) -> listener.parentItemClicked(position, childPosition, checked));
-        //ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), );
-        ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), new SetChildItemClickListener() {
-            @Override
-            public void childItemClicked(boolean checked, int childPosition) {
-                listener.parentItemClicked(parentViewHolder.getAbsoluteAdapterPosition(), childPosition, checked);
-            }
-        });
+        ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), (checked, childPosition) -> listener.parentItemClicked(parentViewHolder.getAbsoluteAdapterPosition(), childPosition, checked));
 
         parentViewHolder.childRecyclerView.setLayoutManager(layoutManager);
         parentViewHolder.childRecyclerView.setAdapter(childItemAdapter);
         parentViewHolder.childRecyclerView.setRecycledViewPool(viewPool);
-    }
-
-    public void setParentItemClickListener(SetParentItemClickListener rvClickListener) {
-        Log.d(TAG, "_____setRvItemClickListener");
-        this.rvClickListener = rvClickListener;
     }
 
     // This method returns the number of items we have added in the ParentItemList i.e. the number of instances we have created of the ParentItemList.

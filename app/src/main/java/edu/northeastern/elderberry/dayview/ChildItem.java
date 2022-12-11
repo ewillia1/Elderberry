@@ -2,11 +2,13 @@ package edu.northeastern.elderberry.dayview;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 public class ChildItem {
     private static final String TAG = "ChildItem";
     // Declaration of the variable
     private String childItemTitle;
-    private boolean takenStatus;
+    private final boolean takenStatus;
 
     // Constructor of the class to initialize the variable*
     public ChildItem(String childItemTitle, boolean takenStatus) {
@@ -31,11 +33,13 @@ public class ChildItem {
         return this.takenStatus;
     }
 
+    @NonNull
     @Override
     public String toString() {
+        Log.d(TAG, "_____toString");
         return "ChildItem{" +
-                "childItemTitle='" + childItemTitle + '\'' +
-                ", takenStatus=" + takenStatus +
+                "childItemTitle='" + this.childItemTitle + '\'' +
+                ", takenStatus=" + this.takenStatus +
                 '}';
     }
 }

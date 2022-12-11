@@ -64,9 +64,6 @@ public class ItemViewModel extends ViewModel {
         ArrayList<String> timeStringArray = new ArrayList<>();
         int upperBound = this.time.size();
         for (int i = 0; i < upperBound; i++) {
-            //if (this.time.get(i).getValue() == null) {
-            //    break;
-            //}
             timeStringArray.add(this.time.get(i).getValue());
         }
         return timeStringArray;
