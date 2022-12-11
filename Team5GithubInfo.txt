@@ -2,11 +2,11 @@ REMARK:
 a. The following credentials are provided for testing purpose. However, feel free to create your own account and password too!
   Account: team5groupassignment@gmail.com
   Password: password
-b. If running the App on emulator, use API 29 and above. Some notification functionality is only campatable with API 29 and newer.
+b. If running the App on an emulator, use API 29 and above. Some functionalities are only campatable with API 29 and higher.
   
 
 SUBMISSION REQUIREMENTS:
 a. Real names: Christopher McCune, Elizabeth Williams, Shriya Hukkeri, and Zhengyu Yang
 b. GitHub names: cmccune2, ewillia1, Shriya-Hukkeri, GoGaCode
 c. Link to our GitHub repository: https://github.com/ewillia1/Team5GroupAssignments.git
-d. Link to video tour of our app: [STILL NEED TO ADD]
+d. Link to video tour of our app: https://drive.google.com/file/d/19gC0ovxzOxJNuUDcxuoH6mHWS0oLP6vK/view?usp=sharing
