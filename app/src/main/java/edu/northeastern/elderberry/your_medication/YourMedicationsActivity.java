@@ -127,18 +127,6 @@ public class YourMedicationsActivity extends AppCompatActivity {
         // Passing an array into the recyclerview adapter.
         this.medAdapter = new MedicineAdapter(this.medicinesArrayList);
 
-//        /**
-//         * init a class which grab the position arg from child
-//         * and use the key to grab the correct position of the medicine key
-//         */
-//        OnListItemClick onListItemClick = position -> {
-//            Log.d(TAG, "_____onClick: position = " + position + ", medKey = " + medKeyArrayList);
-//            Intent intent = new Intent(YourMedicationsActivity.this, AddMedicationActivity.class);
-//            Log.d(TAG, "_____onCreate, OnListItemClick, prior to medKey " + medKeyArrayList.get(position));
-//            intent.putExtra(YOUR_MED_TO_EDIT_MED_KEY, medKeyArrayList.get(position));
-//            Log.d(TAG, "_____onCreate, OnListItemClick, post medKey");
-//            startActivity(intent);
-
         // init a class which grab the position arg from child
         // and use the key to grab the correct position of the medicine key
         OnListItemClick onListItemClick = position -> {
