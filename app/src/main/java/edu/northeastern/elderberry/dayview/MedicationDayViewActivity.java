@@ -170,6 +170,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
             checkboxConfig(isChecked);
         });
 
+
         ParentRecyclerViewItem.setAdapter(this.parentItemAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         ParentRecyclerViewItem.setLayoutManager(layoutManager);

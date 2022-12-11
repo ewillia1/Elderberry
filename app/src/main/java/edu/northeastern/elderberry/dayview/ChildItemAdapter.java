@@ -1,10 +1,12 @@
 package edu.northeastern.elderberry.dayview;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.Checkable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,8 +32,7 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.Chil
     @Override
     public ChildViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         Log.d(TAG, "_____onCreateViewHolder");
-        // Here we inflate the corresponding
-        // layout of the child item
+        // Here we inflate the corresponding layout of the child item.
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.child_item, viewGroup, false);
 
         return new ChildViewHolder(view);
@@ -68,7 +69,7 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.Chil
             this.takenCheckBox = itemView.findViewById(R.id.checkbox_child_item);
             this.childItemTitle = itemView.findViewById(R.id.child_item_title);
 
-            // Set listener for checkbox.
+            // When a checkbox is clicked call the listener's childItemClicked method.
             takenCheckBox.setOnClickListener(v -> listener.childItemClicked(takenCheckBox.isChecked(), getLayoutPosition()));
         }
     }

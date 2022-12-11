@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
 import edu.northeastern.elderberry.R;
 
 /**
@@ -23,6 +24,7 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
     private final RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
     private final List<ParentItem> itemList;
     private final SetParentItemClickListener listener;
+    SetParentItemClickListener rvClickListener;
 
     ParentItemAdapter(List<ParentItem> itemList, SetParentItemClickListener listener) {
         Log.d(TAG, "_____ParentItemAdapter");
@@ -64,6 +66,11 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
         parentViewHolder.childRecyclerView.setLayoutManager(layoutManager);
         parentViewHolder.childRecyclerView.setAdapter(childItemAdapter);
         parentViewHolder.childRecyclerView.setRecycledViewPool(viewPool);
+    }
+
+    public void setParentItemClickListener(SetParentItemClickListener rvClickListener) {
+        Log.d(TAG, "_____setRvItemClickListener");
+        this.rvClickListener = rvClickListener;
     }
 
     // This method returns the number of items we have added in the ParentItemList i.e. the number of instances we have created of the ParentItemList.
