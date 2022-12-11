@@ -36,7 +36,6 @@ import edu.northeastern.elderberry.MedicationTrackerActivity;
 
 import edu.northeastern.elderberry.MyNotificationPublisher;
 import edu.northeastern.elderberry.NotificationUtil;
-import edu.northeastern.elderberry.OnListItemClick;
 import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 
