@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import edu.northeastern.elderberry.OnListItemClick;
 import edu.northeastern.elderberry.R;
 
 public class MedicineAdapter extends RecyclerView.Adapter<MedicineHolder> {

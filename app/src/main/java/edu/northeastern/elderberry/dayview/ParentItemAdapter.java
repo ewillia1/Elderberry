@@ -12,20 +12,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-
 import edu.northeastern.elderberry.R;
 
+/**
+ * Accommodate long medicine names
+ */
 public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.ParentViewHolder> {
     private static final String TAG = "ParentItemAdapter";
     // An object of RecyclerView.RecycledViewPool is created to share the Views between the child and the parent RecyclerViews.
     private final RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
     private final List<ParentItem> itemList;
-    private final Context context;
+    private final SetParentItemClickListener listener;
 
-    ParentItemAdapter(List<ParentItem> itemList, Context context) {
+    ParentItemAdapter(List<ParentItem> itemList, SetParentItemClickListener listener) {
         Log.d(TAG, "_____ParentItemAdapter");
         this.itemList = itemList;
-        this.context = context;
+        this.listener = listener;
     }
 
     @NonNull
@@ -57,15 +59,14 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
         layoutManager.setInitialPrefetchItemCount(parentItem.getChildItemList().size());
 
         // Create an instance of the child item view adapter and set its adapter, layout manager and RecyclerViewPool.
-        ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), this.context);
+        // Set listener for childItemAdapter.
+        ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), (checked, childPosition) -> listener.parentItemClicked(parentViewHolder.getAbsoluteAdapterPosition(), childPosition, checked));
         parentViewHolder.childRecyclerView.setLayoutManager(layoutManager);
         parentViewHolder.childRecyclerView.setAdapter(childItemAdapter);
         parentViewHolder.childRecyclerView.setRecycledViewPool(viewPool);
     }
 
-
-    // This method returns the number of items we have added in the ParentItemList i.e. the number
-    // of instances we have created of the ParentItemList.
+    // This method returns the number of items we have added in the ParentItemList i.e. the number of instances we have created of the ParentItemList.
     @Override
     public int getItemCount() {
         Log.d(TAG, "_____getItemCount");

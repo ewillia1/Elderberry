@@ -3,6 +3,7 @@ package edu.northeastern.elderberry.util;
 import android.util.Log;
 
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 public class DatetimeFormat {
     private static final String TAG = "util.DatetimeFormat";
@@ -80,5 +81,11 @@ public class DatetimeFormat {
 
         // Default should never happen.
         return 1;
+    }
+
+    public static int dateDiff(Calendar o1, Calendar o2) {
+        Log.d(TAG, "_____dateDiff");
+        long diffInMillies = Math.abs(o1.getTimeInMillis() - o2.getTimeInMillis());
+        return (int) TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
     }
 }
