@@ -36,11 +36,14 @@ import java.util.Map;
 import java.util.Objects;
 
 import edu.northeastern.elderberry.MedicineDoseTime;
+import edu.northeastern.elderberry.ParentItemClickListener;
 import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 import edu.northeastern.elderberry.util.DatetimeFormat;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
+// Todo handle the case where taken, time, dose array size added not properly
+// Todo V1.1 save the change only when user leave the activity & use a save button?
 public class MedicationDayViewActivity extends AppCompatActivity {
     public static final String MED_DAY_VIEW_KEY = "medDayViewKey";
     public static final String DATE_KEY = "date_key";
@@ -140,7 +143,9 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                     // To retrieve all the time headers
                     for (Map.Entry<String, List<String>> entry : medicineDoseTime.getTime().entrySet()) {
                         // there is only one key in the hashmap
-                        scheduledTime.addAll(entry.getValue());
+                        for (String t : entry.getValue()) {
+                            scheduledTime.add(t);
+                        }
                     }
 
                     // Slice the correct subset of booleans
@@ -176,10 +181,11 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         // Set a listener for the parentItemAdapter.
         this.parentItemAdapter = new ParentItemAdapter(this.medicineList, (parentPosition, childPosition, isChecked) -> {
             Log.d(TAG, "_____parentItemClicked: parentPosition = " + parentPosition + ", childPosition = " + childPosition + ", isChecked = " + isChecked);
-            parentPos = parentPosition;
-            childPos = childPosition;
             Log.d(TAG, "_____onCreate: parentPos" + parentPos);
             Log.d(TAG, "_____onCreate: childPos" + childPos);
+
+            parentPos = parentPosition;
+            childPos = childPosition;
             checkboxConfig(isChecked);
         });
 
@@ -257,6 +263,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         int dayOffset = DatetimeFormat.dateDiff(
                 makeStringDate(med.getFromDate()),
                 makeStringDate(currentDate));
+
         Log.d(TAG, "_____checkboxConfig num of days from " + med.getFromDate() + " is " + dayOffset);
 
         int firstIndexForDay = timeFreq * dayOffset;
@@ -272,9 +279,11 @@ public class MedicationDayViewActivity extends AppCompatActivity {
     // Else, set the index in the taken array in the database to false.
     private void setCheckbox(boolean checked, int index) {
         Log.d(TAG, "_____setCheckbox");
+        // Retrieve med taken array & key, med key, for database update
         MedicineDoseTime med = this.medDoseTimeList.get(this.parentPos);
         med.getTaken();
         String takenKey = "";
+
         List<Boolean> takenVal = new ArrayList<>();
         String medKey = medKeyList.get(this.parentPos);
         for (Map.Entry<String, List<Boolean>> entry : med.getTaken().entrySet()) {

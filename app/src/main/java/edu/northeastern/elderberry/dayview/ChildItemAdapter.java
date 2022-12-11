@@ -17,13 +17,13 @@ import edu.northeastern.elderberry.R;
 public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.ChildViewHolder> {
     private static final String TAG = "ChildItemAdapter";
     private final List<ChildItem> childItemTitle;
-    private static SetChildItemClickListener listener;
+    private SetChildItemClickListener listener;
 
     // Constructor.
     ChildItemAdapter(List<ChildItem> childItemList, SetChildItemClickListener listener) {
         Log.d(TAG, "_____ChildItemAdapter");
         this.childItemTitle = childItemList;
-        ChildItemAdapter.listener = listener;
+        this.listener = listener;
     }
 
     @NonNull
@@ -56,7 +56,7 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.Chil
     }
 
     // This class is to initialize the Views present in the child RecyclerView.
-    static class ChildViewHolder extends RecyclerView.ViewHolder {
+    class ChildViewHolder extends RecyclerView.ViewHolder {
         private static final String TAG = "ChildViewHolder";
         private final TextView childItemTitle;
         private final CheckBox takenCheckBox;
