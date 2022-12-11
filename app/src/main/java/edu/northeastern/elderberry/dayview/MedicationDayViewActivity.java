@@ -142,9 +142,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                     // To retrieve all the time headers
                     for (Map.Entry<String, List<String>> entry : medicineDoseTime.getTime().entrySet()) {
                         // there is only one key in the hashmap
-                        for (String t : entry.getValue()) {
-                            scheduledTime.add(t);
-                        }
+                        scheduledTime.addAll(entry.getValue());
                     }
 
                     // Slice the correct subset of booleans

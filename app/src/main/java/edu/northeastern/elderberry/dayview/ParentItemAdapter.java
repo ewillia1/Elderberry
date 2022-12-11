@@ -64,12 +64,9 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
         ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), (checked, childPosition) -> listener.parentItemClicked(parentViewHolder.getAbsoluteAdapterPosition(), childPosition, checked));
         //ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), (checked, childPosition) -> listener.parentItemClicked(position, childPosition, checked));
         //ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), );
-        SetChildItemClickListener childListener = new SetChildItemClickListener() {
-            @Override
-            public void childItemClicked(boolean checked, int childPosition) {
-                Log.d(TAG, "_____childItemClicked: parent position is " + parentViewHolder.getLayoutPosition());
-                listener.parentItemClicked(parentViewHolder.getLayoutPosition(), childPosition, checked);
-            }
+        SetChildItemClickListener childListener = (checked, childPosition) -> {
+            Log.d(TAG, "_____childItemClicked: parent position is " + parentViewHolder.getLayoutPosition());
+            listener.parentItemClicked(parentViewHolder.getLayoutPosition(), childPosition, checked);
         };
 //        ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), childListener);
         //childItemAdapter.setListener(childListener);

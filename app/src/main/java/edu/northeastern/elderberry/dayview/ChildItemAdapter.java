@@ -17,7 +17,7 @@ import edu.northeastern.elderberry.R;
 public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.ChildViewHolder> {
     private static final String TAG = "ChildItemAdapter";
     private final List<ChildItem> childItemTitle;
-    private SetChildItemClickListener listener;
+    private final SetChildItemClickListener listener;
 
     // Constructor.
     ChildItemAdapter(List<ChildItem> childItemList, SetChildItemClickListener listener) {
