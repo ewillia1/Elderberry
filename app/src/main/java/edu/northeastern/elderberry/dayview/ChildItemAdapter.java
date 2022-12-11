@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import edu.northeastern.elderberry.OnListItemClick;
 import edu.northeastern.elderberry.R;
 
 public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.ChildViewHolder> {
@@ -51,6 +50,7 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.Chil
         // For the created instance, set title. No need to set the image for the ImageViews because
         // we have provided the source for the images in the layout file itself.
         childViewHolder.childItemTitle.setText(childItem.getChildItemTitle());
+        childViewHolder.takenCheckBox.setChecked(childItem.getTakenStatus());
     }
 
     @Override
@@ -71,8 +71,15 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.Chil
             super(itemView);
             this.takenCheckBox = itemView.findViewById(R.id.checkbox_child_item);
             this.childItemTitle = itemView.findViewById(R.id.child_item_title);
+            //this.takenCheckBox.setChecked(true);
             Log.d(TAG, "_____ChildViewHolder");
-            this.takenCheckBox.setOnClickListener(v -> listener.childItemClicked(takenCheckBox.isChecked(), getLayoutPosition()));
+            // this.takenCheckBox.setOnClickListener(v -> listener.childItemClicked(takenCheckBox.isChecked(), getLayoutPosition()));
+            takenCheckBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.childItemClicked(takenCheckBox.isChecked(), getLayoutPosition());
+                }
+            });
         }
     }
 }

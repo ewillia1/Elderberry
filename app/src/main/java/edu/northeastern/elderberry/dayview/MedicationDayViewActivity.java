@@ -48,7 +48,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
     public static final String DATE_KEY = "date_key";
     private static final String TAG = "MedicationDayViewActivity";
     private final List<ParentItem> medicineList = new ArrayList<>();
-    private final List<List<Boolean>> takenTodayList = new ArrayList<>();
+    //private final List<List<Boolean>> takenTodayList = new ArrayList<>();
     private ArrayList<MedicineDoseTime> medDoseTimeList = new ArrayList<>();
     private ArrayList<String> medKeyList = new ArrayList<>();
     //private final ArrayList<Boolean> takenList = new ArrayList<Boolean>();
@@ -146,16 +146,29 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                         Log.d(TAG, "_____onDataChange: parse datetime format is not aligned with the passed datetime");
                     }
 
+                    ArrayList<String> scheduledTime = new ArrayList<>();
+                    // To retrieve all the time headers
                     for (Map.Entry<String, List<String>> entry : medicineDoseTime.getTime().entrySet()) {
                         // there is only one key in the hashmap
                         for (String t : entry.getValue()) {
-                            ChildItem fd = new ChildItem(t);
-                            children.add(fd);
+                            scheduledTime.add(t);
                         }
                     }
+
+                    // Slice the correct subset of booleans
+                    List<Boolean> takenToday = getTakenToday(medicineDoseTime);
+
+                    // initialize the childItme & add it to child
+                    for (int i = 0; i < scheduledTime.size(); i++) {
+                        ChildItem fd = new ChildItem(scheduledTime.get(i), takenToday.get(i));
+                        Log.d(TAG, "_____onDataChange: childItem " + fd.toString());
+                        children.add(fd);
+                    }
+
+                    // Done
                     medicineList.add(new ParentItem(medicineDoseTime.getName(), children));
                     medKeyList.add(d.getKey());
-                    takenTodayList.add(getTakenToday(medicineDoseTime));
+                    //takenTodayList.add(getTakenToday(medicineDoseTime));
                     // Todo: filter the taken array for rendering. subset of taken
                     medDoseTimeList.add(medicineDoseTime);
                     // New arrayList with
@@ -180,6 +193,8 @@ public class MedicationDayViewActivity extends AppCompatActivity {
             Log.d(TAG, "_____parentItemClicked: parentPosition = " + parentPosition + ", childPosition = " + childPosition + ", isChecked = " + isChecked);
             parentPos = parentPosition;
             childPos = childPosition;
+            Log.d(TAG, "_____onCreate: parentPos" + parentPos);
+            Log.d(TAG, "_____onCreate: childPos" + childPos);
             checkboxConfig(isChecked);
         });
 
@@ -190,11 +205,12 @@ public class MedicationDayViewActivity extends AppCompatActivity {
 
     private List<Boolean> getTakenToday(MedicineDoseTime med) {
 
+        // Todo check bugs
         int dayOffset = DatetimeFormat.dateDiff(
                 makeStringDate(med.getFromDate()),
                 makeStringDate(currentDate));
         int freq = med.getFreq();
-        int startIndex = dayOffset;
+        int startIndex = dayOffset * freq;
         int endIndex = startIndex + freq;
         List<Boolean> takenVal = new ArrayList<>();
         for (Map.Entry<String, List<Boolean>> entry : med.getTaken().entrySet()) {
@@ -205,7 +221,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         Log.d(TAG, "_____getTakenToday med fromDate is " + med.getFromDate());
         Log.d(TAG, "_____getTakenToday start index is " + startIndex + " endIndex is " + endIndex);
         Log.d(TAG, "_____getTakenToday taken array is  " + takenVal.toString());
-        Log.d(TAG, "_____getTakenToday takensubset is  " + takenVal.subList(startIndex, endIndex));
+        Log.d(TAG, "_____getTakenToday takenSubset is  " + takenVal.subList(startIndex, endIndex));
 
         return takenVal.subList(startIndex, endIndex);
     }
@@ -253,6 +269,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         Log.d(TAG, "_____checkboxConfig");
         MedicineDoseTime med = this.medDoseTimeList.get(this.parentPos);
         int timeFreq = med.getFreq();
+        Log.d(TAG, "_____checkboxConfig med name is " + med.getName());
         int dayOffset = DatetimeFormat.dateDiff(
                 makeStringDate(med.getFromDate()),
                 makeStringDate(currentDate));
@@ -289,6 +306,9 @@ public class MedicationDayViewActivity extends AppCompatActivity {
             Log.d(TAG, "_____setCheckbox: takenKey is not empty and takenVal was updated to " + takenVal);
             Map<String, Object> taken = new HashMap<>();
             taken.put(takenKey, takenVal);
+            Log.d(TAG, "_____setCheckbox index is " + index);
+            Log.d(TAG, "_____setCheckbox medKey is " + medKey);
+
             medDatabase.child(medKey).child("taken").updateChildren(taken).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Log.d(TAG, "_____setCheckbox: task.isSuccessful()");
