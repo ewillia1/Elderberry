@@ -33,7 +33,6 @@ public class NotificationUtil {
         userDB = FirebaseDatabase.getInstance().getReference();
         String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
-        // Todo to provide the correct username based on log-in info
         userDB.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -86,7 +85,5 @@ public class NotificationUtil {
         for (DateTimeDose date : dates) {
             MyNotificationPublisher.setAlarm(date, context);
         }
-        List<PendingIntent> intents = MyNotificationPublisher.getPendingIntents();
-        System.out.println("hello");
     }
 }

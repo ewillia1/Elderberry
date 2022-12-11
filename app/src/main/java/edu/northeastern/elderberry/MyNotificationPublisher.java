@@ -25,8 +25,9 @@ public class MyNotificationPublisher extends BroadcastReceiver {
     private final static String default_notification_channel_id = "default";
     public static int NOTIFICATION_ID = 1;
     private TextToSpeech textToSpeech;
-    private static List<PendingIntent> pendingIntents = new ArrayList<>();
+    private static final List<PendingIntent> pendingIntents = new ArrayList<>();
     private static AlarmManager alarmManager;
+    public static int maxAlarms = 0;
 
     public void onReceive(Context context, Intent intent) {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -66,52 +67,51 @@ public class MyNotificationPublisher extends BroadcastReceiver {
 
     public static void setAlarm(DateTimeDose date, Context context) {
         Log.d(TAG, "_____setAlarm");
-        int i = 0;
-        do {
-            if (date.getFromTime().toInstant().toEpochMilli() > System.currentTimeMillis()) {
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(context, default_notification_channel_id);
-                builder.setContentTitle("Time to take your medication!");
-                String notificationTitle;
-                if (date.getDose() > 1) {
-                    notificationTitle = "Please take " + date.getDose() + " doses of " + date.getName();
-                } else {
-                    notificationTitle = "Please take " + date.getDose() + " dose of " + date.getName();
+        if(maxAlarms < 500) {
+            do {
+                if (date.getFromTime().toInstant().toEpochMilli() > System.currentTimeMillis()) {
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(context, default_notification_channel_id);
+                    builder.setContentTitle("Time to take your medication!");
+                    String notificationTitle;
+                    if (date.getDose() > 1) {
+                        notificationTitle = "Please take " + date.getDose() + " doses of " + date.getName();
+                    } else {
+                        notificationTitle = "Please take " + date.getDose() + " dose of " + date.getName();
+                    }
+                    builder.setContentText(notificationTitle);
+                    builder.setSmallIcon(R.drawable.elderberryplant);
+                    builder.setAutoCancel(true);
+                    builder.setChannelId(NOTIFICATION_CHANNEL_ID);
+                    builder.setPriority(NotificationCompat.PRIORITY_HIGH);
+                    Notification notification = builder.build();
+                    Intent notificationIntent = new Intent(context, MyNotificationPublisher.class);
+                    notificationIntent.putExtra(MyNotificationPublisher.getNotificationId(), 1);
+                    notificationIntent.putExtra(MyNotificationPublisher.NOTIFICATION, notification);
+                    notificationIntent.putExtra("toDate", date.getToDate());
+                    notificationIntent.putExtra("fromTime", date.getFromTime());
+                    notificationIntent.putExtra("name", date.getName());
+                    notificationIntent.putExtra("dose", date.getDose());
+                    notificationIntent.putExtra("title", (notificationTitle));
+                    int id = MyNotificationPublisher.getNotificationIdInt();
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, notificationIntent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+                    pendingIntents.add(pendingIntent);
+                    alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                    assert alarmManager != null;
+                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, date.getFromTime().toInstant().toEpochMilli(), pendingIntent);
+                    maxAlarms = maxAlarms + 1;
                 }
-                builder.setContentText(notificationTitle);
-                builder.setSmallIcon(R.drawable.elderberryplant);
-                builder.setAutoCancel(true);
-                builder.setChannelId(NOTIFICATION_CHANNEL_ID);
-                builder.setPriority(NotificationCompat.PRIORITY_HIGH);
-                Notification notification = builder.build();
-                Intent notificationIntent = new Intent(context, MyNotificationPublisher.class);
-                notificationIntent.putExtra(MyNotificationPublisher.getNotificationId(), 1);
-                notificationIntent.putExtra(MyNotificationPublisher.NOTIFICATION, notification);
-                notificationIntent.putExtra("toDate", date.getToDate());
-                notificationIntent.putExtra("fromTime", date.getFromTime());
-                notificationIntent.putExtra("name", date.getName());
-                notificationIntent.putExtra("dose", date.getDose());
-                notificationIntent.putExtra("title", (notificationTitle));
-                int id = MyNotificationPublisher.getNotificationIdInt();
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, notificationIntent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
-                pendingIntents.add(pendingIntent);
-                alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-                assert alarmManager != null;
-                System.out.println(date.getName() + " " + date.getDose() + " " + date.getFromTime() + " with requestId: " + id);
-                alarmManager.setExact(AlarmManager.RTC_WAKEUP, date.getFromTime().toInstant().toEpochMilli(), pendingIntent);
-                i++;
-            }
-            date.getFromTime().setTime(date.getFromTime().getTime() + 300000);
-        } while (i <= 5 && (date.getToDate().toInstant().toEpochMilli()) > (date.getFromTime().toInstant().toEpochMilli()));
+                date.getFromTime().setTime(date.getFromTime().getTime() + 86400000);
+            } while (maxAlarms < 500 && (date.getToDate().toInstant().toEpochMilli()) > (date.getFromTime().toInstant().toEpochMilli()));
+        } else{
+            Log.d(TAG, "500 (max) alarms reached");
+        }
 
-    }
-
-    public static List<PendingIntent> getPendingIntents() {
-        return pendingIntents;
     }
 
     public static void deletePendingIntents() {
         for (int currentIntent = 0; currentIntent < pendingIntents.size(); currentIntent++) {
             alarmManager.cancel(pendingIntents.get(currentIntent));
+            maxAlarms = maxAlarms - 1;
         }
         pendingIntents.clear();
     }
