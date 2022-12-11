@@ -38,6 +38,7 @@
                 android:layout_toEndOf="@id/medScheduleTextView"
                 android:onClick="onCheckboxClicked" />
 
+
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

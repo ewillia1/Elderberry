@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.Checkable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,10 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.Chil
         ChildItemAdapter.listener = listener;
     }
 
+    //public void setClickListener(OnListItemClick listener) {
+    //    this.childListener = listener;
+    //}
+
     @NonNull
     @Override
     public ChildViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -45,6 +50,7 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.Chil
         // For the created instance, set title. No need to set the image for the ImageViews because
         // we have provided the source for the images in the layout file itself.
         childViewHolder.childItemTitle.setText(childItem.getChildItemTitle());
+        childViewHolder.takenCheckBox.setChecked(childItem.getTakenStatus());
     }
 
     @Override
@@ -63,12 +69,17 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.Chil
 
         ChildViewHolder(View itemView) {
             super(itemView);
-            Log.d(TAG, "_____ChildViewHolder");
             this.takenCheckBox = itemView.findViewById(R.id.checkbox_child_item);
             this.childItemTitle = itemView.findViewById(R.id.child_item_title);
-
-            // When a checkbox is clicked call the listener's childItemClicked method.
-            takenCheckBox.setOnClickListener(v -> listener.childItemClicked(takenCheckBox.isChecked(), getLayoutPosition()));
+            //this.takenCheckBox.setChecked(true);
+            Log.d(TAG, "_____ChildViewHolder");
+            // this.takenCheckBox.setOnClickListener(v -> listener.childItemClicked(takenCheckBox.isChecked(), getLayoutPosition()));
+            takenCheckBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.childItemClicked(takenCheckBox.isChecked(), getLayoutPosition());
+                }
+            });
         }
     }
 }
