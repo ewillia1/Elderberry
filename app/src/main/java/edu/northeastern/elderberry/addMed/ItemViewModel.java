@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ItemViewModel extends ViewModel {
     private static final String TAG = "ItemViewModel";
-    private static final int MAX_INDEX = 12;
+    private static final int MAX_INDEX = 5;
     private final MutableLiveData<String> medId = new MutableLiveData<>();
     private final MutableLiveData<String> timeId = new MutableLiveData<>();
     private final MutableLiveData<String> doseId = new MutableLiveData<>();

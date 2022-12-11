@@ -45,7 +45,7 @@ public class AddMedicationActivity extends AppCompatActivity {
     private static final String TAG = "AddMedicationActivity";
     public static final String ADD_MED_KEY = "add_med_key";
     public static final String DATE_KEY = "dateKey";
-    private static final int MAX_INT = 12;
+    private static final int MAX_INT = 5;
     private DatabaseReference userDatabase;
     private FirebaseAuth mAuth;
     private ItemViewModel viewModel;

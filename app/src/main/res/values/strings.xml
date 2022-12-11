@@ -55,13 +55,13 @@
         <item>3 times</item>
         <item>4 times</item>
         <item>5 times</item>
-        <item>6 times</item>
-        <item>7 times</item>
-        <item>8 times</item>
-        <item>9 times</item>
-        <item>10 times</item>
-        <item>11 times</item>
-        <item>12 times</item>
+<!--        <item>6 times</item>-->
+<!--        <item>7 times</item>-->
+<!--        <item>8 times</item>-->
+<!--        <item>9 times</item>-->
+<!--        <item>10 times</item>-->
+<!--        <item>11 times</item>-->
+<!--        <item>12 times</item>-->
     </string-array>
     <string-array name="units_array">
         <item>tabs</item>
