@@ -1,6 +1,7 @@
 package edu.northeastern.elderberry;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.util.Log;
 
@@ -32,18 +33,16 @@ public class NotificationUtil {
         userDB = FirebaseDatabase.getInstance().getReference();
         String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
-        // Todo to provide the correct username based on log-in info
         userDB.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d(TAG, "_____onDataChange: ");
                 notificationManager.deleteNotificationChannel(MyNotificationPublisher.NOTIFICATION_CHANNEL_ID);
                 medicineList.clear();
-
-                for (DataSnapshot d : snapshot.getChildren()) {
-                    MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
-                    medicineList.add(medicineDoseTime);
-                }
+                    for (DataSnapshot d : snapshot.getChildren()) {
+                        MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
+                        medicineList.add(medicineDoseTime);
+                    }
                 scheduleMedicationNotifications(medicineList, context);
             }
 

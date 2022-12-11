@@ -36,6 +36,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import edu.northeastern.elderberry.MedicineDoseTime;
+import edu.northeastern.elderberry.ParentItemClickListener;
 import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 import edu.northeastern.elderberry.util.DatetimeFormat;
@@ -142,18 +143,21 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                     // To retrieve all the time headers
                     for (Map.Entry<String, List<String>> entry : medicineDoseTime.getTime().entrySet()) {
                         // there is only one key in the hashmap
-                        scheduledTime.addAll(entry.getValue());
+                        for (String t : entry.getValue()) {
+                            scheduledTime.add(t);
+                        }
                     }
 
                     // Slice the correct subset of booleans
                     List<Boolean> takenToday = getTakenToday(medicineDoseTime);
 
-                    // initialize the childItme & add it to child
+                    // initialize the childItem & add it to child
                     for (int i = 0; i < scheduledTime.size(); i++) {
                         ChildItem fd = new ChildItem(scheduledTime.get(i), takenToday.get(i));
                         Log.d(TAG, "_____onDataChange: childItem " + fd);
                         children.add(fd);
                     }
+
                     medicineList.add(new ParentItem(medicineDoseTime.getName(), children));
                     medKeyList.add(d.getKey());
                     //takenTodayList.add(getTakenToday(medicineDoseTime));
@@ -196,6 +200,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         int dayOffset = DatetimeFormat.dateDiff(
                 makeStringDate(med.getFromDate()),
                 makeStringDate(currentDate));
+
         int freq = med.getFreq();
         int startIndex = dayOffset * freq;
         int endIndex = startIndex + freq;

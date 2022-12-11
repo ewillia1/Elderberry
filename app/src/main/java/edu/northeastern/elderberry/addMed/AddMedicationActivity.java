@@ -33,8 +33,9 @@ import java.util.Objects;
 
 import edu.northeastern.elderberry.MedicationTrackerActivity;
 import edu.northeastern.elderberry.Medicine;
-import edu.northeastern.elderberry.MedicineDoseTime;
+import edu.northeastern.elderberry.MyNotificationPublisher;
 import edu.northeastern.elderberry.NotificationUtil;
+import edu.northeastern.elderberry.MedicineDoseTime;
 import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.dayview.MedicationDayViewActivity;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
@@ -161,12 +162,8 @@ public class AddMedicationActivity extends AppCompatActivity {
                     // Finish AddMedicationActivity.
                     finish();
 
+                    MyNotificationPublisher.deletePendingIntents();
                     NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                     NotificationUtil.getMedicationInfo(getApplicationContext(), notificationManager);
                     return true;
                 } else {
@@ -234,6 +231,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         doseMap.put(doseKey, doseList);
 
         String takenKey = viewModel.getTakenId().getValue();
+        viewModel.initializeTakenBooleanArray();
         List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
         Map<String, List<Boolean>> takenMap = new HashMap<>();
         takenMap.put(takenKey, takenList);

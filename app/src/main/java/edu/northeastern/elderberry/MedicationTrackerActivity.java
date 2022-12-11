@@ -169,7 +169,7 @@ public class MedicationTrackerActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean("hasLoggedIn", false);
                 editor.apply();
-
+                MyNotificationPublisher.deletePendingIntents();
                 FirebaseAuth.getInstance().signOut();
                 intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
