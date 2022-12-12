@@ -23,7 +23,7 @@
     <string name="log_out">Log Out</string>
     <string name="email">Email</string>
     <string name="forgot_password">Forgot password?</string>
-    <string name="_email_">Please enter your email to recovery/reset your password.</string>
+    <string name="_email_">Please enter your email to recover/reset your password.</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="send_email">Send Email</string>
