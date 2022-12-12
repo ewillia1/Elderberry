@@ -18,6 +18,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     private static final String TAG = "ForgotPasswordActivity";
     private TextInputEditText forgotEmail;
 
+    private static boolean isInvalid(String s) {
+        Log.d(TAG, "_____isValid");
+        return s == null || s.isBlank() || s.isEmpty();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +54,12 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     private void sendEmail() {
         Log.d(TAG, "_____sendEmail");
+
+        if (this.forgotEmail.getText() == null || isInvalid(this.forgotEmail.getText().toString())) {
+            Toast.makeText(this, "Unsuccessful password reset! Please enter a valid email.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         String email = Objects.requireNonNull(this.forgotEmail.getText()).toString();
         FirebaseAuth.getInstance().setLanguageCode("en");       // Set to English.
         FirebaseAuth.getInstance().sendPasswordResetEmail(email).addOnCompleteListener(task -> {
@@ -57,6 +68,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 Toast.makeText(ForgotPasswordActivity.this, "We have sent you instructions to reset your password/email!", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(ForgotPasswordActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
+                return;
             }
             finish();
         });

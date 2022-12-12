@@ -32,9 +32,9 @@ import edu.northeastern.elderberry.helpAndConfigs.SettingsActivity;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
 public class MedicationTrackerActivity extends AppCompatActivity {
-    private static final String TAG = "MedicationTrackerActivity";
     public static final String MED_TRACKER_KEY = "medTrackerKey";
     public static final String CURRENT_DATE = "current_date";
+    private static final String TAG = "MedicationTrackerActivity";
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -111,7 +111,6 @@ public class MedicationTrackerActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, REQUEST_CODE);
         }
     }
-
 
     private void startMedicationTrackerActivity() {
         Log.d(TAG, "_____startMedicationTrackerActivity");

@@ -1,6 +1,5 @@
 package edu.northeastern.elderberry.dayview;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,9 +22,8 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
     // An object of RecyclerView.RecycledViewPool is created to share the Views between the child and the parent RecyclerViews.
     private final RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
     private final List<ParentItem> itemList;
-    //private final SetParentItemClickListener listener;
-    private SetParentItemClickListener listener;
     SetParentItemClickListener rvClickListener;
+    private final SetParentItemClickListener listener;
 
     ParentItemAdapter(List<ParentItem> itemList, SetParentItemClickListener listener) {
         Log.d(TAG, "_____ParentItemAdapter");
@@ -52,8 +50,6 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
         // For the created instance, get the title and set it as the text for the TextView.
         parentViewHolder.parentItemTitle.setText(parentItem.getParentItemTitle());
 
-        // Create a layout manager to assign a layout to the RecyclerView.
-
         // Here we have assigned the layout as LinearLayout with vertical orientation.
         LinearLayoutManager layoutManager = new LinearLayoutManager(parentViewHolder.childRecyclerView.getContext(), LinearLayoutManager.HORIZONTAL, false);
 
@@ -63,14 +59,9 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentItemAdapter.Pa
 
         // Create an instance of the child item view adapter and set its adapter, layout manager and RecyclerViewPool.
         // Set listener for childItemAdapter.
-        //ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), (checked, childPosition) -> listener.parentItemClicked(position, childPosition, checked));
-        //ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), );
-        SetChildItemClickListener childListener = new SetChildItemClickListener() {
-            @Override
-            public void childItemClicked(boolean checked, int childPosition) {
-                Log.d(TAG, "_____childItemClicked: parent position is "+ parentViewHolder.getLayoutPosition());
-                listener.parentItemClicked(parentViewHolder.getLayoutPosition(), childPosition, checked);
-            }
+        SetChildItemClickListener childListener = (checked, childPosition) -> {
+            Log.d(TAG, "_____childItemClicked: parent position is " + parentViewHolder.getLayoutPosition());
+            listener.parentItemClicked(parentViewHolder.getLayoutPosition(), childPosition, checked);
         };
         ChildItemAdapter childItemAdapter = new ChildItemAdapter(parentItem.getChildItemList(), childListener);
         //childItemAdapter.setListener(childListener);

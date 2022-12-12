@@ -2,20 +2,21 @@ package edu.northeastern.elderberry.dayview;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 public class ChildItem {
     private static final String TAG = "ChildItem";
-    // Declaration of the variable
     private String childItemTitle;
-    private boolean takenStatus;
+    private final boolean takenStatus;
 
-    // Constructor of the class to initialize the variable*
+    // Constructor of the class to initialize the variable.
     public ChildItem(String childItemTitle, boolean takenStatus) {
         Log.d(TAG, "_____ChildItem");
         this.childItemTitle = childItemTitle;
         this.takenStatus = takenStatus;
     }
 
-    // Getter and Setter method for the parameter
+    // Getter and Setter method for the parameter.
     public String getChildItemTitle() {
         Log.d(TAG, "_____getChildItemTitle");
         return this.childItemTitle;
@@ -31,11 +32,9 @@ public class ChildItem {
         return this.takenStatus;
     }
 
+    @NonNull
     @Override
     public String toString() {
-        return "ChildItem{" +
-                "childItemTitle='" + childItemTitle + '\'' +
-                ", takenStatus=" + takenStatus +
-                '}';
+        return "ChildItem{" + "childItemTitle='" + this.childItemTitle + '\'' + ", takenStatus=" + this.takenStatus + '}';
     }
 }

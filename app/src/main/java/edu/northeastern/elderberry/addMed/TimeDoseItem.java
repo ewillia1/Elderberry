@@ -27,6 +27,7 @@ public class TimeDoseItem implements Parcelable {
     // Used specifically in SetTimesFragment.java.
     public TimeDoseItem(int itemNumber) {
         this(itemNumber, null, null, null);
+        Log.d(TAG, "_____TimeDoseItem (1 arg constructor)");
     }
 
     public TimeDoseItem(int itemNumber, String time, String dose, String unit) {

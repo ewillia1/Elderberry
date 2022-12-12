@@ -19,35 +19,15 @@ import java.util.List;
 import java.util.Locale;
 
 public class MyNotificationPublisher extends BroadcastReceiver {
-    private static final String TAG = "MyNotificationPublisher";
     public static final String NOTIFICATION = "notification";
     public static final String NOTIFICATION_CHANNEL_ID = "10001";
+    private static final String TAG = "MyNotificationPublisher";
     private final static String default_notification_channel_id = "default";
-    public static int NOTIFICATION_ID = 1;
-    private TextToSpeech textToSpeech;
     private static final List<PendingIntent> pendingIntents = new ArrayList<>();
-    private static AlarmManager alarmManager;
+    public static int NOTIFICATION_ID = 1;
     public static int maxAlarms = 0;
-
-    public void onReceive(Context context, Intent intent) {
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        Notification notification = intent.getParcelableExtra(NOTIFICATION);
-        int importance = NotificationManager.IMPORTANCE_HIGH;
-        NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "Elderberry medicine reminder", importance);
-        assert notificationManager != null;
-        notificationManager.createNotificationChannel(notificationChannel);
-        notificationManager.notify(getNotificationIdInt(), notification);
-        String message = intent.getStringExtra("title");
-        textToSpeech = new TextToSpeech(context, i -> {
-            if (i == TextToSpeech.SUCCESS) {
-                textToSpeech.setLanguage(Locale.UK);
-                textToSpeech.speak(message, TextToSpeech.QUEUE_FLUSH, null, "");
-            } else {
-                Toast.makeText(context, "Text to speech is not available", Toast.LENGTH_SHORT).show();
-            }
-
-        });
-    }
+    private static AlarmManager alarmManager;
+    private TextToSpeech textToSpeech;
 
     public static String getNotificationId() {
         Log.d(TAG, "_____getNotificationId");
@@ -67,7 +47,7 @@ public class MyNotificationPublisher extends BroadcastReceiver {
 
     public static void setAlarm(DateTimeDose date, Context context) {
         Log.d(TAG, "_____setAlarm");
-        if(maxAlarms < 500) {
+        if (maxAlarms < 500) {
             do {
                 if (date.getFromTime().toInstant().toEpochMilli() > System.currentTimeMillis()) {
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(context, default_notification_channel_id);
@@ -102,17 +82,39 @@ public class MyNotificationPublisher extends BroadcastReceiver {
                 }
                 date.getFromTime().setTime(date.getFromTime().getTime() + 86400000);
             } while (maxAlarms < 500 && (date.getToDate().toInstant().toEpochMilli()) > (date.getFromTime().toInstant().toEpochMilli()));
-        } else{
+        } else {
             Log.d(TAG, "500 (max) alarms reached");
         }
 
     }
 
     public static void deletePendingIntents() {
+        Log.d(TAG, "_____deletePendingIntents");
         for (int currentIntent = 0; currentIntent < pendingIntents.size(); currentIntent++) {
             alarmManager.cancel(pendingIntents.get(currentIntent));
             maxAlarms = maxAlarms - 1;
         }
         pendingIntents.clear();
+    }
+
+    public void onReceive(Context context, Intent intent) {
+        Log.d(TAG, "_____onReceive");
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        Notification notification = intent.getParcelableExtra(NOTIFICATION);
+        int importance = NotificationManager.IMPORTANCE_HIGH;
+        NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "Elderberry medicine reminder", importance);
+        assert notificationManager != null;
+        notificationManager.createNotificationChannel(notificationChannel);
+        notificationManager.notify(getNotificationIdInt(), notification);
+        String message = intent.getStringExtra("title");
+        textToSpeech = new TextToSpeech(context, i -> {
+            if (i == TextToSpeech.SUCCESS) {
+                textToSpeech.setLanguage(Locale.UK);
+                textToSpeech.speak(message, TextToSpeech.QUEUE_FLUSH, null, "");
+            } else {
+                Toast.makeText(context, "Text to speech is not available", Toast.LENGTH_SHORT).show();
+            }
+
+        });
     }
 }

@@ -27,8 +27,6 @@ import edu.northeastern.elderberry.R;
  * Use the {@link SetDatesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-
-// Todo set the calendar date picker to pre-sets
 public class SetDatesFragment extends Fragment {
     private static final String TAG = "SetDatesFragment";
     private static final int FONT_SIZE = 25;
@@ -165,7 +163,7 @@ public class SetDatesFragment extends Fragment {
                 }
             } else {
                 Log.d(TAG, "_____initDatePicker: (this.fromDateSet == false, toDate)");
-                Toast.makeText(this.getContext(), "Please set a from date first.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this.getContext(), "Please set a/reset the from date first.", Toast.LENGTH_SHORT).show();
             }
         };
 

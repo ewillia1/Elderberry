@@ -33,18 +33,17 @@ import java.util.Objects;
 
 import edu.northeastern.elderberry.MedicationTrackerActivity;
 import edu.northeastern.elderberry.Medicine;
+import edu.northeastern.elderberry.MedicineDoseTime;
 import edu.northeastern.elderberry.MyNotificationPublisher;
 import edu.northeastern.elderberry.NotificationUtil;
-import edu.northeastern.elderberry.MedicineDoseTime;
 import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.dayview.MedicationDayViewActivity;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
-// 3 Todo to test if the taken field is working when frequency is changed when we edit the medication
 public class AddMedicationActivity extends AppCompatActivity {
-    private static final String TAG = "AddMedicationActivity";
     public static final String ADD_MED_KEY = "add_med_key";
     public static final String DATE_KEY = "dateKey";
+    private static final String TAG = "AddMedicationActivity";
     private static final int MAX_INT = 5;
     private DatabaseReference userDatabase;
     private FirebaseAuth mAuth;
@@ -144,7 +143,7 @@ public class AddMedicationActivity extends AppCompatActivity {
                         startActivity(intent);
                     } else if
                         // Restart MedicationDayViewActivity if coming from there.
-                     (medicationDayViewKey) {
+                    (medicationDayViewKey) {
                         Log.d(TAG, "_____onCreate: came from Medication Day View, so I need to go back there.");
                         Intent intent = new Intent(this, MedicationDayViewActivity.class);
                         intent.putExtra(DATE_KEY, this.currentDate);
@@ -273,7 +272,6 @@ public class AddMedicationActivity extends AppCompatActivity {
                 this.viewModel.getUnit().getValue(),
                 this.viewModel.getTimeFreq().getValue()));
 
-
         this.viewModel.initializeTakenBooleanArray();
         List<Boolean> takenList = this.viewModel.getTakenBooleanArray();
         Log.d(TAG, "_____doAddDataToDb: before setting taken to db taken list is " + takenList);
@@ -377,7 +375,6 @@ public class AddMedicationActivity extends AppCompatActivity {
                     viewModel.setTaken(entry.getValue());
                     Log.d(TAG, "_____onDataChange: set viewModel dose as" + viewModel.getTakenBooleanArray().toString());
                 }
-
             }
 
             @Override

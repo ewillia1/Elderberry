@@ -68,13 +68,13 @@ public class Medicine {
     @Override
     public String toString() {
         return "Medicine{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", information='" + information + '\'' +
-                ", fromDate='" + fromDate + '\'' +
-                ", toDate='" + toDate + '\'' +
-                ", unit='" + unit + '\'' +
-                ", freq=" + freq +
+                "id='" + this.id + '\'' +
+                ", name='" + this.name + '\'' +
+                ", information='" + this.information + '\'' +
+                ", fromDate='" + this.fromDate + '\'' +
+                ", toDate='" + this.toDate + '\'' +
+                ", unit='" + this.unit + '\'' +
+                ", freq=" + this.freq +
                 '}';
     }
 }

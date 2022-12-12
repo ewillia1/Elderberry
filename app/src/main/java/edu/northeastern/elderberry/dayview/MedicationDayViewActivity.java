@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,24 +36,20 @@ import java.util.Map;
 import java.util.Objects;
 
 import edu.northeastern.elderberry.MedicineDoseTime;
-import edu.northeastern.elderberry.ParentItemClickListener;
 import edu.northeastern.elderberry.R;
 import edu.northeastern.elderberry.addMed.AddMedicationActivity;
 import edu.northeastern.elderberry.util.DatetimeFormat;
 import edu.northeastern.elderberry.your_medication.YourMedicationsActivity;
 
-// Todo handle the case where taken, time, dose array size added not properly
-// Todo V1.1 save the change only when user leave the activity & use a save button?
+@SuppressWarnings("UseBulkOperation")
 public class MedicationDayViewActivity extends AppCompatActivity {
     public static final String MED_DAY_VIEW_KEY = "medDayViewKey";
-    public static final String DATE_KEY = "date_key";
+    public static final String DATE_KEY = "dateKey";
+    public static final String CURRENT_DATE = "current_date";
     private static final String TAG = "MedicationDayViewActivity";
     private final List<ParentItem> medicineList = new ArrayList<>();
-    //private final List<List<Boolean>> takenTodayList = new ArrayList<>();
-    private ArrayList<MedicineDoseTime> medDoseTimeList = new ArrayList<>();
-    private ArrayList<String> medKeyList = new ArrayList<>();
-    //private final ArrayList<Boolean> takenList = new ArrayList<Boolean>();
-    //private final ArrayList<Boolean> takenList = new ArrayList<>();
+    private final ArrayList<MedicineDoseTime> medDoseTimeList = new ArrayList<>();
+    private final ArrayList<String> medKeyList = new ArrayList<>();
     private ParentItemAdapter parentItemAdapter;
     private String currentDate;
     private DatabaseReference medDatabase;
@@ -67,10 +62,26 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         Log.d(TAG, "_____IN ON CREATE!!!!");
         setContentView(R.layout.activity_recycle_med_dayview);
 
+        boolean cameFromAdd = getIntent().getBooleanExtra("add_med_key", false);
+        boolean cameFromMedTracker = getIntent().getBooleanExtra("medTrackerKey", false);
+
+        if (cameFromAdd) {
+            Log.d(TAG, "_____onCreate: this.cameFromAdd");
+            this.currentDate = getIntent().getStringExtra(DATE_KEY);
+            Log.d(TAG, "_____onCreate: (came from add) this.currentDate = " + this.currentDate);
+        } else if (cameFromMedTracker) {
+            Log.d(TAG, "_____onCreate: this.cameFromMedTracker");
+            this.currentDate = getIntent().getStringExtra(CURRENT_DATE);
+            Log.d(TAG, "_____onCreate: (came from med tracker) this.currentDate = " + this.currentDate);
+        } else {
+            this.currentDate = "ERROR setting current date";
+            Log.d(TAG, "onCreate: ERROR with setting current date this should never occur");
+        }
+
+        Log.d(TAG, "_____onCreate: this.currentDate = " + this.currentDate);
+
         // Calling this activity's function to use ActionBar utility methods.
         ActionBar actionBar = getSupportActionBar();
-
-        this.currentDate = getIntent().getStringExtra("current_date");
 
         // Providing a subtitle for the ActionBar.
         assert actionBar != null;
@@ -119,13 +130,11 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                 medicineList.clear();
                 medDoseTimeList.clear();
 
-
                 for (DataSnapshot d : snapshot.getChildren()) {
                     List<ChildItem> children = new ArrayList<>();
                     MedicineDoseTime medicineDoseTime = d.getValue(MedicineDoseTime.class);
 
                     if ((medicineDoseTime != null ? medicineDoseTime.getTime() : null) == null) {
-                        // Todo check dose & taken are not null
                         Log.d(TAG, "_____onDataChange: medicineDoseTime.getTime() == null");
                         if (Objects.requireNonNull(medicineDoseTime).getName() != null) {
                             Log.d(TAG, "onDataChange: the medicine with the null time is: " + medicineDoseTime.getName());
@@ -159,16 +168,13 @@ public class MedicationDayViewActivity extends AppCompatActivity {
                     // initialize the childItem & add it to child
                     for (int i = 0; i < scheduledTime.size(); i++) {
                         ChildItem fd = new ChildItem(scheduledTime.get(i), takenToday.get(i));
-                        Log.d(TAG, "_____onDataChange: childItem " + fd.toString());
+                        Log.d(TAG, "_____onDataChange: childItem " + fd);
                         children.add(fd);
                     }
 
                     medicineList.add(new ParentItem(medicineDoseTime.getName(), children));
                     medKeyList.add(d.getKey());
-                    //takenTodayList.add(getTakenToday(medicineDoseTime));
-                    // Todo: filter the taken array for rendering. subset of taken
                     medDoseTimeList.add(medicineDoseTime);
-                    // New arrayList with
                 }
 
                 parentItemAdapter.notifyDataSetChanged();
@@ -187,7 +193,6 @@ public class MedicationDayViewActivity extends AppCompatActivity {
 
         // Set a listener for the parentItemAdapter.
         this.parentItemAdapter = new ParentItemAdapter(this.medicineList, (parentPosition, childPosition, isChecked) -> {
-
             Log.d(TAG, "_____parentItemClicked: parentPosition = " + parentPosition + ", childPosition = " + childPosition + ", isChecked = " + isChecked);
             Log.d(TAG, "_____onCreate: parentPos" + parentPos);
             Log.d(TAG, "_____onCreate: childPos" + childPos);
@@ -203,8 +208,6 @@ public class MedicationDayViewActivity extends AppCompatActivity {
     }
 
     private List<Boolean> getTakenToday(MedicineDoseTime med) {
-
-        // Todo check bugs
         int dayOffset = DatetimeFormat.dateDiff(
                 makeStringDate(med.getFromDate()),
                 makeStringDate(currentDate));
@@ -250,6 +253,7 @@ public class MedicationDayViewActivity extends AppCompatActivity {
         Log.d(TAG, "_____startAddMedicationActivity: about to start the add medication activity");
         Intent intent = new Intent(this, AddMedicationActivity.class);
         intent.putExtra(MED_DAY_VIEW_KEY, true);
+        intent.putExtra(DATE_KEY, this.currentDate);
         startActivity(intent);
 
         // Want to finish this activity so that when add or edit is pressed onCreate for this activity is called again.

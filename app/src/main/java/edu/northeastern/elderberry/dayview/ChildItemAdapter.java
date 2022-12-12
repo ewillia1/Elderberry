@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.Checkable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,7 +17,7 @@ import edu.northeastern.elderberry.R;
 public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.ChildViewHolder> {
     private static final String TAG = "ChildItemAdapter";
     private final List<ChildItem> childItemTitle;
-    private SetChildItemClickListener listener;
+    private final SetChildItemClickListener listener;
 
     // Constructor.
     ChildItemAdapter(List<ChildItem> childItemList, SetChildItemClickListener listener) {
@@ -26,10 +25,6 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.Chil
         this.childItemTitle = childItemList;
         this.listener = listener;
     }
-
-    //public void setClickListener(OnListItemClick listener) {
-    //    this.childListener = listener;
-    //}
 
     @NonNull
     @Override
@@ -74,12 +69,7 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildItemAdapter.Chil
             //this.takenCheckBox.setChecked(true);
             Log.d(TAG, "_____ChildViewHolder");
             // this.takenCheckBox.setOnClickListener(v -> listener.childItemClicked(takenCheckBox.isChecked(), getLayoutPosition()));
-            takenCheckBox.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.childItemClicked(takenCheckBox.isChecked(), getLayoutPosition());
-                }
-            });
+            takenCheckBox.setOnClickListener(v -> listener.childItemClicked(takenCheckBox.isChecked(), getLayoutPosition()));
         }
     }
 }

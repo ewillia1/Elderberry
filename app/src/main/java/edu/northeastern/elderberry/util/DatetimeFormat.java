@@ -1,7 +1,6 @@
 package edu.northeastern.elderberry.util;
 
 import android.util.Log;
-import android.widget.Switch;
 
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
@@ -14,7 +13,6 @@ public class DatetimeFormat {
         return getMonthFormat(month) + " " + day + ", " + year;
     }
 
-
     public static int getDateCompoFromString(String date, String compoType) {
         String[] words = splitDateByWords(date);
         int i = 0;
@@ -23,10 +21,16 @@ public class DatetimeFormat {
             i++;
         }
 
-        if (compoType == "year") return  Integer.parseInt(words[2]);
-        else if (compoType == "month") return  getMonthNumber(words[0]);
-        else if (compoType == "dayOfMonth") return  Integer.parseInt(words[1]);
-        else return 0;
+        switch (compoType) {
+            case "year":
+                return Integer.parseInt(words[2]);
+            case "month":
+                return getMonthNumber(words[0]);
+            case "dayOfMonth":
+                return Integer.parseInt(words[1]);
+            default:
+                return 0;
+        }
     }
 
     public static Calendar makeStringDate(String date) {

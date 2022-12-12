@@ -26,8 +26,6 @@ import edu.northeastern.elderberry.R;
  * Use the {@link SetTimesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-
-// Set time picker to pre-set
 public class SetTimesFragment extends Fragment implements OnTimeDoseItemListener {
     private static final String TAG = "SetTimesFragment";
     private int numOfTimes;

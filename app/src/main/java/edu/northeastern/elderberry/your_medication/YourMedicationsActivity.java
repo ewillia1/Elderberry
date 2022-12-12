@@ -33,7 +33,6 @@ import java.util.Objects;
 
 import edu.northeastern.elderberry.LoginActivity;
 import edu.northeastern.elderberry.MedicationTrackerActivity;
-
 import edu.northeastern.elderberry.MyNotificationPublisher;
 import edu.northeastern.elderberry.NotificationUtil;
 import edu.northeastern.elderberry.R;
@@ -84,7 +83,6 @@ public class YourMedicationsActivity extends AppCompatActivity {
             }
             return false;
         });
-
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         DatabaseReference userDatabase = FirebaseDatabase.getInstance().getReference();

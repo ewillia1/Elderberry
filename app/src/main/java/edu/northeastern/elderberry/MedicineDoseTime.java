@@ -57,11 +57,6 @@ public class MedicineDoseTime {
         this.time = time;
     }
 
-    public void setFreq(Integer freq) {
-        Log.d(TAG, "_____setFreq");
-        this.freq = freq;
-    }
-
     public Map<String, List<Boolean>> getTaken() {
         Log.d(TAG, "_____getTaken");
         return this.taken;
@@ -120,6 +115,11 @@ public class MedicineDoseTime {
     public Integer getFreq() {
         Log.d(TAG, "_____getFreq");
         return this.freq;
+    }
+
+    public void setFreq(Integer freq) {
+        Log.d(TAG, "_____setFreq");
+        this.freq = freq;
     }
 
     @NonNull
